@@ -1,18 +1,18 @@
 {
   "version": "0.7.0",
-  "proposedName": "MetaMask Template Snap",
-  "description": "A MetaMask Snap template.",
+  "proposedName": "ShapeShift MetaMask Snap",
+  "description": "A Multi-chain Snap for MetaMask by ShapeShift.",
   "repository": {
     "type": "git",
-    "url": "https://github.com/MetaMask/snap-template.git"
+    "url": "https://github.com/pastaghost/shapeshift-metamask-snap.git"
   },
   "source": {
-    "shasum": "W4FN/2A1mQSjjrO95MGptw7pr+UR8913AOIksoajQSo=",
+    "shasum": "ZowWdJLCOijpOFAdPXlXnzpqIq2L0pM3m+E/zgCKs/k=",
     "location": {
       "npm": {
         "filePath": "dist/bundle.js",
         "iconPath": "images/icon.svg",
-        "packageName": "@metamask/template-snap",
+        "packageName": "@pastaghost/shapeshift-metamask-snap",
         "registry": "https://registry.npmjs.org/"
       }
     }

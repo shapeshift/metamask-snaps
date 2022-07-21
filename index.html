@@ -1,6 +1,8 @@
+
+
 <!doctype html>
 <html>
-  <head>
+  </head>
     <title>Hello, Snaps!</title>
     <link rel="icon" type="image/svg" href="./images/icon.svg"/>
   </head>
@@ -14,7 +16,7 @@
         <li>Please note that:</li>
         <ul>
           <li>
-            The <code>snap.manifest.json</code> and <code>package.json</code> must be located in the server root directory..
+            The <code>snap.manifest.json</code> and <code>package.json</code> must be located in located in the server root directory..
           </li>
           <li>
             The Snap bundle must be hosted at the location specified by the <code>location</code> field of <code>snap.manifest.json</code>.
@@ -47,10 +49,10 @@
       })
     }
 
-    // here we call the snap's "hello" method
+    // here we call the snap's "inApp" or "native" method
     async function send () {
       try {
-        const response = await ethereum.request({
+        await ethereum.request({
           method: 'wallet_invokeSnap',
           params: [snapId, {
             method: 'hello'

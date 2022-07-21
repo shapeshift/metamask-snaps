@@ -1,24 +1,18 @@
-const { promises: fs } = require('fs');
-const path = require('path');
-const mkdirp = require('mkdirp');
+import { fs } from 'fs'
+import { mkdirp } from 'mkdirp'
+import { path } from 'path'
 
-main();
+main()
 
 async function main() {
-  const rootPath = path.resolve(__dirname, '../');
-  const publicPath = path.join(rootPath, 'public/');
-  const imagesPath = path.join(publicPath, 'images/');
+  const rootPath = path.resolve(__dirname, '../')
+  const publicPath = path.join(rootPath, 'public/')
+  const imagesPath = path.join(publicPath, 'images/')
 
-  await mkdirp(imagesPath);
-  await fs.copyFile(
-    path.join(rootPath, 'images/icon.svg'),
-    path.join(imagesPath, 'icon.svg'),
-  );
+  await mkdirp(imagesPath)
+  await fs.copyFile(path.join(rootPath, 'images/icon.svg'), path.join(imagesPath, 'icon.svg'))
 
-  const htmlContents = await fs.readFile(
-    path.join(rootPath, 'index.html'),
-    'utf8',
-  );
+  const htmlContents = await fs.readFile(path.join(rootPath, 'index.html'), 'utf8')
   await fs.writeFile(
     path.join(publicPath, 'index.html'),
     htmlContents.replace(
@@ -26,5 +20,5 @@ async function main() {
       'const snapId = `local:${window.location.href}`;',
       'const snapId = `npm:@metamask/template-snap`;',
     ),
-  );
+  )
 }
