@@ -17,11 +17,19 @@ export const ConnectButton = () => {
 
   const handleConnect = async (): Promise<boolean> => {
     try {
+      /** Check for MetaMask if an entry does not already exist in state */
       if (Object.keys(provider).length === 0) {
         provider = await detectEthereumProvider()
         dispatch(setProvider(provider))
       }
 
+      /** Make sure the user has MetaMask Flask installed */
+      const isFlask = (await provider.request({ method: 'web3_clientVersion' }))?.includes('flask')
+      if (!isFlask) {
+        throw new Error('Please install MetaMask Flask!')
+      }
+
+      /** Prompt the user to allow the snap */
       const response = await provider?.request({
         method: 'wallet_enable',
         params: [
@@ -34,18 +42,32 @@ export const ConnectButton = () => {
           },
         ],
       })
-      moduleLogger.info(
-        response,
-        { fn: 'handleConnect' },
-        'Response from MetaMask provider wallet_enable call',
-      )
-      return !!response
+
+      if (response.errors) {
+        moduleLogger.error(
+          response.errors,
+          { fn: 'handleConnect' },
+          'MetaMask snap installation failed.',
+        )
+        return false
+      } else {
+        moduleLogger.info(
+          response,
+          { fn: 'handleConnect' },
+          'MetaMask snap installation successful!',
+        )
+        return true
+      }
     } catch (error) {
-      moduleLogger.error(
-        error,
-        { fn: 'handleConnect' },
-        'MetaMask provider wallet_enable call failed.',
-      )
+      if ((error as any).code === 4001) {
+        moduleLogger.error(error, { fn: 'handleConnect' }, 'The user rejected the request.')
+      } else {
+        moduleLogger.error(
+          error,
+          { fn: 'handleConnect' },
+          'MetaMask provider wallet_enable call failed.',
+        )
+      }
       return false
     }
   }
