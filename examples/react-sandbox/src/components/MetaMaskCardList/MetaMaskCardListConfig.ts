@@ -1,4 +1,10 @@
 // import { MetaMaskRPCRequests } from '../../constants/metamask/'
+import {
+  walletEnable,
+  walletGetSnaps,
+  walletInstallSnaps,
+  walletInvokeSnap,
+} from '../../utils/metamask/MetaMaskRPCRequests'
 import { CardActionProps, CardProps } from '../Card/Card'
 
 export const MetaMaskCardListConfig: Array<CardProps> = [
@@ -9,8 +15,8 @@ export const MetaMaskCardListConfig: Array<CardProps> = [
       [
         'wallet_enable',
         {
-          callback: undefined,
-          params: null,
+          callback: walletEnable,
+          params: undefined,
           description:
             "This is a convenience method for requesting the user's accounts and connecting to / installing snaps. You can think of it as a combination of eth_requestAccounts, wallet_installSnaps, and wallet_requestPermissions.",
         },
@@ -18,7 +24,7 @@ export const MetaMaskCardListConfig: Array<CardProps> = [
       [
         'wallet_getSnaps',
         {
-          callback: undefined,
+          callback: walletGetSnaps,
           params: undefined,
           description:
             "This method returns the IDs of the caller's permitted snaps and some relevant metadata.",
@@ -27,9 +33,7 @@ export const MetaMaskCardListConfig: Array<CardProps> = [
       [
         'wallet_installSnaps',
         {
-          callback: () => {
-            console.info('Just invoked the BTC tx callback!')
-          },
+          callback: walletInstallSnaps,
           params: undefined,
           description:
             'This method attempts to install the requested snaps, if they are permitted. If the installation of any snap fails, its object value on the result will contain an error property with the error that caused the installation to fail.',
@@ -38,7 +42,7 @@ export const MetaMaskCardListConfig: Array<CardProps> = [
       [
         'wallet_invokeSnap',
         {
-          callback: undefined,
+          callback: walletInvokeSnap,
           params: undefined,
           description:
             "Invokes the specified JSON-RPC method of the specified snap. The snap must be installed and the caller must have the permission to communicate with the snap, or the request will be rejected. Snaps are fully responsible for implementing their JSON-RPC API; consult the snap's documentation for available methods, their parameters, and return values.",
