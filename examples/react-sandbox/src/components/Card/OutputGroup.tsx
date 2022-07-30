@@ -1,6 +1,12 @@
 import { Heading, Stack, Textarea } from '@chakra-ui/react'
+import ResizeTextArea from 'react-textarea-autosize'
 
-export const OutputGroup = ({ placeholder }: { placeholder: string }) => {
+type OutputGroupProps = {
+  placeholder: string
+  text: any
+}
+
+export const OutputGroup = ({ placeholder, text }: OutputGroupProps) => {
   return (
     <Stack direction='column'>
       <Stack direction='row'>
@@ -8,7 +14,15 @@ export const OutputGroup = ({ placeholder }: { placeholder: string }) => {
           Output
         </Heading>
       </Stack>
-      <Textarea placeholder={placeholder} borderColor='#212631' fontSize='sm'></Textarea>
+      <Textarea
+        placeholder={placeholder}
+        value={text && JSON.stringify(text, null, 2)}
+        borderColor='#212631'
+        fontSize='sm'
+        overflow='hidden'
+        resize='none'
+        as={ResizeTextArea}
+      />
     </Stack>
   )
 }

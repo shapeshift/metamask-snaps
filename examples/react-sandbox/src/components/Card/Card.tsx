@@ -37,15 +37,18 @@ export const Card = ({ name, icon, actions, hasInputField }: CardProps) => {
     'Select an action from the drop-down menu below.',
   )
   const [selectedAction, setSelectedAction] = useState('')
+  const [outputText, setOutputText] = useState('')
 
   const handleSelectChange = (e: any) => {
     setSelectedAction(e.target.value)
     setOutputPlaceHolder(actions.get(e.target.value)?.description || '')
+    setOutputText('')
   }
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     const action = actions.get(selectedAction)
     if (action && action.callback) {
-      action.callback(action.params)
+      const ret = await action.callback(action.params)
+      setOutputText(ret)
     } else {
       if (selectedAction) {
         moduleLogger.error(
@@ -88,7 +91,7 @@ export const Card = ({ name, icon, actions, hasInputField }: CardProps) => {
           </Stack>
           <Divider orientation='horizontal' borderColor='#212631' borderWidth='1px'></Divider>
           <Stack direction='column' spacing='20px'>
-            <OutputGroup placeholder={outputPlaceHolder}></OutputGroup>
+            <OutputGroup placeholder={outputPlaceHolder} text={outputText}></OutputGroup>
             {!hasInputField && (
               <Divider orientation='horizontal' borderColor='#212631' borderWidth='1px'></Divider>
             )}
