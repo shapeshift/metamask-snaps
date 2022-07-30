@@ -10,7 +10,13 @@ export const OutputGroup = ({ placeholder, text }: OutputGroupProps) => {
   return (
     <Stack direction='column'>
       <Stack direction='row'>
-        <Heading justifyContent='left' fontFamily='Inter' fontSize='sm' fontWeight='bold'>
+        <Heading
+          justifyContent='left'
+          fontFamily='Inter'
+          fontSize='sm'
+          fontWeight='bold'
+          color='#718096'
+        >
           Output
         </Heading>
       </Stack>
