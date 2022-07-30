@@ -3,17 +3,21 @@ import {
   CosmosTransactions,
   EthereumTransactions,
 } from '../../constants/transactions'
-import { AssetCardActionProps, AssetCardProps } from './AssetCard'
+import { CardActionProps, CardProps } from '../Card/Card'
 
-export const AssetCardListConfig: Array<AssetCardProps> = [
+export const AssetCardListConfig: Array<CardProps> = [
   {
     name: 'Bitcoin',
     icon: 'btc.png',
-    actions: new Map<string, AssetCardActionProps>([
-      ['address', { callback: undefined, args: null, description: 'Generate a receive address' }],
+    actions: new Map<string, CardActionProps>([
+      ['address', { callback: undefined, params: null, description: 'Generate a receive address' }],
       [
         'sign',
-        { callback: undefined, args: BitcoinTransactions.sign, description: 'Sign a demo message' },
+        {
+          callback: undefined,
+          params: BitcoinTransactions.sign,
+          description: 'Sign a demo message',
+        },
       ],
       [
         'tx',
@@ -21,7 +25,7 @@ export const AssetCardListConfig: Array<AssetCardProps> = [
           callback: () => {
             console.info('Just invoked the BTC tx callback!')
           },
-          args: BitcoinTransactions.tx,
+          params: BitcoinTransactions.tx,
           description: 'Sign a test transaction',
         },
       ],
@@ -29,7 +33,7 @@ export const AssetCardListConfig: Array<AssetCardProps> = [
         'verify',
         {
           callback: undefined,
-          args: BitcoinTransactions.verify,
+          params: BitcoinTransactions.verify,
           description: 'Verify the signature from a previously-signed demo message',
         },
       ],
@@ -38,13 +42,13 @@ export const AssetCardListConfig: Array<AssetCardProps> = [
   {
     name: 'Cosmos',
     icon: 'atom.png',
-    actions: new Map<string, AssetCardActionProps>([
-      ['address', { callback: undefined, args: null, description: 'Generate a receive address' }],
+    actions: new Map<string, CardActionProps>([
+      ['address', { callback: undefined, params: null, description: 'Generate a receive address' }],
       [
         'delegate',
         {
           callback: undefined,
-          args: CosmosTransactions.delegate,
+          params: CosmosTransactions.delegate,
           description: 'Sign a Cosmos delegate message',
         },
       ],
@@ -52,7 +56,7 @@ export const AssetCardListConfig: Array<AssetCardProps> = [
         'ibcTransfer',
         {
           callback: undefined,
-          args: CosmosTransactions.ibcTransfer,
+          params: CosmosTransactions.ibcTransfer,
           description: 'Sign a Cosmos ibcTransfer message',
         },
       ],
@@ -60,7 +64,7 @@ export const AssetCardListConfig: Array<AssetCardProps> = [
         'redelegate',
         {
           callback: undefined,
-          args: CosmosTransactions.redelegate,
+          params: CosmosTransactions.redelegate,
           description: 'Sign a Cosmos redelegate message',
         },
       ],
@@ -68,7 +72,7 @@ export const AssetCardListConfig: Array<AssetCardProps> = [
         'rewards',
         {
           callback: undefined,
-          args: CosmosTransactions.rewards,
+          params: CosmosTransactions.rewards,
           description: 'Sign a Cosmos rewards message',
         },
       ],
@@ -76,7 +80,7 @@ export const AssetCardListConfig: Array<AssetCardProps> = [
         'transfer',
         {
           callback: undefined,
-          args: CosmosTransactions.transfer,
+          params: CosmosTransactions.transfer,
           description: 'Sign a Cosmos transfer message',
         },
       ],
@@ -84,7 +88,7 @@ export const AssetCardListConfig: Array<AssetCardProps> = [
         'undelegate',
         {
           callback: undefined,
-          args: CosmosTransactions.undelegate,
+          params: CosmosTransactions.undelegate,
           description: 'Sign a Cosmos undelegate message',
         },
       ],
@@ -93,12 +97,12 @@ export const AssetCardListConfig: Array<AssetCardProps> = [
   {
     name: 'Ethereum',
     icon: 'eth.png',
-    actions: new Map<string, AssetCardActionProps>([
-      ['address', { callback: undefined, args: null, description: 'Generate a receive address' }],
-      ['send', { callback: undefined, args: EthereumTransactions.send }],
-      ['sign', { callback: undefined, args: EthereumTransactions.sign }],
-      ['tx', { callback: undefined, args: EthereumTransactions.tx }],
-      ['verify', { callback: undefined, args: EthereumTransactions.verify }],
+    actions: new Map<string, CardActionProps>([
+      ['address', { callback: undefined, params: null, description: 'Generate a receive address' }],
+      ['send', { callback: undefined, params: EthereumTransactions.send }],
+      ['sign', { callback: undefined, params: EthereumTransactions.sign }],
+      ['tx', { callback: undefined, params: EthereumTransactions.tx }],
+      ['verify', { callback: undefined, params: EthereumTransactions.verify }],
     ]),
   },
 ]
