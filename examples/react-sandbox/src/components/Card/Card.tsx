@@ -32,7 +32,7 @@ export type CardProps = {
 
 const moduleLogger = logger.child({ namespace: ['Card'] })
 
-export const Card = (props: CardProps) => {
+export const Card = ({ name, icon, actions, hasInputField }: CardProps) => {
   const [outputPlaceHolder, setOutputPlaceHolder] = useState(
     'Select an action from the drop-down menu below.',
   )
@@ -40,17 +40,17 @@ export const Card = (props: CardProps) => {
 
   const handleSelectChange = (e: any) => {
     setSelectedAction(e.target.value)
-    setOutputPlaceHolder(props.actions.get(e.target.value)?.description || '')
+    setOutputPlaceHolder(actions.get(e.target.value)?.description || '')
   }
   const handleSubmit = () => {
-    const action = props.actions.get(selectedAction)
+    const action = actions.get(selectedAction)
     if (action && action.callback) {
       action.callback(action.params)
     } else {
       if (selectedAction) {
         moduleLogger.error(
           { fn: 'handleSubmit' },
-          `No callback registered for ${props.name} '${selectedAction}' action.`,
+          `No callback registered for ${name} '${selectedAction}' action.`,
         )
       } else {
         moduleLogger.info(
@@ -75,7 +75,7 @@ export const Card = (props: CardProps) => {
           <Image
             objectFit='contain'
             boxSize='100%'
-            src={require('../../assets/token-icons/' + props.icon)}
+            src={require('../../assets/token-icons/' + icon)}
           ></Image>
         </Center>
       </Box>
@@ -83,17 +83,17 @@ export const Card = (props: CardProps) => {
         <Stack direction='column' width='90%' spacing='16px'>
           <Stack direction='row'>
             <Heading justifyContent='left' fontFamily='Inter' fontSize='2xl'>
-              {props.name}
+              {name}
             </Heading>
           </Stack>
           <Divider orientation='horizontal' borderColor='#212631' borderWidth='1px'></Divider>
-          <Stack direction='column' spacing='16px'>
+          <Stack direction='column' spacing='20px'>
             <OutputGroup placeholder={outputPlaceHolder}></OutputGroup>
-            {props.hasInputField && (
-              <Box>
-                <Divider orientation='horizontal' borderColor='#212631' borderWidth='1px'></Divider>
-                <InputGroup description={'shit shit shit shit'}></InputGroup>
-              </Box>
+            {!hasInputField && (
+              <Divider orientation='horizontal' borderColor='#212631' borderWidth='1px'></Divider>
+            )}
+            {!hasInputField && (
+              <InputGroup description={'This is a test input description.'}></InputGroup>
             )}
             {/** TODO: Use SelectActionGroup here instead of inlining these components*/}
             <Stack direction='row'>
@@ -104,7 +104,7 @@ export const Card = (props: CardProps) => {
                 onChange={handleSelectChange}
                 fontSize='sm'
               >
-                {[...props.actions.keys()].map((action, idx) => {
+                {[...actions.keys()].map((action, idx) => {
                   return <option value={action}>{action}</option>
                 })}
               </Select>

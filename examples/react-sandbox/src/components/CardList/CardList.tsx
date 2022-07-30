@@ -8,7 +8,6 @@ export const CardList = ({ cards }: { cards: Array<CardProps> }) => {
       direction='column'
       width='100%'
       spacing='14px'
-      p='16'
       borderRadius='xl'
       minWidth='768px'
       maxWidth='1440px'
