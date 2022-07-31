@@ -3,6 +3,19 @@ import {
   CosmosTransactions,
   EthereumTransactions,
 } from '../../constants/transactions'
+import {
+  BTCGetAddress,
+  BTCSignMessage,
+  BTCSignTransaction,
+  BTCVerifyMessage,
+} from '../../utils/bitcoin/BitcoinRPCRequests'
+import { cosmosGetAddress, cosmosSignTransaction } from '../../utils/cosmos/CosmosRPCRequests'
+import {
+  ETHGetAddress,
+  ETHSignMessage,
+  ETHSignTransaction,
+  ETHVerifyMessage,
+} from '../../utils/ethereum/EthereumRPCRequests'
 import { CardActionProps, CardProps } from '../Card/Card'
 
 export const AssetCardListConfig: Array<CardProps> = [
@@ -12,14 +25,12 @@ export const AssetCardListConfig: Array<CardProps> = [
     actions: new Map<string, CardActionProps>([
       [
         'btc_getAddress',
-        { callback: undefined, params: null, description: 'Generate a receive address' },
+        { callback: BTCGetAddress, params: null, description: 'Generate a receive address' },
       ],
       [
         'btc_signMessage',
         {
-          callback: () => {
-            console.info('Just invoked the btc_signMessage callback!')
-          },
+          callback: BTCSignMessage,
           params: BitcoinTransactions.sign,
           description: 'Sign a test message',
         },
@@ -27,9 +38,7 @@ export const AssetCardListConfig: Array<CardProps> = [
       [
         'btc_signTransaction',
         {
-          callback: () => {
-            console.info('Just invoked the btc_signTransaction callback!')
-          },
+          callback: BTCSignTransaction,
           params: BitcoinTransactions.tx,
           description: 'Sign a test transaction',
         },
@@ -37,7 +46,7 @@ export const AssetCardListConfig: Array<CardProps> = [
       [
         'btc_verifyTransaction',
         {
-          callback: undefined,
+          callback: BTCVerifyMessage,
           params: BitcoinTransactions.verify,
           description: 'Verify the signature from a previously-signed test message',
         },
@@ -50,12 +59,12 @@ export const AssetCardListConfig: Array<CardProps> = [
     actions: new Map<string, CardActionProps>([
       [
         'cosmos_getAddress',
-        { callback: undefined, params: null, description: 'Generate a receive address' },
+        { callback: cosmosGetAddress, params: null, description: 'Generate a receive address' },
       ],
       [
         'cosmos_signTransaction',
         {
-          callback: undefined,
+          callback: cosmosSignTransaction,
           params: CosmosTransactions.delegate,
           description: 'Sign a Cosmos delegate message',
         },
@@ -68,12 +77,12 @@ export const AssetCardListConfig: Array<CardProps> = [
     actions: new Map<string, CardActionProps>([
       [
         'eth_getAddress',
-        { callback: undefined, params: null, description: 'Generate a receive address' },
+        { callback: ETHGetAddress, params: null, description: 'Generate a receive address' },
       ],
       [
         'eth_signMessage',
         {
-          callback: undefined,
+          callback: ETHSignMessage,
           params: EthereumTransactions.sign,
           description: 'Sign a test message',
         },
@@ -81,7 +90,7 @@ export const AssetCardListConfig: Array<CardProps> = [
       [
         'eth_signTransaction',
         {
-          callback: undefined,
+          callback: ETHSignTransaction,
           params: EthereumTransactions.tx,
           description: 'Sign a test transaction',
         },
@@ -89,7 +98,7 @@ export const AssetCardListConfig: Array<CardProps> = [
       [
         'eth_verifyMessage',
         {
-          callback: undefined,
+          callback: ETHVerifyMessage,
           params: EthereumTransactions.verify,
           description: 'Verify the signature from a previously-signed test message',
         },
