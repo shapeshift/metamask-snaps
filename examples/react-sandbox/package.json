@@ -11,6 +11,7 @@
     "@fontsource/work-sans": "^4.5.10",
     "@metamask/detect-provider": "^1.2.0",
     "@reduxjs/toolkit": "^1.8.3",
+    "@shapeshiftoss/caip": "^6.7.1",
     "@shapeshiftoss/logger": "^1.1.2",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.0.1",

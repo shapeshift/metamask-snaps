@@ -2324,6 +2324,11 @@
   resolved "https://registry.yarnpkg.com/@rushstack/eslint-patch/-/eslint-patch-1.1.4.tgz#0c8b74c50f29ee44f423f7416829c0bf8bb5eb27"
   integrity sha512-LwzQKA4vzIct1zNZzBmRKI9QuNpLgTQMEjsQLf3BXuGYb3QPTP4Yjf6mkdX+X1mYttZ808QpOwAzZjv28kq7DA==
 
+"@shapeshiftoss/caip@^6.7.1":
+  version "6.7.1"
+  resolved "https://registry.yarnpkg.com/@shapeshiftoss/caip/-/caip-6.7.1.tgz#f7ba10a70eee2cbcbd8000e2c4192b3ddad9d550"
+  integrity sha512-ZougIOYPUt4BwZ+StiK0M8nVy8kJ6pw9J+b58IWCvmr17ZEhKQGqi1vWFEnEedvz1kWwl9QL0mI3x+Q0p6Zkmw==
+
 "@shapeshiftoss/logger@^1.1.2":
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/@shapeshiftoss/logger/-/logger-1.1.2.tgz#abbcc087387823448f8ea404722aab44048460a2"
