@@ -81,7 +81,7 @@ export const ConnectButton = () => {
         )
         toast({
           title: 'Error',
-          description: 'MetaMask provider wallet_enable call failed.',
+          description: String(error),
           status: 'error',
           duration: 3000,
           isClosable: true,
