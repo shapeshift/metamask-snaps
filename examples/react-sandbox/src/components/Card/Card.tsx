@@ -9,6 +9,7 @@ import {
   Select,
   Stack,
   useColorModeValue,
+  useToast,
 } from '@chakra-ui/react'
 import { useState } from 'react'
 
@@ -38,6 +39,7 @@ export const Card = ({ name, icon, actions, hasInputField }: CardProps) => {
   )
   const [selectedAction, setSelectedAction] = useState('')
   const [outputText, setOutputText] = useState('')
+  const toast = useToast()
 
   const handleSelectChange = (e: any) => {
     setSelectedAction(e.target.value)
@@ -48,7 +50,24 @@ export const Card = ({ name, icon, actions, hasInputField }: CardProps) => {
     const action = actions.get(selectedAction)
     if (action && action.callback) {
       const ret = await action.callback(action.params)
-      setOutputText(ret)
+      if (ret === undefined) {
+        toast({
+          title: 'Error',
+          description: `RPC call for ${selectedAction} failed.`,
+          status: 'error',
+          duration: 3000,
+          isClosable: true,
+        })
+      } else {
+        setOutputText(ret)
+        toast({
+          title: 'Success',
+          description: 'See response in output text area.',
+          status: 'success',
+          duration: 3000,
+          isClosable: true,
+        })
+      }
     } else {
       if (selectedAction) {
         moduleLogger.error(
