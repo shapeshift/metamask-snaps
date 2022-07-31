@@ -1,9 +1,13 @@
-// import { MetaMaskRPCRequests } from '../../constants/metamask/'
 import {
+  snapConfirm,
+  snapGetBIP44Entropy,
+  snapManageState,
+  snapNotify,
   walletEnable,
   walletGetSnaps,
   walletInstallSnaps,
   walletInvokeSnap,
+  walletSnap,
 } from '../../utils/metamask/MetaMaskRPCRequests'
 import { CardActionProps, CardProps } from '../Card/Card'
 
@@ -58,7 +62,7 @@ export const MetaMaskCardListConfig: Array<CardProps> = [
       [
         'wallet_snap_*',
         {
-          callback: undefined,
+          callback: walletSnap,
           params: null,
           description:
             'Invokes the specified JSON-RPC method of the snap corresponding to the specified permission name. The snap must be installed and the caller must have the permission to communicate with the snap, or the request will be rejected.',
@@ -68,7 +72,7 @@ export const MetaMaskCardListConfig: Array<CardProps> = [
       [
         'snap_confirm',
         {
-          callback: undefined,
+          callback: snapConfirm,
           params: undefined,
           description:
             "Calling this method causes a confirmation to be displayed in the MetaMask UI. The contents of the confirmation depend on the parameters, see above for their meaning and format. The user can either approve or reject the confirmation, which will be indicated by the method's return value.",
@@ -77,7 +81,7 @@ export const MetaMaskCardListConfig: Array<CardProps> = [
       [
         'snap_getBip44Entropy_*',
         {
-          callback: undefined,
+          callback: snapGetBIP44Entropy,
           params: undefined,
           description:
             "If you call this method, you will receive the user's parent key for the protocol that they requested. When that happens, you are now managing a person's keys, and whatever assets they control, on their behalf. Their safety is your responsibility. Gets the BIP-44 (opens new window)coin_type key for the coin_type number specified by the method name. This is the 'key management' permission of Snaps; use it with the utmost care. For the authoritative list of available protocols and their coin_type values, see SLIP-44.",
@@ -86,7 +90,7 @@ export const MetaMaskCardListConfig: Array<CardProps> = [
       [
         'snap_manageState',
         {
-          callback: undefined,
+          callback: snapManageState,
           params: undefined,
           description:
             'This method allows the snap to persist some data to disk in plaintext form and retrieve it at will. Since the data is in plaintext, the method should never be used to store secrets of any kind.',
@@ -95,7 +99,7 @@ export const MetaMaskCardListConfig: Array<CardProps> = [
       [
         'snap_notify',
         {
-          callback: undefined,
+          callback: snapNotify,
           params: undefined,
           description:
             "Calling this method displays a notification in MetaMask or natively in the browser. The notification type and content are determined by the method's parameters. See above for their meaning and format.",
