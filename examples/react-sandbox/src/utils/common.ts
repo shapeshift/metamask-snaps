@@ -22,3 +22,27 @@ export const getProvider = (): any => {
     )
   }
 }
+
+/**
+ * Prompt the user to allow the snap
+ */
+export const walletEnable = async (): Promise<any> => {
+  try {
+    const provider = getProvider()
+    const ret = await provider.request({
+      method: 'wallet_enable',
+      params: [
+        {
+          wallet_snap: {
+            'npm:@shapeshiftoss/metamask-snaps': {
+              version: '^0.7.0',
+            },
+          },
+        },
+      ],
+    })
+    return ret
+  } catch (error) {
+    moduleLogger.error(error, { fn: 'walletEnable' }, 'wallet_enable RPC call failed.')
+  }
+}

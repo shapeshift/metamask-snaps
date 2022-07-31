@@ -7,6 +7,7 @@ import { useProviderDispatch } from '../../hooks/useProviderDispatch/useProvider
 import { useProviderSelector } from '../../hooks/useProviderSelector/useProviderSelector'
 import { logger } from '../../lib/logger'
 import { setProvider } from '../../state/slices/providerSlice/providerSlice'
+import { walletEnable } from '../../utils/common'
 
 const moduleLogger = logger.child({ namespace: ['ConnectButton'] })
 
@@ -31,18 +32,7 @@ export const ConnectButton = () => {
       }
 
       /** Prompt the user to allow the snap */
-      const response = await provider?.request({
-        method: 'wallet_enable',
-        params: [
-          {
-            wallet_snap: {
-              'npm:@shapeshiftoss/metamask-snaps': {
-                version: '^0.7.0',
-              },
-            },
-          },
-        ],
-      })
+      const response = await walletEnable()
 
       if (response.errors) {
         moduleLogger.error(
