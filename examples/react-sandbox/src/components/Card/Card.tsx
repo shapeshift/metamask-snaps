@@ -92,10 +92,10 @@ export const Card = ({ name, icon, actions, hasInputField }: CardProps) => {
           <Divider orientation='horizontal' borderColor='#212631' borderWidth='1px'></Divider>
           <Stack direction='column' spacing='20px'>
             <OutputGroup placeholder={outputPlaceHolder} text={outputText}></OutputGroup>
-            {!hasInputField && (
+            {hasInputField && (
               <Divider orientation='horizontal' borderColor='#212631' borderWidth='1px'></Divider>
             )}
-            {!hasInputField && (
+            {hasInputField && (
               <InputGroup description={'This is a test input description.'}></InputGroup>
             )}
             {/** TODO: Use SelectActionGroup here instead of inlining these components*/}
