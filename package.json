@@ -4,7 +4,7 @@
   "description": "A multi-chain Snap for MetaMask by ShapeShift.",
   "repository": {
     "type": "git",
-    "url": "https://github.com/shapeshift/metamask-snap.git"
+    "url": "https://github.com/shapeshift/metamask-snaps.git"
   },
   "license": "MIT",
   "main": "src/index.js",

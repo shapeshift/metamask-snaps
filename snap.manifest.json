@@ -4,15 +4,15 @@
   "description": "A Multi-chain Snap for MetaMask by ShapeShift.",
   "repository": {
     "type": "git",
-    "url": "https://github.com/pastaghost/shapeshift-metamask-snap.git"
+    "url": "https://github.com/shapeshift/metamask-snaps.git"
   },
   "source": {
-    "shasum": "ZowWdJLCOijpOFAdPXlXnzpqIq2L0pM3m+E/zgCKs/k=",
+    "shasum": "gDdXj5Kcst+qptCbB8fbL/ABVHbS08cUicxaMf6wQOk=",
     "location": {
       "npm": {
         "filePath": "dist/bundle.js",
         "iconPath": "images/icon.svg",
-        "packageName": "@pastaghost/shapeshift-metamask-snap",
+        "packageName": "@shapeshiftoss/metamask-snaps",
         "registry": "https://registry.npmjs.org/"
       }
     }
