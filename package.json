@@ -1,10 +1,10 @@
 {
-  "name": "@pastaghost/shapeshift-metamask-snap",
+  "name": "@shapeshiftoss/metamask-snaps",
   "version": "0.7.0",
-  "description": "A Multi-chain Snap for MetaMask by ShapeShift.",
+  "description": "A multi-chain Snap for MetaMask by ShapeShift.",
   "repository": {
     "type": "git",
-    "url": "https://github.com/pastaghost/shapeshift-metamask-snap.git"
+    "url": "https://github.com/shapeshift/metamask-snap.git"
   },
   "license": "MIT",
   "main": "src/index.js",
@@ -14,30 +14,54 @@
     "snap.manifest.json"
   ],
   "scripts": {
-    "build": "mm-snap build",
+    "build": "mm-snap build --verboseErrors",
     "build:clean": "yarn clean && yarn build",
     "build:website": "node ./scripts/build-website.js",
     "clean": "rimraf dist/*",
     "dev": "mm-snap watch",
+    "dev:sandbox": "concurrently --prefix\"{time}\" --names \"SNAP,SANDBOX\" -c \"bgBlue.bold,bgMagenta.bold\" \"yarn build && yarn link-packages\" \"cd examples/react-sandbox && yarn dev\"",
+    "eval": "mm-snap eval -b dist/index.js",
+    "link-packages": "./scripts/link-packages.sh",
     "lint": "yarn lint:eslint -c .eslintrc --ext .ts src/ scripts/ && yarn lint:misc --check",
     "lint:changelog": "yarn auto-changelog validate",
     "lint:eslint": "eslint . -c .eslintrc --cache --ext .ts",
     "lint:fix": "yarn lint:eslint --fix && yarn lint:misc --write",
     "lint:misc": "prettier '**/*.json' '**/*.md' '!CHANGELOG.md' --ignore-path .gitignore",
+    "manifest": "mm-snap manifest --fix",
     "serve": "mm-snap serve",
-    "test": "echo 'TODO'"
+    "test": "echo 'TODO'",
+    "unlink-packages": "./scripts/unlink-packages.sh"
   },
   "devDependencies": {
+    "@babel/core": "^7.18.9",
+    "@babel/preset-env": "^7.18.9",
+    "@babel/preset-typescript": "^7.18.6",
+    "@babel/register": "^7.18.9",
     "@lavamoat/allow-scripts": "^2.0.3",
     "@metamask/auto-changelog": "^2.5.0",
     "@metamask/eslint-config": "^8.0.0",
     "@metamask/eslint-config-jest": "^8.0.0",
     "@metamask/eslint-config-nodejs": "^8.0.0",
     "@metamask/eslint-config-typescript": "^9.0.1",
+    "@metamask/rollup-plugin-snaps": "^0.18.1",
     "@metamask/snap-types": "^0.18.1",
+    "@metamask/snaps-browserify-plugin": "^0.18.1",
     "@metamask/snaps-cli": "^0.18.0",
+    "@metamask/types": "^1.1.0",
+    "@rollup/plugin-babel": "^5.3.1",
+    "@rollup/plugin-commonjs": "^22.0.1",
+    "@rollup/plugin-json": "^4.1.0",
+    "@rollup/plugin-node-resolve": "^13.3.0",
+    "@types/browserify": "^12.0.37",
+    "@types/gulp": "^4.0.9",
+    "@types/node": "^18.6.2",
+    "@types/vinyl-source-stream": "^0.0.30",
+    "@types/watchify": "^3.11.1",
     "@typescript-eslint/eslint-plugin": "^5.30.7",
     "@typescript-eslint/parser": "^5.30.7",
+    "babelify": "^10.0.0",
+    "browserify": "^17.0.0",
+    "concurrently": "^7.1.0",
     "eslint": "^7.30.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-import": "^2.23.4",
@@ -46,11 +70,20 @@
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-prettier": "^3.4.0",
     "eslint-plugin-simple-import-sort": "^7.0.0",
+    "gulp": "^4.0.2",
+    "gulp-exec": "^5.0.0",
     "mkdirp": "^1.0.4",
     "prettier": "^2.3.2",
     "prettier-plugin-packagejson": "^2.2.18",
     "rimraf": "^3.0.2",
-    "typescript": "^4.7.4"
+    "rollup": "^2.77.2",
+    "rollup-plugin-execute": "^1.1.1",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "ts-node": "^10.9.1",
+    "tslib": "^2.4.0",
+    "typescript": "^4.7.4",
+    "vinyl-source-stream": "^2.0.0",
+    "watchify": "^4.0.0"
   },
   "engines": {
     "node": ">=16.0.0"
@@ -58,5 +91,14 @@
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org/"
+  },
+  "dependencies": {
+    "@metamask/detect-provider": "^1.2.0",
+    "@metamask/key-tree": "^4.0.0",
+    "@shapeshiftoss/caip": "^6.6.0",
+    "@shapeshiftoss/hdwallet-core": "^1.29.0",
+    "@shapeshiftoss/hdwallet-native": "^1.29.0",
+    "@shapeshiftoss/logger": "^1.1.2",
+    "glob": "^8.0.3"
   }
 }
