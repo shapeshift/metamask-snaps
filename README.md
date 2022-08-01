@@ -1,11 +1,11 @@
-# @metamask/template-snap
+# @shapeshift/metamask-snaps
 
-The "Hello, world!" of MetaMask Snaps, and also a GitHub template repository.
-For instructions, see [the MetaMask documentation](https://docs.metamask.io/guide/snaps.html#serving-a-snap-to-your-local-environment).
+A Snap plugin for MetaMask providing multi-chain signing support.
+Currently supported networks are:
 
-## How To Use This Template
-
-This repository contains the files you need to start your snap project. First, log into GitHub, then click the "Use this template" button to clone this repository into a new project. Once your new repository is created, you can modify the source code to make it your own. For a step by step guide, read [The 5-Minute Snap Tutorial](https://github.com/Montoya/gas-fee-snap#readme).
+- Bitcoin
+- Cosmos
+- Ethereum
 
 ## Cloning
 
@@ -22,9 +22,28 @@ If you don't wish to use any of the existing GitHub actions in this repository, 
 
 ### Setup
 
+- (optional) Make sure you're using the right Node.js version.
+
 ```shell
-yarn install
+nvm use
 ```
+
+- Install dependencies.
+
+```shell
+# This is short for `yarn install`; be sure to use `yarn install --frozen-lockfile` instead if you're setting up a CI pipeline or trying to duplicate a historical build.
+yarn
+```
+
+### Development
+
+A sandbox application is included to assist in snap development. To run both the snap and sandbox application in development mode, use:
+
+```shell
+yarn dev:sandbox
+```
+
+Open [http://www.localhost:3000](http://www.localhost:3000) to view the sandbox in the browser.
 
 ### Testing and Linting
 
@@ -34,7 +53,7 @@ Run `yarn lint` to run the linter, or run `yarn lint:fix` to run the linter and 
 
 ### Releasing & Publishing
 
-The project follows the same release process as the other libraries in the MetaMask organization. The GitHub Actions [`action-create-release-pr`](https://github.com/MetaMask/action-create-release-pr) and [`action-publish-release`](https://github.com/MetaMask/action-publish-release) are used to automate the release process; see those repositories for more information about how they work.
+The GitHub Actions [`action-create-release-pr`](https://github.com/MetaMask/action-create-release-pr) and [`action-publish-release`](https://github.com/MetaMask/action-publish-release) are used to automate the release process; see those repositories for more information about how they work.
 
 1. Choose a release version.
 
