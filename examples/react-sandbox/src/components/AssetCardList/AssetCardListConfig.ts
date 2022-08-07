@@ -2,6 +2,7 @@ import {
   BitcoinTransactions,
   CosmosTransactions,
   EthereumTransactions,
+  OsmosisTransactions,
 } from '../../constants/transactions'
 import {
   BTCGetAddress,
@@ -16,6 +17,7 @@ import {
   ETHSignTransaction,
   ETHVerifyMessage,
 } from '../../utils/ethereum/EthereumRPCRequests'
+import { osmosisGetAddress, osmosisSignTransaction } from '../../utils/osmosis/OsmosisRPCRequests'
 import { CardActionProps, CardProps } from '../Card/Card'
 
 export const AssetCardListConfig: Array<CardProps> = [
@@ -101,6 +103,24 @@ export const AssetCardListConfig: Array<CardProps> = [
           callback: ETHVerifyMessage,
           params: EthereumTransactions.verify,
           description: 'Verify the signature from a previously-signed test message',
+        },
+      ],
+    ]),
+  },
+  {
+    name: 'Osmosis (OSMO)',
+    icon: 'osmo.png',
+    actions: new Map<string, CardActionProps>([
+      [
+        'osmosis_getAddress',
+        { callback: osmosisGetAddress, params: null, description: 'Generate a receive address' },
+      ],
+      [
+        'osmosis_signTransaction',
+        {
+          callback: osmosisSignTransaction,
+          params: OsmosisTransactions.delegate,
+          description: 'Sign a Osmosis delegate message',
         },
       ],
     ]),
