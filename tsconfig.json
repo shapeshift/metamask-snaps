@@ -1,8 +1,18 @@
 {
-  "extends": "../../../../tsconfig.packages.json",
   "compilerOptions": {
-    "typeRoots": ["../../../../node_modules/@types"]
+    "composite": true,
+    "declaration": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "module": "CommonJS",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "sourceMap": true,
+    "strict": true,
+    "target": "es2017",
+    "typeRoots": ["../../../../node_modules/@types"],
+    "useUnknownInCatchVariables": false
   },
-  "files": ["../../../types/global.d.ts"],
-  "include": ["src"]
+  "files": ["./node_modules/@metamask/snap-types/global.d.ts"],
+  "include": ["src/**/*", "gulpfile.ts", "babel.config.json"]
 }
