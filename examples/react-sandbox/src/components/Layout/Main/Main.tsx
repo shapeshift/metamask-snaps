@@ -8,7 +8,7 @@ import { MetaMaskCardListConfig } from '../../MetaMaskCardList/MetaMaskCardListC
 export const Main = () => {
   return (
     <Center width='full'>
-      <Flex width='full' paddingTop='24px' paddingLeft='48px'>
+      <Flex width='full' paddingTop='24px' paddingLeft='48px' paddingRight='48px'>
         <Routes>
           <Route path='/' element={<Navigate to='metamask-utils' />} />
           <Route path='*' element={<Navigate to='metamask-utils' />} />
