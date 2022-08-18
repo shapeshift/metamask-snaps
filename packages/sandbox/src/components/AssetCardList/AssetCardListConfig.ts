@@ -1,33 +1,86 @@
 import {
+  BinanceTransactions,
   BitcoinTransactions,
   CosmosTransactions,
   EthereumTransactions,
   OsmosisTransactions,
+  ThorchainTransactions,
 } from '../../constants/transactions'
+import { binanceGetAddress, binanceSignTransaction } from '../../utils/binance/BinanceRPCRequests'
 import {
   BTCGetAddress,
   BTCSignMessage,
   BTCSignTransaction,
   BTCVerifyMessage,
 } from '../../utils/bitcoin/BitcoinRPCRequests'
+import {
+  BCHGetAddress,
+  BCHSignMessage,
+  BCHSignTransaction,
+  BCHVerifyMessage,
+} from '../../utils/bitcoincash/BitcoinCashRPCRequests'
 import { cosmosGetAddress, cosmosSignTransaction } from '../../utils/cosmos/CosmosRPCRequests'
+import {
+  DogeGetAddress,
+  DogeSignMessage,
+  DogeSignTransaction,
+  DogeVerifyMessage,
+} from '../../utils/dogecoin/DogecoinRPCRequests'
 import {
   ETHGetAddress,
   ETHSignMessage,
   ETHSignTransaction,
   ETHVerifyMessage,
 } from '../../utils/ethereum/EthereumRPCRequests'
+import {
+  LTCGetAddress,
+  LTCSignMessage,
+  LTCSignTransaction,
+  LTCVerifyMessage,
+} from '../../utils/litecoin/LitecoinRPCRequests'
 import { osmosisGetAddress, osmosisSignTransaction } from '../../utils/osmosis/OsmosisRPCRequests'
+import {
+  thorchainGetAddress,
+  thorchainSignTransaction,
+} from '../../utils/thorchain/THORChainRPCRequests'
 import { CardActionProps, CardProps } from '../Card/Card'
 
+/**TODO: Add reference transactions for BCH, DOGE, LTC */
+
 export const AssetCardListConfig: Array<CardProps> = [
+  {
+    name: 'Binance Chain (BNB)',
+    icon: 'bnb.png',
+    actions: new Map<string, CardActionProps>([
+      [
+        'bnb_getAddress',
+        {
+          callback: binanceGetAddress,
+          params: null,
+          description: 'Generate a receive address',
+        },
+      ],
+      [
+        'bnb_signTransaction',
+        {
+          callback: binanceSignTransaction,
+          params: BinanceTransactions.transfer,
+          description: 'Sign a Binance Chain transfer message',
+        },
+      ],
+    ]),
+  },
   {
     name: 'Bitcoin (BTC)',
     icon: 'btc.png',
     actions: new Map<string, CardActionProps>([
       [
         'btc_getAddress',
-        { callback: BTCGetAddress, params: null, description: 'Generate a receive address' },
+        {
+          callback: BTCGetAddress,
+          params: null,
+          description: 'Generate a receive address',
+        },
       ],
       [
         'btc_signMessage',
@@ -56,12 +109,54 @@ export const AssetCardListConfig: Array<CardProps> = [
     ]),
   },
   {
+    name: 'Bitcoin Cash (BCH)',
+    icon: 'bch.png',
+    actions: new Map<string, CardActionProps>([
+      [
+        'bch_getAddress',
+        {
+          callback: BCHGetAddress,
+          params: null,
+          description: 'Generate a receive address',
+        },
+      ],
+      [
+        'bch_signMessage',
+        {
+          callback: BCHSignMessage,
+          params: BitcoinTransactions.sign,
+          description: 'Sign a test message',
+        },
+      ],
+      [
+        'bch_signTransaction',
+        {
+          callback: BCHSignTransaction,
+          params: BitcoinTransactions.tx,
+          description: 'Sign a test transaction',
+        },
+      ],
+      [
+        'bch_verifyTransaction',
+        {
+          callback: BCHVerifyMessage,
+          params: BitcoinTransactions.verify,
+          description: 'Verify the signature from a previously-signed test message',
+        },
+      ],
+    ]),
+  },
+  {
     name: 'Cosmos (ATOM)',
     icon: 'atom.png',
     actions: new Map<string, CardActionProps>([
       [
         'cosmos_getAddress',
-        { callback: cosmosGetAddress, params: null, description: 'Generate a receive address' },
+        {
+          callback: cosmosGetAddress,
+          params: null,
+          description: 'Generate a receive address',
+        },
       ],
       [
         'cosmos_signTransaction',
@@ -74,12 +169,54 @@ export const AssetCardListConfig: Array<CardProps> = [
     ]),
   },
   {
+    name: 'Dogecoin (DOGE)',
+    icon: 'doge.png',
+    actions: new Map<string, CardActionProps>([
+      [
+        'doge_getAddress',
+        {
+          callback: DogeGetAddress,
+          params: null,
+          description: 'Generate a receive address',
+        },
+      ],
+      [
+        'doge_signMessage',
+        {
+          callback: DogeSignMessage,
+          params: BitcoinTransactions.sign,
+          description: 'Sign a test message',
+        },
+      ],
+      [
+        'doge_signTransaction',
+        {
+          callback: DogeSignTransaction,
+          params: BitcoinTransactions.tx,
+          description: 'Sign a test transaction',
+        },
+      ],
+      [
+        'doge_verifyTransaction',
+        {
+          callback: DogeVerifyMessage,
+          params: BitcoinTransactions.verify,
+          description: 'Verify the signature from a previously-signed test message',
+        },
+      ],
+    ]),
+  },
+  {
     name: 'Ethereum (ETH)',
     icon: 'eth.png',
     actions: new Map<string, CardActionProps>([
       [
         'eth_getAddress',
-        { callback: ETHGetAddress, params: null, description: 'Generate a receive address' },
+        {
+          callback: ETHGetAddress,
+          params: null,
+          description: 'Generate a receive address',
+        },
       ],
       [
         'eth_signMessage',
@@ -108,12 +245,54 @@ export const AssetCardListConfig: Array<CardProps> = [
     ]),
   },
   {
+    name: 'Litecoin (LTC)',
+    icon: 'ltc.png',
+    actions: new Map<string, CardActionProps>([
+      [
+        'ltc_getAddress',
+        {
+          callback: LTCGetAddress,
+          params: null,
+          description: 'Generate a receive address',
+        },
+      ],
+      [
+        'ltc_signMessage',
+        {
+          callback: LTCSignMessage,
+          params: BitcoinTransactions.sign,
+          description: 'Sign a test message',
+        },
+      ],
+      [
+        'ltc_signTransaction',
+        {
+          callback: LTCSignTransaction,
+          params: BitcoinTransactions.tx,
+          description: 'Sign a test transaction',
+        },
+      ],
+      [
+        'ltc_verifyTransaction',
+        {
+          callback: LTCVerifyMessage,
+          params: BitcoinTransactions.verify,
+          description: 'Verify the signature from a previously-signed test message',
+        },
+      ],
+    ]),
+  },
+  {
     name: 'Osmosis (OSMO)',
     icon: 'osmo.png',
     actions: new Map<string, CardActionProps>([
       [
         'osmosis_getAddress',
-        { callback: osmosisGetAddress, params: null, description: 'Generate a receive address' },
+        {
+          callback: osmosisGetAddress,
+          params: null,
+          description: 'Generate a receive address',
+        },
       ],
       [
         'osmosis_signTransaction',
@@ -121,6 +300,28 @@ export const AssetCardListConfig: Array<CardProps> = [
           callback: osmosisSignTransaction,
           params: OsmosisTransactions.delegate,
           description: 'Sign a Osmosis delegate message',
+        },
+      ],
+    ]),
+  },
+  {
+    name: 'THORChain (RUNE)',
+    icon: 'rune.png',
+    actions: new Map<string, CardActionProps>([
+      [
+        'rune_getAddress',
+        {
+          callback: thorchainGetAddress,
+          params: null,
+          description: 'Generate a receive address',
+        },
+      ],
+      [
+        'rune_signTransaction',
+        {
+          callback: thorchainSignTransaction,
+          params: ThorchainTransactions.send,
+          description: 'Sign a THORChain transfer message',
         },
       ],
     ]),
