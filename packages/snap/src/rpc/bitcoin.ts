@@ -27,7 +27,7 @@ export const btcGetAddress = async (
     const address = await signer.btcGetAddress({
       coin: 'Bitcoin',
       addressNList: bip32ToAddressNList(
-        `m/44'/${slip44ByCoin('Cosmos')}'/${account}'/0/${addressIndex}`,
+        `m/44'/${slip44ByCoin('Bitcoin')}'/${account}'/0/${addressIndex}`,
       ),
       scriptType,
       showDisplay: false,
