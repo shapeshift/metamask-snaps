@@ -1,0 +1,33 @@
+diff --git a/src/ecpair.js b/src/ecpair.js
+index 91fe3a94aa09d8d49a44631e3de92b452cfdb587..aa65769c5c3ce8a9b7b188c4fd61bca916582c7d 100644
+--- a/src/ecpair.js
++++ b/src/ecpair.js
+@@ -3,7 +3,6 @@ Object.defineProperty(exports, '__esModule', { value: true });
+ const NETWORKS = require('./networks');
+ const types = require('./types');
+ const ecc = require('tiny-secp256k1');
+-const randomBytes = require('randombytes');
+ const typeforce = require('typeforce');
+ const wif = require('wif');
+ const isOptions = typeforce.maybe(
+@@ -12,6 +11,20 @@ const isOptions = typeforce.maybe(
+     network: types.maybe(types.Network),
+   }),
+ );
++function getGlobal() {
++  if (typeof self !== 'undefined') {
++      return self;
++  }
++  if (typeof window !== 'undefined') {
++      return window;
++  }
++  if (typeof global !== 'undefined') {
++      return global;
++  }
++  throw new Error('unable to locate global object');
++}
++var anyGlobal = getGlobal();
++const randomBytes = anyGlobal.crypto.randomBytes
+ class ECPair {
+   constructor(__D, __Q, options) {
+     this.__D = __D;

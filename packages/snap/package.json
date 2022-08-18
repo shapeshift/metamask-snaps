@@ -39,8 +39,8 @@
     "@metamask/key-tree": "^4.0.0",
     "@metamask/snaps-webpack-plugin": "^0.18.1",
     "@shapeshiftoss/caip": "^6.6.0",
-    "@shapeshiftoss/hdwallet-core": "^1.29.0",
-    "@shapeshiftoss/hdwallet-native": "^1.29.0",
+    "@shapeshiftoss/hdwallet-core": "1.29.0",
+    "@shapeshiftoss/hdwallet-native": "1.29.0",
     "@shapeshiftoss/logger": "^1.1.2"
   },
   "devDependencies": {

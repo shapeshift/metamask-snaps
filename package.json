@@ -18,15 +18,15 @@
     "packages/sandbox"
   ],
   "scripts": {
-    "build": "yarn workspaces foreach --verbose --parallel --topological run build",
     "build:clean": "yarn clean && yarn build",
     "build:sandbox": "yarn workspace sandbox build",
     "build:snap": "yarn workspace @shapeshiftoss/metamask-snaps build",
+    "build": "yarn workspaces foreach --verbose --parallel --topological run build",
     "clean": "yarn workspaces foreach --verbose --parallel run clean",
     "dev:sandbox": "concurrently --prefix \"{time}-[{name}]\" --names \"SNAP,SANDBOX\" -c \"bgBlue.bold,bgMagenta.bold\" \"yarn build && yarn link-packages\" \"cd examples/react-sandbox && yarn dev\"",
     "link-packages": "./scripts/link-packages.sh",
-    "lint": "yarn workspaces foreach --verbose --parallel run lint",
     "lint:fix": "yarn workspaces foreach --verbose --parallel run lint:fix",
+    "lint": "yarn workspaces foreach --verbose --parallel run lint",
     "test": "yarn workspaces foreach --verbose --parallel run test",
     "unlink-packages": "./scripts/unlink-packages.sh"
   },
@@ -62,5 +62,17 @@
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org/"
+  },
+  "resolutions": {
+    "@shapeshiftoss/hdwallet-native@1.29.0": "patch:@shapeshiftoss/hdwallet-native@npm:1.29.0#.yarn/patches/@shapeshiftoss-hdwallet-native-npm-1.29.0-24f6e0c8dd.patch",
+    "@shapeshiftoss/hdwallet-core@1.29.0": "patch:@shapeshiftoss/hdwallet-core@npm:1.29.0#.yarn/patches/@shapeshiftoss-hdwallet-core-npm-1.29.0-ce03499ac8.patch",
+    "libsodium-wrappers@0.7.10": "patch:libsodium-wrappers@npm:0.7.10#.yarn/patches/libsodium-wrappers-npm-0.7.10-1e41dfad84.patch",
+    "@shapeshiftoss/fiojs@1.0.1-shapeshift.2": "patch:@shapeshiftoss/fiojs@npm:1.0.1-shapeshift.2#.yarn/patches/@shapeshiftoss-fiojs-npm-1.0.1-shapeshift.2-74dc3c0d66.patch",
+    "@fioprotocol/fiojs@1.0.1": "patch:@fioprotocol/fiojs@npm:1.0.1#.yarn/patches/@fioprotocol-fiojs-npm-1.0.1-d8c9eec6cd.patch",
+    "@bithighlander/bitcoin-cash-js-lib@5.2.1": "patch:@bithighlander/bitcoin-cash-js-lib@npm:5.2.1#.yarn/patches/@bithighlander-bitcoin-cash-js-lib-npm-5.2.1-92e8f8436e.patch",
+    "@shapeshiftoss/bitcoinjs-lib@5.2.0-shapeshift.2": "patch:@shapeshiftoss/bitcoinjs-lib@npm:5.2.0-shapeshift.2#.yarn/patches/@shapeshiftoss-bitcoinjs-lib-npm-5.2.0-shapeshift.2-e59ff81828.patch",
+    "bitcoinjs-lib@5.2.0": "patch:bitcoinjs-lib@npm:5.2.0#.yarn/patches/bitcoinjs-lib-npm-5.2.0-f462e8de5e.patch",
+    "ethereumjs-wallet@1.0.2": "patch:ethereumjs-wallet@npm:1.0.2#.yarn/patches/ethereumjs-wallet-npm-1.0.2-8a504d268d.patch",
+    "libsodium@0.7.10": "patch:libsodium@npm:0.7.10#.yarn/patches/libsodium-npm-0.7.10-047df41812.patch"
   }
 }

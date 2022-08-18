@@ -1,0 +1,155 @@
+diff --git a/dist/wallet.js b/dist/wallet.js
+index d45347b98629f4a779724972fa02daa377bc9c8e..93f2da0e20d00f2327f3712bc686300a998bb714 100644
+--- a/dist/wallet.js
++++ b/dist/wallet.js
+@@ -1,10 +1,11 @@
+ "use strict";
+-var __importDefault = (this && this.__importDefault) || function (mod) {
+-    return (mod && mod.__esModule) ? mod : { "default": mod };
+-};
++
+ Object.defineProperty(exports, "__esModule", { value: true });
+ exports.supportsDebugLink = exports.infoBinance = exports.supportsBinance = exports.infoRipple = exports.supportsRipple = exports.infoKava = exports.supportsKava = exports.infoTerra = exports.supportsTerra = exports.infoSecret = exports.supportsSecret = exports.infoFio = exports.supportsFio = exports.infoEos = exports.supportsEos = exports.infoThorchain = exports.supportsThorchain = exports.infoOsmosis = exports.supportsOsmosis = exports.infoCosmos = exports.supportsEthSwitchChain = exports.supportsCosmos = exports.infoETH = exports.supportsETH = exports.infoBTC = exports.supportsBTC = void 0;
+-const lodash_1 = __importDefault(require("lodash"));
++// Replacement for unsupported lodash isObject() function
++function isObject(x) {
++    return typeof x === 'object' && x !== null;
++  }
+ /**
+  * Type guards
+  *
+@@ -17,107 +18,107 @@ const lodash_1 = __importDefault(require("lodash"));
+  ```
+  */
+ function supportsBTC(wallet) {
+-    return lodash_1.default.isObject(wallet) && wallet._supportsBTC;
++    return isObject(wallet) && wallet._supportsBTC;
+ }
+ exports.supportsBTC = supportsBTC;
+ function infoBTC(info) {
+-    return lodash_1.default.isObject(info) && info._supportsBTCInfo;
++    return isObject(info) && info._supportsBTCInfo;
+ }
+ exports.infoBTC = infoBTC;
+ function supportsETH(wallet) {
+-    return lodash_1.default.isObject(wallet) && wallet._supportsETH;
++    return isObject(wallet) && wallet._supportsETH;
+ }
+ exports.supportsETH = supportsETH;
+ function infoETH(info) {
+-    return lodash_1.default.isObject(info) && info._supportsETHInfo;
++    return isObject(info) && info._supportsETHInfo;
+ }
+ exports.infoETH = infoETH;
+ function supportsCosmos(wallet) {
+-    return lodash_1.default.isObject(wallet) && wallet._supportsCosmos;
++    return isObject(wallet) && wallet._supportsCosmos;
+ }
+ exports.supportsCosmos = supportsCosmos;
+ function supportsEthSwitchChain(wallet) {
+-    return lodash_1.default.isObject(wallet) && wallet._supportsEthSwitchChain;
++    return isObject(wallet) && wallet._supportsEthSwitchChain;
+ }
+ exports.supportsEthSwitchChain = supportsEthSwitchChain;
+ function infoCosmos(info) {
+-    return lodash_1.default.isObject(info) && info._supportsCosmosInfo;
++    return isObject(info) && info._supportsCosmosInfo;
+ }
+ exports.infoCosmos = infoCosmos;
+ function supportsOsmosis(wallet) {
+-    return lodash_1.default.isObject(wallet) && wallet._supportsOsmosis;
++    return isObject(wallet) && wallet._supportsOsmosis;
+ }
+ exports.supportsOsmosis = supportsOsmosis;
+ function infoOsmosis(info) {
+-    return lodash_1.default.isObject(info) && info._supportsOsmosisInfo;
++    return isObject(info) && info._supportsOsmosisInfo;
+ }
+ exports.infoOsmosis = infoOsmosis;
+ function supportsThorchain(wallet) {
+-    return lodash_1.default.isObject(wallet) && wallet._supportsThorchain;
++    return isObject(wallet) && wallet._supportsThorchain;
+ }
+ exports.supportsThorchain = supportsThorchain;
+ function infoThorchain(info) {
+-    return lodash_1.default.isObject(info) && info._supportsThorchainInfo;
++    return isObject(info) && info._supportsThorchainInfo;
+ }
+ exports.infoThorchain = infoThorchain;
+ function supportsEos(wallet) {
+-    return lodash_1.default.isObject(wallet) && wallet._supportsEos;
++    return isObject(wallet) && wallet._supportsEos;
+ }
+ exports.supportsEos = supportsEos;
+ function infoEos(info) {
+-    return lodash_1.default.isObject(info) && info._supportsEosInfo;
++    return isObject(info) && info._supportsEosInfo;
+ }
+ exports.infoEos = infoEos;
+ function supportsFio(wallet) {
+-    return lodash_1.default.isObject(wallet) && wallet._supportsFio;
++    return isObject(wallet) && wallet._supportsFio;
+ }
+ exports.supportsFio = supportsFio;
+ function infoFio(info) {
+-    return lodash_1.default.isObject(info) && info._supportsFioInfo;
++    return isObject(info) && info._supportsFioInfo;
+ }
+ exports.infoFio = infoFio;
+ function supportsSecret(wallet) {
+-    return lodash_1.default.isObject(wallet) && wallet._supportsSecret;
++    return isObject(wallet) && wallet._supportsSecret;
+ }
+ exports.supportsSecret = supportsSecret;
+ function infoSecret(info) {
+-    return lodash_1.default.isObject(info) && info._supportsSecretInfo;
++    return isObject(info) && info._supportsSecretInfo;
+ }
+ exports.infoSecret = infoSecret;
+ function supportsTerra(wallet) {
+-    return lodash_1.default.isObject(wallet) && wallet._supportsTerra;
++    return isObject(wallet) && wallet._supportsTerra;
+ }
+ exports.supportsTerra = supportsTerra;
+ function infoTerra(info) {
+-    return lodash_1.default.isObject(info) && info._supportsTerraInfo;
++    return isObject(info) && info._supportsTerraInfo;
+ }
+ exports.infoTerra = infoTerra;
+ function supportsKava(wallet) {
+-    return lodash_1.default.isObject(wallet) && wallet._supportsKava;
++    return isObject(wallet) && wallet._supportsKava;
+ }
+ exports.supportsKava = supportsKava;
+ function infoKava(info) {
+-    return lodash_1.default.isObject(info) && info._supportsKavaInfo;
++    return isObject(info) && info._supportsKavaInfo;
+ }
+ exports.infoKava = infoKava;
+ function supportsRipple(wallet) {
+-    return lodash_1.default.isObject(wallet) && wallet._supportsRipple;
++    return isObject(wallet) && wallet._supportsRipple;
+ }
+ exports.supportsRipple = supportsRipple;
+ function infoRipple(info) {
+-    return lodash_1.default.isObject(info) && info._supportsRippleInfo;
++    return isObject(info) && info._supportsRippleInfo;
+ }
+ exports.infoRipple = infoRipple;
+ function supportsBinance(wallet) {
+-    return lodash_1.default.isObject(wallet) && wallet._supportsBinance;
++    return isObject(wallet) && wallet._supportsBinance;
+ }
+ exports.supportsBinance = supportsBinance;
+ function infoBinance(info) {
+-    return lodash_1.default.isObject(info) && info._supportsBinanceInfo;
++    return isObject(info) && info._supportsBinanceInfo;
+ }
+ exports.infoBinance = infoBinance;
+ function supportsDebugLink(wallet) {
+-    return lodash_1.default.isObject(wallet) && wallet._supportsDebugLink;
++    return isObject(wallet) && wallet._supportsDebugLink;
+ }
+ exports.supportsDebugLink = supportsDebugLink;
+ //# sourceMappingURL=wallet.js.map
+\ No newline at end of file

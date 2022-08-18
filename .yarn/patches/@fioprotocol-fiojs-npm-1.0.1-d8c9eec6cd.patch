@@ -1,0 +1,32 @@
+diff --git a/dist/ecc/key_utils.js b/dist/ecc/key_utils.js
+index 6c4d121cb77631be5bea3c5e60376bd9918510a2..9bc4e04887e070eb2896fbe493fc7151c56f51a8 100644
+--- a/dist/ecc/key_utils.js
++++ b/dist/ecc/key_utils.js
+@@ -1,6 +1,5 @@
+ const base58 = require('bs58')
+ const assert = require('assert')
+-const randomBytes = require('randombytes');
+ 
+ const hash = require('./hash');
+ 
+@@ -15,6 +14,20 @@ module.exports = {
+ 
+ let entropyPos = 0, entropyCount = 0
+ 
++function getGlobal() {
++    if (typeof self !== 'undefined') {
++        return self;
++    }
++    if (typeof window !== 'undefined') {
++        return window;
++    }
++    if (typeof global !== 'undefined') {
++        return global;
++    }
++    throw new Error('unable to locate global object');
++}
++var anyGlobal = getGlobal();
++const randomBytes = anyGlobal.crypto.randomBytes;
+ const externalEntropyArray = randomBytes(101)
+ 
+ 

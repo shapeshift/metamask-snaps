@@ -1,0 +1,27 @@
+diff --git a/dist/index.js b/dist/index.js
+index 79a59cf7f8c34114707abb2159389355818803ac..42376ab6c6c35e27b3939ed2fefadc406cb4befd 100644
+--- a/dist/index.js
++++ b/dist/index.js
+@@ -31,8 +31,21 @@ Object.defineProperty(exports, "hdkey", { enumerable: true, get: function () { r
+ var thirdparty_1 = require("./thirdparty");
+ Object.defineProperty(exports, "thirdparty", { enumerable: true, get: function () { return __importDefault(thirdparty_1).default; } });
+ const bs58check = require('bs58check');
+-const randomBytes = require('randombytes');
+ const uuidv4 = require('uuid').v4;
++function getGlobal() {
++    if (typeof self !== 'undefined') {
++        return self;
++    }
++    if (typeof window !== 'undefined') {
++        return window;
++    }
++    if (typeof global !== 'undefined') {
++        return global;
++    }
++    throw new Error('unable to locate global object');
++}
++var anyGlobal = getGlobal();
++const randomBytes = anyGlobal.crypto.randomBytes;
+ function validateHexString(paramName, str, length) {
+     if (str.toLowerCase().startsWith('0x')) {
+         str = str.slice(2);

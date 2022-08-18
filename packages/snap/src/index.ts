@@ -3,8 +3,8 @@
 import { getMessage } from './message'
 import { btcGetAddress, btcSignMessage, btcSignTransaction, btcVerifyMessage } from './rpc/bitcoin'
 import { testFunction } from './rpc/common'
-// import { cosmosGetAddress, cosmosSignTransaction } from './rpc/cosmos'
-// import { ethGetAddress, ethSignMessage, ethSignTransaction, ethVerifyMessage } from './rpc/ethereum'
+import { cosmosGetAddress, cosmosSignTransaction } from './rpc/cosmos'
+import { ethGetAddress, ethSignMessage, ethSignTransaction, ethVerifyMessage } from './rpc/ethereum'
 import { MetaMaskRPCRequest } from './types'
 
 /**
@@ -48,18 +48,18 @@ export const onRpcRequest = async ({ origin, request }: RPCRequest) => {
       return btcSignMessage(request.params.message)
     case 'btc_verifyMessage':
       return btcVerifyMessage(request.params.message)
-    // case 'cosmos_getAddress':
-    //   return cosmosGetAddress()
-    // case 'cosmos_signTransaction':
-    //   return cosmosSignTransaction(request.params.transaction)
-    // case 'eth_getAddress':
-    //   return ethGetAddress()
-    // case 'eth_signMessage':
-    //   return ethSignMessage(request.params.message)
-    // case 'eth_signTransaction':
-    //   return ethSignTransaction(request.params.transaction)
-    // case 'eth_verifyMessage':
-    //   return ethVerifyMessage(request.params.message)
+    case 'cosmos_getAddress':
+      return cosmosGetAddress()
+    case 'cosmos_signTransaction':
+      return cosmosSignTransaction(request.params.transaction)
+    case 'eth_getAddress':
+      return ethGetAddress()
+    case 'eth_signMessage':
+      return ethSignMessage(request.params.message)
+    case 'eth_signTransaction':
+      return ethSignTransaction(request.params.transaction)
+    case 'eth_verifyMessage':
+      return ethVerifyMessage(request.params.message)
 
     default:
       throw new Error('Method not found.')
