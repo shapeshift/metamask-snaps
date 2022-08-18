@@ -1,0 +1,34 @@
+{
+  "version": "0.7.0",
+  "proposedName": "ShapeShift MetaMask Snap",
+  "description": "A Multi-chain Snap for MetaMask by ShapeShift.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/shapeshift/metamask-snaps.git"
+  },
+  "source": {
+    "shasum": "P+AeHRpewC2LWzK/8s+69Ow5zz3/ym93VtUcB+0+pdM=",
+    "location": {
+      "npm": {
+        "filePath": "dist/bundle.js",
+        "iconPath": "images/icon.svg",
+        "packageName": "@shapeshiftoss/metamask-snaps",
+        "registry": "https://registry.npmjs.org/"
+      }
+    }
+  },
+  "initialPermissions": {
+    "snap_confirm": {},
+    "snap_getBip44Entropy_0": {},
+    "snap_getBip44Entropy_60": {},
+    "snap_getBip44Entropy_118": {},
+    "snap_getBip44Entropy_235": {},
+    "snap_getBip44Entropy_330": {},
+    "snap_getBip44Entropy_459": {},
+    "snap_getBip44Entropy_529": {},
+    "snap_getBip44Entropy_714": {},
+    "snap_getBip44Entropy_931": {},
+    "snap_manageState": {}
+  },
+  "manifestVersion": "0.1"
+}

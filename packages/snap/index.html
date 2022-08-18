@@ -1,0 +1,176 @@
+<!doctype html>
+<html>
+</head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ShapeShift MetaMask Snap</title>
+<link rel="icon" type="image/svg" href="./images/FOX_Icon_dark.svg" width="112" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+</head>
+
+<body>
+  <section class="section">
+
+    <div class="block">
+
+      <nav class="level">
+        <p class="level-item has-text-centered">
+          <img src="./images/FOX_Icon_dark.svg" alt="" style="height: 120px;">
+        </p>
+      </nav>
+
+      </br>
+      <article class="message is-info ">
+        <div class="message-header">
+
+          <p>Instructions</p>
+          <button class="delete" aria-label="collapse"></button>
+        </div>
+        <div class="message-body">
+          <ul>
+            <li>First, click "Connect". Then, try out the other buttons!</li>
+            <li>Please note that:</li>
+            <ul>
+              <li>
+                The <code>snap.manifest.json</code> and <code>package.json</code> must be located in located in the
+                server
+                root directory..
+              </li>
+              <li>
+                The Snap bundle must be hosted at the location specified by the <code>location</code> field of
+                <code>snap.manifest.json</code>.
+              </li>
+            </ul>
+          </ul>
+        </div>
+      </article>
+    </div>
+
+    <br />
+    <article class="message is-primary">
+      <div class="message-header">
+        <p>Control</p>
+        <button class="delete" aria-label="collapse"></button>
+      </div>
+      <div class="message-body">
+        <div class="field">
+          <label class="label">Action</label>
+          <div class="control">
+            <div class="buttons">
+              <button class="connect button ">Connect</button>
+              <button class="sendHello button ">Send Hello</button>
+            </div>
+            <label class="label">Output</label>
+            <div class="control">
+              <div class="input" type="text" placeholder="No output received for action."></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      </div>
+    </article>
+
+    <article class="message">
+      <div class="message-header">
+        <p>Bitcoin</p>
+        <button class="delete" aria-label="collapse"></button>
+      </div>
+      <div class="message-body">
+        <div class="field">
+          <label class="label">Action</label>
+          <div class="control">
+            <div class="buttons">
+              <button class="btcAddress button ">Address</button>
+              <button class="btcTx button ">Tx</button>
+              <button class="btcSign button ">Sign</button>
+              <button class="btcVerify button ">Verify</button>
+            </div>
+            <label class="label">Output</label>
+            <div class="control">
+              <div class="input" type="text" placeholder="No output received for action."></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="message">
+      <div class="message-header">
+
+        <p>Ethereum</p>
+        <button class="delete" aria-label="collapse"></button>
+      </div>
+      <div class="message-body">
+        <div class="field">
+          <label class="label">Action</label>
+          <div class="control">
+            <div class="buttons">
+              <button class="ethAddress button ">Address</button>
+              <button class="ethTx button ">Tx</button>
+              <button class="ethSign button ">Sign</button>
+              <button class="ethSend button ">Send</button>
+              <button class="ethVerify button ">Verify</button>
+            </div>
+            <label class="label">Output</label>
+            <div class="control">
+              <div class="input" type="text" placeholder="No output received for action."></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="message">
+      <div class="message-header">
+
+        <p>Cosmos</p>
+        <button class="delete" aria-label="collapse"></button>
+      </div>
+      <div class="message-body">
+        <div class="field">
+          <label class="label">Action</label>
+          <div class="control">
+            <div class="buttons">
+              <button class="cosmosAddress button ">Address</button>
+              <button class="cosmosTx button ">Tx</button>
+              <button class="cosmosDelegate button ">Delegate</button>
+              <button class="cosmosUndelegate button ">Undelegate</button>
+              <button class="cosmosRedelegate button ">Redelegate</button>
+              <button class="cosmosRewards button ">Rewards</button>
+              <button class="cosmosIbcTransfer button ">IBC Transfer</button>
+            </div>
+            <label class="label">Output</label>
+            <div class="control">
+              <div class="input" type="text" placeholder="No output received for action."></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+
+  </section>
+
+  <footer class="footer">
+    <div class="content has-text-centered">
+      <p>
+        <strong>Multi-Chain MetaMask Snap</strong> by <a href="https://app.shapeshift.com">ShapeShift</a>. The source
+        code is licensed
+        <a href="http://opensource.org/licenses/mit-license.php">MIT</a>.
+      </p>
+    </div>
+  </footer>
+</body>
+<script type="module" src="./src/index.ts"></script>
+<script>
+  const snapId = `local:${ window?.location?.href }`
+
+  const connectButton = document.querySelector( 'button.connect' )
+  const sendButton = document.querySelector( 'button.sendHello' )
+
+  connectButton.addEventListener( 'click', connect )
+  sendButton.addEventListener( 'click', send )
+</script>
+
+</html>

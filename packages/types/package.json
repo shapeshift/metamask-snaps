@@ -1,0 +1,13 @@
+{
+  "name": "@shapeshiftoss/metamask-snaps-types",
+  "version": "1.0.0",
+  "description": "Types for ShapeShift multi-chain snap.",
+  "main": "index.js",
+  "repository": "http://www.github.com/shapeshift/metamask-snaps",
+  "author": "pastaghost <pastaghost@2520.io>",
+  "license": "MIT",
+  "types": "./index.d.ts",
+  "publishConfig": {
+    "access": "public"
+  }
+}

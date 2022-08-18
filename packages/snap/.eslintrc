@@ -1,0 +1,40 @@
+{
+  "extends": ["@metamask/eslint-config", "@metamask/eslint-config-typescript"],
+  "plugins": ["jest", "prettier", "simple-import-sort"],
+  "rules": {
+    "no-console": [
+      "error",
+      {
+        "allow": ["warn", "error", "info", "group", "groupEnd"]
+      }
+    ],
+    "@typescript-eslint/no-unused-vars": "error",
+    "prettier/prettier": [
+      "error",
+      {
+        "printWidth": 100,
+        "endOfLine": "lf",
+        "tabWidth": 2,
+        "useTabs": false,
+        "singleQuote": true,
+        "semi": false,
+        "arrowParens": "avoid",
+        "jsxSingleQuote": true,
+        "trailingComma": "all"
+      }
+    ],
+    "default-case": "error",
+    "import/no-default-export": "error",
+    "simple-import-sort/imports": [
+      "error",
+      {
+        "groups": [
+          ["^\\u0000"],
+          ["^@?\\w", "^src(/.*|$)", "^scripts(/.*|$)"],
+          ["^\\."]
+        ]
+      }
+    ],
+    "object-shorthand": "error"
+  }
+}
