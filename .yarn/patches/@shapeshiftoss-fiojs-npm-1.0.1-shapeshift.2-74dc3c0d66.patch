@@ -26,7 +26,7 @@ index 6c4d121cb77631be5bea3c5e60376bd9918510a2..9bc4e04887e070eb2896fbe493fc7151
 +    throw new Error('unable to locate global object');
 +}
 +var anyGlobal = getGlobal();
-+const randomBytes = anyGlobal.crypto.randomBytes;
++var randomBytes = anyGlobal.crypto.randomBytes;
  const externalEntropyArray = randomBytes(101)
  
  

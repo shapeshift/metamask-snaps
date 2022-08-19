@@ -27,7 +27,7 @@ index 91fe3a94aa09d8d49a44631e3de92b452cfdb587..aa65769c5c3ce8a9b7b188c4fd61bca9
 +  throw new Error('unable to locate global object');
 +}
 +var anyGlobal = getGlobal();
-+const randomBytes = anyGlobal.crypto.randomBytes;
++var randomBytes = anyGlobal.crypto.randomBytes;
  class ECPair {
    constructor(__D, __Q, options) {
      this.__D = __D;
