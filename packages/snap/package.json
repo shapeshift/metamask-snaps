@@ -27,7 +27,7 @@
     "lint": "yarn lint:eslint -c .eslintrc --ext .ts src/ scripts/ && yarn lint:misc --check",
     "lint:changelog": "yarn auto-changelog validate",
     "lint:eslint": "eslint . -c .eslintrc --cache --ext .ts",
-    "lint:fix": "yarn lint:eslint --fix && yarn lint:misc --write",
+    "lint:fix": "yarn lint --fix",
     "lint:misc": "prettier '**/*.json' '**/*.md' '!CHANGELOG.md' --ignore-path .gitignore",
     "manifest": "mm-snap manifest --fix",
     "serve": "mm-snap serve",
