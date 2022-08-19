@@ -5579,7 +5579,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@fioprotocol/fiojs@npm:1.0.1":
+"@fioprotocol/fiojs@npm:^1.0.1":
   version: 1.0.1
   resolution: "@fioprotocol/fiojs@npm:1.0.1"
   dependencies:
@@ -5598,9 +5598,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@fioprotocol/fiojs@patch:@fioprotocol/fiojs@npm:1.0.1#.yarn/patches/@fioprotocol-fiojs-npm-1.0.1-d8c9eec6cd.patch::locator=root%40workspace%3A.":
+"@fioprotocol/fiojs@patch:@fioprotocol/fiojs@npm:^1.0.1#.yarn/patches/@fioprotocol-fiojs-npm-1.0.1-d8c9eec6cd.patch::locator=root%40workspace%3A.":
   version: 1.0.1
-  resolution: "@fioprotocol/fiojs@patch:@fioprotocol/fiojs@npm%3A1.0.1#.yarn/patches/@fioprotocol-fiojs-npm-1.0.1-d8c9eec6cd.patch::version=1.0.1&hash=b3b919&locator=root%40workspace%3A."
+  resolution: "@fioprotocol/fiojs@patch:@fioprotocol/fiojs@npm%3A1.0.1#.yarn/patches/@fioprotocol-fiojs-npm-1.0.1-d8c9eec6cd.patch::version=1.0.1&hash=c94db4&locator=root%40workspace%3A."
   dependencies:
     ajv: ^6.10.2
     babel-runtime: 6.26.0
@@ -5613,7 +5613,7 @@ __metadata:
     long: ^4.0.0
     randombytes: ^2.1.0
     text-encoding: 0.7.0
-  checksum: ab98c28ecebed1de9791a10eb958623d99b38bc94dfa663d9e7078c7452e431c22f3da61bfed2cf54be1d102f971b92f1dd917c07842a95c4c55586d1b14fbfc
+  checksum: 6402c1e3d4e1d85a7a96c7c3b392f6aec5d29cbf8705370bfe1e8456114dc4634ac4bd0f627ed81640cdeaaf08415aac79f877c503a9cba04fe3875449e8e6e8
   languageName: node
   linkType: hard
 
@@ -6951,7 +6951,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@shapeshiftoss/bitcoinjs-lib@npm:5.2.0-shapeshift.2":
+"@shapeshiftoss/bitcoinjs-lib@npm:^5.2.0-shapeshift.2":
   version: 5.2.0-shapeshift.2
   resolution: "@shapeshiftoss/bitcoinjs-lib@npm:5.2.0-shapeshift.2"
   dependencies:
@@ -6975,9 +6975,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@shapeshiftoss/bitcoinjs-lib@patch:@shapeshiftoss/bitcoinjs-lib@npm:5.2.0-shapeshift.2#.yarn/patches/@shapeshiftoss-bitcoinjs-lib-npm-5.2.0-shapeshift.2-e59ff81828.patch::locator=root%40workspace%3A.":
+"@shapeshiftoss/bitcoinjs-lib@patch:@shapeshiftoss/bitcoinjs-lib@npm:^5.2.0-shapeshift.2#.yarn/patches/@shapeshiftoss-bitcoinjs-lib-npm-5.2.0-shapeshift.2-e59ff81828.patch::locator=root%40workspace%3A.":
   version: 5.2.0-shapeshift.2
-  resolution: "@shapeshiftoss/bitcoinjs-lib@patch:@shapeshiftoss/bitcoinjs-lib@npm%3A5.2.0-shapeshift.2#.yarn/patches/@shapeshiftoss-bitcoinjs-lib-npm-5.2.0-shapeshift.2-e59ff81828.patch::version=5.2.0-shapeshift.2&hash=9fb2cf&locator=root%40workspace%3A."
+  resolution: "@shapeshiftoss/bitcoinjs-lib@patch:@shapeshiftoss/bitcoinjs-lib@npm%3A5.2.0-shapeshift.2#.yarn/patches/@shapeshiftoss-bitcoinjs-lib-npm-5.2.0-shapeshift.2-e59ff81828.patch::version=5.2.0-shapeshift.2&hash=d1974a&locator=root%40workspace%3A."
   dependencies:
     bech32: ^1.1.2
     big-integer: ^1.6.44
@@ -6995,7 +6995,7 @@ __metadata:
     typeforce: ^1.11.3
     varuint-bitcoin: ^1.0.4
     wif: ^2.0.1
-  checksum: 35b7ab0a6e64bb2b48608d06460af7ce9de0f2c6d5cd725988690fa11735adc4f7a4649c6c308a4b1339d48c7e0d711ba3aad85d472a6656544c4b58fb06672c
+  checksum: a0016c07815667d1372f62b6bcd34a555764abcd7bf5d805add2e888c4cd27f5c294c6666772cb06cdb8b5fdace24883e289e5f108c9349d66818a51a031a176
   languageName: node
   linkType: hard
 
@@ -7017,7 +7017,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@shapeshiftoss/fiojs@npm:1.0.1-shapeshift.2":
+"@shapeshiftoss/fiojs@npm:^1.0.1-shapeshift.2":
   version: 1.0.1-shapeshift.2
   resolution: "@shapeshiftoss/fiojs@npm:1.0.1-shapeshift.2"
   dependencies:
@@ -7036,9 +7036,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@shapeshiftoss/fiojs@patch:@shapeshiftoss/fiojs@npm:1.0.1-shapeshift.2#.yarn/patches/@shapeshiftoss-fiojs-npm-1.0.1-shapeshift.2-74dc3c0d66.patch::locator=root%40workspace%3A.":
+"@shapeshiftoss/fiojs@patch:@shapeshiftoss/fiojs@npm:^1.0.1-shapeshift.2#.yarn/patches/@shapeshiftoss-fiojs-npm-1.0.1-shapeshift.2-74dc3c0d66.patch::locator=root%40workspace%3A.":
   version: 1.0.1-shapeshift.2
-  resolution: "@shapeshiftoss/fiojs@patch:@shapeshiftoss/fiojs@npm%3A1.0.1-shapeshift.2#.yarn/patches/@shapeshiftoss-fiojs-npm-1.0.1-shapeshift.2-74dc3c0d66.patch::version=1.0.1-shapeshift.2&hash=b3b919&locator=root%40workspace%3A."
+  resolution: "@shapeshiftoss/fiojs@patch:@shapeshiftoss/fiojs@npm%3A1.0.1-shapeshift.2#.yarn/patches/@shapeshiftoss-fiojs-npm-1.0.1-shapeshift.2-74dc3c0d66.patch::version=1.0.1-shapeshift.2&hash=c94db4&locator=root%40workspace%3A."
   dependencies:
     ajv: ^6.10.2
     babel-runtime: 6.26.0
@@ -7051,7 +7051,7 @@ __metadata:
     long: ^4.0.0
     randombytes: ^2.1.0
     web-encoding: ^1.1.5
-  checksum: 230a1ecf01f274fd19e6c8f45d0bbb3ff5bd2b4db84f32b3d77efb24a726030f26d811c7fa08b275f82081767f4a89b7c698ef9437e227e9f40ccd41ae24f6c9
+  checksum: 0c01e5763564c71f2a404bb6336dfd830b9f84446865d4faa872753d5bc86418e823aafeca367b51cae0008e890a3ddd272fdbe3f8c6b68c0ade5ed656957acf
   languageName: node
   linkType: hard
 
@@ -7069,7 +7069,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@shapeshiftoss/hdwallet-core@latest, @shapeshiftoss/hdwallet-core@npm:1.29.0":
+"@shapeshiftoss/hdwallet-core@latest, @shapeshiftoss/hdwallet-core@npm:1.29.0, @shapeshiftoss/hdwallet-core@npm:^1.29.0":
   version: 1.29.0
   resolution: "@shapeshiftoss/hdwallet-core@npm:1.29.0"
   dependencies:
@@ -23104,6 +23104,7 @@ __metadata:
     "@metamask/detect-provider": ^1.2.0
     "@reduxjs/toolkit": ^1.8.3
     "@shapeshiftoss/caip": ^6.7.1
+    "@shapeshiftoss/hdwallet-core": ^1.29.0
     "@shapeshiftoss/logger": ^1.1.2
     "@testing-library/jest-dom": ^5.16.4
     "@testing-library/react": ^13.0.1
