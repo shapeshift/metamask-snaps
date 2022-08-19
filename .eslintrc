@@ -1,11 +1,29 @@
 {
-  "extends": ["@metamask/eslint-config", "@metamask/eslint-config-typescript"],
-  "plugins": ["jest", "prettier", "simple-import-sort"],
+  "extends": [
+    "prettier"
+  ],
+  "plugins": [
+    "jest",
+    "prettier",
+    "simple-import-sort"
+  ],
+  "env": {
+    "browser": true,
+    "jest/globals": true
+  },
   "rules": {
+    "jsx-a11y/alt-text": "error",
+    "jsx-a11y/no-autofocus": "off",
     "no-console": [
       "error",
       {
-        "allow": ["warn", "error", "info", "group", "groupEnd"]
+        "allow": [
+          "warn",
+          "error",
+          "info",
+          "group",
+          "groupEnd"
+        ]
       }
     ],
     "@typescript-eslint/no-unused-vars": "error",
@@ -29,9 +47,26 @@
       "error",
       {
         "groups": [
-          ["^\\u0000"],
-          ["^@?\\w", "^src(/.*|$)", "^scripts(/.*|$)"],
-          ["^\\."]
+          [
+            "^\\u0000"
+          ],
+          [
+            "^@?\\w",
+            "^assets(/.*|$)",
+            "^components(/.*|$)",
+            "^context(/.*|$)",
+            "^hooks(/.*|$)",
+            "^jest(/.*|$)",
+            "^lib(/.*|$)",
+            "^pages(/.*|$)",
+            "^services(/.*|$)",
+            "^state(/.*|$)",
+            "^theme(/.*|$)",
+            "^types(/.*|$)"
+          ],
+          [
+            "^\\."
+          ]
         ]
       }
     ],
