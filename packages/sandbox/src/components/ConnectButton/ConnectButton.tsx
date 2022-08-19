@@ -11,6 +11,8 @@ import { walletEnable } from '../../utils/common'
 
 const moduleLogger = logger.child({ namespace: ['ConnectButton'] })
 
+const snapId = process.env.REACT_APP_SNAP_ID || 'local:http://localhost:9000'
+
 export const ConnectButton = () => {
   const [snapIsConnected, setSnapIsConnected] = useState(false)
   const dispatch = useProviderDispatch()
@@ -32,7 +34,7 @@ export const ConnectButton = () => {
       }
 
       /** Prompt the user to allow the snap */
-      const response = await walletEnable()
+      const response = await walletEnable(snapId)
 
       if (response.errors) {
         moduleLogger.error(
