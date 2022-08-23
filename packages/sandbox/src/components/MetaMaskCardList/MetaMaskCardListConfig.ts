@@ -7,8 +7,10 @@ import {
   walletGetSnaps,
   walletInstallSnaps,
   walletInvokeSnap,
-  walletSnap,
-} from '../../utils/metamask/MetaMaskRPCRequests'
+  walletSnap
+} from '@shapeshift/metamask-snaps-adapter'
+
+
 import { CardActionProps, CardProps } from '../Card/Card'
 
 export const MetaMaskCardListConfig: Array<CardProps> = [

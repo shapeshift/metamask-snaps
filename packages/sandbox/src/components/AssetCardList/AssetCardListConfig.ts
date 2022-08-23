@@ -4,45 +4,33 @@ import {
   CosmosTransactions,
   EthereumTransactions,
   OsmosisTransactions,
-  ThorchainTransactions,
+  ThorchainTransactions
 } from '../../constants/transactions'
-import { binanceGetAddress, binanceSignTransaction } from '../../utils/binance/BinanceRPCRequests'
-import {
-  BTCGetAddress,
-  BTCSignMessage,
-  BTCSignTransaction,
-  BTCVerifyMessage,
-} from '../../utils/bitcoin/BitcoinRPCRequests'
+
 import {
   BCHGetAddress,
   BCHSignMessage,
   BCHSignTransaction,
-  BCHVerifyMessage,
-} from '../../utils/bitcoincash/BitcoinCashRPCRequests'
-import { cosmosGetAddress, cosmosSignTransaction } from '../../utils/cosmos/CosmosRPCRequests'
-import {
+  BCHVerifyMessage, binanceGetAddress, binanceSignTransaction, BTCGetAddress,
+  BTCSignMessage,
+  BTCSignTransaction,
+  BTCVerifyMessage, cosmosGetAddress, cosmosSignTransaction,
   DogeGetAddress,
   DogeSignMessage,
   DogeSignTransaction,
   DogeVerifyMessage,
-} from '../../utils/dogecoin/DogecoinRPCRequests'
-import {
   ETHGetAddress,
   ETHSignMessage,
   ETHSignTransaction,
   ETHVerifyMessage,
-} from '../../utils/ethereum/EthereumRPCRequests'
-import {
   LTCGetAddress,
   LTCSignMessage,
   LTCSignTransaction,
   LTCVerifyMessage,
-} from '../../utils/litecoin/LitecoinRPCRequests'
-import { osmosisGetAddress, osmosisSignTransaction } from '../../utils/osmosis/OsmosisRPCRequests'
-import {
+  osmosisGetAddress, osmosisSignTransaction,
   thorchainGetAddress,
-  thorchainSignTransaction,
-} from '../../utils/thorchain/THORChainRPCRequests'
+  thorchainSignTransaction
+} from '@shapeshift/metamask-snaps-adapter'
 import { CardActionProps, CardProps } from '../Card/Card'
 
 /**TODO: Add reference transactions for BCH, DOGE, LTC */

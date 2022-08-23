@@ -1,13 +1,8 @@
 import { LockIcon, UnlockIcon } from '@chakra-ui/icons'
 import { Button, useToast } from '@chakra-ui/react'
-import detectEthereumProvider from '@metamask/detect-provider'
+import { enableShapeShiftSnap } from '@shapeshift/metamask-snaps-adapter'
 import { useState } from 'react'
-
-import { useProviderDispatch } from '../../hooks/useProviderDispatch/useProviderDispatch'
-import { useProviderSelector } from '../../hooks/useProviderSelector/useProviderSelector'
 import { logger } from '../../lib/logger'
-import { setProvider } from '../../state/slices/providerSlice/providerSlice'
-import { walletEnable } from '../../utils/common'
 
 const moduleLogger = logger.child({ namespace: ['ConnectButton'] })
 
@@ -15,30 +10,16 @@ const snapId = process.env.REACT_APP_SNAP_ID || 'local:http://localhost:9000'
 
 export const ConnectButton = () => {
   const [snapIsConnected, setSnapIsConnected] = useState(false)
-  const dispatch = useProviderDispatch()
-  let provider = useProviderSelector(state => state.provider.provider)
   const toast = useToast()
 
   const handleConnect = async (): Promise<boolean> => {
     try {
-      /** Check for MetaMask if an entry does not already exist in state */
-      if (Object.keys(provider).length === 0) {
-        provider = await detectEthereumProvider()
-        dispatch(setProvider(provider))
-      }
-
-      /** Make sure the user has MetaMask Flask installed */
-      const isFlask = (await provider.request({ method: 'web3_clientVersion' }))?.includes('flask')
-      if (!isFlask) {
-        throw new Error('Please install MetaMask Flask!')
-      }
-
       /** Prompt the user to allow the snap */
-      const response = await walletEnable(snapId)
+      const response = await enableShapeShiftSnap(snapId)
 
-      if (response.errors) {
+      if (response.message.errors) {
         moduleLogger.error(
-          response.errors,
+          response.message.errors,
           { fn: 'handleConnect' },
           'MetaMask snap installation failed.',
         )
