@@ -7,12 +7,12 @@
     "url": "https://github.com/shapeshift/metamask-snaps.git"
   },
   "source": {
-    "shasum": "3Gw+MA3I74EtNpahAKny0yAZD7T/gOBUocDHQFRDvSw=",
+    "shasum": "JdSutTAcMjM1HN9036ogtNOIRJUqSsruWOGXxOY/MP8=",
     "location": {
       "npm": {
         "filePath": "dist/bundle.js",
         "iconPath": "images/FOX_icon_dark.svg",
-        "packageName": "@shapeshiftoss/metamask-snaps",
+        "packageName": "@shapeshift/metamask-snaps",
         "registry": "https://registry.npmjs.org/"
       }
     }
@@ -20,12 +20,11 @@
   "initialPermissions": {
     "snap_confirm": {},
     "snap_getBip44Entropy_0": {},
+    "snap_getBip44Entropy_2": {},
+    "snap_getBip44Entropy_3": {},
     "snap_getBip44Entropy_60": {},
     "snap_getBip44Entropy_118": {},
-    "snap_getBip44Entropy_235": {},
-    "snap_getBip44Entropy_330": {},
-    "snap_getBip44Entropy_459": {},
-    "snap_getBip44Entropy_529": {},
+    "snap_getBip44Entropy_145": {},
     "snap_getBip44Entropy_714": {},
     "snap_getBip44Entropy_931": {},
     "snap_manageState": {},
