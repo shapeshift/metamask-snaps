@@ -1,0 +1,60 @@
+{
+  "name": "@shapeshift/metamask-snaps-adapter",
+  "version": "0.7.0",
+  "description": "",
+  "author": "pastaghost <pastaghost@2520.io> (http://www.github.com/pastaghost)",
+  "homepage": "https://github.com/shapeshift/metamask-snaps/tree/main/packages/adapter",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/shapeshift/metamask-snaps.git"
+  },
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "scripts": {
+    "build": "tsc --build",
+    "build:clean": "yarn clean && yarn build",
+    "clean": " rimraf dist/*",
+    "dev": "yarn build --watch",
+    "lint": "eslint -c .eslintrc src --ext .ts,.tsx,.json --resolve-plugins-relative-to ../../",
+    "lint:changelog": "yarn auto-changelog validate",
+    "lint:fix": "yarn lint --fix && yarn lint:package-json --write",
+    "lint:misc": "prettier '**/*.json' '**/*.md' '!CHANGELOG.md' --ignore-path .gitignore",
+    "lint:package-json": "prettier-package-json ./package.json"
+  },
+  "types": "dist/index.d.ts",
+  "dependencies": {
+    "@ethersproject/providers": "^5.7.0",
+    "@metamask/detect-provider": "^1.2.0",
+    "@shapeshiftoss/hdwallet-core": "^1.29.0",
+    "@shapeshiftoss/logger": "^1.1.3"
+  },
+  "peerDependencies": {
+    "eslint-plugin-react": "*",
+    "eslint-plugin-react-hooks": "*"
+  },
+  "devDependencies": {
+    "@types/node": "^18.7.8",
+    "@typescript-eslint/eslint-plugin": "^5.33.1",
+    "@typescript-eslint/parser": "^5.33.1",
+    "eslint": "^8.22.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-jest": "^26.8.7",
+    "eslint-plugin-jsx-a11y": "^6.6.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-react": "^7.30.1",
+    "eslint-plugin-simple-import-sort": "^7.0.0",
+    "prettier": "^2.7.1",
+    "prettier-package-json": "^2.6.4",
+    "rimraf": "^3.0.2",
+    "ts-node": "^10.9.1",
+    "tslib": "^2.4.0",
+    "typescript": "^4.7.4"
+  },
+  "installConfig": {
+    "hoistingLimits": "dependencies"
+  },
+  "packageManager": "yarn@3.2.2"
+}

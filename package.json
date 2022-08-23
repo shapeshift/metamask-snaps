@@ -14,6 +14,7 @@
     "snap.manifest.json"
   ],
   "workspaces": [
+    "packages/adapter",
     "packages/snap",
     "packages/sandbox"
   ],
@@ -28,26 +29,37 @@
     "lint:fix": "yarn workspaces foreach --verbose --parallel run lint:fix",
     "lint": "yarn workspaces foreach --verbose --parallel run lint",
     "test": "yarn workspaces foreach --verbose --parallel run test",
-    "unlink-packages": "./scripts/unlink-packages.sh"
+    "unlink-packages": "./scripts/unlink-packages.sh",
+    "precommit": "yarn lint:fix && lint-staged"
+  },
+  "lint-staged": {
+    "package.json": [
+      "prettier-package-json --write",
+      "git add"
+    ]
   },
   "devDependencies": {
-    "@types/node": "^18.6.2",
-    "@typescript-eslint/eslint-plugin": "^5.30.7",
-    "@typescript-eslint/parser": "^5.30.7",
-    "concurrently": "^7.1.0",
-    "eslint": "^7.30.0",
-    "eslint-config-prettier": "^8.3.0",
-    "eslint-plugin-import": "^2.23.4",
-    "eslint-plugin-jest": "^24.4.0",
-    "eslint-plugin-jsdoc": "^39.3.3",
+    "@types/node": "^18.7.8",
+    "@typescript-eslint/eslint-plugin": "^5.33.1",
+    "@typescript-eslint/parser": "^5.33.1",
+    "concurrently": "^7.3.0",
+    "eslint": "^8.22.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-jest": "^26.8.7",
+    "eslint-plugin-jsdoc": "^39.3.6",
+    "eslint-plugin-jsx-a11y": "^6.6.1",
     "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-prettier": "^3.4.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-react": "^7.30.1",
     "eslint-plugin-simple-import-sort": "^7.0.0",
     "gulp": "^4.0.2",
     "gulp-exec": "^5.0.0",
     "hook-shell-script-webpack-plugin": "^0.1.4",
     "mkdirp": "^1.0.4",
-    "prettier": "^2.3.2",
+    "prettier": "^2.7.1",
+    "prettier-package-json": "^2.6.4",
     "prettier-plugin-packagejson": "^2.2.18",
     "rimraf": "^3.0.2",
     "ts-node": "^10.9.1",
@@ -74,5 +86,15 @@
     "bitcoinjs-lib@5.2.0": "patch:bitcoinjs-lib@npm:^5.2.0#.yarn/patches/bitcoinjs-lib-npm-5.2.0-f462e8de5e.patch",
     "ethereumjs-wallet@1.0.2": "patch:ethereumjs-wallet@npm:^1.0.2#.yarn/patches/ethereumjs-wallet-npm-1.0.2-8a504d268d.patch",
     "libsodium@0.7.10": "patch:libsodium@npm:^0.7.10#.yarn/patches/libsodium-npm-0.7.10-047df41812.patch"
+  },
+  "peerDependencies": {
+    "@babel/core": "*",
+    "@babel/plugin-syntax-flow": "*",
+    "@babel/plugin-transform-react-jsx": "*",
+    "@babel/plugin-transform-reqct-jsx": "*",
+    "@chakra-ui/styled-system": "*",
+    "eslint-plugin-jsx-a11y": "*",
+    "eslint-plugin-react": "*",
+    "eslint-plugin-react-hooks": "*"
   }
 }
