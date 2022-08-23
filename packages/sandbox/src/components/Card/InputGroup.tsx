@@ -1,5 +1,4 @@
 import {
-  //   Container,
   Heading,
   Input,
   Popover,
@@ -7,7 +6,7 @@ import {
   PopoverContent,
   PopoverHeader,
   PopoverTrigger,
-  Stack,
+  Stack
 } from '@chakra-ui/react'
 
 export const InputGroup = ({ description }: { description: string }) => {
