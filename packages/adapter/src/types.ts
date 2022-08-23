@@ -33,3 +33,26 @@ export {
   CosmosSignedTx as THORChainSignedTx,
   CosmosSignTx as THORChainSignTx,
 } from '@shapeshiftoss/hdwallet-core'
+
+export interface WalletEnableParam {
+  [snapId: string]: {
+    version?: string
+  }
+  permissionName?: Record<string, never>
+}
+
+export interface WalletEnableResult {
+  // The user's Ethereum accounts, if the eth_accounts permission has been
+  // granted.
+  accounts: string[]
+  // The permissions granted to the requester.
+  permissions: any[]
+  // The user's installed snaps that the requester is permitted to access.
+  snaps: any
+  errors?: Error[] // Any errors encountered during processing.
+}
+
+export interface EnableShapeShiftSnapResult {
+  success: boolean
+  message: WalletEnableResult
+}

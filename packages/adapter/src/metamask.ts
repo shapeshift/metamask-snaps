@@ -1,6 +1,7 @@
 import { slip44ByCoin } from '@shapeshiftoss/hdwallet-core'
 
 import { logger } from './lib/logger'
+import { WalletEnableParam, WalletEnableResult } from './types'
 import { getMetaMaskProvider } from './utils'
 
 const moduleLogger = logger.child({ namespace: ['Adapter', 'Metamask.ts'] })
@@ -10,37 +11,20 @@ const moduleLogger = logger.child({ namespace: ['Adapter', 'Metamask.ts'] })
  */
 
 /** Unrestricted Methods */
+export const walletEnable = async (params: WalletEnableParam[]): Promise<WalletEnableResult> => {
+  const provider = await getMetaMaskProvider()
 
-/** TODO: Fix me, my signature is rekt */
-// export const walletEnable = async ({
-//   wallet_snap,
-//   permissionName,
-// }: {
-//     [snapId: string]: {
-//       version?: string
-//     };
-
-//   [permissionName: string]: {}
-// }): Promise<any> => {
-//   const provider = await getMetaMaskProvider()
-
-//   try {
-//     const ret = await provider.request({
-//       method: 'wallet_enable',
-//       params: [
-//         {
-//           wallet_snap:{
-//           wallet_snap,
-//           permissionName,
-//         },
-//       }
-//       ],
-//     })
-//     return ret
-//   } catch (error) {
-//     moduleLogger.error(error, { fn: 'walletGetSnaps' }, `wallet_enable RPC call failed.`)
-//   }
-// }
+  try {
+    const ret = await provider.request({
+      method: 'wallet_enable',
+      params,
+    })
+    return ret
+  } catch (error) {
+    moduleLogger.error(error, { fn: 'walletGetSnaps' }, `wallet_enable RPC call failed.`)
+    return undefined
+  }
+}
 
 export const walletGetSnaps = async (): Promise<any> => {
   const provider = await getMetaMaskProvider()
@@ -51,8 +35,8 @@ export const walletGetSnaps = async (): Promise<any> => {
     return ret
   } catch (error) {
     moduleLogger.error(error, { fn: 'walletGetSnaps' }, `wallet_getSnaps RPC call failed.`)
+    return undefined
   }
-  return undefined
 }
 
 export const walletInstallSnaps = async ({
@@ -70,8 +54,8 @@ export const walletInstallSnaps = async ({
     return ret
   } catch (error) {
     moduleLogger.error(error, { fn: 'walletInstallSnaps' }, `wallet_installSnaps RPC call failed.`)
+    return undefined
   }
-  return undefined
 }
 
 export const walletInvokeSnap = async ({
@@ -90,8 +74,8 @@ export const walletInvokeSnap = async ({
     return ret
   } catch (error) {
     moduleLogger.error(error, { fn: 'walletInvokeSnap' }, `wallet_invokeSnap RPC call failed.`)
+    return undefined
   }
-  return undefined
 }
 
 /** Restricted Methods */
@@ -116,8 +100,8 @@ export const walletSnap = async ({
     return ret
   } catch (error) {
     moduleLogger.error(error, { fn: 'walletSnap' }, `wallet_snap_* RPC call failed.`)
+    return undefined
   }
-  return undefined
 }
 
 /**
@@ -149,10 +133,11 @@ export const snapConfirm = async ({
     })
     return ret
   } catch (error) {
+    /** User did not confirm the action or an error was encountered */
     moduleLogger.error(error, { fn: 'walletSnap' }, `wallet_snap_* RPC call failed.`)
+
+    return false
   }
-  /** User did not confirm the action or an error was encountered */
-  return false
 }
 
 /**
@@ -175,8 +160,8 @@ export const snapGetBIP44Entropy = async (coinType: string): Promise<any> => {
       { fn: 'snapGetBIP44Entropy' },
       `snap_getBip44Entropy_${chainCode} RPC call failed.`,
     )
+    return undefined
   }
-  return undefined
 }
 
 /**
@@ -198,8 +183,8 @@ export const snapManageState = async ({
     return ret
   } catch (error) {
     moduleLogger.error(error, { fn: 'snapManageState' }, `snap_manageState RPC call failed.`)
+    return undefined
   }
-  return undefined
 }
 
 /**
@@ -226,6 +211,6 @@ export const snapNotify = async ({
     return ret
   } catch (error) {
     moduleLogger.error(error, { fn: 'snapNotify' }, `snap_notify RPC call failed.`)
+    return undefined
   }
-  return undefined
 }

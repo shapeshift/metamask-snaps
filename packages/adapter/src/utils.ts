@@ -2,6 +2,8 @@ import { ExternalProvider } from '@ethersproject/providers'
 import detectEthereumProvider from '@metamask/detect-provider'
 
 import { logger } from './lib/logger'
+import { walletEnable } from './metamask'
+import { EnableShapeShiftSnapResult } from './types'
 
 const moduleLogger = logger.child({ namespace: ['Adapter', 'Utils.ts'] })
 
@@ -33,42 +35,66 @@ export const metaMaskFlaskSupported = async (): Promise<boolean> => {
   return true
 }
 
-export const shapeShiftSnapInstalled = async (): Promise<boolean> => {
+export const shapeShiftSnapInstalled = async (snapId: string): Promise<boolean> => {
   const provider = await getMetaMaskProvider()
   try {
     const ret = await provider.request({
       method: 'wallet_getSnaps',
     })
-    return ret
+
+    /* Requested snap not found in registry */
+    if (!ret[snapId]) {
+      return false
+    }
+
+    /* Errors occurred during the previous snap installation */
+    if (ret[snapId].error) {
+      return false
+    }
+    return true
   } catch (error) {
     moduleLogger.error({ fn: 'shapeShiftSnapInstalled' }, error)
+    return false
   }
-  return true
 }
 
 /**
  * Prompt the user to allow the snap
  */
-export const enableShapeShiftSnap = async (snapId: string): Promise<any> => {
+export const enableShapeShiftSnap = async (
+  snapId: string,
+  version?: string,
+): Promise<EnableShapeShiftSnapResult> => {
+  const ret: EnableShapeShiftSnapResult = {
+    success: false,
+    message: {
+      accounts: [],
+      permissions: [],
+      snaps: null,
+      errors: null,
+    },
+  }
   try {
-    const provider = await getMetaMaskProvider()
     if (!metaMaskFlaskSupported()) {
       throw new Error('Please install MetaMask Flask.')
     }
-    // if(!shapeShiftSnapInstalled()){
-    //   walletEnable( ['npm:@metamask/example-snap']: {},'eth_accounts': {})
-    // }
-    const ret = await provider.request({
-      method: 'wallet_enable',
-      params: [
+    const snapIsInstalled = await shapeShiftSnapInstalled(snapId)
+    if (!snapIsInstalled) {
+      const res = await walletEnable([
         {
-          wallet_snap: { [snapId]: {} },
+          [`wallet_snap_${snapId}`]: {
+            version,
+          },
         },
-      ],
-    })
-    return ret
+      ])
+      if (res.errors?.length) {
+        throw new Error(JSON.stringify(res.errors, null, 2))
+      }
+      ret.success = true
+      ret.message = res
+    }
   } catch (error) {
     moduleLogger.error(error, { fn: 'walletEnable' }, 'wallet_enable RPC call failed.')
   }
-  return undefined
+  return ret
 }
