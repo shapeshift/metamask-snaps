@@ -21,7 +21,9 @@
   "scripts": {
     "build:clean": "yarn clean && yarn build",
     "build:sandbox": "yarn workspace sandbox build",
-    "build:snap": "yarn workspace @shapeshiftoss/metamask-snaps build",
+    "build:snap": "yarn workspace @shapeshift/metamask-snaps build",
+    "build:snap:bundle": "yarn workspace @shapeshift/metamask-snaps build:snap:bundle",
+    "build:snap:eval": "yarn workspace @shapeshift/metamask-snaps build:snap:eval",
     "build": "yarn workspaces foreach --verbose --parallel --topological run build",
     "clean": "yarn workspaces foreach --verbose --parallel run clean",
     "dev:sandbox": "concurrently --prefix \"{time}-[{name}]\" --names \"SNAP,SANDBOX\" -c \"bgBlue.bold,bgMagenta.bold\" \"yarn build && yarn link-packages\" \"cd examples/react-sandbox && yarn dev\"",
