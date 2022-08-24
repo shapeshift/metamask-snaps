@@ -70,3 +70,23 @@ export const LTCVerifyMessage = async (
     return undefined
   }
 }
+
+export const LTCBroadcastTransaction = async (
+  transaction: LitecoinSignedTransaction,
+): Promise<string | undefined> => {
+  const provider = await getMetaMaskProvider()
+  try {
+    const ret = await provider.request({
+      method: 'litecoin_broadcastTransaction',
+      params: [transaction],
+    })
+    return ret
+  } catch (error) {
+    moduleLogger.error(
+      error,
+      { fn: 'LTCBroadcastTransaction' },
+      `litecoin_broadcastTransaction RPC call failed.`,
+    )
+  }
+  return undefined
+}

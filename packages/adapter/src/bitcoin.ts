@@ -70,3 +70,23 @@ export const BTCVerifyMessage = async (
     return undefined
   }
 }
+
+export const BTCBroadcastTransaction = async (
+  transaction: BitcoinSignedTransaction,
+): Promise<string | undefined> => {
+  const provider = await getMetaMaskProvider()
+  try {
+    const ret = await provider.request({
+      method: 'bitcoin_broadcastTransaction',
+      params: [transaction],
+    })
+    return ret
+  } catch (error) {
+    moduleLogger.error(
+      error,
+      { fn: 'BTCBroadcastTransaction' },
+      `bitcoin_broadcastTransaction RPC call failed.`,
+    )
+  }
+  return undefined
+}

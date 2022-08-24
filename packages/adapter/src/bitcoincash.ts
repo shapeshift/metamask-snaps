@@ -72,3 +72,23 @@ export const BCHVerifyMessage = async (
     return undefined
   }
 }
+
+export const BCHBroadcastTransaction = async (
+  transaction: BitcoinCashSignedTransaction,
+): Promise<string | undefined> => {
+  const provider = await getMetaMaskProvider()
+  try {
+    const ret = await provider.request({
+      method: 'bch_broadcastTransaction',
+      params: [transaction],
+    })
+    return ret
+  } catch (error) {
+    moduleLogger.error(
+      error,
+      { fn: 'BCHBroadcastTransaction' },
+      `bch_broadcastTransaction RPC call failed.`,
+    )
+  }
+  return undefined
+}

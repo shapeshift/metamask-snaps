@@ -1,5 +1,5 @@
 import { logger } from './lib/logger'
-import { THORChainSignedTx, THORChainSignTx } from './types'
+import { THORChainSignedTransaction, THORChainSignTransaction } from './types'
 import { getMetaMaskProvider } from './utils'
 
 const moduleLogger = logger.child({ namespace: ['Adapter', 'Thorchain.ts'] })
@@ -22,8 +22,8 @@ export const thorchainGetAddress = async (): Promise<string | undefined> => {
 }
 
 export const thorchainSignTransaction = async (
-  transaction: THORChainSignTx,
-): Promise<THORChainSignedTx | undefined> => {
+  transaction: THORChainSignTransaction,
+): Promise<THORChainSignedTransaction | undefined> => {
   const provider = await getMetaMaskProvider()
   try {
     const ret = await provider.request({

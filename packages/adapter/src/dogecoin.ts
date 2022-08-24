@@ -74,3 +74,23 @@ export const DogeVerifyMessage = async (
     return undefined
   }
 }
+
+export const DogeBroadcastTransaction = async (
+  transaction: DogecoinSignedTransaction,
+): Promise<string | undefined> => {
+  const provider = await getMetaMaskProvider()
+  try {
+    const ret = await provider.request({
+      method: 'doge_broadcastTransaction',
+      params: [transaction],
+    })
+    return ret
+  } catch (error) {
+    moduleLogger.error(
+      error,
+      { fn: 'DogeBroadcastTransaction' },
+      `doge_broadcastTransaction RPC call failed.`,
+    )
+  }
+  return undefined
+}

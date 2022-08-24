@@ -70,3 +70,23 @@ export const ETHVerifyMessage = async (
   }
   return undefined
 }
+
+export const ETHBroadcastTransaction = async (
+  transaction: EthereumSignedTransaction,
+): Promise<string | undefined> => {
+  const provider = await getMetaMaskProvider()
+  try {
+    const ret = await provider.request({
+      method: 'eth_broadcastTransaction',
+      params: [transaction],
+    })
+    return ret
+  } catch (error) {
+    moduleLogger.error(
+      error,
+      { fn: 'ETHBroadcastTransaction' },
+      `eth_broadcastTransaction RPC call failed.`,
+    )
+  }
+  return undefined
+}

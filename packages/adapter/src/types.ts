@@ -1,6 +1,6 @@
 export {
-  BinanceSignedTx,
-  BinanceSignTx,
+  BinanceSignedTx as BinanceSignedTransaction,
+  BinanceSignTx as BinanceSignTransaction,
   BTCSignedMessage as BitcoinCashSignedMessage,
   BTCSignedTx as BitcoinCashSignedTransaction,
   BTCSignMessage as BitcoinCashSignMessage,
@@ -11,8 +11,8 @@ export {
   BTCSignMessage as BitcoinSignMessage,
   BTCSignTx as BitcoinSignTransaction,
   BTCVerifyMessage as BitcoinVerifyMessage,
-  CosmosSignedTx,
-  CosmosSignTx,
+  CosmosSignedTx as CosmosSignedTransaction,
+  CosmosSignTx as CosmosSignTransaction,
   BTCSignedMessage as DogecoinSignedMessage,
   BTCSignedTx as DogecoinSignedTransaction,
   BTCSignMessage as DogecoinSignMessage,
@@ -28,10 +28,10 @@ export {
   BTCSignMessage as LitecoinSignMessage,
   BTCSignTx as LitecoinSignTransaction,
   BTCVerifyMessage as LitecoinVerifyMessage,
-  OsmosisSignedTx,
-  OsmosisSignTx,
-  CosmosSignedTx as THORChainSignedTx,
-  CosmosSignTx as THORChainSignTx,
+  OsmosisSignedTx as OsmosisSignedTransaction,
+  OsmosisSignTx as OsmosisSignTransaction,
+  CosmosSignedTx as THORChainSignedTransaction,
+  CosmosSignTx as THORChainSignTransaction,
 } from '@shapeshiftoss/hdwallet-core'
 
 export interface WalletEnableParam {

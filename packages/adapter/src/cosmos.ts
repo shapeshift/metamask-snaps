@@ -1,5 +1,5 @@
 import { logger } from './lib/logger'
-import { CosmosSignedTx, CosmosSignTx } from './types'
+import { CosmosSignedTransaction, CosmosSignTransaction } from './types'
 import { getMetaMaskProvider } from './utils'
 
 const moduleLogger = logger.child({ namespace: ['Adapter', 'Cosmos.ts'] })
@@ -18,8 +18,8 @@ export const cosmosGetAddress = async (): Promise<string | undefined> => {
 }
 
 export const cosmosSignTransaction = async (
-  transaction: CosmosSignTx,
-): Promise<CosmosSignedTx | undefined> => {
+  transaction: CosmosSignTransaction,
+): Promise<CosmosSignedTransaction | undefined> => {
   const provider = await getMetaMaskProvider()
   try {
     const ret = await provider.request({
@@ -32,6 +32,26 @@ export const cosmosSignTransaction = async (
       error,
       { fn: 'cosmosSignTransaction' },
       `cosmos_signTransaction RPC call failed.`,
+    )
+  }
+  return undefined
+}
+
+export const cosmosBroadcastTransaction = async (
+  transaction: CosmosSignedTransaction,
+): Promise<string | undefined> => {
+  const provider = await getMetaMaskProvider()
+  try {
+    const ret = await provider.request({
+      method: 'cosmos_broadcastTransaction',
+      params: [transaction],
+    })
+    return ret
+  } catch (error) {
+    moduleLogger.error(
+      error,
+      { fn: 'cosmosBroadcastTransaction' },
+      `cosmos_broadcastTransaction RPC call failed.`,
     )
   }
   return undefined
