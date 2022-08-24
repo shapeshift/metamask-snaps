@@ -1,4 +1,4 @@
-// eslint-disable no-console
+/* eslint-disable no-console, no-undef */
 import { Logger, LoggerFunction, LoggerOptions, LogLevel } from '@shapeshiftoss/logger'
 
 interface LogStyle {
@@ -88,6 +88,8 @@ const isValidLogLevel = (level: string): level is LogLevel => {
   return LogLevelStrings.includes(level)
 }
 
+export const logger = createLogger()
+
 /**
  * Save the specified LogLevel to LocalStorage
  */
@@ -103,8 +105,6 @@ export const saveLogLevel = (level: LogLevel | string) => {
 
   return false
 }
-
-export const logger = createLogger()
 
 /*
  DOCUMENTATION

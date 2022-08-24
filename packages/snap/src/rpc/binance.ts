@@ -50,3 +50,17 @@ export const binanceSignTransaction = async (
     throw error
   }
 }
+/* Disabled pending Unchained support */
+// export const binanceBroadcastTransaction = async (message: BinanceSignedTx): Promise<string | undefined> => {
+//   try {
+//     const config = new unchained.binance.Configuration({
+//       basePath: process.env.UNCHAINED_BINANCE_HTTP_URL,
+//     })
+//     const client = new unchained.binance.V1Api(config)
+//     const txid = client.sendTx({ body: { rawTx: message.serialized } })
+//     return txid
+//   } catch (error) {
+//     moduleLogger.error(message, { fn: 'binanceBroadcastMessage' }, error)
+//     return undefined
+//   }
+// }

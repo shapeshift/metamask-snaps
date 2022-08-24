@@ -4,6 +4,7 @@ import {
   OsmosisSignTx,
   slip44ByCoin,
 } from '@shapeshiftoss/hdwallet-core'
+import * as unchained from '@shapeshiftoss/unchained-client'
 
 import { logger } from '../lib/logger'
 import { getHDWalletNativeSigner } from './common'
@@ -48,5 +49,21 @@ export const osmosisSignTransaction = async (
   } catch (error) {
     moduleLogger.error(transaction, { fn: 'osmosisSignTransaction' }, error)
     throw error
+  }
+}
+
+export const osmosisBroadcastTransaction = async (
+  message: OsmosisSignedTx,
+): Promise<string | undefined> => {
+  try {
+    const config = new unchained.osmosis.Configuration({
+      basePath: process.env.UNCHAINED_OSMOSIS_HTTP_URL,
+    })
+    const client = new unchained.osmosis.V1Api(config)
+    const txid = client.sendTx({ body: { rawTx: message.serialized } })
+    return txid
+  } catch (error) {
+    moduleLogger.error(message, { fn: 'osmosisBroadcastMessage' }, error)
+    return undefined
   }
 }

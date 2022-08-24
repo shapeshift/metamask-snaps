@@ -7,6 +7,7 @@ import {
   ETHVerifyMessage,
   slip44ByCoin,
 } from '@shapeshiftoss/hdwallet-core'
+import * as unchained from '@shapeshiftoss/unchained-client'
 
 import { logger } from '../lib/logger'
 import { getHDWalletNativeSigner } from './common'
@@ -80,5 +81,21 @@ export const ethVerifyMessage = async (message: ETHVerifyMessage): Promise<boole
   } catch (error) {
     moduleLogger.error(message, { fn: 'ethVerifyMessage' }, error)
     throw error
+  }
+}
+
+export const ethBroadcastTransaction = async (
+  message: ETHSignedTx,
+): Promise<string | undefined> => {
+  try {
+    const config = new unchained.ethereum.Configuration({
+      basePath: process.env.UNCHAINED_ETHEREUM_HTTP_URL,
+    })
+    const client = new unchained.ethereum.V1Api(config)
+    const txid = client.sendTx({ sendTxBody: { hex: message.serialized } })
+    return txid
+  } catch (error) {
+    moduleLogger.error(message, { fn: 'ethBroadcastMessage' }, error)
+    return undefined
   }
 }

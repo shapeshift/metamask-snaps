@@ -8,6 +8,7 @@ import {
   BTCVerifyMessage,
   slip44ByCoin,
 } from '@shapeshiftoss/hdwallet-core'
+import * as unchained from '@shapeshiftoss/unchained-client'
 
 import { logger } from '../lib/logger'
 import { getHDWalletNativeSigner } from './common'
@@ -87,5 +88,21 @@ export const dogeVerifyMessage = async (message: BTCVerifyMessage): Promise<bool
   } catch (error) {
     moduleLogger.error(message, { fn: 'dogeVerifyMessage' }, error)
     throw error
+  }
+}
+
+export const dogeBroadcastTransaction = async (
+  message: BTCSignedTx,
+): Promise<string | undefined> => {
+  try {
+    const config = new unchained.dogecoin.Configuration({
+      basePath: process.env.UNCHAINED_DOGECOIN_HTTP_URL,
+    })
+    const client = new unchained.dogecoin.V1Api(config)
+    const txid = client.sendTx({ sendTxBody: { hex: message.serializedTx } })
+    return txid
+  } catch (error) {
+    moduleLogger.error(message, { fn: 'dogeBroadcastMessage' }, error)
+    return undefined
   }
 }

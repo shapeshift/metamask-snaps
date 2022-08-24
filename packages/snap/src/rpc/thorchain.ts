@@ -52,3 +52,18 @@ export const thorchainSignTransaction = async (
     throw error
   }
 }
+
+/* Disabled pending Unchained support */
+// export const thorchainBroadcastTransaction = async (message: ThorchainSignedTx): Promise<string | undefined> => {
+//   try {
+//     const config = new unchained.thorchain.Configuration({
+//       basePath: process.env.UNCHAINED_THORCHAIN_HTTP_URL,
+//     })
+//     const client = new unchained.thorchain.V1Api(config)
+//     const txid = client.sendTx({ body: { rawTx: message.serialized } })
+//     return txid
+//   } catch (error) {
+//     moduleLogger.error(message, { fn: 'thorchainBroadcastMessage' }, error)
+//     return undefined
+//   }
+// }

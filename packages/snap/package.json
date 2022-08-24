@@ -43,7 +43,9 @@
     "@shapeshiftoss/caip": "^6.6.0",
     "@shapeshiftoss/hdwallet-core": "1.29.0",
     "@shapeshiftoss/hdwallet-native": "1.29.0",
-    "@shapeshiftoss/logger": "^1.1.2"
+    "@shapeshiftoss/logger": "^1.1.2",
+    "@shapeshiftoss/unchained-client": "^9.9.0",
+    "dotenv": "^16.0.1"
   },
   "peerDependencies": {
     "@babel/core": "*",

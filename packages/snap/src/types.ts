@@ -1,11 +1,15 @@
 import { ChainId } from '@shapeshiftoss/caip'
 import {
+  BinanceSignedTx,
   BinanceSignTx,
   BTCGetAddress,
+  BTCSignedTx,
   BTCSignMessage,
   BTCSignTx,
   BTCVerifyMessage,
+  CosmosSignedTx,
   CosmosSignTx,
+  ETHSignedTx,
   ETHSignMessage,
   ETHSignTx,
   ETHVerifyMessage,
@@ -50,6 +54,13 @@ export interface BCHVerifyMessageRequest {
   }
 }
 
+export interface BCHBroadcastTransactionRequest {
+  method: 'bch_broadcastTransaction'
+  params: {
+    transaction: BTCSignedTx
+  }
+}
+
 export interface BinanceGetAddressRequest {
   method: 'binance_getAddress'
   params: undefined
@@ -58,6 +69,13 @@ export interface BinanceSignTransactionRequest {
   method: 'binance_signTransaction'
   params: {
     transaction: BinanceSignTx
+  }
+}
+
+export interface BinanceBroadcastTransactionRequest {
+  method: 'binance_broadcastTransaction'
+  params: {
+    transaction: BinanceSignedTx
   }
 }
 
@@ -80,6 +98,13 @@ export interface BTCSignMessageRequest {
   }
 }
 
+export interface BTCBroadcastTransactionRequest {
+  method: 'btc_broadcastTransaction'
+  params: {
+    transaction: BTCSignedTx
+  }
+}
+
 export interface BTCVerifyMessageRequest {
   method: 'btc_verifyMessage'
   params: {
@@ -95,6 +120,13 @@ export interface CosmosSignTransactionRequest {
   method: 'cosmos_signTransaction'
   params: {
     transaction: CosmosSignTx
+  }
+}
+
+export interface CosmosBroadcastTransactionRequest {
+  method: 'cosmos_broadcastTransaction'
+  params: {
+    transaction: CosmosSignedTx
   }
 }
 
@@ -124,6 +156,13 @@ export interface DogeVerifyMessageRequest {
   }
 }
 
+export interface DogeBroadcastTransactionRequest {
+  method: 'doge_broadcastTransaction'
+  params: {
+    transaction: BTCSignedTx
+  }
+}
+
 export interface ETHGetAddressRequest {
   method: 'eth_getAddress'
   params: undefined
@@ -147,6 +186,13 @@ export interface ETHVerifyMessageRequest {
   method: 'eth_verifyMessage'
   params: {
     message: ETHVerifyMessage
+  }
+}
+
+export interface ETHBroadcastTransactionRequest {
+  method: 'eth_broadcastTransaction'
+  params: {
+    transaction: ETHSignedTx
   }
 }
 
@@ -176,6 +222,13 @@ export interface LTCVerifyMessageRequest {
   }
 }
 
+export interface LTCBroadcastTransactionRequest {
+  method: 'ltc_broadcastTransaction'
+  params: {
+    transaction: BTCSignedTx
+  }
+}
+
 export interface ThorchainGetAddressRequest {
   method: 'thorchain_getAddress'
   params: undefined
@@ -187,6 +240,13 @@ export interface ThorchainSignTransactionRequest {
   }
 }
 
+export interface ThorchainBroadcastTransactionRequest {
+  method: 'thorchain_broadcastTransaction'
+  params: {
+    transaction: CosmosSignedTx
+  }
+}
+
 export type MetaMaskRPCRequest =
   | HelloRequest
   | GetAddressRequest
@@ -194,25 +254,33 @@ export type MetaMaskRPCRequest =
   | BCHSignTransactionRequest
   | BCHSignMessageRequest
   | BCHVerifyMessageRequest
+  | BCHBroadcastTransactionRequest
   | BinanceGetAddressRequest
   | BinanceSignTransactionRequest
+  | BinanceBroadcastTransactionRequest
   | BTCGetAddressRequest
   | BTCSignTransactionRequest
   | BTCSignMessageRequest
   | BTCVerifyMessageRequest
+  | BTCBroadcastTransactionRequest
   | CosmosGetAddressRequest
   | CosmosSignTransactionRequest
+  | CosmosBroadcastTransactionRequest
   | DogeGetAddressRequest
   | DogeSignTransactionRequest
   | DogeSignMessageRequest
   | DogeVerifyMessageRequest
+  | DogeBroadcastTransactionRequest
   | ETHGetAddressRequest
   | ETHSignMessageRequest
   | ETHSignTransactionRequest
   | ETHVerifyMessageRequest
+  | ETHBroadcastTransactionRequest
   | LTCGetAddressRequest
   | LTCSignTransactionRequest
   | LTCSignMessageRequest
   | LTCVerifyMessageRequest
+  | LTCBroadcastTransactionRequest
   | ThorchainGetAddressRequest
   | ThorchainSignTransactionRequest
+  | ThorchainBroadcastTransactionRequest

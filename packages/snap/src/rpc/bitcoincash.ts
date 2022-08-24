@@ -8,6 +8,7 @@ import {
   BTCVerifyMessage,
   slip44ByCoin,
 } from '@shapeshiftoss/hdwallet-core'
+import * as unchained from '@shapeshiftoss/unchained-client'
 
 import { logger } from '../lib/logger'
 import { getHDWalletNativeSigner } from './common'
@@ -87,5 +88,21 @@ export const bchVerifyMessage = async (message: BTCVerifyMessage): Promise<boole
   } catch (error) {
     moduleLogger.error(message, { fn: 'bchVerifyMessage' }, error)
     throw error
+  }
+}
+
+export const bchBroadcastTransaction = async (
+  message: BTCSignedTx,
+): Promise<string | undefined> => {
+  try {
+    const config = new unchained.bitcoincash.Configuration({
+      basePath: process.env.UNCHAINED_BITCOINCASH_HTTP_URL,
+    })
+    const client = new unchained.bitcoincash.V1Api(config)
+    const txid = client.sendTx({ sendTxBody: { hex: message.serializedTx } })
+    return txid
+  } catch (error) {
+    moduleLogger.error(message, { fn: 'bchBroadcastMessage' }, error)
+    return undefined
   }
 }

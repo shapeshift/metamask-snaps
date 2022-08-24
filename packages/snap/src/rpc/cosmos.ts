@@ -4,6 +4,7 @@ import {
   CosmosSignTx,
   slip44ByCoin,
 } from '@shapeshiftoss/hdwallet-core'
+import * as unchained from '@shapeshiftoss/unchained-client'
 
 import { logger } from '../lib/logger'
 import { getHDWalletNativeSigner } from './common'
@@ -46,5 +47,21 @@ export const cosmosSignTransaction = async (transaction: CosmosSignTx): Promise<
   } catch (error) {
     moduleLogger.error(transaction, { fn: 'cosmosSignTransaction' }, error)
     throw error
+  }
+}
+
+export const cosmosBroadcastTransaction = async (
+  message: CosmosSignedTx,
+): Promise<string | undefined> => {
+  try {
+    const config = new unchained.cosmos.Configuration({
+      basePath: process.env.UNCHAINED_COSMOS_HTTP_URL,
+    })
+    const client = new unchained.cosmos.V1Api(config)
+    const txid = client.sendTx({ body: { rawTx: message.serialized } })
+    return txid
+  } catch (error) {
+    moduleLogger.error(message, { fn: 'cosmosBroadcastMessage' }, error)
+    return undefined
   }
 }
