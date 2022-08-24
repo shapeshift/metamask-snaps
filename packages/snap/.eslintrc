@@ -1,17 +1,28 @@
 {
   "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "airbnb",
+    "plugin:prettier/recommended",
     "prettier"
   ],
+  "parser": "@typescript-eslint/parser",
   "plugins": [
-    "jest",
+    "@typescript-eslint",
     "prettier",
     "simple-import-sort"
   ],
-  "env": {
-    "browser": true,
-    "jest/globals": true
-  },
   "rules": {
+    "@typescript-eslint/no-unused-vars": "error",
+    "@typescript-eslint/no-explicit-any": "off",
+    "default-case": "error",
+    "import/prefer-default-export": "off",
+    "import/first": "error",
+    "import/extensions": "off",
+    "import/no-unresolved": "off",
+    "import/newline-after-import": "error",
+    "import/no-default-export": "error",
+    "import/no-duplicates": "error",
     "jsx-a11y/alt-text": "error",
     "jsx-a11y/no-autofocus": "off",
     "no-console": [
@@ -26,50 +37,23 @@
         ]
       }
     ],
-    "@typescript-eslint/no-unused-vars": "error",
+    "no-underscore-dangle": "off",
+    "object-shorthand": "error",
     "prettier/prettier": [
       "error",
       {
-        "printWidth": 100,
-        "endOfLine": "lf",
-        "tabWidth": 2,
-        "useTabs": false,
-        "singleQuote": true,
-        "semi": false,
         "arrowParens": "avoid",
+        "endOfLine": "lf",
         "jsxSingleQuote": true,
-        "trailingComma": "all"
+        "printWidth": 100,
+        "semi": false,
+        "singleQuote": true,
+        "tabWidth": 2,
+        "trailingComma": "all",
+        "useTabs": false
       }
     ],
-    "default-case": "error",
-    "import/no-default-export": "error",
-    "simple-import-sort/imports": [
-      "error",
-      {
-        "groups": [
-          [
-            "^\\u0000"
-          ],
-          [
-            "^@?\\w",
-            "^assets(/.*|$)",
-            "^components(/.*|$)",
-            "^context(/.*|$)",
-            "^hooks(/.*|$)",
-            "^jest(/.*|$)",
-            "^lib(/.*|$)",
-            "^pages(/.*|$)",
-            "^services(/.*|$)",
-            "^state(/.*|$)",
-            "^theme(/.*|$)",
-            "^types(/.*|$)"
-          ],
-          [
-            "^\\."
-          ]
-        ]
-      }
-    ],
-    "object-shorthand": "error"
+    "simple-import-sort/exports": "error",
+    "simple-import-sort/imports": "error"
   }
 }
