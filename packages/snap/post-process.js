@@ -9,6 +9,12 @@ let bundleString = fs.readFileSync(bundlePath, 'utf8')
 // Alias `window` as `self`
 bundleString = 'var self = window;\n'.concat(bundleString)
 
+// Alias Lodash `root` as `self`
+bundleString = bundleString.replaceAll(
+  `root = require('./_root')`,
+  `root = self`
+)
+
 // Remove useless "stdlib" argument from bignumber.js asm module
 bundleString = bundleString
   .replace(
