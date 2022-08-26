@@ -39,7 +39,7 @@
   "dependencies": {
     "@metamask/detect-provider": "^1.2.0",
     "@metamask/key-tree": "^4.0.0",
-    "@metamask/snaps-webpack-plugin": "^0.18.1",
+    "@metamask/snaps-webpack-plugin": "^0.20.0",
     "@shapeshiftoss/caip": "^6.6.0",
     "@shapeshiftoss/hdwallet-core": "1.29.0",
     "@shapeshiftoss/hdwallet-native": "1.29.0",
