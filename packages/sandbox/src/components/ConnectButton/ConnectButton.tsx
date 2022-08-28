@@ -1,7 +1,8 @@
 import { LockIcon, UnlockIcon } from '@chakra-ui/icons'
 import { Button, useToast } from '@chakra-ui/react'
-import { enableShapeShiftSnap } from '@shapeshift/metamask-snaps-adapter'
+import { enableShapeShiftSnap } from '@shapeshiftoss/metamask-snaps-adapter'
 import { useState } from 'react'
+
 import { logger } from '../../lib/logger'
 
 const moduleLogger = logger.child({ namespace: ['ConnectButton'] })

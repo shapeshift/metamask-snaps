@@ -7,9 +7,8 @@ import {
   walletGetSnaps,
   walletInstallSnaps,
   walletInvokeSnap,
-  walletSnap
-} from '@shapeshift/metamask-snaps-adapter'
-
+  walletSnap,
+} from '@shapeshiftoss/metamask-snaps-adapter'
 
 import { CardActionProps, CardProps } from '../Card/Card'
 
