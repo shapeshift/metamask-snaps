@@ -1,14 +1,15 @@
 import { logger } from './lib/logger'
-import { THORChainSignedTransaction, THORChainSignTransaction } from './types'
+import { ThorchainGetAddressParams, ThorchainSignedTransaction, ThorchainSignTransaction } from './types'
 import { getMetaMaskProvider } from './utils'
 
 const moduleLogger = logger.child({ namespace: ['Adapter', 'Thorchain.ts'] })
 
-export const thorchainGetAddress = async (): Promise<string | undefined> => {
+export const thorchainGetAddress = async (params:ThorchainGetAddressParams): Promise<string | null> => {
   const provider = await getMetaMaskProvider()
   try {
     const ret = await provider.request({
       method: 'thorchain_getAddress',
+      params: [params]
     })
     return ret
   } catch (error) {
@@ -18,12 +19,12 @@ export const thorchainGetAddress = async (): Promise<string | undefined> => {
       `thorchain_getAddress RPC call failed.`,
     )
   }
-  return undefined
+  return null
 }
 
 export const thorchainSignTransaction = async (
-  transaction: THORChainSignTransaction,
-): Promise<THORChainSignedTransaction | undefined> => {
+  transaction: ThorchainSignTransaction,
+): Promise<ThorchainSignedTransaction | null> => {
   const provider = await getMetaMaskProvider()
   try {
     const ret = await provider.request({
@@ -38,5 +39,25 @@ export const thorchainSignTransaction = async (
       `thorchain_signTransaction RPC call failed.`,
     )
   }
-  return undefined
+  return null
+}
+
+export const thorchainBroadcastTransaction = async (
+  transaction: ThorchainSignedTransaction,
+): Promise<string | null> => {
+  const provider = await getMetaMaskProvider()
+  try {
+    const ret = await provider.request({
+      method: 'thorchain_broadcastTransaction',
+      params: [transaction],
+    })
+    return ret
+  } catch (error) {
+    moduleLogger.error(
+      error,
+      { fn: 'ThorchainsBroadcastTransaction' },
+      `thorchain_broadcastTransaction RPC call failed.`,
+    )
+  }
+  return null
 }

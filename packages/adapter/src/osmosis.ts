@@ -1,25 +1,26 @@
 import { logger } from './lib/logger'
-import { OsmosisSignedTransaction, OsmosisSignTransaction } from './types'
+import { OsmosisGetAddressParams, OsmosisSignedTransaction, OsmosisSignTransaction } from './types'
 import { getMetaMaskProvider } from './utils'
 
 const moduleLogger = logger.child({ namespace: ['Adapter', 'Osmosis.ts'] })
 
-export const osmosisGetAddress = async (): Promise<string | undefined> => {
+export const osmosisGetAddress = async (params: OsmosisGetAddressParams): Promise<string | null> => {
   const provider = await getMetaMaskProvider()
   try {
     const ret = await provider.request({
       method: 'osmosis_getAddress',
+      params: [params]
     })
     return ret
   } catch (error) {
     moduleLogger.error(error, { fn: 'osmosisGetAddress' }, `osmosis_getAddress RPC call failed.`)
   }
-  return undefined
+  return null
 }
 
 export const osmosisSignTransaction = async (
   transaction: OsmosisSignTransaction,
-): Promise<OsmosisSignedTransaction | undefined> => {
+): Promise<OsmosisSignedTransaction | null> => {
   const provider = await getMetaMaskProvider()
   try {
     const ret = await provider.request({
@@ -34,16 +35,16 @@ export const osmosisSignTransaction = async (
       `osmosis_signTransaction RPC call failed.`,
     )
   }
-  return undefined
+  return null
 }
 
 export const osmosisBroadcastTransaction = async (
   transaction: OsmosisSignedTransaction,
-): Promise<string | undefined> => {
+): Promise<string | null> => {
   const provider = await getMetaMaskProvider()
   try {
     const ret = await provider.request({
-      method: 'eth_broadcastTransaction',
+      method: 'osmosis_broadcastTransaction',
       params: [transaction],
     })
     return ret
@@ -54,5 +55,5 @@ export const osmosisBroadcastTransaction = async (
       `osmosis_broadcastTransaction RPC call failed.`,
     )
   }
-  return undefined
+  return null
 }

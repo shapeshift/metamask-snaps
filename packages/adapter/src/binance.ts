@@ -1,25 +1,28 @@
 import { logger } from './lib/logger'
-import { BinanceSignedTransaction, BinanceSignTransaction } from './types'
+import { BinanceGetAddressParams, BinanceSignedTransaction, BinanceSignTransaction } from './types'
 import { getMetaMaskProvider } from './utils'
 
 const moduleLogger = logger.child({ namespace: ['Adapter', 'Binance.ts'] })
 
-export const binanceGetAddress = async (): Promise<string | undefined> => {
+export const binanceGetAddress = async (
+  params: BinanceGetAddressParams
+): Promise<string | null> => {
   const provider = await getMetaMaskProvider()
   try {
     const ret = await provider.request({
       method: 'binance_getAddress',
+      params: [params]
     })
     return ret
   } catch (error) {
     moduleLogger.error(error, { fn: 'binanceGetAddress' }, `binance_getAddress RPC call failed.`)
   }
-  return undefined
+  return null
 }
 
 export const binanceSignTransaction = async (
   transaction: BinanceSignTransaction,
-): Promise<BinanceSignedTransaction | undefined> => {
+): Promise<BinanceSignedTransaction | null> => {
   const provider = await getMetaMaskProvider()
   try {
     const ret = await provider.request({
@@ -34,12 +37,12 @@ export const binanceSignTransaction = async (
       `binance_signTransaction RPC call failed.`,
     )
   }
-  return undefined
+  return null
 }
 
 export const binanceBroadcastTransaction = async (
   transaction: BinanceSignedTransaction,
-): Promise<string | undefined> => {
+): Promise<string | null> => {
   const provider = await getMetaMaskProvider()
   try {
     const ret = await provider.request({
@@ -54,5 +57,5 @@ export const binanceBroadcastTransaction = async (
       `binance_broadcastTransaction RPC call failed.`,
     )
   }
-  return undefined
+  return null
 }

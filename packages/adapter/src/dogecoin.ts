@@ -1,5 +1,6 @@
 import { logger } from './lib/logger'
 import {
+  DogecoinGetAddressParams,
   DogecoinSignedMessage,
   DogecoinSignedTransaction,
   DogecoinSignMessage,
@@ -10,22 +11,23 @@ import { getMetaMaskProvider } from './utils'
 
 const moduleLogger = logger.child({ namespace: ['Adapter', 'Dogecoin.ts'] })
 
-export const DogeGetAddress = async (): Promise<string | undefined> => {
+export const dogecoinGetAddress = async (params: DogecoinGetAddressParams): Promise<string | null> => {
   const provider = await getMetaMaskProvider()
   try {
     const ret = await provider.request({
       method: 'doge_getAddress',
+      params: [params]
     })
     return ret
   } catch (error) {
     moduleLogger.error(error, { fn: 'DogeGetAddress' }, `doge_getAddress RPC call failed.`)
   }
-  return undefined
+  return null
 }
 
-export const DogeSignMessage = async (
+export const dogecoinSignMessage = async (
   message: DogecoinSignMessage,
-): Promise<DogecoinSignedMessage | undefined> => {
+): Promise<DogecoinSignedMessage | null> => {
   const provider = await getMetaMaskProvider()
   try {
     const ret = await provider.request({
@@ -36,12 +38,12 @@ export const DogeSignMessage = async (
   } catch (error) {
     moduleLogger.error(error, { fn: 'DogeSignMessage' }, `doge_signMessage RPC call failed.`)
   }
-  return undefined
+  return null
 }
 
-export const DogeSignTransaction = async (
+export const dogecoinSignTransaction = async (
   transaction: DogecoinSignTransaction,
-): Promise<DogecoinSignedTransaction | undefined> => {
+): Promise<DogecoinSignedTransaction | null> => {
   const provider = await getMetaMaskProvider()
   try {
     const ret = await provider.request({
@@ -56,12 +58,12 @@ export const DogeSignTransaction = async (
       `doge_signTransaction RPC call failed.`,
     )
   }
-  return undefined
+  return null
 }
 
-export const DogeVerifyMessage = async (
+export const dogecoinVerifyMessage = async (
   message: DogecoinVerifyMessage,
-): Promise<boolean | undefined> => {
+): Promise<boolean | null> => {
   const provider = await getMetaMaskProvider()
   try {
     const ret = await provider.request({
@@ -71,13 +73,13 @@ export const DogeVerifyMessage = async (
     return ret
   } catch (error) {
     moduleLogger.error(error, { fn: 'DogeVerifyMessage' }, `doge_verifyMessage RPC call failed.`)
-    return undefined
+    return null
   }
 }
 
-export const DogeBroadcastTransaction = async (
+export const dogecoinBroadcastTransaction = async (
   transaction: DogecoinSignedTransaction,
-): Promise<string | undefined> => {
+): Promise<string | null> => {
   const provider = await getMetaMaskProvider()
   try {
     const ret = await provider.request({
@@ -92,5 +94,5 @@ export const DogeBroadcastTransaction = async (
       `doge_broadcastTransaction RPC call failed.`,
     )
   }
-  return undefined
+  return null
 }

@@ -1,25 +1,26 @@
 import { logger } from './lib/logger'
-import { CosmosSignedTransaction, CosmosSignTransaction } from './types'
+import { CosmosGetAddressParams, CosmosSignedTransaction, CosmosSignTransaction } from './types'
 import { getMetaMaskProvider } from './utils'
 
 const moduleLogger = logger.child({ namespace: ['Adapter', 'Cosmos.ts'] })
 
-export const cosmosGetAddress = async (): Promise<string | undefined> => {
+export const cosmosGetAddress = async (params: CosmosGetAddressParams): Promise<string | null> => {
   const provider = await getMetaMaskProvider()
   try {
     const ret = await provider.request({
       method: 'cosmos_getAddress',
+      params: [params]
     })
     return ret
   } catch (error) {
     moduleLogger.error(error, { fn: 'cosmosGetAddress' }, `cosmos_getAddress RPC call failed.`)
   }
-  return undefined
+  return null
 }
 
 export const cosmosSignTransaction = async (
   transaction: CosmosSignTransaction,
-): Promise<CosmosSignedTransaction | undefined> => {
+): Promise<CosmosSignedTransaction | null> => {
   const provider = await getMetaMaskProvider()
   try {
     const ret = await provider.request({
@@ -34,12 +35,12 @@ export const cosmosSignTransaction = async (
       `cosmos_signTransaction RPC call failed.`,
     )
   }
-  return undefined
+  return null
 }
 
 export const cosmosBroadcastTransaction = async (
   transaction: CosmosSignedTransaction,
-): Promise<string | undefined> => {
+): Promise<string | null> => {
   const provider = await getMetaMaskProvider()
   try {
     const ret = await provider.request({
@@ -54,5 +55,5 @@ export const cosmosBroadcastTransaction = async (
       `cosmos_broadcastTransaction RPC call failed.`,
     )
   }
-  return undefined
+  return null
 }

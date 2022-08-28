@@ -5,27 +5,29 @@ import {
   BitcoinSignMessage,
   BitcoinSignTransaction,
   BitcoinVerifyMessage,
+  BTCGetAddressParams,
 } from './types'
 import { getMetaMaskProvider } from './utils'
 
 const moduleLogger = logger.child({ namespace: ['Adapter', 'Bitcoin.ts'] })
 
-export const BTCGetAddress = async (): Promise<string | undefined> => {
+export const BTCGetAddress = async (params: BTCGetAddressParams): Promise<string | null> => {
   const provider = await getMetaMaskProvider()
   try {
     const ret = await provider.request({
       method: 'btc_getAddress',
+      params: [params]
     })
     return ret
   } catch (error) {
     moduleLogger.error(error, { fn: 'BTCGetAddress' }, `btc_getAddress RPC call failed.`)
   }
-  return undefined
+  return null
 }
 
 export const BTCSignMessage = async (
   message: BitcoinSignMessage,
-): Promise<BitcoinSignedMessage | undefined> => {
+): Promise<BitcoinSignedMessage | null> => {
   const provider = await getMetaMaskProvider()
   try {
     const ret = await provider.request({
@@ -36,12 +38,12 @@ export const BTCSignMessage = async (
   } catch (error) {
     moduleLogger.error(error, { fn: 'BTCSignMessage' }, `btc_signMessage RPC call failed.`)
   }
-  return undefined
+  return null
 }
 
 export const BTCSignTransaction = async (
   transaction: BitcoinSignTransaction,
-): Promise<BitcoinSignedTransaction | undefined> => {
+): Promise<BitcoinSignedTransaction | null> => {
   const provider = await getMetaMaskProvider()
   try {
     const ret = await provider.request({
@@ -52,12 +54,12 @@ export const BTCSignTransaction = async (
   } catch (error) {
     moduleLogger.error(error, { fn: 'BTCSignTransaction' }, `btc_signTransaction RPC call failed.`)
   }
-  return undefined
+  return null
 }
 
 export const BTCVerifyMessage = async (
   message: BitcoinVerifyMessage,
-): Promise<boolean | undefined> => {
+): Promise<boolean | null> => {
   const provider = await getMetaMaskProvider()
   try {
     const ret = await provider.request({
@@ -67,13 +69,13 @@ export const BTCVerifyMessage = async (
     return ret
   } catch (error) {
     moduleLogger.error(error, { fn: 'BTCVerifyMessage' }, `btc_verifyMessage RPC call failed.`)
-    return undefined
+    return null
   }
 }
 
 export const BTCBroadcastTransaction = async (
   transaction: BitcoinSignedTransaction,
-): Promise<string | undefined> => {
+): Promise<string | null> => {
   const provider = await getMetaMaskProvider()
   try {
     const ret = await provider.request({
@@ -88,5 +90,5 @@ export const BTCBroadcastTransaction = async (
       `bitcoin_broadcastTransaction RPC call failed.`,
     )
   }
-  return undefined
+  return null
 }
