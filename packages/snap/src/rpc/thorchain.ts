@@ -1,7 +1,7 @@
 import {
   bip32ToAddressNList,
-  CosmosSignedTx as ThorchainSignedTx,
-  CosmosSignTx as ThorchainSignTx,
+  ThorchainSignedTx,
+  ThorchainSignTx,
   slip44ByCoin,
 } from '@shapeshiftoss/hdwallet-core'
 
@@ -18,7 +18,7 @@ export const thorchainGetAddress = async (account = 0, addressIndex = 0): Promis
     if (signer === null) {
       throw new Error('Could not initialize Thorchain signer')
     }
-    const address = await signer.cosmosGetAddress({
+    const address = await signer.thorchainGetAddress({
       addressNList: bip32ToAddressNList(
         `m/44'/${slip44ByCoin('Thorchain')}'/${account}'/0/${addressIndex}`,
       ),
@@ -40,9 +40,9 @@ export const thorchainSignTransaction = async (
   try {
     const signer = await getHDWalletNativeSigner('Thorchain')
     if (signer === null) {
-      throw new Error('Could not initialize Cosmos signer')
+      throw new Error('Could not initialize Thorchain signer')
     }
-    const signedTransaction = await signer.cosmosSignTx(transaction)
+    const signedTransaction = await signer.thorchainSignTx(transaction)
     if (signedTransaction === null) {
       throw new Error('Transaction signing failed')
     }
