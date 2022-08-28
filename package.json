@@ -21,9 +21,9 @@
   "scripts": {
     "build:clean": "yarn clean && yarn build",
     "build:sandbox": "yarn workspace sandbox build",
-    "build:snap": "yarn workspace @shapeshift/metamask-snaps build",
-    "build:snap:bundle": "yarn workspace @shapeshift/metamask-snaps build:snap:bundle",
-    "build:snap:eval": "yarn workspace @shapeshift/metamask-snaps build:snap:eval",
+    "build:snap": "yarn workspace @shapeshiftoss/metamask-snaps build",
+    "build:snap:bundle": "yarn workspace @shapeshiftoss/metamask-snaps build:snap:bundle",
+    "build:snap:eval": "yarn workspace @shapeshiftoss/metamask-snaps build:snap:eval",
     "build": "yarn workspaces foreach --verbose --parallel --topological run build",
     "clean": "yarn workspaces foreach --verbose --parallel run clean",
     "dev:sandbox": "concurrently --prefix \"{time}-[{name}]\" --names \"SNAP,SANDBOX\" -c \"bgBlue.bold,bgMagenta.bold\" \"yarn build && yarn link-packages\" \"cd examples/react-sandbox && yarn dev\"",
@@ -56,9 +56,6 @@
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-react": "^7.30.1",
     "eslint-plugin-simple-import-sort": "^7.0.0",
-    "gulp": "^4.0.2",
-    "gulp-exec": "^5.0.0",
-    "hook-shell-script-webpack-plugin": "^0.1.4",
     "mkdirp": "^1.0.4",
     "prettier": "^2.7.1",
     "prettier-package-json": "^2.6.4",
@@ -66,8 +63,7 @@
     "rimraf": "^3.0.2",
     "ts-node": "^10.9.1",
     "tslib": "^2.4.0",
-    "typescript": "^4.7.4",
-    "watchify": "^4.0.0"
+    "typescript": "^4.7.4"
   },
   "packageManager": "yarn@3.2.2",
   "engines": {
@@ -81,13 +77,16 @@
     "@shapeshiftoss/hdwallet-native@1.29.0": "patch:@shapeshiftoss/hdwallet-native@npm:1.29.0#.yarn/patches/@shapeshiftoss-hdwallet-native-npm-1.29.0-24f6e0c8dd.patch",
     "@shapeshiftoss/hdwallet-core@1.29.0": "patch:@shapeshiftoss/hdwallet-core@npm:1.29.0#.yarn/patches/@shapeshiftoss-hdwallet-core-npm-1.29.0-ce03499ac8.patch",
     "libsodium-wrappers@0.7.10": "patch:libsodium-wrappers@npm:^0.7.10#.yarn/patches/libsodium-wrappers-npm-0.7.10-1e41dfad84.patch",
-    "@shapeshiftoss/fiojs@1.0.1-shapeshift.2": "patch:@shapeshiftoss/fiojs@npm:^1.0.1-shapeshift.2#.yarn/patches/@shapeshiftoss-fiojs-npm-1.0.1-shapeshift.2-74dc3c0d66.patch",
-    "@fioprotocol/fiojs@1.0.1": "patch:@fioprotocol/fiojs@npm:^1.0.1#.yarn/patches/@fioprotocol-fiojs-npm-1.0.1-d8c9eec6cd.patch",
     "@bithighlander/bitcoin-cash-js-lib@5.2.1": "patch:@bithighlander/bitcoin-cash-js-lib@npm:^5.2.1#.yarn/patches/@bithighlander-bitcoin-cash-js-lib-npm-5.2.1-92e8f8436e.patch",
     "@shapeshiftoss/bitcoinjs-lib@5.2.0-shapeshift.2": "patch:@shapeshiftoss/bitcoinjs-lib@npm:^5.2.0-shapeshift.2#.yarn/patches/@shapeshiftoss-bitcoinjs-lib-npm-5.2.0-shapeshift.2-e59ff81828.patch",
     "bitcoinjs-lib@5.2.0": "patch:bitcoinjs-lib@npm:^5.2.0#.yarn/patches/bitcoinjs-lib-npm-5.2.0-f462e8de5e.patch",
     "ethereumjs-wallet@1.0.2": "patch:ethereumjs-wallet@npm:^1.0.2#.yarn/patches/ethereumjs-wallet-npm-1.0.2-8a504d268d.patch",
-    "libsodium@0.7.10": "patch:libsodium@npm:^0.7.10#.yarn/patches/libsodium-npm-0.7.10-047df41812.patch"
+    "libsodium@0.7.10": "patch:libsodium@npm:^0.7.10#.yarn/patches/libsodium-npm-0.7.10-047df41812.patch",
+    "randomfill@1.0.4": "patch:randomfill@npm:1.0.4#.yarn/patches/randomfill-npm-1.0.4-a08651a679.patch",
+    "buffer": "patch:buffer@npm:5.7.1#.yarn/patches/buffer-npm-5.7.1-513ef8259e.patch",
+    "@noble/secp256k1": "patch:@noble/secp256k1@npm:1.6.3#.yarn/patches/@noble-secp256k1-npm-1.6.3-d06f711103.patch",
+    "randombytes": "patch:randombytes@npm:2.1.0#.yarn/patches/randombytes-npm-2.1.0-e3da76bccf.patch",
+    "randombytes@2.1.0": "patch:randombytes@npm:2.1.0#.yarn/patches/randombytes-npm-2.1.0-e3da76bccf.patch"
   },
   "peerDependencies": {
     "@babel/core": "*",

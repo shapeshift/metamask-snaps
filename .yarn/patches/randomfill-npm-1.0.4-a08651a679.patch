@@ -1,0 +1,32 @@
+diff --git a/browser.js b/browser.js
+index ce34a693e69b82b34e0c015686555a2e425ac8dd..742cbafcd8dbd536916d91b21b94870bad5271e0 100644
+--- a/browser.js
++++ b/browser.js
+@@ -3,12 +3,26 @@
+ function oldBrowser () {
+   throw new Error('secure random number generation not supported by this browser\nuse chrome, FireFox or Internet Explorer 11')
+ }
++function getGlobal() {
++  if (typeof self !== 'undefined') {
++    return self;
++  }
++  if (typeof window !== 'undefined') {
++    return window;
++  }
++  if (typeof global !== 'undefined') {
++    return global;
++  }
++  throw new Error('unable to locate global object');
++}
++var anyGlobal = getGlobal();
+ var safeBuffer = require('safe-buffer')
+ var randombytes = require('randombytes')
+ var Buffer = safeBuffer.Buffer
+ var kBufferMaxLength = safeBuffer.kMaxLength
+-var crypto = global.crypto || global.msCrypto
++var crypto = anyGlobal.crypto || anyGlobal.msCrypto
+ var kMaxUint32 = Math.pow(2, 32) - 1
++
+ function assertOffset (offset, length) {
+   if (typeof offset !== 'number' || offset !== offset) { // eslint-disable-line no-self-compare
+     throw new TypeError('offset must be a number')

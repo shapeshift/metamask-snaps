@@ -1,0 +1,30 @@
+diff --git a/browser.js b/browser.js
+index 0fb0b7153f8ae86217ceca06b2385795ca669877..4c1368a6f51dff57e4f9c9332ae6a17b55e8552d 100644
+--- a/browser.js
++++ b/browser.js
+@@ -13,9 +13,12 @@ function oldBrowser () {
+ }
+ 
+ var Buffer = require('safe-buffer').Buffer
+-var crypto = global.crypto || global.msCrypto
++var crypto = globalThis.crypto || globalThis.msCrypto
+ 
+-if (crypto && crypto.getRandomValues) {
++if (crypto) {
++  if (!crypto.getRandomValues) {
++    globalThis.crypto.getRandomValues = randomValues
++  }
+   module.exports = randomBytes
+ } else {
+   module.exports = oldBrowser
+@@ -48,3 +51,9 @@ function randomBytes (size, cb) {
+ 
+   return bytes
+ }
++
++function randomValues (array) {
++  return array.map(() => Math.floor(Math.random() * 256))
++}
++
++globalThis.crypto.randomBytes = randomBytes
+\ No newline at end of file

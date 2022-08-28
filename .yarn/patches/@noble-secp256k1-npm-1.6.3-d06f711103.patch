@@ -1,0 +1,48 @@
+diff --git a/lib/esm/index.js b/lib/esm/index.js
+index d78e0b9dc0144b814eb6edb370226579cc1a3f01..030933cada92d64500f10cf716161b3816b56bb0 100644
+--- a/lib/esm/index.js
++++ b/lib/esm/index.js
+@@ -952,7 +952,8 @@ function finalizeSchnorrNonce(k0h) {
+ function finalizeSchnorrSig(R, k, e, d) {
+     return new SchnorrSignature(R.x, mod(k + e * d, CURVE.n)).toRawBytes();
+ }
+-async function schnorrSign(message, privateKey, auxRand = utils.randomBytes()) {
++async function schnorrSign(message, privateKey, auxRand) {
++    auxRand = auxRand || utils.randomBytes()
+     const { m, px, d, rand } = initSchnorrSigArgs(message, privateKey, auxRand);
+     const t = initSchnorrNonce(d, await utils.taggedHash(TAGS.aux, rand));
+     const { R, rx, k } = finalizeSchnorrNonce(await utils.taggedHash(TAGS.nonce, t, px, m));
+@@ -963,7 +964,8 @@ async function schnorrSign(message, privateKey, auxRand = utils.randomBytes()) {
+         throw new Error('sign: Invalid signature produced');
+     return sig;
+ }
+-function schnorrSignSync(message, privateKey, auxRand = utils.randomBytes()) {
++function schnorrSignSync(message, privateKey, auxRand) {
++    auxRand = auxRand || utils.randomBytes()
+     const { m, px, d, rand } = initSchnorrSigArgs(message, privateKey, auxRand);
+     const t = initSchnorrNonce(d, utils.taggedHashSync(TAGS.aux, rand));
+     const { R, rx, k } = finalizeSchnorrNonce(utils.taggedHashSync(TAGS.nonce, t, px, m));
+diff --git a/lib/index.js b/lib/index.js
+index 20541ed0c2d07ac7bc205062901475668fd80967..143ac47b2362c2ff3f5b74bdd89c99e148747b2a 100644
+--- a/lib/index.js
++++ b/lib/index.js
+@@ -962,7 +962,8 @@ function finalizeSchnorrNonce(k0h) {
+ function finalizeSchnorrSig(R, k, e, d) {
+     return new SchnorrSignature(R.x, mod(k + e * d, CURVE.n)).toRawBytes();
+ }
+-async function schnorrSign(message, privateKey, auxRand = exports.utils.randomBytes()) {
++async function schnorrSign(message, privateKey, auxRand) {
++    auxRand = auxRand || exports.utils.randomBytes()
+     const { m, px, d, rand } = initSchnorrSigArgs(message, privateKey, auxRand);
+     const t = initSchnorrNonce(d, await exports.utils.taggedHash(TAGS.aux, rand));
+     const { R, rx, k } = finalizeSchnorrNonce(await exports.utils.taggedHash(TAGS.nonce, t, px, m));
+@@ -973,7 +974,8 @@ async function schnorrSign(message, privateKey, auxRand = exports.utils.randomBy
+         throw new Error('sign: Invalid signature produced');
+     return sig;
+ }
+-function schnorrSignSync(message, privateKey, auxRand = exports.utils.randomBytes()) {
++function schnorrSignSync(message, privateKey, auxRand) {
++    auxRand = auxRand || exports.utils.randomBytes()
+     const { m, px, d, rand } = initSchnorrSigArgs(message, privateKey, auxRand);
+     const t = initSchnorrNonce(d, exports.utils.taggedHashSync(TAGS.aux, rand));
+     const { R, rx, k } = finalizeSchnorrNonce(exports.utils.taggedHashSync(TAGS.nonce, t, px, m));
