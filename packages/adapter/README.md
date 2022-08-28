@@ -1,4 +1,4 @@
-# @shapeshift/metamask-snaps-adapter
+# @shapeshiftoss/metamask-snaps-adapter
 
 ![](https://github.com/shapeshift/metamask-snaps/workflows/ci/badge.svg)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
