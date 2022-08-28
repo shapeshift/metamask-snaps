@@ -1,24 +1,20 @@
 import {
-  BinanceTransactions,
-  BitcoinTransactions,
-  CosmosTransactions,
-  EthereumTransactions,
-  OsmosisTransactions,
-  ThorchainTransactions
-} from '../../constants/transactions'
-
-import {
   BCHGetAddress,
   BCHSignMessage,
   BCHSignTransaction,
-  BCHVerifyMessage, binanceGetAddress, binanceSignTransaction, BTCGetAddress,
+  BCHVerifyMessage,
+  binanceGetAddress,
+  binanceSignTransaction,
+  BTCGetAddress,
   BTCSignMessage,
   BTCSignTransaction,
-  BTCVerifyMessage, cosmosGetAddress, cosmosSignTransaction,
-  DogeGetAddress,
-  DogeSignMessage,
-  DogeSignTransaction,
-  DogeVerifyMessage,
+  BTCVerifyMessage,
+  cosmosGetAddress,
+  cosmosSignTransaction,
+  dogecoinGetAddress,
+  dogecoinSignMessage,
+  dogecoinSignTransaction,
+  dogecoinVerifyMessage,
   ETHGetAddress,
   ETHSignMessage,
   ETHSignTransaction,
@@ -27,10 +23,20 @@ import {
   LTCSignMessage,
   LTCSignTransaction,
   LTCVerifyMessage,
-  osmosisGetAddress, osmosisSignTransaction,
+  osmosisGetAddress,
+  osmosisSignTransaction,
   thorchainGetAddress,
-  thorchainSignTransaction
-} from '@shapeshift/metamask-snaps-adapter'
+  thorchainSignTransaction,
+} from '@shapeshiftoss/metamask-snaps-adapter'
+
+import {
+  BinanceTransactions,
+  BitcoinTransactions,
+  CosmosTransactions,
+  EthereumTransactions,
+  OsmosisTransactions,
+  ThorchainTransactions,
+} from '../../constants/transactions'
 import { CardActionProps, CardProps } from '../Card/Card'
 
 /**TODO: Add reference transactions for BCH, DOGE, LTC */
@@ -163,7 +169,7 @@ export const AssetCardListConfig: Array<CardProps> = [
       [
         'doge_getAddress',
         {
-          callback: DogeGetAddress,
+          callback: dogecoinGetAddress,
           params: null,
           description: 'Generate a receive address',
         },
@@ -171,7 +177,7 @@ export const AssetCardListConfig: Array<CardProps> = [
       [
         'doge_signMessage',
         {
-          callback: DogeSignMessage,
+          callback: dogecoinSignMessage,
           params: BitcoinTransactions.sign,
           description: 'Sign a test message',
         },
@@ -179,7 +185,7 @@ export const AssetCardListConfig: Array<CardProps> = [
       [
         'doge_signTransaction',
         {
-          callback: DogeSignTransaction,
+          callback: dogecoinSignTransaction,
           params: BitcoinTransactions.tx,
           description: 'Sign a test transaction',
         },
@@ -187,7 +193,7 @@ export const AssetCardListConfig: Array<CardProps> = [
       [
         'doge_verifyTransaction',
         {
-          callback: DogeVerifyMessage,
+          callback: dogecoinVerifyMessage,
           params: BitcoinTransactions.verify,
           description: 'Verify the signature from a previously-signed test message',
         },
