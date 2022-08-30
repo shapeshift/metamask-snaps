@@ -7,6 +7,7 @@ import {
   Heading,
   Image,
   Select,
+  Spinner,
   Stack,
   useColorModeValue,
   useToast,
@@ -39,6 +40,7 @@ export const Card = ({ name, icon, actions, hasInputField }: CardProps) => {
   )
   const [selectedAction, setSelectedAction] = useState('')
   const [outputText, setOutputText] = useState('')
+  const [loading, setLoading] = useState(false)
   const toast = useToast()
 
   const handleSelectChange = (e: any) => {
@@ -49,6 +51,7 @@ export const Card = ({ name, icon, actions, hasInputField }: CardProps) => {
   const handleSubmit = async () => {
     const action = actions.get(selectedAction)
     if (action && action.callback) {
+      setLoading(true)
       const ret = await action.callback(action.params)
       if (ret === undefined) {
         toast({
@@ -81,6 +84,7 @@ export const Card = ({ name, icon, actions, hasInputField }: CardProps) => {
         )
       }
     }
+    setLoading(false)
   }
 
   return (
@@ -138,7 +142,7 @@ export const Card = ({ name, icon, actions, hasInputField }: CardProps) => {
                 onClick={handleSubmit}
                 fontSize='md'
               >
-                Submit
+                {loading ? <Spinner /> : 'Submit'}
               </Button>
             </Stack>
           </Stack>
