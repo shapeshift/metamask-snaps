@@ -1,5 +1,5 @@
 import { LockIcon, UnlockIcon } from '@chakra-ui/icons'
-import { Button, useToast } from '@chakra-ui/react'
+import { Button, Spinner, useToast } from '@chakra-ui/react'
 import { enableShapeShiftSnap } from '@shapeshiftoss/metamask-snaps-adapter'
 import { useState } from 'react'
 
@@ -11,12 +11,15 @@ const snapId = process.env.REACT_APP_SNAP_ID || 'local:http://localhost:9000'
 
 export const ConnectButton = () => {
   const [snapIsConnected, setSnapIsConnected] = useState(false)
+  const [loading, setLoading] = useState(false)
   const toast = useToast()
 
   const handleConnect = async (): Promise<boolean> => {
     try {
       /** Prompt the user to allow the snap */
+      setLoading(true)
       const response = await enableShapeShiftSnap(snapId)
+      setLoading(false)
 
       if (response.message.errors) {
         moduleLogger.error(
@@ -48,6 +51,7 @@ export const ConnectButton = () => {
         return true
       }
     } catch (error) {
+      setLoading(false)
       if ((error as any).code === 4001) {
         moduleLogger.error(error, { fn: 'handleConnect' }, 'The user rejected the request.')
         toast({
@@ -77,16 +81,17 @@ export const ConnectButton = () => {
 
   return (
     <Button
-      bg={snapIsConnected ? '#00CD98' : '#EF5350'}
+      bg={loading ? '#FFFFFF' : snapIsConnected ? '#00CD98' : '#EF5350'}
       height='40px'
-      leftIcon={snapIsConnected ? <LockIcon /> : <UnlockIcon />}
+      leftIcon={loading ? undefined : snapIsConnected ? <LockIcon /> : <UnlockIcon />}
       onClick={async () => {
         setSnapIsConnected(await handleConnect())
       }}
       variant='solid'
       fontSize='md'
+      minWidth='140px'
     >
-      {snapIsConnected ? 'Connected' : 'Not Connected'}
+      {loading ? <Spinner /> : snapIsConnected ? 'Connected' : 'Not Connected'}
     </Button>
   )
 }
