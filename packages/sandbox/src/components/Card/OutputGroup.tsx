@@ -22,7 +22,7 @@ export const OutputGroup = ({ placeholder, text }: OutputGroupProps) => {
       </Stack>
       <Textarea
         placeholder={placeholder}
-        value={text && JSON.stringify(text, null, 2)}
+        value={(text && JSON.stringify(text, null, 2)) || ''}
         borderColor='#212631'
         fontSize='sm'
         overflow='hidden'
