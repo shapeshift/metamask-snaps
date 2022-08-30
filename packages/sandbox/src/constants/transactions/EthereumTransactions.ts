@@ -1,4 +1,7 @@
 export const EthereumTransactions: any = {
+  address: {
+    addressNList: [0x80000000 + 44, 0x80000000 + 60, 0x80000000 + 0, 0, 0],
+  },
   send: {
     addressNList: [0x80000000 + 44, 0x80000000 + 60, 0x80000000 + 0, 0, 0],
     nonce: '0x0',

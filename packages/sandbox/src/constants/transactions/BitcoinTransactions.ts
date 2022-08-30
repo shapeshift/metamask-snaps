@@ -1,4 +1,11 @@
+import * as core from '@shapeshiftoss/hdwallet-core'
+
 export const BitcoinTransactions: any = {
+  address: {
+    coin: 'Bitcoin',
+    addressNList: [0x80000000 + 44, 0x80000000 + 0, 0x80000000 + 0, 0, 0],
+    scriptType: core.BTCInputScriptType.SpendAddress,
+  },
   tx: {
     coin: 'Bitcoin',
     inputs: [

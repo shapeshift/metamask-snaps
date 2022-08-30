@@ -31,9 +31,12 @@ import {
 
 import {
   BinanceTransactions,
+  BitcoinCashTransactions,
   BitcoinTransactions,
   CosmosTransactions,
+  DogecoinTransactions,
   EthereumTransactions,
+  LitecoinTransactions,
   OsmosisTransactions,
   ThorchainTransactions,
 } from '../../constants/transactions'
@@ -50,7 +53,7 @@ export const AssetCardListConfig: Array<CardProps> = [
         'bnb_getAddress',
         {
           callback: binanceGetAddress,
-          params: null,
+          params: BinanceTransactions.address,
           description: 'Generate a receive address',
         },
       ],
@@ -72,7 +75,7 @@ export const AssetCardListConfig: Array<CardProps> = [
         'btc_getAddress',
         {
           callback: BTCGetAddress,
-          params: null,
+          params: BitcoinTransactions.address,
           description: 'Generate a receive address',
         },
       ],
@@ -110,7 +113,7 @@ export const AssetCardListConfig: Array<CardProps> = [
         'bch_getAddress',
         {
           callback: BCHGetAddress,
-          params: null,
+          params: BitcoinCashTransactions.address,
           description: 'Generate a receive address',
         },
       ],
@@ -148,7 +151,7 @@ export const AssetCardListConfig: Array<CardProps> = [
         'cosmos_getAddress',
         {
           callback: cosmosGetAddress,
-          params: null,
+          params: CosmosTransactions.address,
           description: 'Generate a receive address',
         },
       ],
@@ -170,7 +173,7 @@ export const AssetCardListConfig: Array<CardProps> = [
         'doge_getAddress',
         {
           callback: dogecoinGetAddress,
-          params: null,
+          params: DogecoinTransactions.address,
           description: 'Generate a receive address',
         },
       ],
@@ -208,7 +211,7 @@ export const AssetCardListConfig: Array<CardProps> = [
         'eth_getAddress',
         {
           callback: ETHGetAddress,
-          params: null,
+          params: EthereumTransactions.address,
           description: 'Generate a receive address',
         },
       ],
@@ -246,7 +249,7 @@ export const AssetCardListConfig: Array<CardProps> = [
         'ltc_getAddress',
         {
           callback: LTCGetAddress,
-          params: null,
+          params: LitecoinTransactions.address,
           description: 'Generate a receive address',
         },
       ],
@@ -284,7 +287,7 @@ export const AssetCardListConfig: Array<CardProps> = [
         'osmosis_getAddress',
         {
           callback: osmosisGetAddress,
-          params: null,
+          params: OsmosisTransactions.address,
           description: 'Generate a receive address',
         },
       ],
@@ -303,15 +306,15 @@ export const AssetCardListConfig: Array<CardProps> = [
     icon: 'rune.png',
     actions: new Map<string, CardActionProps>([
       [
-        'rune_getAddress',
+        'thorchain_getAddress',
         {
           callback: thorchainGetAddress,
-          params: null,
+          params: ThorchainTransactions.address,
           description: 'Generate a receive address',
         },
       ],
       [
-        'rune_signTransaction',
+        'thorchain_signTransaction',
         {
           callback: thorchainSignTransaction,
           params: ThorchainTransactions.send,

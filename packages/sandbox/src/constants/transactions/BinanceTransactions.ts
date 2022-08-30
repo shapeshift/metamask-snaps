@@ -1,4 +1,7 @@
 export const BinanceTransactions: any = {
+  address: {
+    addressNList: [0x80000000 + 44, 0x80000000 + 714, 0x80000000 + 0, 0, 0],
+  },
   transfer: {
     account_number: '34',
     chain_id: 'Binance-Chain-Nile',

@@ -1,4 +1,7 @@
 export const ThorchainTransactions: any = {
+  address: {
+    addressNList: [0x80000000 + 44, 0x80000000 + 931, 0x80000000 + 0, 0, 0],
+  },
   send: {
     fee: {
       amount: [

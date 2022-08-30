@@ -1,4 +1,7 @@
 export const CosmosTransactions: any = {
+  address: {
+    addressNList: [0x80000000 + 44, 0x80000000 + 118, 0x80000000 + 0, 0, 0],
+  },
   delegate: {
     account_number: '16359',
     chain_id: 'cosmoshub-4',
