@@ -46,8 +46,9 @@ import { CardActionProps, CardProps } from '../Card/Card'
 
 export const AssetCardListConfig: Array<CardProps> = [
   {
-    name: 'Binance Chain (BNB)',
+    name: 'Binance Chain',
     icon: 'bnb.png',
+    symbol: 'BNB',
     actions: new Map<string, CardActionProps>([
       [
         'bnb_getAddress',
@@ -68,8 +69,9 @@ export const AssetCardListConfig: Array<CardProps> = [
     ]),
   },
   {
-    name: 'Bitcoin (BTC)',
+    name: 'Bitcoin',
     icon: 'btc.png',
+    symbol: 'BTC',
     actions: new Map<string, CardActionProps>([
       [
         'btc_getAddress',
@@ -106,8 +108,9 @@ export const AssetCardListConfig: Array<CardProps> = [
     ]),
   },
   {
-    name: 'Bitcoin Cash (BCH)',
+    name: 'Bitcoin Cash',
     icon: 'bch.png',
+    symbol: 'BCH',
     actions: new Map<string, CardActionProps>([
       [
         'bch_getAddress',
@@ -144,8 +147,9 @@ export const AssetCardListConfig: Array<CardProps> = [
     ]),
   },
   {
-    name: 'Cosmos (ATOM)',
+    name: 'Cosmos',
     icon: 'atom.png',
+    symbol: 'ATOM',
     actions: new Map<string, CardActionProps>([
       [
         'cosmos_getAddress',
@@ -166,8 +170,9 @@ export const AssetCardListConfig: Array<CardProps> = [
     ]),
   },
   {
-    name: 'Dogecoin (DOGE)',
+    name: 'Dogecoin',
     icon: 'doge.png',
+    symbol: 'DOGE',
     actions: new Map<string, CardActionProps>([
       [
         'doge_getAddress',
@@ -204,8 +209,9 @@ export const AssetCardListConfig: Array<CardProps> = [
     ]),
   },
   {
-    name: 'Ethereum (ETH)',
+    name: 'Ethereum',
     icon: 'eth.png',
+    symbol: 'ETH',
     actions: new Map<string, CardActionProps>([
       [
         'eth_getAddress',
@@ -242,8 +248,9 @@ export const AssetCardListConfig: Array<CardProps> = [
     ]),
   },
   {
-    name: 'Litecoin (LTC)',
+    name: 'Litecoin',
     icon: 'ltc.png',
+    symbol: 'LTC',
     actions: new Map<string, CardActionProps>([
       [
         'ltc_getAddress',
@@ -280,8 +287,9 @@ export const AssetCardListConfig: Array<CardProps> = [
     ]),
   },
   {
-    name: 'Osmosis (OSMO)',
+    name: 'Osmosis',
     icon: 'osmo.png',
+    symbol: 'OSMO',
     actions: new Map<string, CardActionProps>([
       [
         'osmosis_getAddress',
@@ -302,8 +310,9 @@ export const AssetCardListConfig: Array<CardProps> = [
     ]),
   },
   {
-    name: 'THORChain (RUNE)',
+    name: 'THORChain',
     icon: 'rune.png',
+    symbol: 'RUNE',
     actions: new Map<string, CardActionProps>([
       [
         'thorchain_getAddress',

@@ -18,6 +18,7 @@ export const CardList = ({ cards }: { cards: Array<CardProps> }) => {
             key={card.name}
             name={card.name}
             icon={card.icon}
+            symbol={card.symbol}
             actions={card.actions}
             hasInputField={card.hasInputField}
           ></Card>

@@ -28,13 +28,14 @@ export type CardActionProps = {
 export type CardProps = {
   name: string
   icon: string
+  symbol?: string
   actions: Map<string, CardActionProps>
   hasInputField?: boolean
 }
 
 const moduleLogger = logger.child({ namespace: ['Card'] })
 
-export const Card = ({ name, icon, actions, hasInputField }: CardProps) => {
+export const Card = ({ name, icon, symbol, actions, hasInputField }: CardProps) => {
   const [outputPlaceHolder, setOutputPlaceHolder] = useState(
     'Select an action from the drop-down menu below.',
   )
@@ -109,7 +110,7 @@ export const Card = ({ name, icon, actions, hasInputField }: CardProps) => {
         <Stack direction='column' width='90%' spacing='16px'>
           <Stack direction='row'>
             <Heading justifyContent='left' fontFamily='Inter' fontSize='2xl'>
-              {name}
+              {symbol ? `${name} (${symbol})` : name}
             </Heading>
           </Stack>
           <Divider orientation='horizontal' borderColor='#212631' borderWidth='1px'></Divider>
