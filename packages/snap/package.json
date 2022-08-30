@@ -33,26 +33,24 @@
     "lint:package-json": "prettier-package-json ./package.json",
     "manifest": "mm-snap manifest --fix",
     "serve": "mm-snap serve",
-    "test": "echo 'TODO'",
-    "webpack": "webpack"
+    "test": "echo 'TODO'"
   },
   "dependencies": {
     "@metamask/detect-provider": "^1.2.0",
     "@metamask/key-tree": "^4.0.0",
-    "@shapeshiftoss/caip": "^6.6.0",
     "@shapeshiftoss/hdwallet-core": "1.29.0",
     "@shapeshiftoss/hdwallet-native": "1.29.0",
     "@shapeshiftoss/logger": "^1.1.2",
-    "@shapeshiftoss/unchained-client": "^9.9.0",
+    "@shapeshiftoss/metamask-snaps-types": "workspace:^",
     "dotenv": "^16.0.1"
   },
   "peerDependencies": {
     "@babel/core": "*",
     "@metamask/eslint-config": "*",
+    "@shapeshiftoss/caip": "*",
     "@shapeshiftoss/types": "*",
     "@typescript-eslint/eslint-plugin": "*",
     "@typescript-eslint/parser": "*",
-    "esling-plugin-prettier": "*",
     "eslint": "*",
     "eslint-plugin-jest": "*",
     "eslint-plugin-jsx-a11y": "*",
@@ -80,7 +78,7 @@
     "babel-loader": "^8.2.5",
     "babelify": "^10.0.0",
     "concurrently": "^7.3.0",
-    "eslint": "^8.22.0",
+    "eslint": "^8.23.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-import": "^2.26.0",
@@ -98,7 +96,7 @@
     "rimraf": "^3.0.2",
     "ts-node": "^10.9.1",
     "tslib": "^2.4.0",
-    "typescript": "^4.7.4"
+    "typescript": "^4.8.2"
   },
   "engines": {
     "node": ">=16.0.0"

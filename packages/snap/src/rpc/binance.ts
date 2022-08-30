@@ -1,25 +1,24 @@
+import { BinanceSignTx } from '@shapeshiftoss/hdwallet-core'
 import {
-  BinanceSignedTx,
-  BinanceSignTx,
-  bip32ToAddressNList,
-  slip44ByCoin,
-} from '@shapeshiftoss/hdwallet-core'
+  BinanceGetAddressParams,
+  BinanceSignTransactionResponse,
+} from '@shapeshiftoss/metamask-snaps-types'
 
 import { logger } from '../lib/logger'
 import { getHDWalletNativeSigner } from './common'
 
 const moduleLogger = logger.child({ namespace: ['Snap', 'RPC', 'Binance.ts'] })
 
-export const binanceGetAddress = async (account = 0, addressIndex = 0): Promise<string> => {
+export const binanceGetAddress = async ({
+  addressNList,
+}: BinanceGetAddressParams): Promise<string> => {
   try {
     const signer = await getHDWalletNativeSigner('Binance')
     if (signer === null) {
       throw new Error('Could not initialize Binance signer')
     }
     const address = await signer.binanceGetAddress({
-      addressNList: bip32ToAddressNList(
-        `m/44'/${slip44ByCoin('Binance')}'/${account}'/0/${addressIndex}`,
-      ),
+      addressNList,
       showDisplay: false,
     })
     if (address === null) {
@@ -28,13 +27,13 @@ export const binanceGetAddress = async (account = 0, addressIndex = 0): Promise<
     return address
   } catch (error) {
     moduleLogger.error({ fn: 'binanceGetAddress' }, error)
-    throw error
+    return Promise.reject(error)
   }
 }
 
 export const binanceSignTransaction = async (
   transaction: BinanceSignTx,
-): Promise<BinanceSignedTx> => {
+): Promise<BinanceSignTransactionResponse> => {
   try {
     const signer = await getHDWalletNativeSigner('Binance')
     if (signer === null) {
@@ -47,11 +46,11 @@ export const binanceSignTransaction = async (
     return signedTransaction
   } catch (error) {
     moduleLogger.error(transaction, { fn: 'binanceSignTransaction' }, error)
-    throw error
+    return Promise.reject(error)
   }
 }
 /* Disabled pending Unchained support */
-// export const binanceBroadcastTransaction = async (message: BinanceSignedTx): Promise<string | undefined> => {
+// export const binanceBroadcastTransaction = async (message: BinanceSignedTx): Promise<BinanceBroadcastTransactionResponse> => {
 //   try {
 //     const config = new unchained.binance.Configuration({
 //       basePath: process.env.UNCHAINED_BINANCE_HTTP_URL,
@@ -61,6 +60,6 @@ export const binanceSignTransaction = async (
 //     return txid
 //   } catch (error) {
 //     moduleLogger.error(message, { fn: 'binanceBroadcastMessage' }, error)
-//     return undefined
+//     return Promise.reject(error)
 //   }
 // }

@@ -7,7 +7,7 @@
     "url": "https://github.com/shapeshift/metamask-snaps.git"
   },
   "source": {
-    "shasum": "JILD9o6mXp6xKKkFZzwqepNpvlZYgyBLhx2ogJNs0gw=",
+    "shasum": "Jyqlsxq2jjLuQrK21zPrscgYdK0FTE8YrEk/dORKGmE=",
     "location": {
       "npm": {
         "filePath": "dist/bundle.js",
@@ -28,7 +28,8 @@
     "snap_getBip44Entropy_714": {},
     "snap_getBip44Entropy_931": {},
     "snap_manageState": {},
-    "endowment:network-access": {}
+    "endowment:network-access": {},
+    "endowment:long-running": {}
   },
   "manifestVersion": "0.1"
 }

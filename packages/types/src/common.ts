@@ -8,7 +8,7 @@ export {
   BTCSignMessage as BitcoinCashSignMessage,
   BTCSignTx as BitcoinCashSignTransaction,
   BTCVerifyMessage as BitcoinCashVerifyMessage,
-  BTCGetAddress as BTCGetAddressParams,
+  BTCGetAddress as BitcoinGetAddressParams,
   BTCSignedMessage as BitcoinSignedMessage,
   BTCSignedTx as BitcoinSignedTransaction,
   BTCSignMessage as BitcoinSignMessage,

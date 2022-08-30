@@ -1,17 +1,29 @@
+import {
+  ThorchainBroadcastTransactionResponse,
+  ThorchainGetAddressParams,
+  ThorchainGetAddressResponse,
+  ThorchainSignedTransaction,
+  ThorchainSignTransaction,
+  ThorchainSignTransactionResponse,
+} from '@shapeshiftoss/metamask-snaps-types'
+
 import { logger } from './lib/logger'
-import { ThorchainGetAddressParams, ThorchainSignedTransaction, ThorchainSignTransaction } from './types'
-import { getMetaMaskProvider } from './utils'
+import { DEFAULT_SNAP_ID, sendFlaskRPCRequest } from './utils'
 
 const moduleLogger = logger.child({ namespace: ['Adapter', 'Thorchain.ts'] })
 
-export const thorchainGetAddress = async (params:ThorchainGetAddressParams): Promise<string | null> => {
-  const provider = await getMetaMaskProvider()
+export const thorchainGetAddress = async (
+  params: ThorchainGetAddressParams,
+  snapId: string = DEFAULT_SNAP_ID,
+): Promise<ThorchainGetAddressResponse> => {
   try {
-    const ret = await provider.request({
-      method: 'thorchain_getAddress',
-      params: [params]
-    })
-    return ret
+    return await sendFlaskRPCRequest(
+      {
+        method: 'thorchain_getAddress',
+        params: { params },
+      },
+      snapId,
+    )
   } catch (error) {
     moduleLogger.error(
       error,
@@ -24,14 +36,16 @@ export const thorchainGetAddress = async (params:ThorchainGetAddressParams): Pro
 
 export const thorchainSignTransaction = async (
   transaction: ThorchainSignTransaction,
-): Promise<ThorchainSignedTransaction | null> => {
-  const provider = await getMetaMaskProvider()
+  snapId: string = DEFAULT_SNAP_ID,
+): Promise<ThorchainSignTransactionResponse> => {
   try {
-    const ret = await provider.request({
-      method: 'thorchain_signTransaction',
-      params: [transaction],
-    })
-    return ret
+    return await sendFlaskRPCRequest(
+      {
+        method: 'thorchain_signTransaction',
+        params: { transaction },
+      },
+      snapId,
+    )
   } catch (error) {
     moduleLogger.error(
       error,
@@ -44,14 +58,16 @@ export const thorchainSignTransaction = async (
 
 export const thorchainBroadcastTransaction = async (
   transaction: ThorchainSignedTransaction,
-): Promise<string | null> => {
-  const provider = await getMetaMaskProvider()
+  snapId: string = DEFAULT_SNAP_ID,
+): Promise<ThorchainBroadcastTransactionResponse> => {
   try {
-    const ret = await provider.request({
-      method: 'thorchain_broadcastTransaction',
-      params: [transaction],
-    })
-    return ret
+    return await sendFlaskRPCRequest(
+      {
+        method: 'thorchain_broadcastTransaction',
+        params: { transaction },
+      },
+      snapId,
+    )
   } catch (error) {
     moduleLogger.error(
       error,

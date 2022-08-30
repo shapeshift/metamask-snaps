@@ -1,24 +1,33 @@
-import { logger } from './lib/logger'
 import {
+  EthereumBroadcastTransactionResponse,
   EthereumGetAddressParams,
-  EthereumSignedMessage,
+  EthereumGetAddressResponse,
   EthereumSignedTransaction,
   EthereumSignMessage,
+  EthereumSignMessageResponse,
   EthereumSignTransaction,
+  EthereumSignTransactionResponse,
   EthereumVerifyMessage,
-} from './types'
-import { getMetaMaskProvider } from './utils'
+  EthereumVerifyMessageResponse,
+} from '@shapeshiftoss/metamask-snaps-types'
+
+import { logger } from './lib/logger'
+import { DEFAULT_SNAP_ID, sendFlaskRPCRequest } from './utils'
 
 const moduleLogger = logger.child({ namespace: ['Adapter', 'Ethereum.ts'] })
 
-export const ETHGetAddress = async (params: EthereumGetAddressParams): Promise<string | null> => {
-  const provider = await getMetaMaskProvider()
+export const ETHGetAddress = async (
+  params: EthereumGetAddressParams,
+  snapId: string = DEFAULT_SNAP_ID,
+): Promise<EthereumGetAddressResponse> => {
   try {
-    const ret = await provider.request({
-      method: 'eth_getAddress',
-      params: [params]
-    })
-    return ret
+    return await sendFlaskRPCRequest(
+      {
+        method: 'eth_getAddress',
+        params: { params },
+      },
+      snapId,
+    )
   } catch (error) {
     moduleLogger.error(error, { fn: 'ETHGetAddress' }, `eth_getAddress RPC call failed.`)
   }
@@ -27,14 +36,16 @@ export const ETHGetAddress = async (params: EthereumGetAddressParams): Promise<s
 
 export const ETHSignMessage = async (
   message: EthereumSignMessage,
-): Promise<EthereumSignedMessage | null> => {
-  const provider = await getMetaMaskProvider()
+  snapId: string = DEFAULT_SNAP_ID,
+): Promise<EthereumSignMessageResponse> => {
   try {
-    const ret = await provider.request({
-      method: 'eth_signMessage',
-      params: [message],
-    })
-    return ret
+    return await sendFlaskRPCRequest(
+      {
+        method: 'eth_signMessage',
+        params: { message },
+      },
+      snapId,
+    )
   } catch (error) {
     moduleLogger.error(error, { fn: 'ETHSignMessage' }, `eth_signMessage RPC call failed.`)
   }
@@ -43,14 +54,16 @@ export const ETHSignMessage = async (
 
 export const ETHSignTransaction = async (
   transaction: EthereumSignTransaction,
-): Promise<EthereumSignedTransaction | null> => {
-  const provider = await getMetaMaskProvider()
+  snapId: string = DEFAULT_SNAP_ID,
+): Promise<EthereumSignTransactionResponse> => {
   try {
-    const ret = await provider.request({
-      method: 'eth_signTransaction',
-      params: [transaction],
-    })
-    return ret
+    return await sendFlaskRPCRequest(
+      {
+        method: 'eth_signTransaction',
+        params: { transaction },
+      },
+      snapId,
+    )
   } catch (error) {
     moduleLogger.error(error, { fn: 'ETHSignTransaction' }, `eth_signTransaction RPC call failed.`)
   }
@@ -59,14 +72,16 @@ export const ETHSignTransaction = async (
 
 export const ETHVerifyMessage = async (
   message: EthereumVerifyMessage,
-): Promise<boolean | null> => {
-  const provider = await getMetaMaskProvider()
+  snapId: string = DEFAULT_SNAP_ID,
+): Promise<EthereumVerifyMessageResponse> => {
   try {
-    const ret = await provider.request({
-      method: 'eth_verifyMessage',
-      params: [message],
-    })
-    return ret
+    return await sendFlaskRPCRequest(
+      {
+        method: 'eth_verifyMessage',
+        params: { message },
+      },
+      snapId,
+    )
   } catch (error) {
     moduleLogger.error(error, { fn: 'ETHVerifyMessage' }, `eth_verifyMessage RPC call failed.`)
   }
@@ -75,14 +90,16 @@ export const ETHVerifyMessage = async (
 
 export const ETHBroadcastTransaction = async (
   transaction: EthereumSignedTransaction,
-): Promise<string | null> => {
-  const provider = await getMetaMaskProvider()
+  snapId: string = DEFAULT_SNAP_ID,
+): Promise<EthereumBroadcastTransactionResponse> => {
   try {
-    const ret = await provider.request({
-      method: 'eth_broadcastTransaction',
-      params: [transaction],
-    })
-    return ret
+    return await sendFlaskRPCRequest(
+      {
+        method: 'eth_broadcastTransaction',
+        params: { transaction },
+      },
+      snapId,
+    )
   } catch (error) {
     moduleLogger.error(
       error,

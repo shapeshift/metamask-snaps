@@ -1,17 +1,29 @@
+import {
+  CosmosBroadcastTransactionResponse,
+  CosmosGetAddressParams,
+  CosmosGetAddressResponse,
+  CosmosSignedTransaction,
+  CosmosSignTransaction,
+  CosmosSignTransactionResponse,
+} from '@shapeshiftoss/metamask-snaps-types'
+
 import { logger } from './lib/logger'
-import { CosmosGetAddressParams, CosmosSignedTransaction, CosmosSignTransaction } from './types'
-import { getMetaMaskProvider } from './utils'
+import { DEFAULT_SNAP_ID, sendFlaskRPCRequest } from './utils'
 
 const moduleLogger = logger.child({ namespace: ['Adapter', 'Cosmos.ts'] })
 
-export const cosmosGetAddress = async (params: CosmosGetAddressParams): Promise<string | null> => {
-  const provider = await getMetaMaskProvider()
+export const cosmosGetAddress = async (
+  params: CosmosGetAddressParams,
+  snapId: string = DEFAULT_SNAP_ID,
+): Promise<CosmosGetAddressResponse> => {
   try {
-    const ret = await provider.request({
-      method: 'cosmos_getAddress',
-      params: [params]
-    })
-    return ret
+    return await sendFlaskRPCRequest(
+      {
+        method: 'cosmos_getAddress',
+        params: { params },
+      },
+      snapId,
+    )
   } catch (error) {
     moduleLogger.error(error, { fn: 'cosmosGetAddress' }, `cosmos_getAddress RPC call failed.`)
   }
@@ -20,14 +32,16 @@ export const cosmosGetAddress = async (params: CosmosGetAddressParams): Promise<
 
 export const cosmosSignTransaction = async (
   transaction: CosmosSignTransaction,
-): Promise<CosmosSignedTransaction | null> => {
-  const provider = await getMetaMaskProvider()
+  snapId: string = DEFAULT_SNAP_ID,
+): Promise<CosmosSignTransactionResponse> => {
   try {
-    const ret = await provider.request({
-      method: 'cosmos_signTransaction',
-      params: [transaction],
-    })
-    return ret
+    return await sendFlaskRPCRequest(
+      {
+        method: 'cosmos_signTransaction',
+        params: { transaction },
+      },
+      snapId,
+    )
   } catch (error) {
     moduleLogger.error(
       error,
@@ -40,14 +54,16 @@ export const cosmosSignTransaction = async (
 
 export const cosmosBroadcastTransaction = async (
   transaction: CosmosSignedTransaction,
-): Promise<string | null> => {
-  const provider = await getMetaMaskProvider()
+  snapId: string = DEFAULT_SNAP_ID,
+): Promise<CosmosBroadcastTransactionResponse> => {
   try {
-    const ret = await provider.request({
-      method: 'cosmos_broadcastTransaction',
-      params: [transaction],
-    })
-    return ret
+    return await sendFlaskRPCRequest(
+      {
+        method: 'cosmos_broadcastTransaction',
+        params: { transaction },
+      },
+      snapId,
+    )
   } catch (error) {
     moduleLogger.error(
       error,

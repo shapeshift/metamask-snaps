@@ -1,25 +1,26 @@
 import {
-  bip32ToAddressNList,
-  BTCInputScriptType,
-  BTCSignedMessage,
-  BTCSignedTx,
-  BTCSignMessage,
-  BTCSignTx,
-  BTCVerifyMessage,
-  slip44ByCoin,
-} from '@shapeshiftoss/hdwallet-core'
-import * as unchained from '@shapeshiftoss/unchained-client'
+  LitecoinGetAddressParams,
+  LitecoinGetAddressResponse,
+  LitecoinSignMessage,
+  LitecoinSignMessageResponse,
+  LitecoinSignTransaction,
+  LitecoinSignTransactionResponse,
+  LitecoinVerifyMessage,
+  LitecoinVerifyMessageResponse,
+} from '@shapeshiftoss/metamask-snaps-types'
 
+// import * as unchained from "@shapeshiftoss/unchained-client";
 import { logger } from '../lib/logger'
 import { getHDWalletNativeSigner } from './common'
 
-const moduleLogger = logger.child({ namespace: ['Snap', 'RPC', 'Litecoin.ts'] })
+const moduleLogger = logger.child({
+  namespace: ['Snap', 'RPC', 'Litecoin.ts'],
+})
 
-export const ltcGetAddress = async (
-  scriptType?: BTCInputScriptType,
-  account = 0,
-  addressIndex = 0,
-): Promise<string> => {
+export const ltcGetAddress = async ({
+  addressNList,
+  scriptType,
+}: LitecoinGetAddressParams): Promise<LitecoinGetAddressResponse> => {
   try {
     const signer = await getHDWalletNativeSigner('Litecoin')
     if (signer === null) {
@@ -27,9 +28,7 @@ export const ltcGetAddress = async (
     }
     const address = await signer.btcGetAddress({
       coin: 'Litecoin',
-      addressNList: bip32ToAddressNList(
-        `m/44'/${slip44ByCoin('Litecoin')}'/${account}'/0/${addressIndex}`,
-      ),
+      addressNList,
       scriptType,
       showDisplay: false,
     })
@@ -39,11 +38,13 @@ export const ltcGetAddress = async (
     return address
   } catch (error) {
     moduleLogger.error({ fn: 'ltcGetAddress' }, error)
-    throw error
+    return Promise.reject(error)
   }
 }
 
-export const ltcSignTransaction = async (transaction: BTCSignTx): Promise<BTCSignedTx> => {
+export const ltcSignTransaction = async (
+  transaction: LitecoinSignTransaction,
+): Promise<LitecoinSignTransactionResponse> => {
   try {
     const signer = await getHDWalletNativeSigner('Litecoin')
     if (signer === null) {
@@ -56,11 +57,13 @@ export const ltcSignTransaction = async (transaction: BTCSignTx): Promise<BTCSig
     return signedTransaction
   } catch (error) {
     moduleLogger.error(transaction, { fn: 'ltcSignTransaction' }, error)
-    throw error
+    return Promise.reject(error)
   }
 }
 
-export const ltcSignMessage = async (message: BTCSignMessage): Promise<BTCSignedMessage> => {
+export const ltcSignMessage = async (
+  message: LitecoinSignMessage,
+): Promise<LitecoinSignMessageResponse> => {
   try {
     const signer = await getHDWalletNativeSigner('Litecoin')
     if (signer === null) {
@@ -73,11 +76,13 @@ export const ltcSignMessage = async (message: BTCSignMessage): Promise<BTCSigned
     return signedMessage
   } catch (error) {
     moduleLogger.error(message, { fn: 'ltcSignMessage' }, error)
-    throw error
+    return Promise.reject(error)
   }
 }
 
-export const ltcVerifyMessage = async (message: BTCVerifyMessage): Promise<boolean> => {
+export const ltcVerifyMessage = async (
+  message: LitecoinVerifyMessage,
+): Promise<LitecoinVerifyMessageResponse> => {
   try {
     const signer = await getHDWalletNativeSigner('Litecoin')
     if (signer === null) {
@@ -87,22 +92,22 @@ export const ltcVerifyMessage = async (message: BTCVerifyMessage): Promise<boole
     return isVerified
   } catch (error) {
     moduleLogger.error(message, { fn: 'ltcVerifyMessage' }, error)
-    throw error
+    return Promise.reject(error)
   }
 }
 
-export const ltcBroadcastTransaction = async (
-  message: BTCSignedTx,
-): Promise<string | undefined> => {
-  try {
-    const config = new unchained.litecoin.Configuration({
-      basePath: process.env.UNCHAINED_LITECOIN_HTTP_URL,
-    })
-    const client = new unchained.litecoin.V1Api(config)
-    const txid = client.sendTx({ sendTxBody: { hex: message.serializedTx } })
-    return txid
-  } catch (error) {
-    moduleLogger.error(message, { fn: 'ltcBroadcastMessage' }, error)
-    return undefined
-  }
-}
+// export const ltcBroadcastTransaction = async (
+//   message: LitecoinSignedTransaction
+// ): Promise<LitecoinBroadcastTransactionResponse> => {
+//   try {
+//     const config = new unchained.litecoin.Configuration({
+//       basePath: process.env.UNCHAINED_LITECOIN_HTTP_URL,
+//     });
+//     const client = new unchained.litecoin.V1Api(config);
+//     const txid = client.sendTx({ sendTxBody: { hex: message.serializedTx } });
+//     return txid;
+//   } catch (error) {
+//     moduleLogger.error(message, { fn: "ltcBroadcastMessage" }, error);
+//     return Promise.reject(error);
+//   }
+// };

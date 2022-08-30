@@ -1,11 +1,18 @@
 import { ExternalProvider } from '@ethersproject/providers'
 import detectEthereumProvider from '@metamask/detect-provider'
+import {
+  EnableShapeShiftSnapResult,
+  RPCHandlerResponse,
+  ShapeShiftSnapRPCRequest,
+  ShapeShiftSnapRPCResponse,
+} from '@shapeshiftoss/metamask-snaps-types'
 
 import { logger } from './lib/logger'
 import { walletEnable } from './metamask'
-import { EnableShapeShiftSnapResult } from './types'
 
 const moduleLogger = logger.child({ namespace: ['Adapter', 'Utils.ts'] })
+
+export const DEFAULT_SNAP_ID = 'local:http://localhost:9000'
 
 export const getMetaMaskProvider = async (): Promise<ExternalProvider> => {
   let ret
@@ -97,4 +104,21 @@ export const enableShapeShiftSnap = async (
     moduleLogger.error(error, { fn: 'walletEnable' }, 'wallet_enable RPC call failed.')
   }
   return ret
+}
+
+export const sendFlaskRPCRequest = async <T extends ShapeShiftSnapRPCResponse>(
+  request: ShapeShiftSnapRPCRequest,
+  snapId: string,
+): Promise<RPCHandlerResponse<T>> => {
+  try {
+    const provider = await getMetaMaskProvider()
+    const ret = await provider.request({
+      method: `wallet_snap_${snapId}`,
+      params: [request],
+    })
+    return ret as T
+  } catch (error) {
+    moduleLogger.error(error, { fn: 'makeFlaskRPCRequest' }, `${request.method} RPC call failed.`)
+    return error
+  }
 }

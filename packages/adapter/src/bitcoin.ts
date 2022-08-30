@@ -1,24 +1,27 @@
-import { logger } from './lib/logger'
 import {
-  BitcoinSignedMessage,
+  BitcoinBroadcastTransactionResponse,
+  BitcoinGetAddressParams,
+  BitcoinGetAddressResponse,
   BitcoinSignedTransaction,
   BitcoinSignMessage,
+  BitcoinSignMessageResponse,
   BitcoinSignTransaction,
+  BitcoinSignTransactionResponse,
   BitcoinVerifyMessage,
-  BTCGetAddressParams,
-} from './types'
-import { getMetaMaskProvider } from './utils'
+  BitcoinVerifyMessageResponse,
+} from '@shapeshiftoss/metamask-snaps-types'
+
+import { logger } from './lib/logger'
+import { DEFAULT_SNAP_ID, sendFlaskRPCRequest } from './utils'
 
 const moduleLogger = logger.child({ namespace: ['Adapter', 'Bitcoin.ts'] })
 
-export const BTCGetAddress = async (params: BTCGetAddressParams): Promise<string | null> => {
-  const provider = await getMetaMaskProvider()
+export const BTCGetAddress = async (
+  params: BitcoinGetAddressParams,
+  snapId: string = DEFAULT_SNAP_ID,
+): Promise<BitcoinGetAddressResponse> => {
   try {
-    const ret = await provider.request({
-      method: 'btc_getAddress',
-      params: [params]
-    })
-    return ret
+    return await sendFlaskRPCRequest({ method: 'btc_getAddress', params: { params } }, snapId)
   } catch (error) {
     moduleLogger.error(error, { fn: 'BTCGetAddress' }, `btc_getAddress RPC call failed.`)
   }
@@ -27,14 +30,10 @@ export const BTCGetAddress = async (params: BTCGetAddressParams): Promise<string
 
 export const BTCSignMessage = async (
   message: BitcoinSignMessage,
-): Promise<BitcoinSignedMessage | null> => {
-  const provider = await getMetaMaskProvider()
+  snapId: string = DEFAULT_SNAP_ID,
+): Promise<BitcoinSignMessageResponse> => {
   try {
-    const ret = await provider.request({
-      method: 'btc_signMessage',
-      params: [message],
-    })
-    return ret
+    return await sendFlaskRPCRequest({ method: 'btc_signMessage', params: { message } }, snapId)
   } catch (error) {
     moduleLogger.error(error, { fn: 'BTCSignMessage' }, `btc_signMessage RPC call failed.`)
   }
@@ -43,14 +42,13 @@ export const BTCSignMessage = async (
 
 export const BTCSignTransaction = async (
   transaction: BitcoinSignTransaction,
-): Promise<BitcoinSignedTransaction | null> => {
-  const provider = await getMetaMaskProvider()
+  snapId: string = DEFAULT_SNAP_ID,
+): Promise<BitcoinSignTransactionResponse> => {
   try {
-    const ret = await provider.request({
-      method: 'btc_signTransaction',
-      params: [transaction],
-    })
-    return ret
+    return await sendFlaskRPCRequest(
+      { method: 'btc_signTransaction', params: { transaction } },
+      snapId,
+    )
   } catch (error) {
     moduleLogger.error(error, { fn: 'BTCSignTransaction' }, `btc_signTransaction RPC call failed.`)
   }
@@ -59,14 +57,10 @@ export const BTCSignTransaction = async (
 
 export const BTCVerifyMessage = async (
   message: BitcoinVerifyMessage,
-): Promise<boolean | null> => {
-  const provider = await getMetaMaskProvider()
+  snapId: string = DEFAULT_SNAP_ID,
+): Promise<BitcoinVerifyMessageResponse> => {
   try {
-    const ret = await provider.request({
-      method: 'btc_verifyMessage',
-      params: [message],
-    })
-    return ret
+    return await sendFlaskRPCRequest({ method: 'btc_verifyMessage', params: { message } }, snapId)
   } catch (error) {
     moduleLogger.error(error, { fn: 'BTCVerifyMessage' }, `btc_verifyMessage RPC call failed.`)
     return null
@@ -75,14 +69,13 @@ export const BTCVerifyMessage = async (
 
 export const BTCBroadcastTransaction = async (
   transaction: BitcoinSignedTransaction,
-): Promise<string | null> => {
-  const provider = await getMetaMaskProvider()
+  snapId: string = DEFAULT_SNAP_ID,
+): Promise<BitcoinBroadcastTransactionResponse> => {
   try {
-    const ret = await provider.request({
-      method: 'bitcoin_broadcastTransaction',
-      params: [transaction],
-    })
-    return ret
+    return await sendFlaskRPCRequest(
+      { method: 'btc_broadcastTransaction', params: { transaction } },
+      snapId,
+    )
   } catch (error) {
     moduleLogger.error(
       error,

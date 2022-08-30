@@ -1,13 +1,14 @@
 import { BIP44CoinTypeNode, getBIP44AddressKeyDeriver } from '@metamask/key-tree'
 import { Keyring, slip44ByCoin } from '@shapeshiftoss/hdwallet-core'
 import { NativeAdapter, NativeHDWallet } from '@shapeshiftoss/hdwallet-native'
+import { Node } from '@shapeshiftoss/hdwallet-native/dist/crypto/isolation/engines/default/bip32'
 
 import { logger } from '../lib/logger'
 
 const moduleLogger = logger.child({ namespace: ['Snap', 'Common.ts'] })
 
 export const testFunction = (): string => {
-  return 'work'
+  return 'return from testFunction().'
 }
 
 export const getAddress = async (wallet: any, params: any): Promise<string> => {
@@ -34,34 +35,31 @@ export const getHDWalletNativeSigner = async (coinType: string): Promise<NativeH
     method: `snap_getBip44Entropy_${chainCode}`,
     params: [],
   })) as BIP44CoinTypeNode
-
   try {
-    if (node.privateKeyBuffer === undefined) {
+    if (node.privateKey === undefined) {
       throw new Error('No private key provided in BIP44CoinTypeNode')
     }
+    const deriveAddressAtPath = await getBIP44AddressKeyDeriver(node)
+    const addZero = await deriveAddressAtPath(0)
     const keyring = new Keyring()
     const nativeAdapter = NativeAdapter.useKeyring(keyring)
-    console.info(nativeAdapter)
-    //   await nativeAdapter.initialize();
-    //   const wallet = await nativeAdapter.pairDevice(
-    //     "@shapeshiftoss/metamask-snaps"
-    //   );
-    //   if (wallet === null) {
-    //     throw new Error("Unable to pair ShapeShift Native signer");
-    //   }
-    //   const nativeNode = await crypto.Isolation.Engines.Default.BIP32.Node.create(
-    //     node.privateKeyBuffer,
-    //     node.chainCodeBuffer
-    //   );
-    //   wallet.loadDevice({ masterKey: nativeNode });
-    //   return wallet;
+    await nativeAdapter.initialize()
+    const wallet = await nativeAdapter.pairDevice('@shapeshiftoss/metamask-snaps')
+    if (wallet === null) {
+      throw new Error('Unable to pair ShapeShift Native signer')
+    }
+    const nativeNode = await Node.create(
+      Buffer.from(addZero.privateKey, 'hex'),
+      Buffer.from(addZero.chainCode, 'hex'),
+    )
+    await wallet.loadDevice({ masterKey: nativeNode })
+    return wallet
   } catch (error) {
     moduleLogger.error(
       error,
       { fn: 'getHDWalletNativeSigner' },
       `Failed to initialize HDWallet signer.`,
     )
-    console.error('dang')
   }
   return null
 }

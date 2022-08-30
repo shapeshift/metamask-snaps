@@ -1,0 +1,5 @@
+# Ignore artifacts:
+.github
+dist
+images
+node_modules

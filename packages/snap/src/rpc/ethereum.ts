@@ -1,29 +1,28 @@
+import { ETHSignMessage, ETHSignTx, ETHVerifyMessage } from '@shapeshiftoss/hdwallet-core'
 import {
-  bip32ToAddressNList,
-  ETHSignedMessage,
-  ETHSignedTx,
-  ETHSignMessage,
-  ETHSignTx,
-  ETHVerifyMessage,
-  slip44ByCoin,
-} from '@shapeshiftoss/hdwallet-core'
-import * as unchained from '@shapeshiftoss/unchained-client'
+  EthereumGetAddressParams,
+  EthereumGetAddressResponse,
+  EthereumSignMessageResponse,
+  EthereumSignTransactionResponse,
+  EthereumVerifyMessageResponse,
+} from '@shapeshiftoss/metamask-snaps-types'
 
+// import * as unchained from "@shapeshiftoss/unchained-client";
 import { logger } from '../lib/logger'
 import { getHDWalletNativeSigner } from './common'
 
 const moduleLogger = logger.child({ namespace: ['Snap', 'Ethereum.ts'] })
 
-export const ethGetAddress = async (account = 0, addressIndex = 0): Promise<string> => {
+export const ethGetAddress = async ({
+  addressNList,
+}: EthereumGetAddressParams): Promise<EthereumGetAddressResponse> => {
   try {
     const signer = await getHDWalletNativeSigner('Ethereum')
     if (signer === null) {
       throw new Error('Could not initialize Ethereum signer')
     }
     const address = await signer.ethGetAddress({
-      addressNList: bip32ToAddressNList(
-        `m/44'/${slip44ByCoin('Ethereum')}'/${account}'/0/${addressIndex}`,
-      ),
+      addressNList,
       showDisplay: false,
     })
     if (address === null) {
@@ -32,11 +31,13 @@ export const ethGetAddress = async (account = 0, addressIndex = 0): Promise<stri
     return address
   } catch (error) {
     moduleLogger.error({ fn: 'ethGetAddress' }, error)
-    throw error
+    return Promise.reject(error)
   }
 }
 
-export const ethSignTransaction = async (transaction: ETHSignTx): Promise<ETHSignedTx> => {
+export const ethSignTransaction = async (
+  transaction: ETHSignTx,
+): Promise<EthereumSignTransactionResponse> => {
   try {
     const signer = await getHDWalletNativeSigner('Ethereum')
     if (signer === null) {
@@ -49,11 +50,13 @@ export const ethSignTransaction = async (transaction: ETHSignTx): Promise<ETHSig
     return signedTransaction
   } catch (error) {
     moduleLogger.error(transaction, { fn: 'ethSignTransaction' }, error)
-    throw error
+    return Promise.reject(error)
   }
 }
 
-export const ethSignMessage = async (message: ETHSignMessage): Promise<ETHSignedMessage> => {
+export const ethSignMessage = async (
+  message: ETHSignMessage,
+): Promise<EthereumSignMessageResponse> => {
   try {
     const signer = await getHDWalletNativeSigner('Ethereum')
     if (signer === null) {
@@ -66,11 +69,13 @@ export const ethSignMessage = async (message: ETHSignMessage): Promise<ETHSigned
     return signedMessage
   } catch (error) {
     moduleLogger.error(message, { fn: 'ethSignMessage' }, error)
-    throw error
+    return Promise.reject(error)
   }
 }
 
-export const ethVerifyMessage = async (message: ETHVerifyMessage): Promise<boolean> => {
+export const ethVerifyMessage = async (
+  message: ETHVerifyMessage,
+): Promise<EthereumVerifyMessageResponse> => {
   try {
     const signer = await getHDWalletNativeSigner('Ethereum')
     if (signer === null) {
@@ -80,22 +85,22 @@ export const ethVerifyMessage = async (message: ETHVerifyMessage): Promise<boole
     return isVerified
   } catch (error) {
     moduleLogger.error(message, { fn: 'ethVerifyMessage' }, error)
-    throw error
+    return Promise.reject(error)
   }
 }
 
-export const ethBroadcastTransaction = async (
-  message: ETHSignedTx,
-): Promise<string | undefined> => {
-  try {
-    const config = new unchained.ethereum.Configuration({
-      basePath: process.env.UNCHAINED_ETHEREUM_HTTP_URL,
-    })
-    const client = new unchained.ethereum.V1Api(config)
-    const txid = client.sendTx({ sendTxBody: { hex: message.serialized } })
-    return txid
-  } catch (error) {
-    moduleLogger.error(message, { fn: 'ethBroadcastMessage' }, error)
-    return undefined
-  }
-}
+// export const ethBroadcastTransaction = async (
+//   message: ETHSignedTx
+// ): Promise<EthereumBroadcastTransactionResponse> => {
+//   try {
+//     const config = new unchained.ethereum.Configuration({
+//       basePath: process.env.UNCHAINED_ETHEREUM_HTTP_URL,
+//     });
+//     const client = new unchained.ethereum.V1Api(config);
+//     const txid = client.sendTx({ sendTxBody: { hex: message.serialized } });
+//     return txid;
+//   } catch (error) {
+//     moduleLogger.error(message, { fn: "ethBroadcastMessage" }, error);
+//     return Promise.reject(error);
+//   }
+// };

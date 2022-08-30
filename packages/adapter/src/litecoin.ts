@@ -1,24 +1,33 @@
-import { logger } from './lib/logger'
 import {
+  LitecoinBroadcastTransactionResponse,
   LitecoinGetAddressParams,
-  LitecoinSignedMessage,
+  LitecoinGetAddressResponse,
   LitecoinSignedTransaction,
   LitecoinSignMessage,
+  LitecoinSignMessageResponse,
   LitecoinSignTransaction,
+  LitecoinSignTransactionResponse,
   LitecoinVerifyMessage,
-} from './types'
-import { getMetaMaskProvider } from './utils'
+  LitecoinVerifyMessageResponse,
+} from '@shapeshiftoss/metamask-snaps-types'
+
+import { logger } from './lib/logger'
+import { DEFAULT_SNAP_ID, sendFlaskRPCRequest } from './utils'
 
 const moduleLogger = logger.child({ namespace: ['Adapter', 'Litecoin.ts'] })
 
-export const LTCGetAddress = async (params: LitecoinGetAddressParams): Promise<string | null> => {
-  const provider = await getMetaMaskProvider()
+export const LTCGetAddress = async (
+  params: LitecoinGetAddressParams,
+  snapId: string = DEFAULT_SNAP_ID,
+): Promise<LitecoinGetAddressResponse> => {
   try {
-    const ret = await provider.request({
-      method: 'ltc_getAddress',
-      params: [params]
-    })
-    return ret
+    return await sendFlaskRPCRequest(
+      {
+        method: 'ltc_getAddress',
+        params: { params },
+      },
+      snapId,
+    )
   } catch (error) {
     moduleLogger.error(error, { fn: 'LTCGetAddress' }, `ltc_getAddress RPC call failed.`)
   }
@@ -27,14 +36,16 @@ export const LTCGetAddress = async (params: LitecoinGetAddressParams): Promise<s
 
 export const LTCSignMessage = async (
   message: LitecoinSignMessage,
-): Promise<LitecoinSignedMessage | null> => {
-  const provider = await getMetaMaskProvider()
+  snapId: string = DEFAULT_SNAP_ID,
+): Promise<LitecoinSignMessageResponse> => {
   try {
-    const ret = await provider.request({
-      method: 'ltc_signMessage',
-      params: [message],
-    })
-    return ret
+    return await sendFlaskRPCRequest(
+      {
+        method: 'ltc_signMessage',
+        params: { message },
+      },
+      snapId,
+    )
   } catch (error) {
     moduleLogger.error(error, { fn: 'LTCSignMessage' }, `ltc_signMessage RPC call failed.`)
   }
@@ -43,14 +54,16 @@ export const LTCSignMessage = async (
 
 export const LTCSignTransaction = async (
   transaction: LitecoinSignTransaction,
-): Promise<LitecoinSignedTransaction | null> => {
-  const provider = await getMetaMaskProvider()
+  snapId: string = DEFAULT_SNAP_ID,
+): Promise<LitecoinSignTransactionResponse> => {
   try {
-    const ret = await provider.request({
-      method: 'ltc_signTransaction',
-      params: [transaction],
-    })
-    return ret
+    return await sendFlaskRPCRequest(
+      {
+        method: 'ltc_signTransaction',
+        params: { transaction },
+      },
+      snapId,
+    )
   } catch (error) {
     moduleLogger.error(error, { fn: 'LTCSignTransaction' }, `ltc_signTransaction RPC call failed.`)
   }
@@ -59,14 +72,16 @@ export const LTCSignTransaction = async (
 
 export const LTCVerifyMessage = async (
   message: LitecoinVerifyMessage,
-): Promise<boolean | null> => {
-  const provider = await getMetaMaskProvider()
+  snapId: string = DEFAULT_SNAP_ID,
+): Promise<LitecoinVerifyMessageResponse> => {
   try {
-    const ret = await provider.request({
-      method: 'ltc_verifyMessage',
-      params: [message],
-    })
-    return ret
+    return await sendFlaskRPCRequest(
+      {
+        method: 'ltc_verifyMessage',
+        params: { message },
+      },
+      snapId,
+    )
   } catch (error) {
     moduleLogger.error(error, { fn: 'LTCVerifyMessage' }, `ltc_verifyMessage RPC call failed.`)
     return null
@@ -75,14 +90,16 @@ export const LTCVerifyMessage = async (
 
 export const LTCBroadcastTransaction = async (
   transaction: LitecoinSignedTransaction,
-): Promise<string | null> => {
-  const provider = await getMetaMaskProvider()
+  snapId: string = DEFAULT_SNAP_ID,
+): Promise<LitecoinBroadcastTransactionResponse> => {
   try {
-    const ret = await provider.request({
-      method: 'litecoin_broadcastTransaction',
-      params: [transaction],
-    })
-    return ret
+    return await sendFlaskRPCRequest(
+      {
+        method: 'ltc_broadcastTransaction',
+        params: { transaction },
+      },
+      snapId,
+    )
   } catch (error) {
     moduleLogger.error(
       error,

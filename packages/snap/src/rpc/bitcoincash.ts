@@ -1,35 +1,32 @@
+import { BTCSignMessage, BTCSignTx, BTCVerifyMessage } from '@shapeshiftoss/hdwallet-core'
 import {
-  bip32ToAddressNList,
-  BTCInputScriptType,
-  BTCSignedMessage,
-  BTCSignedTx,
-  BTCSignMessage,
-  BTCSignTx,
-  BTCVerifyMessage,
-  slip44ByCoin,
-} from '@shapeshiftoss/hdwallet-core'
-import * as unchained from '@shapeshiftoss/unchained-client'
+  BitcoinCashGetAddressParams,
+  BitcoinCashGetAddressResponse,
+  BitcoinCashSignMessageResponse,
+  BitcoinCashSignTransactionResponse,
+  BitcoinCashVerifyMessageResponse,
+} from '@shapeshiftoss/metamask-snaps-types'
 
+// import * as unchained from '@shapeshiftoss/unchained-client'
 import { logger } from '../lib/logger'
 import { getHDWalletNativeSigner } from './common'
 
-const moduleLogger = logger.child({ namespace: ['Snap', 'RPC', 'BitcoinCash.ts'] })
+const moduleLogger = logger.child({
+  namespace: ['Snap', 'RPC', 'BitcoinCash.ts'],
+})
 
-export const bchGetAddress = async (
-  scriptType?: BTCInputScriptType,
-  account = 0,
-  addressIndex = 0,
-): Promise<string> => {
+export const bchGetAddress = async ({
+  addressNList,
+  scriptType,
+}: BitcoinCashGetAddressParams): Promise<BitcoinCashGetAddressResponse> => {
   try {
     const signer = await getHDWalletNativeSigner('BitcoinCash')
     if (signer === null) {
-      throw new Error('Could not initialize BitcoinCash signer')
+      throw new Error('Could not initialize Bitcoin Cash signer')
     }
     const address = await signer.btcGetAddress({
       coin: 'BitcoinCash',
-      addressNList: bip32ToAddressNList(
-        `m/44'/${slip44ByCoin('BitcoinCash')}'/${account}'/0/${addressIndex}`,
-      ),
+      addressNList,
       scriptType,
       showDisplay: false,
     })
@@ -38,14 +35,16 @@ export const bchGetAddress = async (
     }
     return address
   } catch (error) {
-    moduleLogger.error({ fn: 'bchGetAddress' }, error)
-    throw error
+    moduleLogger.error({ fn: 'btcGetAddress' }, error)
+    return Promise.reject(error)
   }
 }
 
-export const bchSignTransaction = async (transaction: BTCSignTx): Promise<BTCSignedTx> => {
+export const bchSignTransaction = async (
+  transaction: BTCSignTx,
+): Promise<BitcoinCashSignTransactionResponse> => {
   try {
-    const signer = await getHDWalletNativeSigner('BitcoinCashCash')
+    const signer = await getHDWalletNativeSigner('BitcoinCash')
     if (signer === null) {
       throw new Error('Could not initialize BitcoinCash signer')
     }
@@ -56,11 +55,13 @@ export const bchSignTransaction = async (transaction: BTCSignTx): Promise<BTCSig
     return signedTransaction
   } catch (error) {
     moduleLogger.error(transaction, { fn: 'bchSignTransaction' }, error)
-    throw error
+    return Promise.reject(error)
   }
 }
 
-export const bchSignMessage = async (message: BTCSignMessage): Promise<BTCSignedMessage> => {
+export const bchSignMessage = async (
+  message: BTCSignMessage,
+): Promise<BitcoinCashSignMessageResponse> => {
   try {
     const signer = await getHDWalletNativeSigner('BitcoinCash')
     if (signer === null) {
@@ -73,11 +74,13 @@ export const bchSignMessage = async (message: BTCSignMessage): Promise<BTCSigned
     return signedMessage
   } catch (error) {
     moduleLogger.error(message, { fn: 'bchSignMessage' }, error)
-    throw error
+    return Promise.reject(error)
   }
 }
 
-export const bchVerifyMessage = async (message: BTCVerifyMessage): Promise<boolean> => {
+export const bchVerifyMessage = async (
+  message: BTCVerifyMessage,
+): Promise<BitcoinCashVerifyMessageResponse> => {
   try {
     const signer = await getHDWalletNativeSigner('BitcoinCash')
     if (signer === null) {
@@ -87,22 +90,22 @@ export const bchVerifyMessage = async (message: BTCVerifyMessage): Promise<boole
     return isVerified
   } catch (error) {
     moduleLogger.error(message, { fn: 'bchVerifyMessage' }, error)
-    throw error
+    return Promise.reject(error)
   }
 }
 
-export const bchBroadcastTransaction = async (
-  message: BTCSignedTx,
-): Promise<string | undefined> => {
-  try {
-    const config = new unchained.bitcoincash.Configuration({
-      basePath: process.env.UNCHAINED_BITCOINCASH_HTTP_URL,
-    })
-    const client = new unchained.bitcoincash.V1Api(config)
-    const txid = client.sendTx({ sendTxBody: { hex: message.serializedTx } })
-    return txid
-  } catch (error) {
-    moduleLogger.error(message, { fn: 'bchBroadcastMessage' }, error)
-    return undefined
-  }
-}
+// export const bchBroadcastTransaction = async (
+//   message: BTCSignedTx
+// ): Promise<BitcoinCashBroadcastTransactionResponse> => {
+//   try {
+//     const config = new unchained.bitcoincash.Configuration({
+//       basePath: process.env.UNCHAINED_BITCOINCASH_HTTP_URL,
+//     });
+//     const client = new unchained.bitcoincash.V1Api(config);
+//     const txid = client.sendTx({ sendTxBody: { hex: message.serializedTx } });
+//     return txid;
+//   } catch (error) {
+//     moduleLogger.error(message, { fn: "bchBroadcastMessage" }, error);
+//     return Promise.reject(error);
+//   }
+// };

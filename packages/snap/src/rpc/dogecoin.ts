@@ -1,35 +1,32 @@
+import { BTCSignMessage, BTCSignTx, BTCVerifyMessage } from '@shapeshiftoss/hdwallet-core'
 import {
-  bip32ToAddressNList,
-  BTCInputScriptType,
-  BTCSignedMessage,
-  BTCSignedTx,
-  BTCSignMessage,
-  BTCSignTx,
-  BTCVerifyMessage,
-  slip44ByCoin,
-} from '@shapeshiftoss/hdwallet-core'
-import * as unchained from '@shapeshiftoss/unchained-client'
+  DogecoinGetAddressParams,
+  DogecoinGetAddressResponse,
+  DogecoinSignMessageResponse,
+  DogecoinSignTransactionResponse,
+  DogecoinVerifyMessageResponse,
+} from '@shapeshiftoss/metamask-snaps-types'
 
+// import * as unchained from "@shapeshiftoss/unchained-client";
 import { logger } from '../lib/logger'
 import { getHDWalletNativeSigner } from './common'
 
-const moduleLogger = logger.child({ namespace: ['Snap', 'RPC', 'Dogecoin.ts'] })
+const moduleLogger = logger.child({
+  namespace: ['Snap', 'RPC', 'Dogecoin.ts'],
+})
 
-export const dogeGetAddress = async (
-  scriptType?: BTCInputScriptType,
-  account = 0,
-  addressIndex = 0,
-): Promise<string> => {
+export const dogeGetAddress = async ({
+  addressNList,
+  scriptType,
+}: DogecoinGetAddressParams): Promise<DogecoinGetAddressResponse> => {
   try {
     const signer = await getHDWalletNativeSigner('Dogecoin')
     if (signer === null) {
-      throw new Error('Could not initialize Bitcoin signer')
+      throw new Error('Could not initialize Dogecoin signer')
     }
     const address = await signer.btcGetAddress({
       coin: 'Dogecoin',
-      addressNList: bip32ToAddressNList(
-        `m/44'/${slip44ByCoin('Dogecoin')}'/${account}'/0/${addressIndex}`,
-      ),
+      addressNList,
       scriptType,
       showDisplay: false,
     })
@@ -39,11 +36,13 @@ export const dogeGetAddress = async (
     return address
   } catch (error) {
     moduleLogger.error({ fn: 'dogeGetAddress' }, error)
-    throw error
+    return Promise.reject(error)
   }
 }
 
-export const dogeSignTransaction = async (transaction: BTCSignTx): Promise<BTCSignedTx> => {
+export const dogeSignTransaction = async (
+  transaction: BTCSignTx,
+): Promise<DogecoinSignTransactionResponse> => {
   try {
     const signer = await getHDWalletNativeSigner('Dogecoin')
     if (signer === null) {
@@ -56,11 +55,13 @@ export const dogeSignTransaction = async (transaction: BTCSignTx): Promise<BTCSi
     return signedTransaction
   } catch (error) {
     moduleLogger.error(transaction, { fn: 'dogeSignTransaction' }, error)
-    throw error
+    return Promise.reject(error)
   }
 }
 
-export const dogeSignMessage = async (message: BTCSignMessage): Promise<BTCSignedMessage> => {
+export const dogeSignMessage = async (
+  message: BTCSignMessage,
+): Promise<DogecoinSignMessageResponse> => {
   try {
     const signer = await getHDWalletNativeSigner('Dogecoin')
     if (signer === null) {
@@ -73,11 +74,13 @@ export const dogeSignMessage = async (message: BTCSignMessage): Promise<BTCSigne
     return signedMessage
   } catch (error) {
     moduleLogger.error(message, { fn: 'dogeSignMessage' }, error)
-    throw error
+    return Promise.reject(error)
   }
 }
 
-export const dogeVerifyMessage = async (message: BTCVerifyMessage): Promise<boolean> => {
+export const dogeVerifyMessage = async (
+  message: BTCVerifyMessage,
+): Promise<DogecoinVerifyMessageResponse> => {
   try {
     const signer = await getHDWalletNativeSigner('Dogecoin')
     if (signer === null) {
@@ -87,22 +90,22 @@ export const dogeVerifyMessage = async (message: BTCVerifyMessage): Promise<bool
     return isVerified
   } catch (error) {
     moduleLogger.error(message, { fn: 'dogeVerifyMessage' }, error)
-    throw error
+    return Promise.reject(error)
   }
 }
 
-export const dogeBroadcastTransaction = async (
-  message: BTCSignedTx,
-): Promise<string | undefined> => {
-  try {
-    const config = new unchained.dogecoin.Configuration({
-      basePath: process.env.UNCHAINED_DOGECOIN_HTTP_URL,
-    })
-    const client = new unchained.dogecoin.V1Api(config)
-    const txid = client.sendTx({ sendTxBody: { hex: message.serializedTx } })
-    return txid
-  } catch (error) {
-    moduleLogger.error(message, { fn: 'dogeBroadcastMessage' }, error)
-    return undefined
-  }
-}
+// export const dogeBroadcastTransaction = async (
+//   message: BTCSignedTx
+// ): Promise<DogecoinBroadcastTransactionResponse> => {
+//   try {
+//     const config = new unchained.dogecoin.Configuration({
+//       basePath: process.env.UNCHAINED_DOGECOIN_HTTP_URL,
+//     });
+//     const client = new unchained.dogecoin.V1Api(config);
+//     const txid = client.sendTx({ sendTxBody: { hex: message.serializedTx } });
+//     return txid;
+//   } catch (error) {
+//     moduleLogger.error(message, { fn: "dogeBroadcastMessage" }, error);
+//     return Promise.reject(error);
+//   }
+// };

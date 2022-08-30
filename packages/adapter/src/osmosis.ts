@@ -1,17 +1,29 @@
+import {
+  OsmosisBroadcastTransactionResponse,
+  OsmosisGetAddressParams,
+  OsmosisGetAddressResponse,
+  OsmosisSignedTransaction,
+  OsmosisSignTransaction,
+  OsmosisSignTransactionResponse,
+} from '@shapeshiftoss/metamask-snaps-types'
+
 import { logger } from './lib/logger'
-import { OsmosisGetAddressParams, OsmosisSignedTransaction, OsmosisSignTransaction } from './types'
-import { getMetaMaskProvider } from './utils'
+import { DEFAULT_SNAP_ID, sendFlaskRPCRequest } from './utils'
 
 const moduleLogger = logger.child({ namespace: ['Adapter', 'Osmosis.ts'] })
 
-export const osmosisGetAddress = async (params: OsmosisGetAddressParams): Promise<string | null> => {
-  const provider = await getMetaMaskProvider()
+export const osmosisGetAddress = async (
+  params: OsmosisGetAddressParams,
+  snapId: string = DEFAULT_SNAP_ID,
+): Promise<OsmosisGetAddressResponse> => {
   try {
-    const ret = await provider.request({
-      method: 'osmosis_getAddress',
-      params: [params]
-    })
-    return ret
+    return await sendFlaskRPCRequest(
+      {
+        method: 'osmosis_getAddress',
+        params: { params },
+      },
+      snapId,
+    )
   } catch (error) {
     moduleLogger.error(error, { fn: 'osmosisGetAddress' }, `osmosis_getAddress RPC call failed.`)
   }
@@ -20,14 +32,16 @@ export const osmosisGetAddress = async (params: OsmosisGetAddressParams): Promis
 
 export const osmosisSignTransaction = async (
   transaction: OsmosisSignTransaction,
-): Promise<OsmosisSignedTransaction | null> => {
-  const provider = await getMetaMaskProvider()
+  snapId: string = DEFAULT_SNAP_ID,
+): Promise<OsmosisSignTransactionResponse> => {
   try {
-    const ret = await provider.request({
-      method: 'osmosis_signTransaction',
-      params: [transaction],
-    })
-    return ret
+    return await sendFlaskRPCRequest(
+      {
+        method: 'osmosis_signTransaction',
+        params: { transaction },
+      },
+      snapId,
+    )
   } catch (error) {
     moduleLogger.error(
       error,
@@ -40,14 +54,16 @@ export const osmosisSignTransaction = async (
 
 export const osmosisBroadcastTransaction = async (
   transaction: OsmosisSignedTransaction,
-): Promise<string | null> => {
-  const provider = await getMetaMaskProvider()
+  snapId: string = DEFAULT_SNAP_ID,
+): Promise<OsmosisBroadcastTransactionResponse> => {
   try {
-    const ret = await provider.request({
-      method: 'osmosis_broadcastTransaction',
-      params: [transaction],
-    })
-    return ret
+    return await sendFlaskRPCRequest(
+      {
+        method: 'osmosis_broadcastTransaction',
+        params: { transaction },
+      },
+      snapId,
+    )
   } catch (error) {
     moduleLogger.error(
       error,

@@ -1,19 +1,29 @@
+import {
+  BinanceBroadcastTransactionResponse,
+  BinanceGetAddressParams,
+  BinanceGetAddressResponse,
+  BinanceSignedTransaction,
+  BinanceSignTransaction,
+  BinanceSignTransactionResponse,
+} from '@shapeshiftoss/metamask-snaps-types'
+
 import { logger } from './lib/logger'
-import { BinanceGetAddressParams, BinanceSignedTransaction, BinanceSignTransaction } from './types'
-import { getMetaMaskProvider } from './utils'
+import { DEFAULT_SNAP_ID, sendFlaskRPCRequest } from './utils'
 
 const moduleLogger = logger.child({ namespace: ['Adapter', 'Binance.ts'] })
 
 export const binanceGetAddress = async (
-  params: BinanceGetAddressParams
-): Promise<string | null> => {
-  const provider = await getMetaMaskProvider()
+  params: BinanceGetAddressParams,
+  snapId: string = DEFAULT_SNAP_ID,
+): Promise<BinanceGetAddressResponse> => {
   try {
-    const ret = await provider.request({
-      method: 'binance_getAddress',
-      params: [params]
-    })
-    return ret
+    return await sendFlaskRPCRequest(
+      {
+        method: 'binance_getAddress',
+        params: { params },
+      },
+      snapId,
+    )
   } catch (error) {
     moduleLogger.error(error, { fn: 'binanceGetAddress' }, `binance_getAddress RPC call failed.`)
   }
@@ -22,14 +32,16 @@ export const binanceGetAddress = async (
 
 export const binanceSignTransaction = async (
   transaction: BinanceSignTransaction,
-): Promise<BinanceSignedTransaction | null> => {
-  const provider = await getMetaMaskProvider()
+  snapId: string = DEFAULT_SNAP_ID,
+): Promise<BinanceSignTransactionResponse> => {
   try {
-    const ret = await provider.request({
-      method: 'binance_signTransaction',
-      params: [transaction],
-    })
-    return ret
+    return await sendFlaskRPCRequest(
+      {
+        method: 'binance_signTransaction',
+        params: { transaction },
+      },
+      snapId,
+    )
   } catch (error) {
     moduleLogger.error(
       error,
@@ -42,14 +54,16 @@ export const binanceSignTransaction = async (
 
 export const binanceBroadcastTransaction = async (
   transaction: BinanceSignedTransaction,
-): Promise<string | null> => {
-  const provider = await getMetaMaskProvider()
+  snapId: string = DEFAULT_SNAP_ID,
+): Promise<BinanceBroadcastTransactionResponse> => {
   try {
-    const ret = await provider.request({
-      method: 'binance_broadcastTransaction',
-      params: [transaction],
-    })
-    return ret
+    return await sendFlaskRPCRequest(
+      {
+        method: 'binance_broadcastTransaction',
+        params: { transaction },
+      },
+      snapId,
+    )
   } catch (error) {
     moduleLogger.error(
       error,

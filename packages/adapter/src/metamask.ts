@@ -1,7 +1,7 @@
 import { slip44ByCoin } from '@shapeshiftoss/hdwallet-core'
+import { WalletEnableParam, WalletEnableResult } from '@shapeshiftoss/metamask-snaps-types'
 
 import { logger } from './lib/logger'
-import { WalletEnableParam, WalletEnableResult } from './types'
 import { getMetaMaskProvider } from './utils'
 
 const moduleLogger = logger.child({ namespace: ['Adapter', 'Metamask.ts'] })
