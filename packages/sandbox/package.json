@@ -22,7 +22,6 @@
     "@fontsource/inter": "^4.5.11",
     "@fontsource/work-sans": "^4.5.10",
     "@reduxjs/toolkit": "^1.8.3",
-    "@shapeshiftoss/caip": "^6.7.1",
     "@shapeshiftoss/hdwallet-core": "^1.29.0",
     "@shapeshiftoss/logger": "^1.1.2",
     "@shapeshiftoss/metamask-snaps-adapter": "workspace:*",
@@ -50,9 +49,11 @@
     "@chakra-ui/styled-system": "*",
     "@chakra-ui/system": "*",
     "@chakra-ui/theme-tools": "*",
+    "@shapeshiftoss/caip": "*",
     "@shapeshiftoss/types": "*",
     "@testing-library/dom": "*",
-    "eslint": "*"
+    "eslint": "*",
+    "eslint-plugin-react-hooks": "*"
   },
   "devDependencies": {
     "eslint-config-prettier": "^8.5.0",
