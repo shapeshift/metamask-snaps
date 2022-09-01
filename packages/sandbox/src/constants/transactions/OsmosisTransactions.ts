@@ -3,180 +3,333 @@ export const OsmosisTransactions: any = {
     addressNList: [0x80000000 + 44, 0x80000000 + 118, 0x80000000 + 0, 0, 0],
   },
   delegate: {
-    account_number: '16359',
-    chain_id: 'cosmoshub-4',
-    sequence: '18',
-    fee: {
-      amount: [
+    addressNList: [0x80000000 + 44, 0x80000000 + 118, 0x80000000 + 0, 0, 0],
+    account_number: '95421',
+    chain_id: 'osmosis-1',
+    sequence: '36',
+    tx: {
+      fee: {
+        amount: [
+          {
+            amount: '2800',
+            denom: 'uosmo',
+          },
+        ],
+        gas: '290000',
+      },
+      memo: '',
+      msg: [
         {
-          amount: '2800',
-          denom: 'uatom',
-        },
-      ],
-      gas: '290000',
-    },
-    memo: '',
-    msg: [
-      {
-        type: 'cosmos-sdk/MsgDelegate',
-        value: {
-          delegator_address: 'cosmos15cenya0tr7nm3tz2wn3h3zwkht2rxrq7q7h3dj',
-          validator_address: 'cosmosvaloper1qwl879nx9t6kef4supyazayf7vjhennyh568ys',
-          amount: {
-            denom: 'uatom',
-            amount: '1000',
+          type: 'cosmos-sdk/MsgDelegate',
+          value: {
+            delegator_address: 'osmo1dhg0fmtthguze5n8d0tcdfnj9qeumagjqjflq4',
+            validator_address: 'osmovaloper1cyw4vw20el8e7ez8080md0r8psg25n0cq98a9n',
+            amount: {
+              denom: 'uosmo',
+              amount: '1000',
+            },
           },
         },
-      },
-    ],
+      ],
+    },
   },
-  ibcTransfer: {
-    account_number: '16359',
-    chain_id: 'cosmoshub-4',
-    sequence: '27',
-    fee: {
-      amount: [
+  lp_add: {
+    addressNList: [0x80000000 + 44, 0x80000000 + 118, 0x80000000 + 0, 0, 0],
+    chain_id: 'osmosis-1',
+    account_number: '95421',
+    sequence: '45',
+    tx: {
+      fee: {
+        amount: [
+          {
+            amount: '0',
+            denom: 'uosmo',
+          },
+        ],
+        gas: '290000',
+      },
+      memo: '',
+      msg: [
         {
-          amount: '2800',
-          denom: 'uatom',
+          type: 'osmosis/gamm/join-pool',
+          value: {
+            sender: 'osmo1dhg0fmtthguze5n8d0tcdfnj9qeumagjqjflq4',
+            poolId: '1',
+            shareOutAmount: '402238349184328773',
+            tokenInMaxs: [
+              {
+                denom: 'ibc/27394FB092D2ECCD56123C74F36E4C1F926001CEADA9CA97EA622B25F41E5EB2',
+                amount: '8198',
+              },
+              {
+                denom: 'uosmo',
+                amount: '28619',
+              },
+            ],
+          },
         },
       ],
-      gas: '290000',
     },
-    memo: '',
-    msg: [
-      {
-        type: 'cosmos-sdk/MsgTransfer',
-        value: {
-          receiver: 'osmo15cenya0tr7nm3tz2wn3h3zwkht2rxrq7g9ypmq',
-          sender: 'cosmos15cenya0tr7nm3tz2wn3h3zwkht2rxrq7q7h3dj',
-          source_channel: 'channel-141',
-          source_port: 'transfer',
-          timeout_height: {
-            revision_height: '9339851',
-            revision_number: '1',
+  },
+  lp_remove: {
+    addressNList: [0x80000000 + 44, 0x80000000 + 118, 0x80000000 + 0, 0, 0],
+    chain_id: 'osmosis-1',
+    account_number: '95421',
+    sequence: '46',
+    tx: {
+      fee: {
+        amount: [
+          {
+            amount: '2800',
+            denom: 'uosmo',
           },
-          token: {
-            amount: '100',
-            denom: 'uatom',
+        ],
+        gas: '290000',
+      },
+      memo: '',
+      msg: [
+        {
+          type: 'osmosis/gamm/exit-pool',
+          value: {
+            sender: 'osmo1dhg0fmtthguze5n8d0tcdfnj9qeumagjqjflq4',
+            poolId: '1',
+            shareOutAmount: '78719426289889034',
+            tokenOutMins: [
+              {
+                denom: 'ibc/27394FB092D2ECCD56123C74F36E4C1F926001CEADA9CA97EA622B25F41E5EB2',
+                amount: '1532',
+              },
+              {
+                denom: 'uosmo',
+                amount: '5304',
+              },
+            ],
           },
         },
+      ],
+    },
+  },
+  lp_stake: {
+    addressNList: [0x80000000 + 44, 0x80000000 + 118, 0x80000000 + 0, 0, 0],
+    chain_id: 'osmosis-1',
+    account_number: '95421',
+    sequence: '46',
+    tx: {
+      fee: {
+        amount: [
+          {
+            amount: '0',
+            denom: 'uosmo',
+          },
+        ],
+        gas: '290000',
       },
-    ],
+      memo: '',
+      msg: [
+        {
+          type: 'osmosis/lockup/lock-tokens',
+          value: {
+            owner: 'osmo1dhg0fmtthguze5n8d0tcdfnj9qeumagjqjflq4',
+            duration: '86400000000000',
+            coins: [
+              {
+                denom: 'gamm/pool/1',
+                amount: '10000000000000000',
+              },
+            ],
+          },
+        },
+      ],
+    },
+  },
+  lp_unstake: {
+    addressNList: [0x80000000 + 44, 0x80000000 + 118, 0x80000000 + 0, 0, 0],
+    chain_id: 'osmosis-1',
+    account_number: '95421',
+    sequence: '47',
+    tx: {
+      fee: {
+        amount: [
+          {
+            amount: '0',
+            denom: 'uosmo',
+          },
+        ],
+        gas: '290000',
+      },
+      memo: '',
+      msg: [
+        {
+          type: 'osmosis/lockup/begin-unlock-period-lock',
+          value: {
+            owner: 'osmo1dhg0fmtthguze5n8d0tcdfnj9qeumagjqjflq4',
+            ID: '382614',
+          },
+        },
+      ],
+    },
   },
   redelegate: {
-    account_number: '16359',
-    chain_id: 'cosmoshub-4',
-    sequence: '19',
-    fee: {
-      amount: [
-        {
-          amount: '2800',
-          denom: 'uosmo',
-        },
-      ],
-      gas: '290000',
-    },
-    memo: '',
-    msg: [
-      {
-        type: 'cosmos-sdk/MsgBeginRedelegate',
-        value: {
-          delegator_address: 'cosmos15cenya0tr7nm3tz2wn3h3zwkht2rxrq7q7h3dj',
-          validator_src_address: 'cosmosvaloper1qwl879nx9t6kef4supyazayf7vjhennyh568ys',
-          validator_dst_address: 'cosmosvaloper1qs8tnw2t8l6amtzvdemnnsq9dzk0ag0z52uzay',
-          amount: {
+    addressNList: [0x80000000 + 44, 0x80000000 + 118, 0x80000000 + 0, 0, 0],
+    account_number: '95421',
+    chain_id: 'osmosis-1',
+    sequence: '37',
+    tx: {
+      fee: {
+        amount: [
+          {
+            amount: '2800',
             denom: 'uosmo',
-            amount: '100',
+          },
+        ],
+        gas: '290000',
+      },
+      memo: '',
+      msg: [
+        {
+          type: 'cosmos-sdk/MsgBeginRedelegate',
+          value: {
+            delegator_address: 'osmo1dhg0fmtthguze5n8d0tcdfnj9qeumagjqjflq4',
+            validator_src_address: 'osmovaloper1cyw4vw20el8e7ez8080md0r8psg25n0cq98a9n',
+            validator_dst_address: 'osmovaloper1clpqr4nrk4khgkxj78fcwwh6dl3uw4ep88n0y4',
+            amount: {
+              denom: 'uosmo',
+              amount: '100',
+            },
           },
         },
-      },
-    ],
+      ],
+    },
   },
   rewards: {
-    account_number: '16359',
-    chain_id: 'cosmoshub-4',
-    sequence: '19',
-    fee: {
-      amount: [
+    addressNList: [0x80000000 + 44, 0x80000000 + 118, 0x80000000 + 0, 0, 0],
+    account_number: '95421',
+    chain_id: 'osmosis-1',
+    sequence: '38',
+    tx: {
+      fee: {
+        amount: [
+          {
+            amount: '2800',
+            denom: 'uosmo',
+          },
+        ],
+        gas: '290000',
+      },
+      memo: '',
+      msg: [
         {
-          amount: '2800',
-          denom: 'uatom',
-        },
-      ],
-      gas: '290000',
-    },
-    memo: '',
-    msg: [
-      {
-        type: 'cosmos-sdk/MsgWithdrawDelegatorReward',
-        value: {
-          delegator_address: 'cosmos15cenya0tr7nm3tz2wn3h3zwkht2rxrq7q7h3dj',
-          validator_address: 'cosmosvaloper1qwl879nx9t6kef4supyazayf7vjhennyh568ys',
-          amount: {
-            denom: 'uatom',
-            amount: '100',
+          type: 'cosmos-sdk/MsgWithdrawDelegationReward',
+          value: {
+            delegator_address: 'osmo1dhg0fmtthguze5n8d0tcdfnj9qeumagjqjflq4',
+            validator_address: 'osmovaloper1cyw4vw20el8e7ez8080md0r8psg25n0cq98a9n',
+            amount: {
+              denom: 'uosmo',
+              amount: '100',
+            },
           },
         },
+      ],
+    },
+  },
+  swap: {
+    addressNList: [0x80000000 + 44, 0x80000000 + 118, 0x80000000 + 0, 0, 0],
+    chain_id: 'osmosis-1',
+    account_number: '95421',
+    sequence: '40',
+    tx: {
+      fee: {
+        amount: [
+          {
+            amount: '2800',
+            denom: 'uosmo',
+          },
+        ],
+        gas: '290000',
       },
-    ],
+      memo: '',
+      msg: [
+        {
+          type: 'osmosis/gamm/swap-exact-amount-in',
+          value: {
+            routes: [
+              {
+                poolId: '1',
+                tokenOutDenom:
+                  'ibc/27394FB092D2ECCD56123C74F36E4C1F926001CEADA9CA97EA622B25F41E5EB2',
+              },
+            ],
+            sender: 'osmo1dhg0fmtthguze5n8d0tcdfnj9qeumagjqjflq4',
+            tokenIn: {
+              amount: '6500',
+              denom: 'uosmo',
+            },
+            tokenOutMinAmount: '8204',
+          },
+        },
+      ],
+    },
   },
   transfer: {
-    account_number: '16359',
-    chain_id: 'cosmoshub-4',
-    fee: {
-      amount: [
-        {
-          amount: '100',
-          denom: 'uatom',
-        },
-      ],
-      gas: '100000',
-    },
-    memo: '',
-    msg: [
-      {
-        type: 'cosmos-sdk/MsgSend',
-        value: {
-          amount: [
-            {
-              amount: '1000',
-              denom: 'uatom',
-            },
-          ],
-          from_address: 'cosmos15cenya0tr7nm3tz2wn3h3zwkht2rxrq7q7h3dj',
-          to_address: 'cosmos1qjwdyn56ecagk8rjf7crrzwcyz6775cj89njn3',
-        },
+    addressNList: [0x80000000 + 44, 0x80000000 + 118, 0x80000000 + 0, 0, 0],
+    chain_id: 'osmosis-1',
+    account_number: '95421',
+    sequence: '35',
+    tx: {
+      fee: {
+        amount: [
+          {
+            denom: 'uosmo',
+            amount: '2800',
+          },
+        ],
+        gas: '80000',
       },
-    ],
-    sequence: '17',
-  },
-  undelegate: {
-    account_number: '16359',
-    chain_id: 'cosmoshub-4',
-    sequence: '20',
-    fee: {
-      amount: [
+      msg: [
         {
-          denom: 'uatom',
-          amount: '0',
-        },
-      ],
-      gas: '250000',
-    },
-    memo: '',
-    msg: [
-      {
-        type: 'cosmos-sdk/MsgUndelegate',
-        value: {
-          delegator_address: 'cosmos15cenya0tr7nm3tz2wn3h3zwkht2rxrq7q7h3dj',
-          validator_address: 'cosmosvaloper1qwl879nx9t6kef4supyazayf7vjhennyh568ys',
-          amount: {
-            denom: 'uatom',
-            amount: '3000',
+          type: 'cosmos-sdk/MsgSend',
+          value: {
+            from_address: 'osmo1dhg0fmtthguze5n8d0tcdfnj9qeumagjqjflq4',
+            to_address: 'osmo1qjwdyn56ecagk8rjf7crrzwcyz6775cj07qz9r',
+            amount: [
+              {
+                denom: 'uosmo',
+                amount: '1000',
+              },
+            ],
           },
         },
+      ],
+    },
+  },
+  undelegate: {
+    addressNList: [0x80000000 + 44, 0x80000000 + 118, 0x80000000 + 0, 0, 0],
+    account_number: '95421',
+    chain_id: 'osmosis-1',
+    sequence: '39',
+    tx: {
+      fee: {
+        amount: [
+          {
+            denom: 'uosmo',
+            amount: '0',
+          },
+        ],
+        gas: '250000',
       },
-    ],
+      msg: [
+        {
+          type: 'cosmos-sdk/MsgUndelegate',
+          value: {
+            delegator_address: 'osmo1dhg0fmtthguze5n8d0tcdfnj9qeumagjqjflq4',
+            validator_address: 'osmovaloper1clpqr4nrk4khgkxj78fcwwh6dl3uw4ep88n0y4',
+            amount: {
+              denom: 'uosmo',
+              amount: '3000',
+            },
+          },
+        },
+      ],
+    },
   },
 }
