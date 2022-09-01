@@ -50,6 +50,12 @@ export interface WalletEnableParam {
   permissionName?: Record<string, never>
 }
 
+export interface userConfirmParam {
+  prompt: string
+  description: string
+  textAreaContent: string
+}
+
 export interface WalletEnableResult {
   // The user's Ethereum accounts, if the eth_accounts permission has been
   // granted.

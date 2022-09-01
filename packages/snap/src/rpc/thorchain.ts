@@ -5,7 +5,7 @@ import {
 } from '@shapeshiftoss/metamask-snaps-types'
 
 import { logger } from '../lib/logger'
-import { getHDWalletNativeSigner } from './common'
+import { getHDWalletNativeSigner, userConfirm } from './common'
 
 const moduleLogger = logger.child({
   namespace: ['Snap', 'RPC', 'Thorchain.ts'],
@@ -40,6 +40,15 @@ export const thorchainSignTransaction = async (
     const signer = await getHDWalletNativeSigner('Thorchain')
     if (signer === null) {
       throw new Error('Could not initialize Thorchain signer')
+    }
+    if (
+      !(await userConfirm({
+        prompt: 'Sign THORChain Transaction?',
+        description: 'Please verify the transaction data below',
+        textAreaContent: JSON.stringify(transaction, null, 2),
+      }))
+    ) {
+      throw new Error('User rejected the signing request')
     }
     const signedTransaction = await signer.thorchainSignTx(transaction)
     if (signedTransaction === null) {

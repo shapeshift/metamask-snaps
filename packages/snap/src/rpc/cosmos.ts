@@ -6,7 +6,7 @@ import {
 
 // import * as unchained from "@shapeshiftoss/unchained-client";
 import { logger } from '../lib/logger'
-import { getHDWalletNativeSigner } from './common'
+import { getHDWalletNativeSigner, userConfirm } from './common'
 
 const moduleLogger = logger.child({ namespace: ['Snap', 'RPC', 'Cosmos.ts'] })
 
@@ -36,9 +36,18 @@ export const cosmosSignTransaction = async (
   transaction: CosmosSignTx,
 ): Promise<CosmosSignTransactionResponse> => {
   try {
-    const signer = await getHDWalletNativeSigner('Cosmos')
+    const signer = await getHDWalletNativeSigner('Atom')
     if (signer === null) {
       throw new Error('Could not initialize Cosmos signer')
+    }
+    if (
+      !(await userConfirm({
+        prompt: 'Sign Cosmos Transaction?',
+        description: 'Please verify the transaction data below',
+        textAreaContent: JSON.stringify(transaction, null, 2),
+      }))
+    ) {
+      throw new Error('User rejected the signing request')
     }
     const signedTransaction = await signer.cosmosSignTx(transaction)
     if (signedTransaction === null) {

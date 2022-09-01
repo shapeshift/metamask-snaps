@@ -9,7 +9,7 @@ import {
 
 // import * as unchained from '@shapeshiftoss/unchained-client'
 import { logger } from '../lib/logger'
-import { getHDWalletNativeSigner } from './common'
+import { getHDWalletNativeSigner, userConfirm } from './common'
 
 const moduleLogger = logger.child({
   namespace: ['Snap', 'RPC', 'BitcoinCash.ts'],
@@ -47,6 +47,15 @@ export const bchSignTransaction = async (
     const signer = await getHDWalletNativeSigner('BitcoinCash')
     if (signer === null) {
       throw new Error('Could not initialize BitcoinCash signer')
+    }
+    if (
+      !(await userConfirm({
+        prompt: 'Sign Bitcoin Cash Transaction?',
+        description: 'Please verify the transaction data below',
+        textAreaContent: JSON.stringify(transaction, null, 2),
+      }))
+    ) {
+      throw new Error('User rejected the signing request')
     }
     const signedTransaction = await signer.btcSignTx(transaction)
     if (signedTransaction === null) {
