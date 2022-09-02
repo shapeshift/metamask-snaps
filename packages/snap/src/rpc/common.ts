@@ -32,8 +32,10 @@ export const getHDWalletNativeSigner = async (coinType: string): Promise<NativeH
   }
   // eslint-disable-next-line no-undef
   const node: BIP44CoinTypeNode = (await wallet.request({
-    method: `snap_getBip44Entropy_${chainCode}`,
-    params: [],
+    method: `snap_getBip44Entropy`,
+    params: {
+      coinType: chainCode
+    },
   })) as BIP44CoinTypeNode
   try {
     if (node.privateKey === undefined) {
