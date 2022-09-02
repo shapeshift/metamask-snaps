@@ -1,3 +1,5 @@
+import { JsonRpcError } from '@metamask/types'
+
 import {
   BinanceSignedTransaction,
   BitcoinCashSignedMessage,
@@ -9,13 +11,16 @@ import {
   DogecoinSignedTransaction,
   EthereumSignedMessage,
   EthereumSignedTransaction,
+  KavaSignedTransaction,
   LitecoinSignedMessage,
   LitecoinSignedTransaction,
   OsmosisSignedTransaction,
+  SecretSignedTransaction,
+  TerraSignedTransaction,
   ThorchainSignedTransaction,
 } from './common'
 
-export type RPCHandlerError = Error | string | null
+export type RPCHandlerError = Error | JsonRpcError | string | null
 export type RPCHandlerResponse<T> = T | RPCHandlerError
 
 export type BinanceBroadcastTransactionResponse = RPCHandlerResponse<string>
@@ -44,6 +49,9 @@ export type EthereumGetAddressResponse = RPCHandlerResponse<string>
 export type EthereumSignMessageResponse = RPCHandlerResponse<EthereumSignedMessage>
 export type EthereumSignTransactionResponse = RPCHandlerResponse<EthereumSignedTransaction>
 export type EthereumVerifyMessageResponse = RPCHandlerResponse<boolean>
+export type KavaBroadcastTransactionResponse = RPCHandlerResponse<string>
+export type KavaGetAddressResponse = RPCHandlerResponse<string>
+export type KavaSignTransactionResponse = RPCHandlerResponse<KavaSignedTransaction>
 export type LitecoinBroadcastTransactionResponse = RPCHandlerResponse<string>
 export type LitecoinGetAddressResponse = RPCHandlerResponse<string>
 export type LitecoinSignMessageResponse = RPCHandlerResponse<LitecoinSignedMessage>
@@ -52,6 +60,13 @@ export type LitecoinVerifyMessageResponse = RPCHandlerResponse<boolean>
 export type OsmosisBroadcastTransactionResponse = RPCHandlerResponse<string>
 export type OsmosisGetAddressResponse = RPCHandlerResponse<string>
 export type OsmosisSignTransactionResponse = RPCHandlerResponse<OsmosisSignedTransaction>
+export type PingResponse = RPCHandlerResponse<string>
+export type SecretBroadcastTransactionResponse = RPCHandlerResponse<string>
+export type SecretGetAddressResponse = RPCHandlerResponse<string>
+export type SecretSignTransactionResponse = RPCHandlerResponse<SecretSignedTransaction>
+export type TerraBroadcastTransactionResponse = RPCHandlerResponse<string>
+export type TerraGetAddressResponse = RPCHandlerResponse<string>
+export type TerraSignTransactionResponse = RPCHandlerResponse<TerraSignedTransaction>
 export type ThorchainBroadcastTransactionResponse = RPCHandlerResponse<string>
 export type ThorchainGetAddressResponse = RPCHandlerResponse<string>
 export type ThorchainSignTransactionResponse = RPCHandlerResponse<ThorchainSignedTransaction>
@@ -83,6 +98,9 @@ export type ShapeShiftSnapRPCResponse =
   | EthereumSignMessageResponse
   | EthereumSignTransactionResponse
   | EthereumVerifyMessageResponse
+  | KavaBroadcastTransactionResponse
+  | KavaGetAddressResponse
+  | KavaSignTransactionResponse
   | LitecoinBroadcastTransactionResponse
   | LitecoinGetAddressResponse
   | LitecoinSignMessageResponse
@@ -91,6 +109,13 @@ export type ShapeShiftSnapRPCResponse =
   | OsmosisBroadcastTransactionResponse
   | OsmosisGetAddressResponse
   | OsmosisSignTransactionResponse
+  | PingResponse
+  | SecretBroadcastTransactionResponse
+  | SecretGetAddressResponse
+  | SecretSignTransactionResponse
+  | TerraBroadcastTransactionResponse
+  | TerraGetAddressResponse
+  | TerraSignTransactionResponse
   | ThorchainBroadcastTransactionResponse
   | ThorchainGetAddressResponse
   | ThorchainSignTransactionResponse

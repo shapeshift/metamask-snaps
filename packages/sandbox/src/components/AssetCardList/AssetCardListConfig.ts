@@ -19,12 +19,18 @@ import {
   ETHSignMessage,
   ETHSignTransaction,
   ETHVerifyMessage,
+  kavaGetAddress,
+  kavaSignTransaction,
   LTCGetAddress,
   LTCSignMessage,
   LTCSignTransaction,
   LTCVerifyMessage,
   osmosisGetAddress,
   osmosisSignTransaction,
+  secretGetAddress,
+  secretSignTransaction,
+  terraGetAddress,
+  terraSignTransaction,
   thorchainGetAddress,
   thorchainSignTransaction,
 } from '@shapeshiftoss/metamask-snaps-adapter'
@@ -36,8 +42,11 @@ import {
   CosmosTransactions,
   DogecoinTransactions,
   EthereumTransactions,
+  KavaTransactions,
   LitecoinTransactions,
   OsmosisTransactions,
+  SecretTransactions,
+  TerraTransactions,
   ThorchainTransactions,
 } from '../../constants/transactions'
 import { CardActionProps, CardProps } from '../Card/Card'
@@ -248,6 +257,29 @@ export const AssetCardListConfig: Array<CardProps> = [
     ]),
   },
   {
+    name: 'Kava',
+    icon: 'kava.png',
+    symbol: 'KAVA',
+    actions: new Map<string, CardActionProps>([
+      [
+        'kava_getAddress',
+        {
+          callback: kavaGetAddress,
+          params: KavaTransactions.address,
+          description: 'Generate a receive address',
+        },
+      ],
+      [
+        'kava_signTransaction',
+        {
+          callback: kavaSignTransaction,
+          params: KavaTransactions.kava,
+          description: 'Sign a Terra kava message',
+        },
+      ],
+    ]),
+  },
+  {
     name: 'Litecoin',
     icon: 'ltc.png',
     symbol: 'LTC',
@@ -305,6 +337,53 @@ export const AssetCardListConfig: Array<CardProps> = [
           callback: osmosisSignTransaction,
           params: OsmosisTransactions.delegate,
           description: 'Sign a Osmosis delegate message',
+        },
+      ],
+    ]),
+  },
+  {
+    name: 'Terra',
+    icon: 'luna.png',
+    symbol: 'LUNA',
+    actions: new Map<string, CardActionProps>([
+      [
+        'terra_getAddress',
+        {
+          callback: terraGetAddress,
+          params: TerraTransactions.address,
+          description: 'Generate a receive address',
+        },
+      ],
+      [
+        'terra_signTransaction',
+        {
+          callback: terraSignTransaction,
+          params: TerraTransactions.send,
+          description: 'Sign a Terra send message',
+        },
+      ],
+    ]),
+  },
+
+  {
+    name: 'Secret',
+    icon: 'scrt.png',
+    symbol: 'SCRT',
+    actions: new Map<string, CardActionProps>([
+      [
+        'secret_getAddress',
+        {
+          callback: secretGetAddress,
+          params: SecretTransactions.address,
+          description: 'Generate a receive address',
+        },
+      ],
+      [
+        'secret_signTransaction',
+        {
+          callback: secretSignTransaction,
+          params: SecretTransactions.send,
+          description: 'Sign a Terra send message',
         },
       ],
     ]),

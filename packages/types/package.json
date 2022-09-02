@@ -19,6 +19,7 @@
   },
   "types": "dist/index.d.ts",
   "dependencies": {
+    "@metamask/types": "^1.1.0",
     "@shapeshiftoss/hdwallet-core": "^1.29.0"
   },
   "devDependencies": {

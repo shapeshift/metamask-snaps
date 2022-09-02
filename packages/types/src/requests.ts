@@ -24,6 +24,9 @@ import {
   EthereumSignMessage,
   EthereumSignTransaction,
   EthereumVerifyMessage,
+  KavaGetAddressParams,
+  KavaSignedTransaction,
+  KavaSignTransaction,
   LitecoinGetAddressParams,
   LitecoinSignedTransaction,
   LitecoinSignMessage,
@@ -32,6 +35,12 @@ import {
   OsmosisGetAddressParams,
   OsmosisSignedTransaction,
   OsmosisSignTransaction,
+  SecretGetAddressParams,
+  SecretSignedTransaction,
+  SecretSignTransaction,
+  TerraGetAddressParams,
+  TerraSignedTransaction,
+  TerraSignTransaction,
   ThorchainGetAddressParams,
   ThorchainSignedTransaction,
   ThorchainSignTransaction,
@@ -217,6 +226,26 @@ export interface EthereumBroadcastTransactionRequest {
   }
 }
 
+export interface KavaGetAddressRequest {
+  method: 'kava_getAddress'
+  params: {
+    params: KavaGetAddressParams
+  }
+}
+export interface KavaSignTransactionRequest {
+  method: 'kava_signTransaction'
+  params: {
+    transaction: KavaSignTransaction
+  }
+}
+
+export interface KavaBroadcastTransactionRequest {
+  method: 'kava_broadcastTransaction'
+  params: {
+    transaction: KavaSignedTransaction
+  }
+}
+
 export interface LitecoinGetAddressRequest {
   method: 'ltc_getAddress'
   params: {
@@ -272,6 +301,51 @@ export interface OsmosisBroadcastTransactionRequest {
   }
 }
 
+export interface PingRequest {
+  method: 'ping'
+  params: null
+}
+
+export interface SecretGetAddressRequest {
+  method: 'secret_getAddress'
+  params: {
+    params: SecretGetAddressParams
+  }
+}
+export interface SecretSignTransactionRequest {
+  method: 'secret_signTransaction'
+  params: {
+    transaction: SecretSignTransaction
+  }
+}
+
+export interface SecretBroadcastTransactionRequest {
+  method: 'secret_broadcastTransaction'
+  params: {
+    transaction: SecretSignedTransaction
+  }
+}
+
+export interface TerraGetAddressRequest {
+  method: 'terra_getAddress'
+  params: {
+    params: TerraGetAddressParams
+  }
+}
+export interface TerraSignTransactionRequest {
+  method: 'terra_signTransaction'
+  params: {
+    transaction: TerraSignTransaction
+  }
+}
+
+export interface TerraBroadcastTransactionRequest {
+  method: 'terra_broadcastTransaction'
+  params: {
+    transaction: TerraSignedTransaction
+  }
+}
+
 export interface ThorchainGetAddressRequest {
   method: 'thorchain_getAddress'
   params: {
@@ -319,6 +393,9 @@ export type ShapeShiftSnapRPCRequest =
   | EthereumSignMessageRequest
   | EthereumSignTransactionRequest
   | EthereumVerifyMessageRequest
+  | KavaBroadcastTransactionRequest
+  | KavaGetAddressRequest
+  | KavaSignTransactionRequest
   | LitecoinBroadcastTransactionRequest
   | LitecoinGetAddressRequest
   | LitecoinSignMessageRequest
@@ -327,6 +404,13 @@ export type ShapeShiftSnapRPCRequest =
   | OsmosisBroadcastTransactionRequest
   | OsmosisGetAddressRequest
   | OsmosisSignTransactionRequest
+  | PingRequest
+  | SecretBroadcastTransactionRequest
+  | SecretGetAddressRequest
+  | SecretSignTransactionRequest
+  | TerraBroadcastTransactionRequest
+  | TerraGetAddressRequest
+  | TerraSignTransactionRequest
   | ThorchainBroadcastTransactionRequest
   | ThorchainGetAddressRequest
   | ThorchainSignTransactionRequest
