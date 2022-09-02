@@ -1,5 +1,9 @@
-import { BTCSignMessage, BTCSignTx, BTCVerifyMessage } from '@shapeshiftoss/hdwallet-core'
-// import * as unchained from '@shapeshiftoss/unchained-client'
+import {
+  BTCSignedTx,
+  BTCSignMessage,
+  BTCSignTx,
+  BTCVerifyMessage,
+} from '@shapeshiftoss/hdwallet-core'
 import {
   BitcoinGetAddressParams,
   BitcoinGetAddressResponse,
@@ -7,6 +11,7 @@ import {
   BitcoinSignTransactionResponse,
   BitcoinVerifyMessageResponse,
 } from '@shapeshiftoss/metamask-snaps-types'
+import * as unchained from '@shapeshiftoss/unchained-client'
 
 import { logger } from '../lib/logger'
 import { getHDWalletNativeSigner, userConfirm } from './common'
@@ -101,18 +106,18 @@ export const btcVerifyMessage = async (
   }
 }
 
-// export const btcBroadcastTransaction = async (
-//   message: BTCSignedTx,
-// ): Promise<string | undefined> => {
-//   try {
-//     const config = new unchained.bitcoin.Configuration({
-//       basePath: process.env.UNCHAINED_BITCOIN_HTTP_URL,
-//     })
-//     const client = new unchained.bitcoin.V1Api(config)
-//     const txid = client.sendTx({ sendTxBody: { hex: message.serializedTx } })
-//     return txid
-//   } catch (error) {
-//     moduleLogger.error(message, { fn: 'btcBroadcastMessage' }, error)
-//     return undefined
-//   }
-// }
+export const btcBroadcastTransaction = async (
+  message: BTCSignedTx,
+): Promise<string | undefined> => {
+  try {
+    const config = new unchained.bitcoin.Configuration({
+      basePath: process.env.UNCHAINED_BITCOIN_HTTP_URL,
+    })
+    const client = new unchained.bitcoin.V1Api(config)
+    const txid = client.sendTx({ sendTxBody: { hex: message.serializedTx } })
+    return txid
+  } catch (error) {
+    moduleLogger.error(message, { fn: 'btcBroadcastMessage' }, error)
+    return undefined
+  }
+}

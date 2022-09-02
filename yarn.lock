@@ -5307,12 +5307,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@shapeshiftoss/caip@npm:^6.16.0":
+"@shapeshiftoss/caip@file:/Users/nicholasmorrow/Work/shapeshiftdao/lib/packages/caip::locator=root%40workspace%3A.":
   version: 6.16.0
-  resolution: "@shapeshiftoss/caip@npm:6.16.0"
+  resolution: "@shapeshiftoss/caip@file:/Users/nicholasmorrow/Work/shapeshiftdao/lib/packages/caip#/Users/nicholasmorrow/Work/shapeshiftdao/lib/packages/caip::hash=4a8338&locator=root%40workspace%3A."
   peerDependencies:
     "@shapeshiftoss/types": ^8.1.0
-  checksum: b5616a1b2fb264b643a36d15ef1e0a450cc59ccca3a3342da749610c54fc5fa06781be0226fde004c9a8f3ac10166344bc953e4a5ae2ee923421aaa471418679
+  checksum: 73ff9d4934fced7e5906fecf898ba56085a483defe281ae641d87b381f2f86ee0c0886e9fd7de0b665dd259fe3f6e52600deb9de09b5922fd9f2571f4526fc96
   languageName: node
   linkType: hard
 
@@ -5518,6 +5518,7 @@ __metadata:
     "@shapeshiftoss/hdwallet-native": 1.29.0
     "@shapeshiftoss/logger": ^1.1.2
     "@shapeshiftoss/metamask-snaps-types": "workspace:^"
+    "@shapeshiftoss/unchained-client": ^9.9.0
     "@types/browserify": ^12.0.37
     "@types/node": ^18.7.8
     "@types/webpack": ^5.28.0
@@ -5574,6 +5575,40 @@ __metadata:
     google-protobuf: ^3.17.0
     long: ^4.0.0
   checksum: c890d73cb0bc2336f609d661ead17e03ea8e7996e019fa219debecba4396adf692feda24e37825c3b488395333f167c289f8b0e469d294aa053037accfa9b8b2
+  languageName: node
+  linkType: hard
+
+"@shapeshiftoss/unchained-client@npm:9.9.0":
+  version: 9.9.0
+  resolution: "@shapeshiftoss/unchained-client@npm:9.9.0"
+  dependencies:
+    "@yfi/sdk": ^1.0.30
+    bignumber.js: ^9.0.2
+    ethers: ^5.5.3
+    isomorphic-ws: ^4.0.1
+    ws: ^8.3.0
+  peerDependencies:
+    "@shapeshiftoss/caip": ^6.7.0
+    "@shapeshiftoss/logger": ^1.1.2
+    "@shapeshiftoss/types": ^8.1.0
+  checksum: 0adaf2eacfefbda5ca2264399d84d92d9cf7464417b13273cacdde4a6acf7f9be7ea8d072f80f3754a60259861a2f02c4c78f7dc7da05a512ffc34564bfbcf1d
+  languageName: node
+  linkType: hard
+
+"@shapeshiftoss/unchained-client@patch:@shapeshiftoss/unchained-client@npm:9.9.0#.yarn/patches/@shapeshiftoss-unchained-client-npm-9.9.0-7a9b09d533.patch::locator=root%40workspace%3A.":
+  version: 9.9.0
+  resolution: "@shapeshiftoss/unchained-client@patch:@shapeshiftoss/unchained-client@npm%3A9.9.0#.yarn/patches/@shapeshiftoss-unchained-client-npm-9.9.0-7a9b09d533.patch::version=9.9.0&hash=c68b1a&locator=root%40workspace%3A."
+  dependencies:
+    "@yfi/sdk": ^1.0.30
+    bignumber.js: ^9.0.2
+    ethers: ^5.5.3
+    isomorphic-ws: ^4.0.1
+    ws: ^8.3.0
+  peerDependencies:
+    "@shapeshiftoss/caip": ^6.7.0
+    "@shapeshiftoss/logger": ^1.1.2
+    "@shapeshiftoss/types": ^8.1.0
+  checksum: e84c2896dd8a45cf443bc71b67f67a72437693ef7d15dabb829884cd95cfae0344307360474678828a2eaa7c0b0336d431f1a286fdd52c006136319a707e7b84
   languageName: node
   linkType: hard
 
@@ -6759,6 +6794,26 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@yfi/sdk@npm:^1.0.30":
+  version: 1.2.0
+  resolution: "@yfi/sdk@npm:1.2.0"
+  dependencies:
+    bignumber.js: 9.0.1
+    cross-fetch: 3.1.4
+    dotenv: 10.0.0
+    emittery: 0.8.1
+    type-fest: 1.2.1
+  peerDependencies:
+    "@ethersproject/abi": ^5.4.0
+    "@ethersproject/address": ^5.4.0
+    "@ethersproject/bignumber": ^5.4.1
+    "@ethersproject/bytes": ^5.4.0
+    "@ethersproject/contracts": ^5.4.1
+    "@ethersproject/providers": ^5.4.3
+  checksum: 96027dea1a50b20dee4b9a5d74cfda94ecd2c07402403daabb8cc4f7ab54f7499f542508c20030cac7e533ecadcf27240349ddc5d731f46278438c00e156edd1
+  languageName: node
+  linkType: hard
+
 "@zag-js/element-size@npm:0.1.0":
   version: 0.1.0
   resolution: "@zag-js/element-size@npm:0.1.0"
@@ -7842,7 +7897,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"bignumber.js@npm:^9.0.1":
+"bignumber.js@npm:9.0.1":
+  version: 9.0.1
+  resolution: "bignumber.js@npm:9.0.1"
+  checksum: 6e72f6069d9db32fc8d27561164de9f811b15f9144be61f323d8b36150a239eea50c92e20ba38af2ba5e717af10b8ef12db8f9948fe2ff02bf17ede5239d15d3
+  languageName: node
+  linkType: hard
+
+"bignumber.js@npm:^9.0.1, bignumber.js@npm:^9.0.2":
   version: 9.1.0
   resolution: "bignumber.js@npm:9.1.0"
   checksum: 52ec2bb5a3874d7dc1a1018f28f8f7aff4683515ffd09d6c2d93191343c76567ae0ee32cc45149d53afb2b904bc62ed471a307b35764beea7e9db78e56bef6c6
@@ -9271,6 +9333,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"cross-fetch@npm:3.1.4":
+  version: 3.1.4
+  resolution: "cross-fetch@npm:3.1.4"
+  dependencies:
+    node-fetch: 2.6.1
+  checksum: 2107e5e633aa327bdacab036b1907c7ddd28651ede0c1d4fd14db04510944d56849a8255e2f5b8f9a1da0e061b6cee943f6819fe29ed9a130195e7fadd82a4ff
+  languageName: node
+  linkType: hard
+
 "cross-spawn@npm:^6.0.5":
   version: 6.0.5
   resolution: "cross-spawn@npm:6.0.5"
@@ -10156,7 +10227,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dotenv@npm:^10.0.0":
+"dotenv@npm:10.0.0, dotenv@npm:^10.0.0":
   version: 10.0.0
   resolution: "dotenv@npm:10.0.0"
   checksum: f412c5fe8c24fbe313d302d2500e247ba8a1946492db405a4de4d30dd0eb186a88a43f13c958c5a7de303938949c4231c56994f97d05c4bc1f22478d631b4005
@@ -10288,17 +10359,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"emittery@npm:0.8.1, emittery@npm:^0.8.1":
+  version: 0.8.1
+  resolution: "emittery@npm:0.8.1"
+  checksum: 2457e8c7b0688bb006126f2c025b2655abe682f66b184954122a8a065b5277f9813d49d627896a10b076b81c513ec5f491fd9c14fbd42c04b95ca3c9f3c365ee
+  languageName: node
+  linkType: hard
+
 "emittery@npm:^0.10.2":
   version: 0.10.2
   resolution: "emittery@npm:0.10.2"
   checksum: ee3e21788b043b90885b18ea756ec3105c1cedc50b29709c92b01e239c7e55345d4bb6d3aef4ddbaf528eef448a40b3bb831bad9ee0fc9c25cbf1367ab1ab5ac
-  languageName: node
-  linkType: hard
-
-"emittery@npm:^0.8.1":
-  version: 0.8.1
-  resolution: "emittery@npm:0.8.1"
-  checksum: 2457e8c7b0688bb006126f2c025b2655abe682f66b184954122a8a065b5277f9813d49d627896a10b076b81c513ec5f491fd9c14fbd42c04b95ca3c9f3c365ee
   languageName: node
   linkType: hard
 
@@ -11490,7 +11561,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ethers@npm:^5.4.1":
+"ethers@npm:^5.4.1, ethers@npm:^5.5.3":
   version: 5.7.0
   resolution: "ethers@npm:5.7.0"
   dependencies:
@@ -15798,6 +15869,13 @@ __metadata:
   dependencies:
     node-gyp: latest
   checksum: 31fb22d674648204f8dd94167eb5aac896c841b84a9210d614bf5d97c74ef059cc6326389cf0c54d2086e35312938401d4cc82e5fcd679202503eb8ac84814f8
+  languageName: node
+  linkType: hard
+
+"node-fetch@npm:2.6.1":
+  version: 2.6.1
+  resolution: "node-fetch@npm:2.6.1"
+  checksum: 91075bedd57879117e310fbcc36983ad5d699e522edb1ebcdc4ee5294c982843982652925c3532729fdc86b2d64a8a827797a745f332040d91823c8752ee4d7c
   languageName: node
   linkType: hard
 
@@ -20848,6 +20926,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"type-fest@npm:1.2.1":
+  version: 1.2.1
+  resolution: "type-fest@npm:1.2.1"
+  checksum: 8a177c228267a6d50267fe7b21f1ea41d057556795df7a34ee9022088dd4fc8bddf6616790f5cf99ca73ba0ec161bae8f229b7888aaf7082d7e909bea36efd11
+  languageName: node
+  linkType: hard
+
 "type-fest@npm:^0.16.0":
   version: 0.16.0
   resolution: "type-fest@npm:0.16.0"
@@ -22125,7 +22210,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ws@npm:^8.4.2":
+"ws@npm:^8.3.0, ws@npm:^8.4.2":
   version: 8.8.1
   resolution: "ws@npm:8.8.1"
   peerDependencies:

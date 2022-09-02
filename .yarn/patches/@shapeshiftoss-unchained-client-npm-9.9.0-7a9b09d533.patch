@@ -1,0 +1,10 @@
+diff --git a/dist/evm/ethereum/index.js b/dist/evm/ethereum/index.js
+index 8b8b64290200faf6fc4fd7a2494bea878679ac47..b407cb3ef207185f1fb372c9ae8d4d1767d2c079 100644
+--- a/dist/evm/ethereum/index.js
++++ b/dist/evm/ethereum/index.js
+@@ -15,4 +15,4 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
+ };
+ Object.defineProperty(exports, "__esModule", { value: true });
+ __exportStar(require("../../generated/ethereum"), exports);
+-__exportStar(require("./parser"), exports);
++// __exportStar(require("./parser"), exports);

@@ -1,10 +1,11 @@
-import { CosmosSignTx } from '@shapeshiftoss/hdwallet-core'
+import { CosmosSignedTx, CosmosSignTx } from '@shapeshiftoss/hdwallet-core'
 import {
+  CosmosBroadcastTransactionResponse,
   CosmosGetAddressParams,
   CosmosSignTransactionResponse,
 } from '@shapeshiftoss/metamask-snaps-types'
+import * as unchained from '@shapeshiftoss/unchained-client'
 
-// import * as unchained from "@shapeshiftoss/unchained-client";
 import { logger } from '../lib/logger'
 import { getHDWalletNativeSigner, userConfirm } from './common'
 
@@ -60,18 +61,18 @@ export const cosmosSignTransaction = async (
   }
 }
 
-// export const cosmosBroadcastTransaction = async (
-//   message: CosmosSignedTx
-// ): Promise<CosmosBroadcastTransactionResponse> => {
-//   try {
-//     const config = new unchained.cosmos.Configuration({
-//       basePath: process.env.UNCHAINED_COSMOS_HTTP_URL,
-//     });
-//     const client = new unchained.cosmos.V1Api(config);
-//     const txid = client.sendTx({ body: { rawTx: message.serialized } });
-//     return txid;
-//   } catch (error) {
-//     moduleLogger.error(message, { fn: "cosmosBroadcastMessage" }, error);
-//     return Promise.reject(error);
-//   }
-// };
+export const cosmosBroadcastTransaction = async (
+  message: CosmosSignedTx,
+): Promise<CosmosBroadcastTransactionResponse> => {
+  try {
+    const config = new unchained.cosmos.Configuration({
+      basePath: process.env.UNCHAINED_COSMOS_HTTP_URL,
+    })
+    const client = new unchained.cosmos.V1Api(config)
+    const txid = client.sendTx({ body: { rawTx: message.serialized } })
+    return txid
+  } catch (error) {
+    moduleLogger.error(message, { fn: 'cosmosBroadcastMessage' }, error)
+    return Promise.reject(error)
+  }
+}

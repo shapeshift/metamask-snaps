@@ -1,10 +1,11 @@
-import { OsmosisSignTx } from '@shapeshiftoss/hdwallet-core'
+import { OsmosisSignedTx, OsmosisSignTx } from '@shapeshiftoss/hdwallet-core'
 import {
+  OsmosisBroadcastTransactionResponse,
   OsmosisGetAddressParams,
   OsmosisSignTransactionResponse,
 } from '@shapeshiftoss/metamask-snaps-types'
+import * as unchained from '@shapeshiftoss/unchained-client'
 
-// import * as unchained from "@shapeshiftoss/unchained-client";
 import { logger } from '../lib/logger'
 import { getHDWalletNativeSigner, userConfirm } from './common'
 
@@ -60,18 +61,18 @@ export const osmosisSignTransaction = async (
   }
 }
 
-// export const osmosisBroadcastTransaction = async (
-//   message: OsmosisSignedTx
-// ): Promise<OsmosisBroadcastTransactionResponse> => {
-//   try {
-//     const config = new unchained.osmosis.Configuration({
-//       basePath: process.env.UNCHAINED_OSMOSIS_HTTP_URL,
-//     });
-//     const client = new unchained.osmosis.V1Api(config);
-//     const txid = client.sendTx({ body: { rawTx: message.serialized } });
-//     return txid;
-//   } catch (error) {
-//     moduleLogger.error(message, { fn: "osmosisBroadcastMessage" }, error);
-//     return Promise.reject(error);
-//   }
-// };
+export const osmosisBroadcastTransaction = async (
+  message: OsmosisSignedTx,
+): Promise<OsmosisBroadcastTransactionResponse> => {
+  try {
+    const config = new unchained.osmosis.Configuration({
+      basePath: process.env.UNCHAINED_OSMOSIS_HTTP_URL,
+    })
+    const client = new unchained.osmosis.V1Api(config)
+    const txid = client.sendTx({ body: { rawTx: message.serialized } })
+    return txid
+  } catch (error) {
+    moduleLogger.error(message, { fn: 'osmosisBroadcastMessage' }, error)
+    return Promise.reject(error)
+  }
+}

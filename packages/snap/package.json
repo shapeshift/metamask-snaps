@@ -36,12 +36,15 @@
     "test": "echo 'TODO'"
   },
   "dependencies": {
+    "@ethersproject/providers": "^5.7.0",
     "@metamask/detect-provider": "^1.2.0",
     "@metamask/key-tree": "^4.0.0",
+    "@metamask/snap-types": "^0.20.0",
     "@shapeshiftoss/hdwallet-core": "1.29.0",
     "@shapeshiftoss/hdwallet-native": "1.29.0",
     "@shapeshiftoss/logger": "^1.1.2",
     "@shapeshiftoss/metamask-snaps-types": "workspace:^",
+    "@shapeshiftoss/unchained-client": "^9.9.0",
     "dotenv": "^16.0.1"
   },
   "peerDependencies": {

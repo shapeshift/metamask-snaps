@@ -1,6 +1,8 @@
 import {
+  LitecoinBroadcastTransactionResponse,
   LitecoinGetAddressParams,
   LitecoinGetAddressResponse,
+  LitecoinSignedTransaction,
   LitecoinSignMessage,
   LitecoinSignMessageResponse,
   LitecoinSignTransaction,
@@ -8,8 +10,8 @@ import {
   LitecoinVerifyMessage,
   LitecoinVerifyMessageResponse,
 } from '@shapeshiftoss/metamask-snaps-types'
+import * as unchained from '@shapeshiftoss/unchained-client'
 
-// import * as unchained from "@shapeshiftoss/unchained-client";
 import { logger } from '../lib/logger'
 import { getHDWalletNativeSigner, userConfirm } from './common'
 
@@ -105,18 +107,18 @@ export const ltcVerifyMessage = async (
   }
 }
 
-// export const ltcBroadcastTransaction = async (
-//   message: LitecoinSignedTransaction
-// ): Promise<LitecoinBroadcastTransactionResponse> => {
-//   try {
-//     const config = new unchained.litecoin.Configuration({
-//       basePath: process.env.UNCHAINED_LITECOIN_HTTP_URL,
-//     });
-//     const client = new unchained.litecoin.V1Api(config);
-//     const txid = client.sendTx({ sendTxBody: { hex: message.serializedTx } });
-//     return txid;
-//   } catch (error) {
-//     moduleLogger.error(message, { fn: "ltcBroadcastMessage" }, error);
-//     return Promise.reject(error);
-//   }
-// };
+export const ltcBroadcastTransaction = async (
+  message: LitecoinSignedTransaction,
+): Promise<LitecoinBroadcastTransactionResponse> => {
+  try {
+    const config = new unchained.litecoin.Configuration({
+      basePath: process.env.UNCHAINED_LITECOIN_HTTP_URL,
+    })
+    const client = new unchained.litecoin.V1Api(config)
+    const txid = client.sendTx({ sendTxBody: { hex: message.serializedTx } })
+    return txid
+  } catch (error) {
+    moduleLogger.error(message, { fn: 'ltcBroadcastMessage' }, error)
+    return Promise.reject(error)
+  }
+}
