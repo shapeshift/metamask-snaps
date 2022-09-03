@@ -7,8 +7,11 @@ const moduleLogger = logger.child({ namespace: ['Snap', 'Utils.ts'] })
 
 const getMetaMaskProvider = async (): Promise<ExternalProvider> => {
   try {
-    const ret = await detectEthereumProvider({ mustBeMetaMask: true })
-    return ret
+    const provider = window.ethereum
+    if(!provider){
+      throw new Error('Could not detect Ethereum provider')
+    }
+    return provider
   } catch (error) {
     moduleLogger.error(
       error,
