@@ -91,27 +91,11 @@ export const AssetCardListConfig: Array<CardProps> = [
         },
       ],
       [
-        'btc_signMessage',
-        {
-          callback: BTCSignMessage,
-          params: BitcoinTransactions.sign,
-          description: 'Sign a test message',
-        },
-      ],
-      [
         'btc_signTransaction',
         {
           callback: BTCSignTransaction,
           params: BitcoinTransactions.tx,
           description: 'Sign a test transaction',
-        },
-      ],
-      [
-        'btc_verifyTransaction',
-        {
-          callback: BTCVerifyMessage,
-          params: BitcoinTransactions.verify,
-          description: 'Verify the signature from a previously-signed test message',
         },
       ],
     ]),
@@ -130,27 +114,11 @@ export const AssetCardListConfig: Array<CardProps> = [
         },
       ],
       [
-        'bch_signMessage',
-        {
-          callback: BCHSignMessage,
-          params: BitcoinTransactions.sign,
-          description: 'Sign a test message',
-        },
-      ],
-      [
         'bch_signTransaction',
         {
           callback: BCHSignTransaction,
           params: BitcoinTransactions.tx,
           description: 'Sign a test transaction',
-        },
-      ],
-      [
-        'bch_verifyTransaction',
-        {
-          callback: BCHVerifyMessage,
-          params: BitcoinTransactions.verify,
-          description: 'Verify the signature from a previously-signed test message',
         },
       ],
     ]),
@@ -192,27 +160,11 @@ export const AssetCardListConfig: Array<CardProps> = [
         },
       ],
       [
-        'doge_signMessage',
-        {
-          callback: dogecoinSignMessage,
-          params: BitcoinTransactions.sign,
-          description: 'Sign a test message',
-        },
-      ],
-      [
         'doge_signTransaction',
         {
           callback: dogecoinSignTransaction,
           params: BitcoinTransactions.tx,
           description: 'Sign a test transaction',
-        },
-      ],
-      [
-        'doge_verifyTransaction',
-        {
-          callback: dogecoinVerifyMessage,
-          params: BitcoinTransactions.verify,
-          description: 'Verify the signature from a previously-signed test message',
         },
       ],
     ]),
