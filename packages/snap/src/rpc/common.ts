@@ -5,7 +5,7 @@ import { Node } from '@shapeshiftoss/hdwallet-native/dist/crypto/isolation/engin
 import { userConfirmParam } from '@shapeshiftoss/metamask-snaps-types'
 
 import { logger } from '../lib/logger'
-// import { metaMaskVersionGreaterThanOrEqualTo } from '../utils'
+import { metaMaskVersionGreaterThanOrEqualTo } from '../utils'
 
 const moduleLogger = logger.child({ namespace: ['Snap', 'Common.ts'] })
 
@@ -30,47 +30,22 @@ export const getHDWalletNativeSigner = async (coin: Coin): Promise<NativeHDWalle
     throw new Error(`Coin type: '${coin}' is invalid or unsupported`)
   }
 
-  // let node = undefined;
-  // if (metaMaskVersionGreaterThanOrEqualTo("10.18.4-flask.0")) {
-  //   node = await wallet.request({
-  //     method: `snap_getBip32Entropy`,
-  //     params: [
-  //       {
-  //         path: ['m', "44'", `${coin}'`],
-  //         curve: 'secp256k1'
-  //       }
-  //     ],
-  //   })
-  //   console.log("SLIP10NODE: ", node)
-  //   node = await wallet.request({
-  //     method: `snap_getBip44Entropy`,
-  //     params: [
-  //       {
-  //         coinType: coin
-  //       }
-  //     ],
-  //   })
-  //   console.log("BIP44NODE: ", node)
-  // } else {
-  //   // eslint-disable-next-line no-undef
-  //   node = (await wallet.request({
-  //     method: `snap_getBip44Entropy_${slip44}`,
-  //     params: [],
-  //   })) as JsonBIP44CoinTypeNode;
-  // }
-
-  // eslint-disable-next-line no-undef
-  const node = (await wallet.request({
-    method: `snap_getBip44Entropy_${slip44}`,
-    params: [],
-  })) as JsonBIP44CoinTypeNode
+  const node = await wallet.request({
+    method: `snap_getBip32Entropy`,
+    params: [
+      {
+        path: ['m', "44'", `${coin}'`],
+        curve: 'secp256k1'
+      }
+    ],
+  })
 
   try {
     if (node.privateKey === undefined) {
       throw new Error('No private key provided in BIP44CoinTypeNode')
     }
 
-    const addressKeyDeriver = await getBIP44AddressKeyDeriver(node as JsonBIP44CoinTypeNode, {
+    const addressKeyDeriver = await getBIP44AddressKeyDeriver(node, {
       account: 0,
       change: { index: 0, hardened: false },
     })
