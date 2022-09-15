@@ -11,7 +11,9 @@ import { getHDWalletNativeSigner, userConfirm } from './common'
 
 const moduleLogger = logger.child({ namespace: ['Snap', 'RPC', 'Binance.ts'] })
 
-export const binanceGetAddress = async ({addressParams}: BinanceGetAddressParams): Promise<string> => {
+export const binanceGetAddress = async ({
+  addressParams,
+}: BinanceGetAddressParams): Promise<string> => {
   const { addressNList } = addressParams
   try {
     const signer = await getHDWalletNativeSigner('Binance')
@@ -32,9 +34,9 @@ export const binanceGetAddress = async ({addressParams}: BinanceGetAddressParams
   }
 }
 
-export const binanceSignTransaction = async (
-  {transaction}: BinanceSignTransactionParams,
-): Promise<BinanceSignTransactionResponse> => {
+export const binanceSignTransaction = async ({
+  transaction,
+}: BinanceSignTransactionParams): Promise<BinanceSignTransactionResponse> => {
   try {
     const signer = await getHDWalletNativeSigner('Binance')
     if (signer === null) {
@@ -60,6 +62,7 @@ export const binanceSignTransaction = async (
   }
 }
 
-export const binanceBroadcastTransaction = async ({}: BinanceBroadcastTransactionParams): Promise<BinanceBroadcastTransactionResponse> => {
-  return Promise.reject("Disabled pending Unchained support.")
-}
+export const binanceBroadcastTransaction =
+  async ({}: BinanceBroadcastTransactionParams): Promise<BinanceBroadcastTransactionResponse> => {
+    return Promise.reject(new Error('Disabled pending Unchained support.'))
+  }

@@ -11,10 +11,8 @@ import { getHDWalletNativeSigner, userConfirm } from './common'
 
 const moduleLogger = logger.child({ namespace: ['Snap', 'RPC', 'Kava.ts'] })
 
-export const kavaGetAddress = async ({
-  addressParams
-}: KavaGetAddressParams): Promise<string> => {
-  const {addressNList} =  addressParams
+export const kavaGetAddress = async ({ addressParams }: KavaGetAddressParams): Promise<string> => {
+  const { addressNList } = addressParams
   try {
     const signer = await getHDWalletNativeSigner('Kava')
     if (signer === null) {
@@ -34,9 +32,9 @@ export const kavaGetAddress = async ({
   }
 }
 
-export const kavaSignTransaction = async (
-  {transaction}: KavaSignTransactionParams,
-): Promise<KavaSignTransactionResponse> => {
+export const kavaSignTransaction = async ({
+  transaction,
+}: KavaSignTransactionParams): Promise<KavaSignTransactionResponse> => {
   try {
     const signer = await getHDWalletNativeSigner('Kava')
     if (signer === null) {
@@ -62,7 +60,7 @@ export const kavaSignTransaction = async (
   }
 }
 
-export const kavaBroadcastTransaction = async ({}: KavaBroadcastTransactionParams): Promise<KavaBroadcastTransactionResponse> => {
-  return Promise.reject("Disabled pending Unchained support.")
-}
-
+export const kavaBroadcastTransaction =
+  async ({}: KavaBroadcastTransactionParams): Promise<KavaBroadcastTransactionResponse> => {
+    return Promise.reject(new Error('Disabled pending Unchained support.'))
+  }

@@ -1,17 +1,17 @@
 import {
-  DogecoinBroadcastTransactionResponse,
-  DogecoinGetAddressResponse,
-  DogecoinSignMessageResponse,
-  DogecoinSignTransactionResponse,
-  DogecoinVerifyMessageResponse,
-  DogecoinGetAddressParams,
-  DogecoinSignTransactionParams,
-  DogecoinSignMessageParams,
-  DogecoinVerifyMessageParams,
   DogecoinBroadcastTransactionParams,
+  DogecoinBroadcastTransactionResponse,
+  DogecoinGetAddressParams,
+  DogecoinGetAddressResponse,
+  DogecoinSignMessageParams,
+  DogecoinSignMessageResponse,
+  DogecoinSignTransactionParams,
+  DogecoinSignTransactionResponse,
+  DogecoinVerifyMessageParams,
+  DogecoinVerifyMessageResponse,
 } from '@shapeshiftoss/metamask-snaps-types'
+import * as unchained from '@shapeshiftoss/unchained-client'
 
-import * as unchained from "@shapeshiftoss/unchained-client";
 import { logger } from '../lib/logger'
 import { getHDWalletNativeSigner, userConfirm } from './common'
 
@@ -20,9 +20,9 @@ const moduleLogger = logger.child({
 })
 
 export const dogeGetAddress = async ({
-  addressParams
+  addressParams,
 }: DogecoinGetAddressParams): Promise<DogecoinGetAddressResponse> => {
-  const {addressNList, scriptType} = addressParams
+  const { addressNList, scriptType } = addressParams
   try {
     const signer = await getHDWalletNativeSigner('Dogecoin')
     if (signer === null) {
@@ -44,9 +44,9 @@ export const dogeGetAddress = async ({
   }
 }
 
-export const dogeSignTransaction = async (
-  {transaction}: DogecoinSignTransactionParams
-): Promise<DogecoinSignTransactionResponse> => {
+export const dogeSignTransaction = async ({
+  transaction,
+}: DogecoinSignTransactionParams): Promise<DogecoinSignTransactionResponse> => {
   try {
     const signer = await getHDWalletNativeSigner('Dogecoin')
     if (signer === null) {
@@ -72,9 +72,9 @@ export const dogeSignTransaction = async (
   }
 }
 
-export const dogeSignMessage = async (
-  {message}: DogecoinSignMessageParams,
-): Promise<DogecoinSignMessageResponse> => {
+export const dogeSignMessage = async ({
+  message,
+}: DogecoinSignMessageParams): Promise<DogecoinSignMessageResponse> => {
   try {
     const signer = await getHDWalletNativeSigner('Dogecoin')
     if (signer === null) {
@@ -91,9 +91,9 @@ export const dogeSignMessage = async (
   }
 }
 
-export const dogeVerifyMessage = async (
-  {message}: DogecoinVerifyMessageParams,
-): Promise<DogecoinVerifyMessageResponse> => {
+export const dogeVerifyMessage = async ({
+  message,
+}: DogecoinVerifyMessageParams): Promise<DogecoinVerifyMessageResponse> => {
   try {
     const signer = await getHDWalletNativeSigner('Dogecoin')
     if (signer === null) {
@@ -107,17 +107,18 @@ export const dogeVerifyMessage = async (
   }
 }
 
-export const dogeBroadcastTransaction = async (
-  {transaction, baseUrl}: DogecoinBroadcastTransactionParams
-): Promise<DogecoinBroadcastTransactionResponse> => {
+export const dogeBroadcastTransaction = async ({
+  transaction,
+  baseUrl,
+}: DogecoinBroadcastTransactionParams): Promise<DogecoinBroadcastTransactionResponse> => {
   try {
     const config = new unchained.dogecoin.Configuration({
       basePath: baseUrl,
-    });
-    const client = new unchained.dogecoin.V1Api(config);
-    return await client.sendTx({ sendTxBody: { hex: transaction.serializedTx } });
+    })
+    const client = new unchained.dogecoin.V1Api(config)
+    return await client.sendTx({ sendTxBody: { hex: transaction.serializedTx } })
   } catch (error) {
-    moduleLogger.error(transaction, { fn: "dogeBroadcastTransaction" }, error);
-    return Promise.reject(error);
+    moduleLogger.error(transaction, { fn: 'dogeBroadcastTransaction' }, error)
+    return Promise.reject(error)
   }
-};
+}

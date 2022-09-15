@@ -1,10 +1,9 @@
-
 import {
-  CosmosBroadcastTransactionResponse,
   CosmosBroadcastTransactionParams,
-  CosmosSignTransactionResponse,
+  CosmosBroadcastTransactionResponse,
   CosmosGetAddressParams,
   CosmosSignTransactionParams,
+  CosmosSignTransactionResponse,
 } from '@shapeshiftoss/metamask-snaps-types'
 import * as unchained from '@shapeshiftoss/unchained-client'
 
@@ -36,9 +35,9 @@ export const cosmosGetAddress = async ({
   }
 }
 
-export const cosmosSignTransaction = async (
-  {transaction}: CosmosSignTransactionParams,
-): Promise<CosmosSignTransactionResponse> => {
+export const cosmosSignTransaction = async ({
+  transaction,
+}: CosmosSignTransactionParams): Promise<CosmosSignTransactionResponse> => {
   try {
     const signer = await getHDWalletNativeSigner('Atom')
     if (signer === null) {
@@ -64,9 +63,10 @@ export const cosmosSignTransaction = async (
   }
 }
 
-export const cosmosBroadcastTransaction = async (
-  {transaction, baseUrl}: CosmosBroadcastTransactionParams
-): Promise<CosmosBroadcastTransactionResponse> => {
+export const cosmosBroadcastTransaction = async ({
+  transaction,
+  baseUrl,
+}: CosmosBroadcastTransactionParams): Promise<CosmosBroadcastTransactionResponse> => {
   try {
     const config = new unchained.cosmos.Configuration({
       basePath: baseUrl,

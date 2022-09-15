@@ -1,9 +1,9 @@
 import {
   OsmosisBroadcastTransactionParams,
   OsmosisBroadcastTransactionResponse,
-  OsmosisSignTransactionResponse,
   OsmosisGetAddressParams,
   OsmosisSignTransactionParams,
+  OsmosisSignTransactionResponse,
 } from '@shapeshiftoss/metamask-snaps-types'
 import * as unchained from '@shapeshiftoss/unchained-client'
 
@@ -15,7 +15,7 @@ const moduleLogger = logger.child({ namespace: ['Snap', 'Osmosis.ts'] })
 export const osmosisGetAddress = async ({
   addressParams,
 }: OsmosisGetAddressParams): Promise<string> => {
-  const {addressNList} = addressParams
+  const { addressNList } = addressParams
   try {
     const signer = await getHDWalletNativeSigner('Osmo')
     if (signer === null) {
@@ -35,9 +35,9 @@ export const osmosisGetAddress = async ({
   }
 }
 
-export const osmosisSignTransaction = async (
-  {transaction}: OsmosisSignTransactionParams,
-): Promise<OsmosisSignTransactionResponse> => {
+export const osmosisSignTransaction = async ({
+  transaction,
+}: OsmosisSignTransactionParams): Promise<OsmosisSignTransactionResponse> => {
   try {
     const signer = await getHDWalletNativeSigner('Osmo')
     if (signer === null) {
@@ -63,9 +63,10 @@ export const osmosisSignTransaction = async (
   }
 }
 
-export const osmosisBroadcastTransaction = async (
-  {transaction, baseUrl}: OsmosisBroadcastTransactionParams
-): Promise<OsmosisBroadcastTransactionResponse> => {
+export const osmosisBroadcastTransaction = async ({
+  transaction,
+  baseUrl,
+}: OsmosisBroadcastTransactionParams): Promise<OsmosisBroadcastTransactionResponse> => {
   try {
     const config = new unchained.osmosis.Configuration({
       basePath: baseUrl,

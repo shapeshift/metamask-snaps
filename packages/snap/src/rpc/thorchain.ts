@@ -1,9 +1,9 @@
 import {
-  ThorchainSignTransactionResponse,
   ThorchainBroadcastTransactionParams,
   ThorchainBroadcastTransactionResponse,
   ThorchainGetAddressParams,
   ThorchainSignTransactionParams,
+  ThorchainSignTransactionResponse,
 } from '@shapeshiftoss/metamask-snaps-types'
 import * as unchained from '@shapeshiftoss/unchained-client'
 
@@ -37,9 +37,9 @@ export const thorchainGetAddress = async ({
   }
 }
 
-export const thorchainSignTransaction = async (
-  {transaction}: ThorchainSignTransactionParams,
-): Promise<ThorchainSignTransactionResponse> => {
+export const thorchainSignTransaction = async ({
+  transaction,
+}: ThorchainSignTransactionParams): Promise<ThorchainSignTransactionResponse> => {
   try {
     const signer = await getHDWalletNativeSigner('Thorchain')
     if (signer === null) {
@@ -65,17 +65,18 @@ export const thorchainSignTransaction = async (
   }
 }
 
-export const thorchainBroadcastTransaction = async (
-  {transaction, baseUrl}: ThorchainBroadcastTransactionParams
-): Promise<ThorchainBroadcastTransactionResponse> => {
+export const thorchainBroadcastTransaction = async ({
+  transaction,
+  baseUrl,
+}: ThorchainBroadcastTransactionParams): Promise<ThorchainBroadcastTransactionResponse> => {
   try {
     const config = new unchained.thorchain.Configuration({
       basePath: baseUrl,
-    });
-    const client = new unchained.thorchain.V1Api(config);
-    return await client.sendTx({ body: { rawTx: transaction.serialized } });
+    })
+    const client = new unchained.thorchain.V1Api(config)
+    return await client.sendTx({ body: { rawTx: transaction.serialized } })
   } catch (error) {
-    moduleLogger.error(transaction, { fn: "thorchainBroadcastTransaction" }, error);
-    return Promise.reject(error);
+    moduleLogger.error(transaction, { fn: 'thorchainBroadcastTransaction' }, error)
+    return Promise.reject(error)
   }
-};
+}

@@ -20,9 +20,9 @@ const moduleLogger = logger.child({
 })
 
 export const ltcGetAddress = async ({
-  addressParams
+  addressParams,
 }: LitecoinGetAddressParams): Promise<LitecoinGetAddressResponse> => {
-  const {addressNList, scriptType} = addressParams
+  const { addressNList, scriptType } = addressParams
   try {
     const signer = await getHDWalletNativeSigner('Litecoin')
     if (signer === null) {
@@ -44,9 +44,9 @@ export const ltcGetAddress = async ({
   }
 }
 
-export const ltcSignTransaction = async (
-  {transaction}: LitecoinSignTransactionParams,
-): Promise<LitecoinSignTransactionResponse> => {
+export const ltcSignTransaction = async ({
+  transaction,
+}: LitecoinSignTransactionParams): Promise<LitecoinSignTransactionResponse> => {
   try {
     const signer = await getHDWalletNativeSigner('Litecoin')
     if (signer === null) {
@@ -72,9 +72,9 @@ export const ltcSignTransaction = async (
   }
 }
 
-export const ltcSignMessage = async (
-  {message}: LitecoinSignMessageParams,
-): Promise<LitecoinSignMessageResponse> => {
+export const ltcSignMessage = async ({
+  message,
+}: LitecoinSignMessageParams): Promise<LitecoinSignMessageResponse> => {
   try {
     const signer = await getHDWalletNativeSigner('Litecoin')
     if (signer === null) {
@@ -91,9 +91,9 @@ export const ltcSignMessage = async (
   }
 }
 
-export const ltcVerifyMessage = async (
-  {message}: LitecoinVerifyMessageParams,
-): Promise<LitecoinVerifyMessageResponse> => {
+export const ltcVerifyMessage = async ({
+  message,
+}: LitecoinVerifyMessageParams): Promise<LitecoinVerifyMessageResponse> => {
   try {
     const signer = await getHDWalletNativeSigner('Litecoin')
     if (signer === null) {
@@ -107,9 +107,10 @@ export const ltcVerifyMessage = async (
   }
 }
 
-export const ltcBroadcastTransaction = async (
- {transaction, baseUrl}: LitecoinBroadcastTransactionParams
-): Promise<LitecoinBroadcastTransactionResponse> => {
+export const ltcBroadcastTransaction = async ({
+  transaction,
+  baseUrl,
+}: LitecoinBroadcastTransactionParams): Promise<LitecoinBroadcastTransactionResponse> => {
   try {
     const config = new unchained.litecoin.Configuration({
       basePath: baseUrl,

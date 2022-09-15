@@ -5,7 +5,7 @@ import { Node } from '@shapeshiftoss/hdwallet-native/dist/crypto/isolation/engin
 import { userConfirmParam } from '@shapeshiftoss/metamask-snaps-types'
 
 import { logger } from '../lib/logger'
-import {slip44AndCurveByCoin } from '../utils'
+import { slip44AndCurveByCoin } from '../utils'
 
 const moduleLogger = logger.child({ namespace: ['Snap', 'Common.ts'] })
 
@@ -26,18 +26,16 @@ export const getAddress = async (wallet: any, params: any): Promise<string> => {
 
 export const getHDWalletNativeSigner = async (coin: Coin): Promise<NativeHDWallet | null> => {
   const { slip44, curve } = slip44AndCurveByCoin(coin)
-  if(!((typeof slip44 === 'number') && curve)){
+  if (!(typeof slip44 === 'number' && curve)) {
     throw new Error(`Coin type: '${coin}' is invalid or unsupported`)
   }
   const path = ['m', "44'", `${slip44}'`]
   const node = await wallet.request({
     method: 'snap_getBip32Entropy',
-    params: 
-      {
-        path: path,
-        curve: curve
-      }
-    ,
+    params: {
+      path,
+      curve,
+    },
   })
 
   try {
@@ -46,7 +44,7 @@ export const getHDWalletNativeSigner = async (coin: Coin): Promise<NativeHDWalle
     }
 
     const slip10Node = await SLIP10Node.fromJSON(node) // node at depth 2
-   
+
     const privateKey = slip10Node.privateKeyBuffer
     const chainCode = slip10Node.chainCodeBuffer
 
@@ -86,10 +84,10 @@ export const userConfirm = async (params: userConfirmParam): Promise<boolean> =>
     try {
       if (textAreaContent) {
         const start = i * MAX_LENGTH
-        /** Technically, this can put the value of 'end' past the end-of-string boundary for 
+        /** Technically, this can put the value of 'end' past the end-of-string boundary for
          * textAreaContent[n-1], but the call to .substring() is safe and writing it this way
-         * is cleaner and more readable than adding an explicit string length check. */ 
-        const end = start + MAX_LENGTH 
+         * is cleaner and more readable than adding an explicit string length check. */
+        const end = start + MAX_LENGTH
         textAreaContent[i] = params.textAreaContent.substring(start, end)
       }
       // eslint-disable-next-line no-undef, no-await-in-loop

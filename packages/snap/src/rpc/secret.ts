@@ -1,9 +1,9 @@
 import {
-  SecretGetAddressParams,
-  SecretSignTransactionResponse,
   SecretBroadcastTransactionParams,
   SecretBroadcastTransactionResponse,
+  SecretGetAddressParams,
   SecretSignTransactionParams,
+  SecretSignTransactionResponse,
 } from '@shapeshiftoss/metamask-snaps-types'
 
 import { logger } from '../lib/logger'
@@ -11,9 +11,10 @@ import { getHDWalletNativeSigner, userConfirm } from './common'
 
 const moduleLogger = logger.child({ namespace: ['Snap', 'RPC', 'Secret.ts'] })
 
-export const secretGetAddress = async (
-  { addressParams }: SecretGetAddressParams): Promise<string> => {
-  const {addressNList} = addressParams
+export const secretGetAddress = async ({
+  addressParams,
+}: SecretGetAddressParams): Promise<string> => {
+  const { addressNList } = addressParams
   try {
     const signer = await getHDWalletNativeSigner('Secret')
     if (signer === null) {
@@ -33,9 +34,9 @@ export const secretGetAddress = async (
   }
 }
 
-export const secretSignTransaction = async (
-  { transaction }: SecretSignTransactionParams,
-): Promise<SecretSignTransactionResponse> => {
+export const secretSignTransaction = async ({
+  transaction,
+}: SecretSignTransactionParams): Promise<SecretSignTransactionResponse> => {
   try {
     const signer = await getHDWalletNativeSigner('Secret')
     if (signer === null) {
@@ -61,6 +62,7 @@ export const secretSignTransaction = async (
   }
 }
 
-export const secretBroadcastTransaction = async ({}: SecretBroadcastTransactionParams): Promise<SecretBroadcastTransactionResponse> => {
-  return Promise.reject("Disabled pending Unchained support.")
-}
+export const secretBroadcastTransaction =
+  async ({}: SecretBroadcastTransactionParams): Promise<SecretBroadcastTransactionResponse> => {
+    return Promise.reject(new Error('Disabled pending Unchained support.'))
+  }

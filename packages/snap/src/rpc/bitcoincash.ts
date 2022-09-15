@@ -20,9 +20,9 @@ const moduleLogger = logger.child({
 })
 
 export const bchGetAddress = async ({
-  addressParams
+  addressParams,
 }: BitcoinCashGetAddressParams): Promise<BitcoinCashGetAddressResponse> => {
-  const {addressNList, scriptType} = addressParams
+  const { addressNList, scriptType } = addressParams
   try {
     const signer = await getHDWalletNativeSigner('BitcoinCash')
     if (signer === null) {
@@ -44,9 +44,9 @@ export const bchGetAddress = async ({
   }
 }
 
-export const bchSignTransaction = async (
-  {transaction}: BitcoinCashSignTransactionParams,
-): Promise<BitcoinCashSignTransactionResponse> => {
+export const bchSignTransaction = async ({
+  transaction,
+}: BitcoinCashSignTransactionParams): Promise<BitcoinCashSignTransactionResponse> => {
   try {
     const signer = await getHDWalletNativeSigner('BitcoinCash')
     if (signer === null) {
@@ -72,9 +72,9 @@ export const bchSignTransaction = async (
   }
 }
 
-export const bchSignMessage = async (
-  {message}: BitcoinCashSignMessageParams,
-): Promise<BitcoinCashSignMessageResponse> => {
+export const bchSignMessage = async ({
+  message,
+}: BitcoinCashSignMessageParams): Promise<BitcoinCashSignMessageResponse> => {
   try {
     const signer = await getHDWalletNativeSigner('BitcoinCash')
     if (signer === null) {
@@ -91,9 +91,9 @@ export const bchSignMessage = async (
   }
 }
 
-export const bchVerifyMessage = async (
-  {message}: BitcoinCashVerifyMessageParams,
-): Promise<BitcoinCashVerifyMessageResponse> => {
+export const bchVerifyMessage = async ({
+  message,
+}: BitcoinCashVerifyMessageParams): Promise<BitcoinCashVerifyMessageResponse> => {
   try {
     const signer = await getHDWalletNativeSigner('BitcoinCash')
     if (signer === null) {
@@ -107,9 +107,10 @@ export const bchVerifyMessage = async (
   }
 }
 
-export const bchBroadcastTransaction = async (
- {transaction, baseUrl}: BitcoinCashBroadcastTransactionParams
-): Promise<BitcoinCashBroadcastTransactionResponse> => {
+export const bchBroadcastTransaction = async ({
+  transaction,
+  baseUrl,
+}: BitcoinCashBroadcastTransactionParams): Promise<BitcoinCashBroadcastTransactionResponse> => {
   try {
     const config = new unchained.bitcoincash.Configuration({
       basePath: baseUrl,

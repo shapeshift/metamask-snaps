@@ -1,45 +1,45 @@
 import { ExternalProvider } from '@ethersproject/providers'
-import detectEthereumProvider from '@metamask/detect-provider'
 import { Coin } from '@shapeshiftoss/hdwallet-core'
 
 import { logger } from './lib/logger'
 
-
 // https://github.com/satoshilabs/slips/blob/master/slip-0044.md
 const slip44AndCurveTable = Object.freeze({
-  Bitcoin: {slip44: 0, curve: 'secp256k1'},
-  Testnet: {slip44: 1, curve: 'secp256k1'},
-  BitcoinCash: {slip44: 145, curve: 'secp256k1'},
-  BitcoinGold: {slip44: 156, curve: 'secp256k1'},
-  Litecoin: {slip44: 2, curve: 'secp256k1'},
-  Dash: {slip44: 5, curve: 'secp256k1'},
-  DigiByte: {slip44: 20, curve: 'secp256k1'},
-  Dogecoin: {slip44: 3, curve: 'secp256k1'},
-  BitcoinSV: {slip44: 236, curve: 'secp256k1'},
-  Ethereum: {slip44: 60, curve: 'secp256k1'},
-  Atom: {slip44: 118, curve: 'secp256k1'},
-  Osmo: {slip44: 118, curve: 'secp256k1'},
-  Binance: {slip44: 714, curve: 'secp256k1'},
-  Ripple: {slip44: 144, curve: 'secp256k1'},
-  Eos: {slip44: 194, curve: 'secp256k1'},
-  Fio: {slip44: 235, curve: 'secp256k1'},
-  Thorchain: {slip44: 931, curve: 'secp256k1'},
-  Rune: {slip44: 931, curve: 'secp256k1'},
-  Cardano: {slip44: 1815, curve: 'secp256k1'},
-  Secret: {slip44: 529, curve: 'secp256k1'},
-  Terra: {slip44: 330, curve: 'secp256k1'},
-  Kava: {slip44: 459, curve: 'secp256k1'},
-} as const);
+  Bitcoin: { slip44: 0, curve: 'secp256k1' },
+  Testnet: { slip44: 1, curve: 'secp256k1' },
+  BitcoinCash: { slip44: 145, curve: 'secp256k1' },
+  BitcoinGold: { slip44: 156, curve: 'secp256k1' },
+  Litecoin: { slip44: 2, curve: 'secp256k1' },
+  Dash: { slip44: 5, curve: 'secp256k1' },
+  DigiByte: { slip44: 20, curve: 'secp256k1' },
+  Dogecoin: { slip44: 3, curve: 'secp256k1' },
+  BitcoinSV: { slip44: 236, curve: 'secp256k1' },
+  Ethereum: { slip44: 60, curve: 'secp256k1' },
+  Atom: { slip44: 118, curve: 'secp256k1' },
+  Osmo: { slip44: 118, curve: 'secp256k1' },
+  Binance: { slip44: 714, curve: 'secp256k1' },
+  Ripple: { slip44: 144, curve: 'secp256k1' },
+  Eos: { slip44: 194, curve: 'secp256k1' },
+  Fio: { slip44: 235, curve: 'secp256k1' },
+  Thorchain: { slip44: 931, curve: 'secp256k1' },
+  Rune: { slip44: 931, curve: 'secp256k1' },
+  Cardano: { slip44: 1815, curve: 'secp256k1' },
+  Secret: { slip44: 529, curve: 'secp256k1' },
+  Terra: { slip44: 330, curve: 'secp256k1' },
+  Kava: { slip44: 459, curve: 'secp256k1' },
+} as const)
 
 type Curve = 'secp256k1' | 'ed25519'
 type Slip44AndCurve<T> = {
-  slip44:T  extends keyof typeof slip44AndCurveTable ? number : undefined,
+  slip44: T extends keyof typeof slip44AndCurveTable ? number : undefined
   curve: Curve
 }
-type Slip44AndCurveByCoin<T> = T extends keyof typeof slip44AndCurveTable ? typeof slip44AndCurveTable[T] : Slip44AndCurve<T> | undefined;
+type Slip44AndCurveByCoin<T> = T extends keyof typeof slip44AndCurveTable
+  ? typeof slip44AndCurveTable[T]
+  : Slip44AndCurve<T> | undefined
 
 export const slip44AndCurveByCoin = <T extends Coin>(coin: T): Slip44AndCurveByCoin<T> => {
-  return (slip44AndCurveTable as any)[coin];
+  return (slip44AndCurveTable as any)[coin]
 }
 
 const moduleLogger = logger.child({ namespace: ['Snap', 'Utils.ts'] })
@@ -47,7 +47,7 @@ const moduleLogger = logger.child({ namespace: ['Snap', 'Utils.ts'] })
 const getMetaMaskProvider = async (): Promise<ExternalProvider> => {
   try {
     const provider = window.ethereum
-    if(!provider){
+    if (!provider) {
       throw new Error('Could not detect Ethereum provider')
     }
     return provider
@@ -105,7 +105,6 @@ export const metaMaskVersionGreaterThanOrEqualTo = async (version: string): Prom
       version = `MetaMask/${version}`
     }
     const current = await getMetamaskVersion()
-    console.info('current version', version)
     return isNewerVersion(current, version)
   } catch (error) {
     moduleLogger.error({ fn: 'metaMaskVersionGreaterThanOrEqualTo' }, error)

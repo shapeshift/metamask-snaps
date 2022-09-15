@@ -1,9 +1,9 @@
 import {
-  TerraSignTransactionParams,
-  TerraSignTransactionResponse,
-  TerraGetAddressParams,
   TerraBroadcastTransactionParams,
   TerraBroadcastTransactionResponse,
+  TerraGetAddressParams,
+  TerraSignTransactionParams,
+  TerraSignTransactionResponse,
 } from '@shapeshiftoss/metamask-snaps-types'
 
 import { logger } from '../lib/logger'
@@ -34,9 +34,9 @@ export const terraGetAddress = async ({
   }
 }
 
-export const terraSignTransaction = async (
-  { transaction }: TerraSignTransactionParams,
-): Promise<TerraSignTransactionResponse> => {
+export const terraSignTransaction = async ({
+  transaction,
+}: TerraSignTransactionParams): Promise<TerraSignTransactionResponse> => {
   try {
     const signer = await getHDWalletNativeSigner('Terra')
     if (signer === null) {
@@ -62,6 +62,7 @@ export const terraSignTransaction = async (
   }
 }
 
-export const terraBroadcastTransaction = async ({}: TerraBroadcastTransactionParams): Promise<TerraBroadcastTransactionResponse> => {
-  return Promise.reject("Disabled pending Unchained support.")
-}
+export const terraBroadcastTransaction =
+  async ({}: TerraBroadcastTransactionParams): Promise<TerraBroadcastTransactionResponse> => {
+    return Promise.reject(new Error('Disabled pending Unchained support.'))
+  }

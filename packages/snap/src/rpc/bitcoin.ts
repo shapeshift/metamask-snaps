@@ -18,9 +18,9 @@ import { getHDWalletNativeSigner, userConfirm } from './common'
 const moduleLogger = logger.child({ namespace: ['Snap', 'Bitcoin.ts'] })
 
 export const btcGetAddress = async ({
-  addressParams
+  addressParams,
 }: BitcoinGetAddressParams): Promise<BitcoinGetAddressResponse> => {
-  const { addressNList, scriptType} = addressParams
+  const { addressNList, scriptType } = addressParams
   try {
     const signer = await getHDWalletNativeSigner('Bitcoin')
     if (signer === null) {
@@ -42,9 +42,9 @@ export const btcGetAddress = async ({
   }
 }
 
-export const btcSignTransaction = async (
-  {transaction}: BitcoinSignTransactionParams
-): Promise<BitcoinSignTransactionResponse> => {
+export const btcSignTransaction = async ({
+  transaction,
+}: BitcoinSignTransactionParams): Promise<BitcoinSignTransactionResponse> => {
   try {
     const signer = await getHDWalletNativeSigner('Bitcoin')
     if (signer === null) {
@@ -70,9 +70,9 @@ export const btcSignTransaction = async (
   }
 }
 
-export const btcSignMessage = async (
-  {message}: BitcoinSignMessageParams
-): Promise<BitcoinSignMessageResponse> => {
+export const btcSignMessage = async ({
+  message,
+}: BitcoinSignMessageParams): Promise<BitcoinSignMessageResponse> => {
   try {
     const signer = await getHDWalletNativeSigner('Bitcoin')
     if (signer === null) {
@@ -89,9 +89,9 @@ export const btcSignMessage = async (
   }
 }
 
-export const btcVerifyMessage = async (
-  {message}: BitcoinVerifyMessageParams
-): Promise<BitcoinVerifyMessageResponse> => {
+export const btcVerifyMessage = async ({
+  message,
+}: BitcoinVerifyMessageParams): Promise<BitcoinVerifyMessageResponse> => {
   try {
     const signer = await getHDWalletNativeSigner('Bitcoin')
     if (signer === null) {
@@ -105,9 +105,10 @@ export const btcVerifyMessage = async (
   }
 }
 
-export const btcBroadcastTransaction = async (
-  {transaction, baseUrl }:BitcoinBroadcastTransactionParams
-): Promise<BitcoinBroadcastTransactionResponse> => {
+export const btcBroadcastTransaction = async ({
+  transaction,
+  baseUrl,
+}: BitcoinBroadcastTransactionParams): Promise<BitcoinBroadcastTransactionResponse> => {
   try {
     const config = new unchained.bitcoin.Configuration({
       basePath: baseUrl,
