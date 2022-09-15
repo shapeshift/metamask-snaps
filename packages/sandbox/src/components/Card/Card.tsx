@@ -12,7 +12,7 @@ import {
   useColorModeValue,
   useToast,
 } from '@chakra-ui/react'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { logger } from '../../lib/logger'
 import { InputGroup } from './InputGroup'
@@ -29,7 +29,7 @@ export type CardProps = {
   name: string
   icon: string
   symbol?: string
-  actions: Map<string, CardActionProps>
+  actions: Record<string, CardActionProps>
   hasInputField?: boolean
 }
 
@@ -45,12 +45,19 @@ export const Card = ({ name, icon, symbol, actions, hasInputField }: CardProps) 
   const toast = useToast()
 
   const handleSelectChange = (e: any) => {
-    setSelectedAction(e.target.value)
-    setOutputPlaceHolder(actions.get(e.target.value)?.description || '')
-    setOutputText('')
+    const actionName = e.target.value
+    setSelectedAction(actionName)
   }
+
+  useEffect(() => {
+    if (selectedAction) {
+      setOutputPlaceHolder(actions[selectedAction]?.description || '')
+      setOutputText('')
+    }
+  }, [actions, selectedAction])
+
   const handleSubmit = async () => {
-    const action = actions.get(selectedAction)
+    const action = actions[selectedAction]
     if (action && action.callback) {
       setLoading(true)
       const ret = await action.callback(action.params)
@@ -125,13 +132,14 @@ export const Card = ({ name, icon, symbol, actions, hasInputField }: CardProps) 
             {/** TODO: Use SelectActionGroup here instead of inlining these components*/}
             <Stack direction='row'>
               <Select
+                value={selectedAction}
                 variant='outline'
                 placeholder='Select action'
                 borderColor='#212631'
                 onChange={handleSelectChange}
                 fontSize='sm'
               >
-                {[...actions.keys()].map((action, idx) => {
+                {Object.keys(actions).map((action, idx) => {
                   return <option value={action}>{action}</option>
                 })}
               </Select>
