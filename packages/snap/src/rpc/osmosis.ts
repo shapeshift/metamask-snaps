@@ -1,8 +1,9 @@
-import { OsmosisSignedTx, OsmosisSignTx } from '@shapeshiftoss/hdwallet-core'
 import {
+  OsmosisBroadcastTransactionParams,
   OsmosisBroadcastTransactionResponse,
-  OsmosisGetAddressParams,
   OsmosisSignTransactionResponse,
+  OsmosisGetAddressParams,
+  OsmosisSignTransactionParams,
 } from '@shapeshiftoss/metamask-snaps-types'
 import * as unchained from '@shapeshiftoss/unchained-client'
 
@@ -12,8 +13,9 @@ import { getHDWalletNativeSigner, userConfirm } from './common'
 const moduleLogger = logger.child({ namespace: ['Snap', 'Osmosis.ts'] })
 
 export const osmosisGetAddress = async ({
-  addressNList,
+  addressParams,
 }: OsmosisGetAddressParams): Promise<string> => {
+  const {addressNList} = addressParams
   try {
     const signer = await getHDWalletNativeSigner('Osmo')
     if (signer === null) {
@@ -34,7 +36,7 @@ export const osmosisGetAddress = async ({
 }
 
 export const osmosisSignTransaction = async (
-  transaction: OsmosisSignTx,
+  {transaction}: OsmosisSignTransactionParams,
 ): Promise<OsmosisSignTransactionResponse> => {
   try {
     const signer = await getHDWalletNativeSigner('Osmo')
@@ -62,17 +64,16 @@ export const osmosisSignTransaction = async (
 }
 
 export const osmosisBroadcastTransaction = async (
-  message: OsmosisSignedTx,
+  {transaction, baseUrl}: OsmosisBroadcastTransactionParams
 ): Promise<OsmosisBroadcastTransactionResponse> => {
   try {
     const config = new unchained.osmosis.Configuration({
-      basePath: process.env.UNCHAINED_OSMOSIS_HTTP_URL,
+      basePath: baseUrl,
     })
     const client = new unchained.osmosis.V1Api(config)
-    const txid = client.sendTx({ body: { rawTx: message.serialized } })
-    return txid
+    return await client.sendTx({ body: { rawTx: transaction.serialized } })
   } catch (error) {
-    moduleLogger.error(message, { fn: 'osmosisBroadcastMessage' }, error)
+    moduleLogger.error(transaction, { fn: 'osmosisBroadcastTransaction' }, error)
     return Promise.reject(error)
   }
 }

@@ -1,6 +1,8 @@
-import { BinanceSignTx } from '@shapeshiftoss/hdwallet-core'
 import {
+  BinanceBroadcastTransactionParams,
+  BinanceBroadcastTransactionResponse,
   BinanceGetAddressParams,
+  BinanceSignTransactionParams,
   BinanceSignTransactionResponse,
 } from '@shapeshiftoss/metamask-snaps-types'
 
@@ -9,9 +11,8 @@ import { getHDWalletNativeSigner, userConfirm } from './common'
 
 const moduleLogger = logger.child({ namespace: ['Snap', 'RPC', 'Binance.ts'] })
 
-export const binanceGetAddress = async ({
-  addressNList,
-}: BinanceGetAddressParams): Promise<string> => {
+export const binanceGetAddress = async ({addressParams}: BinanceGetAddressParams): Promise<string> => {
+  const { addressNList } = addressParams
   try {
     const signer = await getHDWalletNativeSigner('Binance')
     if (signer === null) {
@@ -32,7 +33,7 @@ export const binanceGetAddress = async ({
 }
 
 export const binanceSignTransaction = async (
-  transaction: BinanceSignTx,
+  {transaction}: BinanceSignTransactionParams,
 ): Promise<BinanceSignTransactionResponse> => {
   try {
     const signer = await getHDWalletNativeSigner('Binance')
@@ -58,17 +59,7 @@ export const binanceSignTransaction = async (
     return Promise.reject(error)
   }
 }
-/* Disabled pending Unchained support */
-// export const binanceBroadcastTransaction = async (message: BinanceSignedTx): Promise<BinanceBroadcastTransactionResponse> => {
-//   try {
-//     const config = new unchained.binance.Configuration({
-//       basePath: process.env.UNCHAINED_BINANCE_HTTP_URL,
-//     })
-//     const client = new unchained.binance.V1Api(config)
-//     const txid = client.sendTx({ body: { rawTx: message.serialized } })
-//     return txid
-//   } catch (error) {
-//     moduleLogger.error(message, { fn: 'binanceBroadcastMessage' }, error)
-//     return Promise.reject(error)
-//   }
-// }
+
+export const binanceBroadcastTransaction = async ({}: BinanceBroadcastTransactionParams): Promise<BinanceBroadcastTransactionResponse> => {
+  return Promise.reject("Disabled pending Unchained support.")
+}

@@ -1,8 +1,11 @@
-import { ThorchainSignTx } from '@shapeshiftoss/hdwallet-core'
 import {
-  ThorchainGetAddressParams,
   ThorchainSignTransactionResponse,
+  ThorchainBroadcastTransactionParams,
+  ThorchainBroadcastTransactionResponse,
+  ThorchainGetAddressParams,
+  ThorchainSignTransactionParams,
 } from '@shapeshiftoss/metamask-snaps-types'
+import * as unchained from '@shapeshiftoss/unchained-client'
 
 import { logger } from '../lib/logger'
 import { getHDWalletNativeSigner, userConfirm } from './common'
@@ -12,8 +15,9 @@ const moduleLogger = logger.child({
 })
 
 export const thorchainGetAddress = async ({
-  addressNList,
+  addressParams,
 }: ThorchainGetAddressParams): Promise<string> => {
+  const { addressNList } = addressParams
   try {
     const signer = await getHDWalletNativeSigner('Rune')
     if (signer === null) {
@@ -34,7 +38,7 @@ export const thorchainGetAddress = async ({
 }
 
 export const thorchainSignTransaction = async (
-  transaction: ThorchainSignTx,
+  {transaction}: ThorchainSignTransactionParams,
 ): Promise<ThorchainSignTransactionResponse> => {
   try {
     const signer = await getHDWalletNativeSigner('Thorchain')
@@ -61,19 +65,17 @@ export const thorchainSignTransaction = async (
   }
 }
 
-/* Disabled pending Unchained support */
-// export const thorchainBroadcastTransaction = async (
-//   message: ThorchainSignedTx
-// ): Promise<ThorchainBroadcastTransactionResponse> => {
-//   try {
-//     const config = new unchained.thorchain.Configuration({
-//       basePath: process.env.UNCHAINED_THORCHAIN_HTTP_URL,
-//     });
-//     const client = new unchained.thorchain.V1Api(config);
-//     const txid = client.sendTx({ body: { rawTx: message.serialized } });
-//     return txid;
-//   } catch (error) {
-//     moduleLogger.error(message, { fn: "thorchainBroadcastMessage" }, error);
-//     return Promise.reject(error);
-//   }
-// };
+export const thorchainBroadcastTransaction = async (
+  {transaction, baseUrl}: ThorchainBroadcastTransactionParams
+): Promise<ThorchainBroadcastTransactionResponse> => {
+  try {
+    const config = new unchained.thorchain.Configuration({
+      basePath: baseUrl,
+    });
+    const client = new unchained.thorchain.V1Api(config);
+    return await client.sendTx({ body: { rawTx: transaction.serialized } });
+  } catch (error) {
+    moduleLogger.error(transaction, { fn: "thorchainBroadcastTransaction" }, error);
+    return Promise.reject(error);
+  }
+};

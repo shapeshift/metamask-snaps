@@ -1,10 +1,10 @@
-import { TerraSignedTx, TerraSignTx } from '@shapeshiftoss/hdwallet-core'
 import {
-  TerraBroadcastTransactionResponse,
-  TerraGetAddressParams,
+  TerraSignTransactionParams,
   TerraSignTransactionResponse,
+  TerraGetAddressParams,
+  TerraBroadcastTransactionParams,
+  TerraBroadcastTransactionResponse,
 } from '@shapeshiftoss/metamask-snaps-types'
-import * as unchained from '@shapeshiftoss/unchained-client'
 
 import { logger } from '../lib/logger'
 import { getHDWalletNativeSigner, userConfirm } from './common'
@@ -12,8 +12,9 @@ import { getHDWalletNativeSigner, userConfirm } from './common'
 const moduleLogger = logger.child({ namespace: ['Snap', 'RPC', 'Terra.ts'] })
 
 export const terraGetAddress = async ({
-  addressNList,
+  addressParams,
 }: TerraGetAddressParams): Promise<string> => {
+  const { addressNList } = addressParams
   try {
     const signer = await getHDWalletNativeSigner('Terra')
     if (signer === null) {
@@ -34,7 +35,7 @@ export const terraGetAddress = async ({
 }
 
 export const terraSignTransaction = async (
-  transaction: TerraSignTx,
+  { transaction }: TerraSignTransactionParams,
 ): Promise<TerraSignTransactionResponse> => {
   try {
     const signer = await getHDWalletNativeSigner('Terra')
@@ -61,19 +62,6 @@ export const terraSignTransaction = async (
   }
 }
 
-/* Disabled pending Unchained support */
-// export const terraBroadcastTransaction = async (
-//   message: TerraSignedTx,
-// ): Promise<TerraBroadcastTransactionResponse> => {
-//   try {
-//     const config = new unchained.terra.Configuration({
-//       basePath: process.env.UNCHAINED_SECRET_HTTP_URL,
-//     })
-//     const client = new unchained.terra.V1Api(config)
-//     const txid = client.sendTx({ body: { rawTx: message.serialized } })
-//     return txid
-//   } catch (error) {
-//     moduleLogger.error(message, { fn: 'terraBroadcastMessage' }, error)
-//     return Promise.reject(error)
-//   }
-// }
+export const terraBroadcastTransaction = async ({}: TerraBroadcastTransactionParams): Promise<TerraBroadcastTransactionResponse> => {
+  return Promise.reject("Disabled pending Unchained support.")
+}

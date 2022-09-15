@@ -1,19 +1,19 @@
-import { SecretSignedTx, SecretSignTx } from '@shapeshiftoss/hdwallet-core'
 import {
-  SecretBroadcastTransactionResponse,
   SecretGetAddressParams,
   SecretSignTransactionResponse,
+  SecretBroadcastTransactionParams,
+  SecretBroadcastTransactionResponse,
+  SecretSignTransactionParams,
 } from '@shapeshiftoss/metamask-snaps-types'
-import * as unchained from '@shapeshiftoss/unchained-client'
 
 import { logger } from '../lib/logger'
 import { getHDWalletNativeSigner, userConfirm } from './common'
 
 const moduleLogger = logger.child({ namespace: ['Snap', 'RPC', 'Secret.ts'] })
 
-export const secretGetAddress = async ({
-  addressNList,
-}: SecretGetAddressParams): Promise<string> => {
+export const secretGetAddress = async (
+  { addressParams }: SecretGetAddressParams): Promise<string> => {
+  const {addressNList} = addressParams
   try {
     const signer = await getHDWalletNativeSigner('Secret')
     if (signer === null) {
@@ -34,7 +34,7 @@ export const secretGetAddress = async ({
 }
 
 export const secretSignTransaction = async (
-  transaction: SecretSignTx,
+  { transaction }: SecretSignTransactionParams,
 ): Promise<SecretSignTransactionResponse> => {
   try {
     const signer = await getHDWalletNativeSigner('Secret')
@@ -61,19 +61,6 @@ export const secretSignTransaction = async (
   }
 }
 
-/* Disabled pending Unchained support */
-// export const secretBroadcastTransaction = async (
-//   message: SecretSignedTx,
-// ): Promise<SecretBroadcastTransactionResponse> => {
-//   try {
-//     const config = new unchained.secret.Configuration({
-//       basePath: process.env.UNCHAINED_SECRET_HTTP_URL,
-//     })
-//     const client = new unchained.secret.V1Api(config)
-//     const txid = client.sendTx({ body: { rawTx: message.serialized } })
-//     return txid
-//   } catch (error) {
-//     moduleLogger.error(message, { fn: 'secretBroadcastMessage' }, error)
-//     return Promise.reject(error)
-//   }
-// }
+export const secretBroadcastTransaction = async ({}: SecretBroadcastTransactionParams): Promise<SecretBroadcastTransactionResponse> => {
+  return Promise.reject("Disabled pending Unchained support.")
+}

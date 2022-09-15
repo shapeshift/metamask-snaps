@@ -1,14 +1,13 @@
 import {
-  BTCSignedTx,
-  BTCSignMessage,
-  BTCSignTx,
-  BTCVerifyMessage,
-} from '@shapeshiftoss/hdwallet-core'
-import {
+  BitcoinBroadcastTransactionParams,
+  BitcoinBroadcastTransactionResponse,
   BitcoinGetAddressParams,
   BitcoinGetAddressResponse,
+  BitcoinSignMessageParams,
   BitcoinSignMessageResponse,
+  BitcoinSignTransactionParams,
   BitcoinSignTransactionResponse,
+  BitcoinVerifyMessageParams,
   BitcoinVerifyMessageResponse,
 } from '@shapeshiftoss/metamask-snaps-types'
 import * as unchained from '@shapeshiftoss/unchained-client'
@@ -19,9 +18,9 @@ import { getHDWalletNativeSigner, userConfirm } from './common'
 const moduleLogger = logger.child({ namespace: ['Snap', 'Bitcoin.ts'] })
 
 export const btcGetAddress = async ({
-  addressNList,
-  scriptType,
+  addressParams
 }: BitcoinGetAddressParams): Promise<BitcoinGetAddressResponse> => {
+  const { addressNList, scriptType} = addressParams
   try {
     const signer = await getHDWalletNativeSigner('Bitcoin')
     if (signer === null) {
@@ -44,7 +43,7 @@ export const btcGetAddress = async ({
 }
 
 export const btcSignTransaction = async (
-  transaction: BTCSignTx,
+  {transaction}: BitcoinSignTransactionParams
 ): Promise<BitcoinSignTransactionResponse> => {
   try {
     const signer = await getHDWalletNativeSigner('Bitcoin')
@@ -72,7 +71,7 @@ export const btcSignTransaction = async (
 }
 
 export const btcSignMessage = async (
-  message: BTCSignMessage,
+  {message}: BitcoinSignMessageParams
 ): Promise<BitcoinSignMessageResponse> => {
   try {
     const signer = await getHDWalletNativeSigner('Bitcoin')
@@ -91,7 +90,7 @@ export const btcSignMessage = async (
 }
 
 export const btcVerifyMessage = async (
-  message: BTCVerifyMessage,
+  {message}: BitcoinVerifyMessageParams
 ): Promise<BitcoinVerifyMessageResponse> => {
   try {
     const signer = await getHDWalletNativeSigner('Bitcoin')
@@ -107,17 +106,16 @@ export const btcVerifyMessage = async (
 }
 
 export const btcBroadcastTransaction = async (
-  message: BTCSignedTx,
-): Promise<string | undefined> => {
+  {transaction, baseUrl }:BitcoinBroadcastTransactionParams
+): Promise<BitcoinBroadcastTransactionResponse> => {
   try {
     const config = new unchained.bitcoin.Configuration({
-      basePath: process.env.UNCHAINED_BITCOIN_HTTP_URL,
+      basePath: baseUrl,
     })
     const client = new unchained.bitcoin.V1Api(config)
-    const txid = client.sendTx({ sendTxBody: { hex: message.serializedTx } })
-    return txid
+    return await client.sendTx({ sendTxBody: { hex: transaction.serializedTx } })
   } catch (error) {
-    moduleLogger.error(message, { fn: 'btcBroadcastMessage' }, error)
-    return undefined
+    moduleLogger.error(transaction, { fn: 'btcBroadcastTransaction' }, error)
+    return Promise.reject(error)
   }
 }

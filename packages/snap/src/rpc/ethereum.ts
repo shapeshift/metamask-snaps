@@ -1,16 +1,14 @@
 import {
-  ETHSignedTx,
-  ETHSignMessage,
-  ETHSignTx,
-  ETHVerifyMessage,
-} from '@shapeshiftoss/hdwallet-core'
-import {
   EthereumBroadcastTransactionResponse,
-  EthereumGetAddressParams,
   EthereumGetAddressResponse,
   EthereumSignMessageResponse,
   EthereumSignTransactionResponse,
   EthereumVerifyMessageResponse,
+  EthereumGetAddressParams,
+  EthereumSignTransactionParams,
+  EthereumSignMessageParams,
+  EthereumVerifyMessageParams,
+  EthereumBroadcastTransactionParams
 } from '@shapeshiftoss/metamask-snaps-types'
 import * as unchained from '@shapeshiftoss/unchained-client'
 
@@ -20,8 +18,9 @@ import { getHDWalletNativeSigner, userConfirm } from './common'
 const moduleLogger = logger.child({ namespace: ['Snap', 'Ethereum.ts'] })
 
 export const ethGetAddress = async ({
-  addressNList,
+  addressParams
 }: EthereumGetAddressParams): Promise<EthereumGetAddressResponse> => {
+  const { addressNList } = addressParams
   try {
     const signer = await getHDWalletNativeSigner('Ethereum')
     if (signer === null) {
@@ -42,7 +41,7 @@ export const ethGetAddress = async ({
 }
 
 export const ethSignTransaction = async (
-  transaction: ETHSignTx,
+  {transaction}: EthereumSignTransactionParams,
 ): Promise<EthereumSignTransactionResponse> => {
   try {
     const signer = await getHDWalletNativeSigner('Ethereum')
@@ -70,7 +69,7 @@ export const ethSignTransaction = async (
 }
 
 export const ethSignMessage = async (
-  message: ETHSignMessage,
+  {message}: EthereumSignMessageParams,
 ): Promise<EthereumSignMessageResponse> => {
   try {
     const signer = await getHDWalletNativeSigner('Ethereum')
@@ -89,7 +88,7 @@ export const ethSignMessage = async (
 }
 
 export const ethVerifyMessage = async (
-  message: ETHVerifyMessage,
+  {message}: EthereumVerifyMessageParams,
 ): Promise<EthereumVerifyMessageResponse> => {
   try {
     const signer = await getHDWalletNativeSigner('Ethereum')
@@ -105,17 +104,16 @@ export const ethVerifyMessage = async (
 }
 
 export const ethBroadcastTransaction = async (
-  message: ETHSignedTx,
+  {transaction, baseUrl}: EthereumBroadcastTransactionParams
 ): Promise<EthereumBroadcastTransactionResponse> => {
   try {
     const config = new unchained.ethereum.Configuration({
-      basePath: process.env.UNCHAINED_ETHEREUM_HTTP_URL,
+      basePath: baseUrl,
     })
     const client = new unchained.ethereum.V1Api(config)
-    const txid = client.sendTx({ sendTxBody: { hex: message.serialized } })
-    return txid
+    return await client.sendTx({ sendTxBody: { hex: transaction.serialized } })
   } catch (error) {
-    moduleLogger.error(message, { fn: 'ethBroadcastMessage' }, error)
+    moduleLogger.error(transaction, { fn: 'ethBroadcastTransaction' }, error)
     return Promise.reject(error)
   }
 }

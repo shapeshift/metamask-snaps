@@ -1,11 +1,14 @@
-import { BTCSignedTx, BTCSignMessage, BTCSignTx, BTCVerifyMessage } from '@shapeshiftoss/hdwallet-core'
 import {
   DogecoinBroadcastTransactionResponse,
-  DogecoinGetAddressParams,
   DogecoinGetAddressResponse,
   DogecoinSignMessageResponse,
   DogecoinSignTransactionResponse,
   DogecoinVerifyMessageResponse,
+  DogecoinGetAddressParams,
+  DogecoinSignTransactionParams,
+  DogecoinSignMessageParams,
+  DogecoinVerifyMessageParams,
+  DogecoinBroadcastTransactionParams,
 } from '@shapeshiftoss/metamask-snaps-types'
 
 import * as unchained from "@shapeshiftoss/unchained-client";
@@ -17,9 +20,9 @@ const moduleLogger = logger.child({
 })
 
 export const dogeGetAddress = async ({
-  addressNList,
-  scriptType,
+  addressParams
 }: DogecoinGetAddressParams): Promise<DogecoinGetAddressResponse> => {
+  const {addressNList, scriptType} = addressParams
   try {
     const signer = await getHDWalletNativeSigner('Dogecoin')
     if (signer === null) {
@@ -42,7 +45,7 @@ export const dogeGetAddress = async ({
 }
 
 export const dogeSignTransaction = async (
-  transaction: BTCSignTx,
+  {transaction}: DogecoinSignTransactionParams
 ): Promise<DogecoinSignTransactionResponse> => {
   try {
     const signer = await getHDWalletNativeSigner('Dogecoin')
@@ -70,7 +73,7 @@ export const dogeSignTransaction = async (
 }
 
 export const dogeSignMessage = async (
-  message: BTCSignMessage,
+  {message}: DogecoinSignMessageParams,
 ): Promise<DogecoinSignMessageResponse> => {
   try {
     const signer = await getHDWalletNativeSigner('Dogecoin')
@@ -89,7 +92,7 @@ export const dogeSignMessage = async (
 }
 
 export const dogeVerifyMessage = async (
-  message: BTCVerifyMessage,
+  {message}: DogecoinVerifyMessageParams,
 ): Promise<DogecoinVerifyMessageResponse> => {
   try {
     const signer = await getHDWalletNativeSigner('Dogecoin')
@@ -105,17 +108,16 @@ export const dogeVerifyMessage = async (
 }
 
 export const dogeBroadcastTransaction = async (
-  message: BTCSignedTx
+  {transaction, baseUrl}: DogecoinBroadcastTransactionParams
 ): Promise<DogecoinBroadcastTransactionResponse> => {
   try {
     const config = new unchained.dogecoin.Configuration({
-      basePath: process.env.UNCHAINED_DOGECOIN_HTTP_URL,
+      basePath: baseUrl,
     });
     const client = new unchained.dogecoin.V1Api(config);
-    const txid = client.sendTx({ sendTxBody: { hex: message.serializedTx } });
-    return txid;
+    return await client.sendTx({ sendTxBody: { hex: transaction.serializedTx } });
   } catch (error) {
-    moduleLogger.error(message, { fn: "dogeBroadcastMessage" }, error);
+    moduleLogger.error(transaction, { fn: "dogeBroadcastTransaction" }, error);
     return Promise.reject(error);
   }
 };

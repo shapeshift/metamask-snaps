@@ -1,8 +1,10 @@
-import { CosmosSignedTx, CosmosSignTx } from '@shapeshiftoss/hdwallet-core'
+
 import {
   CosmosBroadcastTransactionResponse,
-  CosmosGetAddressParams,
+  CosmosBroadcastTransactionParams,
   CosmosSignTransactionResponse,
+  CosmosGetAddressParams,
+  CosmosSignTransactionParams,
 } from '@shapeshiftoss/metamask-snaps-types'
 import * as unchained from '@shapeshiftoss/unchained-client'
 
@@ -12,8 +14,9 @@ import { getHDWalletNativeSigner, userConfirm } from './common'
 const moduleLogger = logger.child({ namespace: ['Snap', 'RPC', 'Cosmos.ts'] })
 
 export const cosmosGetAddress = async ({
-  addressNList,
+  addressParams,
 }: CosmosGetAddressParams): Promise<string> => {
+  const { addressNList } = addressParams
   try {
     const signer = await getHDWalletNativeSigner('Atom')
     if (signer === null) {
@@ -34,7 +37,7 @@ export const cosmosGetAddress = async ({
 }
 
 export const cosmosSignTransaction = async (
-  transaction: CosmosSignTx,
+  {transaction}: CosmosSignTransactionParams,
 ): Promise<CosmosSignTransactionResponse> => {
   try {
     const signer = await getHDWalletNativeSigner('Atom')
@@ -62,17 +65,16 @@ export const cosmosSignTransaction = async (
 }
 
 export const cosmosBroadcastTransaction = async (
-  message: CosmosSignedTx,
+  {transaction, baseUrl}: CosmosBroadcastTransactionParams
 ): Promise<CosmosBroadcastTransactionResponse> => {
   try {
     const config = new unchained.cosmos.Configuration({
-      basePath: process.env.UNCHAINED_COSMOS_HTTP_URL,
+      basePath: baseUrl,
     })
     const client = new unchained.cosmos.V1Api(config)
-    const txid = client.sendTx({ body: { rawTx: message.serialized } })
-    return txid
+    return await client.sendTx({ body: { rawTx: transaction.serialized } })
   } catch (error) {
-    moduleLogger.error(message, { fn: 'cosmosBroadcastMessage' }, error)
+    moduleLogger.error(transaction, { fn: 'cosmosBroadcastTransaction' }, error)
     return Promise.reject(error)
   }
 }
