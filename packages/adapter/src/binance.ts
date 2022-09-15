@@ -1,39 +1,39 @@
 import {
+  BinanceBroadcastTransactionAdapterParams,
   BinanceBroadcastTransactionResponse,
-  BinanceGetAddressParams,
+  BinanceGetAddressAdapterParams,
   BinanceGetAddressResponse,
-  BinanceSignedTransaction,
-  BinanceSignTransaction,
+  BinanceSignTransactionAdapterParams,
   BinanceSignTransactionResponse,
 } from '@shapeshiftoss/metamask-snaps-types'
 
 import { logger } from './lib/logger'
-import { DEFAULT_SNAP_ID, sendFlaskRPCRequest } from './utils'
+import { sendFlaskRPCRequest } from './utils'
 
 const moduleLogger = logger.child({ namespace: ['Adapter', 'Binance.ts'] })
 
 export const binanceGetAddress = async (
-  params: BinanceGetAddressParams,
-  snapId: string = DEFAULT_SNAP_ID,
+  params: BinanceGetAddressAdapterParams,
 ): Promise<BinanceGetAddressResponse> => {
+  const { addressParams, snapId } = params
   try {
     return await sendFlaskRPCRequest(
       {
         method: 'binance_getAddress',
-        params: { params },
+        params: { addressParams },
       },
       snapId,
     )
   } catch (error) {
     moduleLogger.error(error, { fn: 'binanceGetAddress' }, `binance_getAddress RPC call failed.`)
+    return Promise.reject(error)
   }
-  return null
 }
 
 export const binanceSignTransaction = async (
-  transaction: BinanceSignTransaction,
-  snapId: string = DEFAULT_SNAP_ID,
+  params: BinanceSignTransactionAdapterParams,
 ): Promise<BinanceSignTransactionResponse> => {
+  const { transaction, snapId } = params
   try {
     return await sendFlaskRPCRequest(
       {
@@ -48,19 +48,19 @@ export const binanceSignTransaction = async (
       { fn: 'binanceSignTransaction' },
       `binance_signTransaction RPC call failed.`,
     )
+    return Promise.reject(error)
   }
-  return null
 }
 
 export const binanceBroadcastTransaction = async (
-  transaction: BinanceSignedTransaction,
-  snapId: string = DEFAULT_SNAP_ID,
+  params: BinanceBroadcastTransactionAdapterParams,
 ): Promise<BinanceBroadcastTransactionResponse> => {
   try {
+    const { transaction, baseUrl, snapId } = params
     return await sendFlaskRPCRequest(
       {
         method: 'binance_broadcastTransaction',
-        params: { transaction },
+        params: { transaction, baseUrl },
       },
       snapId,
     )
@@ -70,6 +70,6 @@ export const binanceBroadcastTransaction = async (
       { fn: 'binanceBroadcastTransaction' },
       `binance_broadcastTransaction RPC call failed.`,
     )
+    return Promise.reject(error)
   }
-  return null
 }

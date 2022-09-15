@@ -22,7 +22,7 @@ export const walletEnable = async (params: WalletEnableParam[]): Promise<WalletE
     return ret
   } catch (error) {
     moduleLogger.error(error, { fn: 'walletGetSnaps' }, `wallet_enable RPC call failed.`)
-    return undefined
+    return Promise.reject(error)
   }
 }
 
@@ -35,7 +35,7 @@ export const walletGetSnaps = async (): Promise<any> => {
     return ret
   } catch (error) {
     moduleLogger.error(error, { fn: 'walletGetSnaps' }, `wallet_getSnaps RPC call failed.`)
-    return undefined
+    return Promise.reject(error)
   }
 }
 
@@ -54,7 +54,7 @@ export const walletInstallSnaps = async ({
     return ret
   } catch (error) {
     moduleLogger.error(error, { fn: 'walletInstallSnaps' }, `wallet_installSnaps RPC call failed.`)
-    return undefined
+    return Promise.reject(error)
   }
 }
 
@@ -74,7 +74,7 @@ export const walletInvokeSnap = async ({
     return ret
   } catch (error) {
     moduleLogger.error(error, { fn: 'walletInvokeSnap' }, `wallet_invokeSnap RPC call failed.`)
-    return undefined
+    return Promise.reject(error)
   }
 }
 
@@ -100,7 +100,7 @@ export const walletSnap = async ({
     return ret
   } catch (error) {
     moduleLogger.error(error, { fn: 'walletSnap' }, `wallet_snap_* RPC call failed.`)
-    return undefined
+    return Promise.reject(error)
   }
 }
 
@@ -136,7 +136,7 @@ export const snapConfirm = async ({
     /** User did not confirm the action or an error was encountered */
     moduleLogger.error(error, { fn: 'walletSnap' }, `wallet_snap_* RPC call failed.`)
 
-    return false
+    return Promise.reject(error)
   }
 }
 
@@ -160,7 +160,7 @@ export const snapGetBIP44Entropy = async (coinType: string): Promise<any> => {
       { fn: 'snapGetBIP44Entropy' },
       `snap_getBip44Entropy_${chainCode} RPC call failed.`,
     )
-    return undefined
+    return Promise.reject(error)
   }
 }
 
@@ -183,7 +183,7 @@ export const snapManageState = async ({
     return ret
   } catch (error) {
     moduleLogger.error(error, { fn: 'snapManageState' }, `snap_manageState RPC call failed.`)
-    return undefined
+    return Promise.reject(error)
   }
 }
 
@@ -211,6 +211,6 @@ export const snapNotify = async ({
     return ret
   } catch (error) {
     moduleLogger.error(error, { fn: 'snapNotify' }, `snap_notify RPC call failed.`)
-    return undefined
+    return Promise.reject(error)
   }
 }

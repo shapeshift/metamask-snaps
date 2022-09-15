@@ -1,43 +1,43 @@
 import {
+  DogecoinBroadcastTransactionAdapterParams,
   DogecoinBroadcastTransactionResponse,
-  DogecoinGetAddressParams,
+  DogecoinGetAddressAdapterParams,
   DogecoinGetAddressResponse,
-  DogecoinSignedTransaction,
-  DogecoinSignMessage,
+  DogecoinSignMessageAdapterParams,
   DogecoinSignMessageResponse,
-  DogecoinSignTransaction,
+  DogecoinSignTransactionAdapterParams,
   DogecoinSignTransactionResponse,
-  DogecoinVerifyMessage,
+  DogecoinVerifyMessageAdapterParams,
   DogecoinVerifyMessageResponse,
 } from '@shapeshiftoss/metamask-snaps-types'
 
 import { logger } from './lib/logger'
-import { DEFAULT_SNAP_ID, sendFlaskRPCRequest } from './utils'
+import { sendFlaskRPCRequest } from './utils'
 
 const moduleLogger = logger.child({ namespace: ['Adapter', 'Dogecoin.ts'] })
 
 export const dogecoinGetAddress = async (
-  params: DogecoinGetAddressParams,
-  snapId: string = DEFAULT_SNAP_ID,
+  params: DogecoinGetAddressAdapterParams,
 ): Promise<DogecoinGetAddressResponse> => {
   try {
+    const { addressParams, snapId } = params
     return await sendFlaskRPCRequest(
       {
         method: 'doge_getAddress',
-        params: { params },
+        params: { addressParams },
       },
       snapId,
     )
   } catch (error) {
     moduleLogger.error(error, { fn: 'DogeGetAddress' }, `doge_getAddress RPC call failed.`)
+    return Promise.reject(error)
   }
-  return null
 }
 
 export const dogecoinSignMessage = async (
-  message: DogecoinSignMessage,
-  snapId: string = DEFAULT_SNAP_ID,
+  params: DogecoinSignMessageAdapterParams,
 ): Promise<DogecoinSignMessageResponse> => {
+  const { message, snapId } = params
   try {
     return await sendFlaskRPCRequest(
       {
@@ -48,14 +48,14 @@ export const dogecoinSignMessage = async (
     )
   } catch (error) {
     moduleLogger.error(error, { fn: 'DogeSignMessage' }, `doge_signMessage RPC call failed.`)
+    return Promise.reject(error)
   }
-  return null
 }
 
 export const dogecoinSignTransaction = async (
-  transaction: DogecoinSignTransaction,
-  snapId: string = DEFAULT_SNAP_ID,
+  params: DogecoinSignTransactionAdapterParams,
 ): Promise<DogecoinSignTransactionResponse> => {
+  const { transaction, snapId } = params
   try {
     return await sendFlaskRPCRequest(
       {
@@ -70,15 +70,15 @@ export const dogecoinSignTransaction = async (
       { fn: 'DogeSignTransaction' },
       `doge_signTransaction RPC call failed.`,
     )
+    return Promise.reject(error)
   }
-  return null
 }
 
 export const dogecoinVerifyMessage = async (
-  message: DogecoinVerifyMessage,
-  snapId: string = DEFAULT_SNAP_ID,
+  params: DogecoinVerifyMessageAdapterParams,
 ): Promise<DogecoinVerifyMessageResponse> => {
   try {
+    const { message, snapId } = params
     return await sendFlaskRPCRequest(
       {
         method: 'doge_verifyMessage',
@@ -88,19 +88,19 @@ export const dogecoinVerifyMessage = async (
     )
   } catch (error) {
     moduleLogger.error(error, { fn: 'DogeVerifyMessage' }, `doge_verifyMessage RPC call failed.`)
-    return null
+    return Promise.reject(error)
   }
 }
 
 export const dogecoinBroadcastTransaction = async (
-  transaction: DogecoinSignedTransaction,
-  snapId: string = DEFAULT_SNAP_ID,
+  params: DogecoinBroadcastTransactionAdapterParams,
 ): Promise<DogecoinBroadcastTransactionResponse> => {
+  const { transaction, baseUrl, snapId } = params
   try {
     return await sendFlaskRPCRequest(
       {
         method: 'doge_broadcastTransaction',
-        params: { transaction },
+        params: { transaction, baseUrl },
       },
       snapId,
     )
@@ -110,6 +110,6 @@ export const dogecoinBroadcastTransaction = async (
       { fn: 'DogeBroadcastTransaction' },
       `doge_broadcastTransaction RPC call failed.`,
     )
+    return Promise.reject(error)
   }
-  return null
 }

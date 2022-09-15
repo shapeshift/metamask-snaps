@@ -1,45 +1,45 @@
 import {
+  BitcoinCashBroadcastTransactionAdapterParams,
   BitcoinCashBroadcastTransactionResponse,
-  BitcoinCashGetAddressParams,
+  BitcoinCashGetAddressAdapterParams,
   BitcoinCashGetAddressResponse,
-  BitcoinCashSignedTransaction,
-  BitcoinCashSignMessage,
+  BitcoinCashSignMessageAdapterParams,
   BitcoinCashSignMessageResponse,
-  BitcoinCashSignTransaction,
+  BitcoinCashSignTransactionAdapterParams,
   BitcoinCashSignTransactionResponse,
-  BitcoinCashVerifyMessage,
+  BitcoinCashVerifyMessageAdapterParams,
   BitcoinCashVerifyMessageResponse,
 } from '@shapeshiftoss/metamask-snaps-types'
 
 import { logger } from './lib/logger'
-import { DEFAULT_SNAP_ID, sendFlaskRPCRequest } from './utils'
+import { sendFlaskRPCRequest } from './utils'
 
 const moduleLogger = logger.child({
   namespace: ['Adapter', 'BitcoinCash.ts'],
 })
 
 export const BCHGetAddress = async (
-  params: BitcoinCashGetAddressParams,
-  snapId: string = DEFAULT_SNAP_ID,
+  params: BitcoinCashGetAddressAdapterParams,
 ): Promise<BitcoinCashGetAddressResponse> => {
+  const { addressParams, snapId } = params
   try {
     return await sendFlaskRPCRequest(
       {
         method: 'bch_getAddress',
-        params: { params },
+        params: { addressParams },
       },
       snapId,
     )
   } catch (error) {
     moduleLogger.error(error, { fn: 'BCHGetAddress' }, `bch_getAddress RPC call failed.`)
+    return Promise.reject(error)
   }
-  return null
 }
 
 export const BCHSignMessage = async (
-  message: BitcoinCashSignMessage,
-  snapId: string = DEFAULT_SNAP_ID,
+  params: BitcoinCashSignMessageAdapterParams,
 ): Promise<BitcoinCashSignMessageResponse> => {
+  const { message, snapId } = params
   try {
     return await sendFlaskRPCRequest(
       {
@@ -50,14 +50,14 @@ export const BCHSignMessage = async (
     )
   } catch (error) {
     moduleLogger.error(error, { fn: 'BCHSignMessage' }, `bch_signMessage RPC call failed.`)
+    return Promise.reject(error)
   }
-  return null
 }
 
 export const BCHSignTransaction = async (
-  transaction: BitcoinCashSignTransaction,
-  snapId: string = DEFAULT_SNAP_ID,
+  params: BitcoinCashSignTransactionAdapterParams,
 ): Promise<BitcoinCashSignTransactionResponse> => {
+  const { transaction, snapId } = params
   try {
     return await sendFlaskRPCRequest(
       {
@@ -68,14 +68,14 @@ export const BCHSignTransaction = async (
     )
   } catch (error) {
     moduleLogger.error(error, { fn: 'BCHSignTransaction' }, `bch_signTransaction RPC call failed.`)
+    return Promise.reject(error)
   }
-  return null
 }
 
 export const BCHVerifyMessage = async (
-  message: BitcoinCashVerifyMessage,
-  snapId: string = DEFAULT_SNAP_ID,
+  params: BitcoinCashVerifyMessageAdapterParams,
 ): Promise<BitcoinCashVerifyMessageResponse> => {
+  const { message, snapId } = params
   try {
     return await sendFlaskRPCRequest(
       {
@@ -86,19 +86,19 @@ export const BCHVerifyMessage = async (
     )
   } catch (error) {
     moduleLogger.error(error, { fn: 'BCHVerifyMessage' }, `bch_verifyMessage RPC call failed.`)
-    return null
+    return Promise.reject(error)
   }
 }
 
 export const BCHBroadcastTransaction = async (
-  transaction: BitcoinCashSignedTransaction,
-  snapId: string = DEFAULT_SNAP_ID,
+  params: BitcoinCashBroadcastTransactionAdapterParams,
 ): Promise<BitcoinCashBroadcastTransactionResponse> => {
+  const { transaction, baseUrl, snapId } = params
   try {
     return await sendFlaskRPCRequest(
       {
         method: 'bch_broadcastTransaction',
-        params: { transaction },
+        params: { transaction, baseUrl },
       },
       snapId,
     )
@@ -108,6 +108,6 @@ export const BCHBroadcastTransaction = async (
       { fn: 'BCHBroadcastTransaction' },
       `bch_broadcastTransaction RPC call failed.`,
     )
+    return Promise.reject(error)
   }
-  return null
 }

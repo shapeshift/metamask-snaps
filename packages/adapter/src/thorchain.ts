@@ -1,26 +1,26 @@
 import {
+  ThorchainBroadcastTransactionAdapterParams,
   ThorchainBroadcastTransactionResponse,
-  ThorchainGetAddressParams,
+  ThorchainGetAddressAdapterParams,
   ThorchainGetAddressResponse,
-  ThorchainSignedTransaction,
-  ThorchainSignTransaction,
+  ThorchainSignTransactionAdapterParams,
   ThorchainSignTransactionResponse,
 } from '@shapeshiftoss/metamask-snaps-types'
 
 import { logger } from './lib/logger'
-import { DEFAULT_SNAP_ID, sendFlaskRPCRequest } from './utils'
+import { sendFlaskRPCRequest } from './utils'
 
 const moduleLogger = logger.child({ namespace: ['Adapter', 'Thorchain.ts'] })
 
 export const thorchainGetAddress = async (
-  params: ThorchainGetAddressParams,
-  snapId: string = DEFAULT_SNAP_ID,
+  params: ThorchainGetAddressAdapterParams,
 ): Promise<ThorchainGetAddressResponse> => {
+  const { addressParams, snapId } = params
   try {
     return await sendFlaskRPCRequest(
       {
         method: 'thorchain_getAddress',
-        params: { params },
+        params: { addressParams },
       },
       snapId,
     )
@@ -30,14 +30,14 @@ export const thorchainGetAddress = async (
       { fn: 'thorchainGetAddress' },
       `thorchain_getAddress RPC call failed.`,
     )
+    return Promise.reject(error)
   }
-  return null
 }
 
 export const thorchainSignTransaction = async (
-  transaction: ThorchainSignTransaction,
-  snapId: string = DEFAULT_SNAP_ID,
+  params: ThorchainSignTransactionAdapterParams,
 ): Promise<ThorchainSignTransactionResponse> => {
+  const { transaction, snapId } = params
   try {
     return await sendFlaskRPCRequest(
       {
@@ -52,19 +52,19 @@ export const thorchainSignTransaction = async (
       { fn: 'thorchainSignTransaction' },
       `thorchain_signTransaction RPC call failed.`,
     )
+    return Promise.reject(error)
   }
-  return null
 }
 
 export const thorchainBroadcastTransaction = async (
-  transaction: ThorchainSignedTransaction,
-  snapId: string = DEFAULT_SNAP_ID,
+  params: ThorchainBroadcastTransactionAdapterParams,
 ): Promise<ThorchainBroadcastTransactionResponse> => {
+  const { transaction, baseUrl, snapId } = params
   try {
     return await sendFlaskRPCRequest(
       {
         method: 'thorchain_broadcastTransaction',
-        params: { transaction },
+        params: { transaction, baseUrl },
       },
       snapId,
     )
@@ -74,6 +74,6 @@ export const thorchainBroadcastTransaction = async (
       { fn: 'ThorchainsBroadcastTransaction' },
       `thorchain_broadcastTransaction RPC call failed.`,
     )
+    return Promise.reject(error)
   }
-  return null
 }

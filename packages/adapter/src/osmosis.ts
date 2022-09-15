@@ -1,39 +1,39 @@
 import {
+  OsmosisBroadcastTransactionAdapterParams,
   OsmosisBroadcastTransactionResponse,
-  OsmosisGetAddressParams,
+  OsmosisGetAddressAdapterParams,
   OsmosisGetAddressResponse,
-  OsmosisSignedTransaction,
-  OsmosisSignTransaction,
+  OsmosisSignTransactionAdapterParams,
   OsmosisSignTransactionResponse,
 } from '@shapeshiftoss/metamask-snaps-types'
 
 import { logger } from './lib/logger'
-import { DEFAULT_SNAP_ID, sendFlaskRPCRequest } from './utils'
+import { sendFlaskRPCRequest } from './utils'
 
 const moduleLogger = logger.child({ namespace: ['Adapter', 'Osmosis.ts'] })
 
 export const osmosisGetAddress = async (
-  params: OsmosisGetAddressParams,
-  snapId: string = DEFAULT_SNAP_ID,
+  params: OsmosisGetAddressAdapterParams,
 ): Promise<OsmosisGetAddressResponse> => {
+  const { addressParams, snapId } = params
   try {
     return await sendFlaskRPCRequest(
       {
         method: 'osmosis_getAddress',
-        params: { params },
+        params: { addressParams },
       },
       snapId,
     )
   } catch (error) {
     moduleLogger.error(error, { fn: 'osmosisGetAddress' }, `osmosis_getAddress RPC call failed.`)
+    return Promise.reject(error)
   }
-  return null
 }
 
 export const osmosisSignTransaction = async (
-  transaction: OsmosisSignTransaction,
-  snapId: string = DEFAULT_SNAP_ID,
+  params: OsmosisSignTransactionAdapterParams,
 ): Promise<OsmosisSignTransactionResponse> => {
+  const { transaction, snapId } = params
   try {
     return await sendFlaskRPCRequest(
       {
@@ -48,19 +48,19 @@ export const osmosisSignTransaction = async (
       { fn: 'osmosisSignTransaction' },
       `osmosis_signTransaction RPC call failed.`,
     )
+    return Promise.reject(error)
   }
-  return null
 }
 
 export const osmosisBroadcastTransaction = async (
-  transaction: OsmosisSignedTransaction,
-  snapId: string = DEFAULT_SNAP_ID,
+  params: OsmosisBroadcastTransactionAdapterParams,
 ): Promise<OsmosisBroadcastTransactionResponse> => {
+  const { transaction, baseUrl, snapId } = params
   try {
     return await sendFlaskRPCRequest(
       {
         method: 'osmosis_broadcastTransaction',
-        params: { transaction },
+        params: { transaction, baseUrl },
       },
       snapId,
     )
@@ -70,6 +70,6 @@ export const osmosisBroadcastTransaction = async (
       { fn: 'OsmosisBroadcastTransaction' },
       `osmosis_broadcastTransaction RPC call failed.`,
     )
+    return Promise.reject(error)
   }
-  return null
 }

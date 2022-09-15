@@ -1,43 +1,43 @@
 import {
+  LitecoinBroadcastTransactionAdapterParams,
   LitecoinBroadcastTransactionResponse,
-  LitecoinGetAddressParams,
+  LitecoinGetAddressAdapterParams,
   LitecoinGetAddressResponse,
-  LitecoinSignedTransaction,
-  LitecoinSignMessage,
+  LitecoinSignMessageAdapterParams,
   LitecoinSignMessageResponse,
-  LitecoinSignTransaction,
+  LitecoinSignTransactionAdapterParams,
   LitecoinSignTransactionResponse,
-  LitecoinVerifyMessage,
+  LitecoinVerifyMessageAdapterParams,
   LitecoinVerifyMessageResponse,
 } from '@shapeshiftoss/metamask-snaps-types'
 
 import { logger } from './lib/logger'
-import { DEFAULT_SNAP_ID, sendFlaskRPCRequest } from './utils'
+import { sendFlaskRPCRequest } from './utils'
 
 const moduleLogger = logger.child({ namespace: ['Adapter', 'Litecoin.ts'] })
 
 export const LTCGetAddress = async (
-  params: LitecoinGetAddressParams,
-  snapId: string = DEFAULT_SNAP_ID,
+  params: LitecoinGetAddressAdapterParams,
 ): Promise<LitecoinGetAddressResponse> => {
+  const { addressParams, snapId } = params
   try {
     return await sendFlaskRPCRequest(
       {
         method: 'ltc_getAddress',
-        params: { params },
+        params: { addressParams },
       },
       snapId,
     )
   } catch (error) {
     moduleLogger.error(error, { fn: 'LTCGetAddress' }, `ltc_getAddress RPC call failed.`)
+    return Promise.reject(error)
   }
-  return null
 }
 
 export const LTCSignMessage = async (
-  message: LitecoinSignMessage,
-  snapId: string = DEFAULT_SNAP_ID,
+  params: LitecoinSignMessageAdapterParams,
 ): Promise<LitecoinSignMessageResponse> => {
+  const { message, snapId } = params
   try {
     return await sendFlaskRPCRequest(
       {
@@ -48,14 +48,14 @@ export const LTCSignMessage = async (
     )
   } catch (error) {
     moduleLogger.error(error, { fn: 'LTCSignMessage' }, `ltc_signMessage RPC call failed.`)
+    return Promise.reject(error)
   }
-  return null
 }
 
 export const LTCSignTransaction = async (
-  transaction: LitecoinSignTransaction,
-  snapId: string = DEFAULT_SNAP_ID,
+  params: LitecoinSignTransactionAdapterParams,
 ): Promise<LitecoinSignTransactionResponse> => {
+  const { transaction, snapId } = params
   try {
     return await sendFlaskRPCRequest(
       {
@@ -66,14 +66,14 @@ export const LTCSignTransaction = async (
     )
   } catch (error) {
     moduleLogger.error(error, { fn: 'LTCSignTransaction' }, `ltc_signTransaction RPC call failed.`)
+    return Promise.reject(error)
   }
-  return null
 }
 
 export const LTCVerifyMessage = async (
-  message: LitecoinVerifyMessage,
-  snapId: string = DEFAULT_SNAP_ID,
+  params: LitecoinVerifyMessageAdapterParams,
 ): Promise<LitecoinVerifyMessageResponse> => {
+  const { message, snapId } = params
   try {
     return await sendFlaskRPCRequest(
       {
@@ -84,19 +84,19 @@ export const LTCVerifyMessage = async (
     )
   } catch (error) {
     moduleLogger.error(error, { fn: 'LTCVerifyMessage' }, `ltc_verifyMessage RPC call failed.`)
-    return null
+    return Promise.reject(error)
   }
 }
 
 export const LTCBroadcastTransaction = async (
-  transaction: LitecoinSignedTransaction,
-  snapId: string = DEFAULT_SNAP_ID,
+  params: LitecoinBroadcastTransactionAdapterParams,
 ): Promise<LitecoinBroadcastTransactionResponse> => {
+  const { transaction, baseUrl, snapId } = params
   try {
     return await sendFlaskRPCRequest(
       {
         method: 'ltc_broadcastTransaction',
-        params: { transaction },
+        params: { transaction, baseUrl },
       },
       snapId,
     )
@@ -106,6 +106,6 @@ export const LTCBroadcastTransaction = async (
       { fn: 'LTCBroadcastTransaction' },
       `litecoin_broadcastTransaction RPC call failed.`,
     )
+    return Promise.reject(error)
   }
-  return null
 }
