@@ -22,7 +22,7 @@ export const OsmosisTransactions: any = {
         {
           type: 'cosmos-sdk/MsgDelegate',
           value: {
-            delegator_address: 'osmo1dhg0fmtthguze5n8d0tcdfnj9qeumagjqjflq4',
+            delegator_address: 'osmo15cenya0tr7nm3tz2wn3h3zwkht2rxrq7g9ypmq',
             validator_address: 'osmovaloper1cyw4vw20el8e7ez8080md0r8psg25n0cq98a9n',
             amount: {
               denom: 'uosmo',
@@ -53,7 +53,7 @@ export const OsmosisTransactions: any = {
         {
           type: 'osmosis/gamm/join-pool',
           value: {
-            sender: 'osmo1dhg0fmtthguze5n8d0tcdfnj9qeumagjqjflq4',
+            sender: 'osmo15cenya0tr7nm3tz2wn3h3zwkht2rxrq7g9ypmq',
             poolId: '1',
             shareOutAmount: '402238349184328773',
             tokenInMaxs: [
@@ -91,7 +91,7 @@ export const OsmosisTransactions: any = {
         {
           type: 'osmosis/gamm/exit-pool',
           value: {
-            sender: 'osmo1dhg0fmtthguze5n8d0tcdfnj9qeumagjqjflq4',
+            sender: 'osmo15cenya0tr7nm3tz2wn3h3zwkht2rxrq7g9ypmq',
             poolId: '1',
             shareOutAmount: '78719426289889034',
             tokenOutMins: [
@@ -129,7 +129,7 @@ export const OsmosisTransactions: any = {
         {
           type: 'osmosis/lockup/lock-tokens',
           value: {
-            owner: 'osmo1dhg0fmtthguze5n8d0tcdfnj9qeumagjqjflq4',
+            owner: 'osmo15cenya0tr7nm3tz2wn3h3zwkht2rxrq7g9ypmq',
             duration: '86400000000000',
             coins: [
               {
@@ -162,7 +162,7 @@ export const OsmosisTransactions: any = {
         {
           type: 'osmosis/lockup/begin-unlock-period-lock',
           value: {
-            owner: 'osmo1dhg0fmtthguze5n8d0tcdfnj9qeumagjqjflq4',
+            owner: 'osmo15cenya0tr7nm3tz2wn3h3zwkht2rxrq7g9ypmq',
             ID: '382614',
           },
         },
@@ -189,7 +189,7 @@ export const OsmosisTransactions: any = {
         {
           type: 'cosmos-sdk/MsgBeginRedelegate',
           value: {
-            delegator_address: 'osmo1dhg0fmtthguze5n8d0tcdfnj9qeumagjqjflq4',
+            delegator_address: 'osmo15cenya0tr7nm3tz2wn3h3zwkht2rxrq7g9ypmq',
             validator_src_address: 'osmovaloper1cyw4vw20el8e7ez8080md0r8psg25n0cq98a9n',
             validator_dst_address: 'osmovaloper1clpqr4nrk4khgkxj78fcwwh6dl3uw4ep88n0y4',
             amount: {
@@ -221,7 +221,7 @@ export const OsmosisTransactions: any = {
         {
           type: 'cosmos-sdk/MsgWithdrawDelegationReward',
           value: {
-            delegator_address: 'osmo1dhg0fmtthguze5n8d0tcdfnj9qeumagjqjflq4',
+            delegator_address: 'osmo15cenya0tr7nm3tz2wn3h3zwkht2rxrq7g9ypmq',
             validator_address: 'osmovaloper1cyw4vw20el8e7ez8080md0r8psg25n0cq98a9n',
             amount: {
               denom: 'uosmo',
@@ -259,7 +259,7 @@ export const OsmosisTransactions: any = {
                   'ibc/27394FB092D2ECCD56123C74F36E4C1F926001CEADA9CA97EA622B25F41E5EB2',
               },
             ],
-            sender: 'osmo1dhg0fmtthguze5n8d0tcdfnj9qeumagjqjflq4',
+            sender: 'osmo15cenya0tr7nm3tz2wn3h3zwkht2rxrq7g9ypmq',
             tokenIn: {
               amount: '6500',
               denom: 'uosmo',
@@ -289,7 +289,7 @@ export const OsmosisTransactions: any = {
         {
           type: 'cosmos-sdk/MsgSend',
           value: {
-            from_address: 'osmo1dhg0fmtthguze5n8d0tcdfnj9qeumagjqjflq4',
+            from_address: 'osmo15cenya0tr7nm3tz2wn3h3zwkht2rxrq7g9ypmq',
             to_address: 'osmo1qjwdyn56ecagk8rjf7crrzwcyz6775cj07qz9r',
             amount: [
               {
@@ -321,7 +321,7 @@ export const OsmosisTransactions: any = {
         {
           type: 'cosmos-sdk/MsgUndelegate',
           value: {
-            delegator_address: 'osmo1dhg0fmtthguze5n8d0tcdfnj9qeumagjqjflq4',
+            delegator_address: 'osmo15cenya0tr7nm3tz2wn3h3zwkht2rxrq7g9ypmq',
             validator_address: 'osmovaloper1clpqr4nrk4khgkxj78fcwwh6dl3uw4ep88n0y4',
             amount: {
               denom: 'uosmo',
@@ -331,5 +331,15 @@ export const OsmosisTransactions: any = {
         },
       ],
     },
+  },
+  broadcast: {
+    serialized:
+      'CpkBCokBChwvY29zbW9zLmJhbmsudjFiZXRhMS5Nc2dTZW5kEmkKK29zbW8xNWNlbnlhMHRyN25tM3R6MnduM2gzendraHQycnhycTdnOXlwbXESK29zbW8xcWp3ZHluNTZlY2FnazhyamY3Y3JyendjeXo2Nzc1Y2owN3F6OXIaDQoFdW9zbW8SBDEwMDASC2hlbGxvIHdvcmxkEmcKUApGCh8vY29zbW9zLmNyeXB0by5zZWNwMjU2azEuUHViS2V5EiMKIQO+468w5Tpz84q8Wi/NrEJtewTrcqjr07AZkuLSBuJK2BIECgIIARgjEhMKDQoFdW9zbW8SBDI4MDAQgPEEGkAK+GLz+zi1n4Oi+4azQxMrpIPHI0Tr7N5xxszk+2DsNkIy0suWL5JpK5o7wb8kvpQN/q2lU/lsWzx5q9H/oqM0',
+    body: 'CokBChwvY29zbW9zLmJhbmsudjFiZXRhMS5Nc2dTZW5kEmkKK29zbW8xNWNlbnlhMHRyN25tM3R6MnduM2gzendraHQycnhycTdnOXlwbXESK29zbW8xcWp3ZHluNTZlY2FnazhyamY3Y3JyendjeXo2Nzc1Y2owN3F6OXIaDQoFdW9zbW8SBDEwMDASC2hlbGxvIHdvcmxk',
+    authInfoBytes:
+      'ClAKRgofL2Nvc21vcy5jcnlwdG8uc2VjcDI1NmsxLlB1YktleRIjCiEDvuOvMOU6c/OKvFovzaxCbXsE63Ko69OwGZLi0gbiStgSBAoCCAEYIxITCg0KBXVvc21vEgQyODAwEIDxBA==',
+    signatures: [
+      'Cvhi8/s4tZ+DovuGs0MTK6SDxyNE6+zeccbM5Ptg7DZCMtLLli+SaSuaO8G/JL6UDf6tpVP5bFs8eavR/6KjNA==',
+    ],
   },
 }

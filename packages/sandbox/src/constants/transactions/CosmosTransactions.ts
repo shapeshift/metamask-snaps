@@ -22,7 +22,7 @@ export const CosmosTransactions: any = {
         {
           type: 'cosmos-sdk/MsgDelegate',
           value: {
-            delegator_address: 'cosmos1dhg0fmtthguze5n8d0tcdfnj9qeumagjgf60k8',
+            delegator_address: 'cosmos15cenya0tr7nm3tz2wn3h3zwkht2rxrq7q7h3dj',
             validator_address: 'cosmosvaloper1qwl879nx9t6kef4supyazayf7vjhennyh568ys',
             amount: {
               denom: 'uatom',
@@ -54,7 +54,7 @@ export const CosmosTransactions: any = {
           type: 'cosmos-sdk/MsgTransfer',
           value: {
             receiver: 'osmo15cenya0tr7nm3tz2wn3h3zwkht2rxrq7g9ypmq',
-            sender: 'cosmos1dhg0fmtthguze5n8d0tcdfnj9qeumagjgf60k8',
+            sender: 'cosmos15cenya0tr7nm3tz2wn3h3zwkht2rxrq7q7h3dj',
             source_channel: 'channel-141',
             source_port: 'transfer',
             timeout_height: {
@@ -90,7 +90,7 @@ export const CosmosTransactions: any = {
         {
           type: 'cosmos-sdk/MsgBeginRedelegate',
           value: {
-            delegator_address: 'cosmos1dhg0fmtthguze5n8d0tcdfnj9qeumagjgf60k8',
+            delegator_address: 'cosmos15cenya0tr7nm3tz2wn3h3zwkht2rxrq7q7h3dj',
             validator_src_address: 'cosmosvaloper1qwl879nx9t6kef4supyazayf7vjhennyh568ys',
             validator_dst_address: 'cosmosvaloper1qs8tnw2t8l6amtzvdemnnsq9dzk0ag0z52uzay',
             amount: {
@@ -122,7 +122,7 @@ export const CosmosTransactions: any = {
         {
           type: 'cosmos-sdk/MsgWithdrawDelegatorReward',
           value: {
-            delegator_address: 'cosmos1dhg0fmtthguze5n8d0tcdfnj9qeumagjgf60k8',
+            delegator_address: 'cosmos15cenya0tr7nm3tz2wn3h3zwkht2rxrq7q7h3dj',
             validator_address: 'cosmosvaloper1qwl879nx9t6kef4supyazayf7vjhennyh568ys',
             amount: {
               denom: 'uatom',
@@ -159,7 +159,7 @@ export const CosmosTransactions: any = {
                 denom: 'uatom',
               },
             ],
-            from_address: 'cosmos1dhg0fmtthguze5n8d0tcdfnj9qeumagjgf60k8',
+            from_address: 'cosmos15cenya0tr7nm3tz2wn3h3zwkht2rxrq7q7h3dj',
             to_address: 'cosmos1qjwdyn56ecagk8rjf7crrzwcyz6775cj89njn3',
           },
         },
@@ -195,5 +195,15 @@ export const CosmosTransactions: any = {
         },
       ],
     },
+  },
+  broadcast: {
+    serialized:
+      'CrsBCrgBCikvaWJjLmFwcGxpY2F0aW9ucy50cmFuc2Zlci52MS5Nc2dUcmFuc2ZlchKKAQoIdHJhbnNmZXISC2NoYW5uZWwtMTQxGgwKBXVhdG9tEgMxMDAiLWNvc21vczE1Y2VueWEwdHI3bm0zdHoyd24zaDN6d2todDJyeHJxN3E3aDNkaiorb3NtbzE1Y2VueWEwdHI3bm0zdHoyd24zaDN6d2todDJyeHJxN2c5eXBtcTIHCAEQy4e6BBJnClAKRgofL2Nvc21vcy5jcnlwdG8uc2VjcDI1NmsxLlB1YktleRIjCiEDvuOvMOU6c/OKvFovzaxCbXsE63Ko69OwGZLi0gbiStgSBAoCCAEYGxITCg0KBXVhdG9tEgQyODAwENDZERpARca0xhdMkItu+qnyzj58LkGyMKCBS+HwJRO+samk7RxJxo3rtoftuk/4JNNEjTKIsIurzoR8lXQgu1yS2IDh8A==',
+    body: 'CrgBCikvaWJjLmFwcGxpY2F0aW9ucy50cmFuc2Zlci52MS5Nc2dUcmFuc2ZlchKKAQoIdHJhbnNmZXISC2NoYW5uZWwtMTQxGgwKBXVhdG9tEgMxMDAiLWNvc21vczE1Y2VueWEwdHI3bm0zdHoyd24zaDN6d2todDJyeHJxN3E3aDNkaiorb3NtbzE1Y2VueWEwdHI3bm0zdHoyd24zaDN6d2todDJyeHJxN2c5eXBtcTIHCAEQy4e6BA==',
+    authInfoBytes:
+      'ClAKRgofL2Nvc21vcy5jcnlwdG8uc2VjcDI1NmsxLlB1YktleRIjCiEDvuOvMOU6c/OKvFovzaxCbXsE63Ko69OwGZLi0gbiStgSBAoCCAEYGxITCg0KBXVhdG9tEgQyODAwENDZEQ==',
+    signatures: [
+      'Rca0xhdMkItu+qnyzj58LkGyMKCBS+HwJRO+samk7RxJxo3rtoftuk/4JNNEjTKIsIurzoR8lXQgu1yS2IDh8A==',
+    ],
   },
 }
