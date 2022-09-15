@@ -1,11 +1,11 @@
-import { getBIP44AddressKeyDeriver, JsonBIP44CoinTypeNode } from '@metamask/key-tree'
-import { Coin, Keyring, slip44ByCoin } from '@shapeshiftoss/hdwallet-core'
+import { getBIP44AddressKeyDeriver, SLIP10Node } from '@metamask/key-tree'
+import { Coin, Keyring } from '@shapeshiftoss/hdwallet-core'
 import { NativeAdapter, NativeHDWallet } from '@shapeshiftoss/hdwallet-native'
 import { Node } from '@shapeshiftoss/hdwallet-native/dist/crypto/isolation/engines/default/bip32'
 import { userConfirmParam } from '@shapeshiftoss/metamask-snaps-types'
 
 import { logger } from '../lib/logger'
-import { metaMaskVersionGreaterThanOrEqualTo } from '../utils'
+import {slip44AndCurveByCoin } from '../utils'
 
 const moduleLogger = logger.child({ namespace: ['Snap', 'Common.ts'] })
 
@@ -25,19 +25,19 @@ export const getAddress = async (wallet: any, params: any): Promise<string> => {
 }
 
 export const getHDWalletNativeSigner = async (coin: Coin): Promise<NativeHDWallet | null> => {
-  const slip44 = slip44ByCoin(coin)
-  if (slip44 === undefined) {
+  const { slip44, curve } = slip44AndCurveByCoin(coin)
+  if(!((typeof slip44 === 'number') && curve)){
     throw new Error(`Coin type: '${coin}' is invalid or unsupported`)
   }
-
+  const path = ['m', "44'", `${slip44}'`]
   const node = await wallet.request({
-    method: `snap_getBip32Entropy`,
-    params: [
+    method: 'snap_getBip32Entropy',
+    params: 
       {
-        path: ['m', "44'", `${coin}'`],
-        curve: 'secp256k1'
+        path: path,
+        curve: curve
       }
-    ],
+    ,
   })
 
   try {
@@ -45,13 +45,10 @@ export const getHDWalletNativeSigner = async (coin: Coin): Promise<NativeHDWalle
       throw new Error('No private key provided in BIP44CoinTypeNode')
     }
 
-    const addressKeyDeriver = await getBIP44AddressKeyDeriver(node, {
-      account: 0,
-      change: { index: 0, hardened: false },
-    })
-    const deriver = await addressKeyDeriver(0)
-    const privateKey = deriver.privateKeyBuffer
-    const chainCode = deriver.chainCodeBuffer
+    const slip10Node = await SLIP10Node.fromJSON(node) // node at depth 2
+   
+    const privateKey = slip10Node.privateKeyBuffer
+    const chainCode = slip10Node.chainCodeBuffer
 
     const keyring = new Keyring()
     const nativeAdapter = NativeAdapter.useKeyring(keyring)
@@ -61,7 +58,8 @@ export const getHDWalletNativeSigner = async (coin: Coin): Promise<NativeHDWalle
     if (wallet === null) {
       throw new Error('Unable to pair ShapeShift Native signer')
     }
-    const nativeNode = await Node.create(privateKey, chainCode)
+
+    const nativeNode = await Node.create(privateKey, chainCode, `m/44'/${slip44}'`)
     await wallet.loadDevice({ masterKey: nativeNode })
     return wallet
   } catch (error) {
@@ -83,7 +81,6 @@ export const userConfirm = async (params: userConfirmParam): Promise<boolean> =>
   const MAX_LENGTH = 1800
   const n = Math.ceil(JSON.stringify(params.textAreaContent, null, 2).length / MAX_LENGTH)
   const textAreaContent = n ? new Array(n) : undefined
-  console.info()
 
   for (let i = 0, j = 0; i < n; ++i, j += MAX_LENGTH) {
     try {
