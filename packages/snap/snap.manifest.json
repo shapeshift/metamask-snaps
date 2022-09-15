@@ -7,7 +7,7 @@
     "url": "https://github.com/shapeshift/metamask-snaps.git"
   },
   "source": {
-    "shasum": "ShQAcs1fjD9VAWzoBDt8ZRtWLctI5cv+Za+bdUs+hqs=",
+    "shasum": "Qyvi1fx2fWmDkoyGZs3dofrAkH9dcfLEsjlwSI01958=",
     "location": {
       "npm": {
         "filePath": "dist/bundle.js",
@@ -81,6 +81,30 @@
           "m",
           "44'",
           "931'"
+        ],
+        "curve": "secp256k1"
+      },
+      {
+        "path": [
+          "m",
+          "44'",
+          "330'"
+        ],
+        "curve": "secp256k1"
+      },
+      {
+        "path": [
+          "m",
+          "44'",
+          "459'"
+        ],
+        "curve": "secp256k1"
+      },
+      {
+        "path": [
+          "m",
+          "44'",
+          "529'"
         ],
         "curve": "secp256k1"
       }
