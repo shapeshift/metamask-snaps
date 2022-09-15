@@ -1,304 +1,231 @@
 import {
+  BinanceBroadcastTransactionParams,
   BinanceGetAddressParams,
-  BinanceSignedTransaction,
-  BinanceSignTransaction,
+  BinanceSignTransactionParams,
+  BitcoinBroadcastTransactionParams,
+  BitcoinCashBroadcastTransactionParams,
   BitcoinCashGetAddressParams,
-  BitcoinCashSignedTransaction,
-  BitcoinCashSignMessage,
-  BitcoinCashVerifyMessage,
+  BitcoinCashSignMessageParams,
+  BitcoinCashSignTransactionParams,
+  BitcoinCashVerifyMessageParams,
   BitcoinGetAddressParams,
-  BitcoinSignedTransaction,
-  BitcoinSignMessage,
-  BitcoinSignTransaction,
-  BitcoinVerifyMessage,
+  BitcoinSignMessageParams,
+  BitcoinSignTransactionParams,
+  BitcoinVerifyMessageParams,
+  CosmosBroadcastTransactionParams,
   CosmosGetAddressParams,
-  CosmosSignedTransaction,
-  CosmosSignTransaction,
+  CosmosSignTransactionParams,
+  DogecoinBroadcastTransactionParams,
   DogecoinGetAddressParams,
-  DogecoinSignedTransaction,
-  DogecoinSignMessage,
-  DogecoinSignTransaction,
-  DogecoinVerifyMessage,
+  DogecoinSignMessageParams,
+  DogecoinSignTransactionParams,
+  DogecoinVerifyMessageParams,
+  EthereumBroadcastTransactionParams,
   EthereumGetAddressParams,
-  EthereumSignedTransaction,
-  EthereumSignMessage,
-  EthereumSignTransaction,
-  EthereumVerifyMessage,
+  EthereumSignMessageParams,
+  EthereumSignTransactionParams,
+  EthereumVerifyMessageParams,
+  KavaBroadcastTransactionParams,
   KavaGetAddressParams,
-  KavaSignedTransaction,
-  KavaSignTransaction,
+  KavaSignTransactionParams,
+  LitecoinBroadcastTransactionParams,
   LitecoinGetAddressParams,
-  LitecoinSignedTransaction,
-  LitecoinSignMessage,
-  LitecoinSignTransaction,
-  LitecoinVerifyMessage,
+  LitecoinSignMessageParams,
+  LitecoinSignTransactionParams,
+  LitecoinVerifyMessageParams,
+  OsmosisBroadcastTransactionParams,
   OsmosisGetAddressParams,
-  OsmosisSignedTransaction,
-  OsmosisSignTransaction,
+  OsmosisSignTransactionParams,
+  SecretBroadcastTransactionParams,
   SecretGetAddressParams,
-  SecretSignedTransaction,
-  SecretSignTransaction,
+  SecretSignTransactionParams,
+  TerraBroadcastTransactionParams,
   TerraGetAddressParams,
-  TerraSignedTransaction,
-  TerraSignTransaction,
+  TerraSignTransactionParams,
+  ThorchainBroadcastTransactionParams,
   ThorchainGetAddressParams,
-  ThorchainSignedTransaction,
-  ThorchainSignTransaction,
-} from './common'
+  ThorchainSignTransactionParams,
+} from './params'
 
 export interface BitcoinCashGetAddressRequest {
   method: 'bch_getAddress'
-  params: {
-    params: BitcoinCashGetAddressParams
-  }
+  params: BitcoinCashGetAddressParams
 }
 
 export interface BitcoinCashSignTransactionRequest {
   method: 'bch_signTransaction'
-  params: {
-    transaction: BitcoinSignTransaction
-  }
+  params: BitcoinCashSignTransactionParams
 }
 
 export interface BitcoinCashSignMessageRequest {
   method: 'bch_signMessage'
-  params: {
-    message: BitcoinCashSignMessage
-  }
+  params: BitcoinCashSignMessageParams
 }
 
 export interface BitcoinCashVerifyMessageRequest {
   method: 'bch_verifyMessage'
-  params: {
-    message: BitcoinCashVerifyMessage
-  }
+  params: BitcoinCashVerifyMessageParams
 }
 
 export interface BitcoinCashBroadcastTransactionRequest {
   method: 'bch_broadcastTransaction'
-  params: {
-    transaction: BitcoinCashSignedTransaction
-  }
+  params: BitcoinCashBroadcastTransactionParams
 }
 
 export interface BinanceGetAddressRequest {
   method: 'binance_getAddress'
-  params: {
-    params: BinanceGetAddressParams
-  }
+  params: BinanceGetAddressParams
 }
 export interface BinanceSignTransactionRequest {
   method: 'binance_signTransaction'
-  params: {
-    transaction: BinanceSignTransaction
-  }
+  params: BinanceSignTransactionParams
 }
 
 export interface BinanceBroadcastTransactionRequest {
   method: 'binance_broadcastTransaction'
-  params: {
-    transaction: BinanceSignedTransaction
-  }
+  params: BinanceBroadcastTransactionParams
 }
 
 export interface BitcoinGetAddressRequest {
   method: 'btc_getAddress'
-  params: {
-    params: BitcoinGetAddressParams
-  }
+  params: BitcoinGetAddressParams
 }
 
 export interface BitcoinSignTransactionRequest {
   method: 'btc_signTransaction'
-  params: {
-    transaction: BitcoinSignTransaction
-  }
+  params: BitcoinSignTransactionParams
 }
 
 export interface BitcoinSignMessageRequest {
   method: 'btc_signMessage'
-  params: {
-    message: BitcoinSignMessage
-  }
+  params: BitcoinSignMessageParams
 }
 
 export interface BitcoinBroadcastTransactionRequest {
   method: 'btc_broadcastTransaction'
-  params: {
-    transaction: BitcoinSignedTransaction
-  }
+  params: BitcoinBroadcastTransactionParams
 }
 
 export interface BitcoinVerifyMessageRequest {
   method: 'btc_verifyMessage'
-  params: {
-    message: BitcoinVerifyMessage
-  }
+  params: BitcoinVerifyMessageParams
 }
 
 export interface CosmosGetAddressRequest {
   method: 'cosmos_getAddress'
-  params: {
-    params: CosmosGetAddressParams
-  }
+  params: CosmosGetAddressParams
 }
 export interface CosmosSignTransactionRequest {
   method: 'cosmos_signTransaction'
-  params: {
-    transaction: CosmosSignTransaction
-  }
+  params: CosmosSignTransactionParams
 }
 
 export interface CosmosBroadcastTransactionRequest {
   method: 'cosmos_broadcastTransaction'
-  params: {
-    transaction: CosmosSignedTransaction
-  }
+  params: CosmosBroadcastTransactionParams
 }
 
 export interface DogecoinGetAddressRequest {
   method: 'doge_getAddress'
-  params: {
-    params: DogecoinGetAddressParams
-  }
+  params: DogecoinGetAddressParams
 }
 
 export interface DogecoinSignTransactionRequest {
   method: 'doge_signTransaction'
-  params: {
-    transaction: DogecoinSignTransaction
-  }
+  params: DogecoinSignTransactionParams
 }
 
 export interface DogecoinSignMessageRequest {
   method: 'doge_signMessage'
-  params: {
-    message: DogecoinSignMessage
-  }
+  params: DogecoinSignMessageParams
 }
 
 export interface DogecoinVerifyMessageRequest {
   method: 'doge_verifyMessage'
-  params: {
-    message: DogecoinVerifyMessage
-  }
+  params: DogecoinVerifyMessageParams
 }
 
 export interface DogecoinBroadcastTransactionRequest {
   method: 'doge_broadcastTransaction'
-  params: {
-    transaction: DogecoinSignedTransaction
-  }
+  params: DogecoinBroadcastTransactionParams
 }
 
 export interface EthereumGetAddressRequest {
   method: 'eth_getAddress'
-  params: {
-    params: EthereumGetAddressParams
-  }
+  params: EthereumGetAddressParams
 }
 
 export interface EthereumSignMessageRequest {
   method: 'eth_signMessage'
-  params: {
-    message: EthereumSignMessage
-  }
+  params: EthereumSignMessageParams
 }
 
 export interface EthereumSignTransactionRequest {
   method: 'eth_signTransaction'
-  params: {
-    transaction: EthereumSignTransaction
-  }
+  params: EthereumSignTransactionParams
 }
 
 export interface EthereumVerifyMessageRequest {
   method: 'eth_verifyMessage'
-  params: {
-    message: EthereumVerifyMessage
-  }
+  params: EthereumVerifyMessageParams
 }
 
 export interface EthereumBroadcastTransactionRequest {
   method: 'eth_broadcastTransaction'
-  params: {
-    transaction: EthereumSignedTransaction
-  }
+  params: EthereumBroadcastTransactionParams
 }
 
 export interface KavaGetAddressRequest {
   method: 'kava_getAddress'
-  params: {
-    params: KavaGetAddressParams
-  }
+  params: KavaGetAddressParams
 }
 export interface KavaSignTransactionRequest {
   method: 'kava_signTransaction'
-  params: {
-    transaction: KavaSignTransaction
-  }
+  params: KavaSignTransactionParams
 }
 
 export interface KavaBroadcastTransactionRequest {
   method: 'kava_broadcastTransaction'
-  params: {
-    transaction: KavaSignedTransaction
-  }
+  params: KavaBroadcastTransactionParams
 }
 
 export interface LitecoinGetAddressRequest {
   method: 'ltc_getAddress'
-  params: {
-    params: LitecoinGetAddressParams
-  }
+  params: LitecoinGetAddressParams
 }
 
 export interface LitecoinSignTransactionRequest {
   method: 'ltc_signTransaction'
-  params: {
-    transaction: LitecoinSignTransaction
-  }
+  params: LitecoinSignTransactionParams
 }
 
 export interface LitecoinSignMessageRequest {
   method: 'ltc_signMessage'
-  params: {
-    message: LitecoinSignMessage
-  }
+  params: LitecoinSignMessageParams
 }
 
 export interface LitecoinVerifyMessageRequest {
   method: 'ltc_verifyMessage'
-  params: {
-    message: LitecoinVerifyMessage
-  }
+  params: LitecoinVerifyMessageParams
 }
 
 export interface LitecoinBroadcastTransactionRequest {
   method: 'ltc_broadcastTransaction'
-  params: {
-    transaction: LitecoinSignedTransaction
-  }
+  params: LitecoinBroadcastTransactionParams
 }
 
 export interface OsmosisGetAddressRequest {
   method: 'osmosis_getAddress'
-  params: {
-    params: OsmosisGetAddressParams
-  }
+  params: OsmosisGetAddressParams
 }
 export interface OsmosisSignTransactionRequest {
   method: 'osmosis_signTransaction'
-  params: {
-    transaction: OsmosisSignTransaction
-  }
+  params: OsmosisSignTransactionParams
 }
 
 export interface OsmosisBroadcastTransactionRequest {
   method: 'osmosis_broadcastTransaction'
-  params: {
-    transaction: OsmosisSignedTransaction
-  }
+  params: OsmosisBroadcastTransactionParams
 }
 
 export interface PingRequest {
@@ -308,62 +235,44 @@ export interface PingRequest {
 
 export interface SecretGetAddressRequest {
   method: 'secret_getAddress'
-  params: {
-    params: SecretGetAddressParams
-  }
+  params: SecretGetAddressParams
 }
 export interface SecretSignTransactionRequest {
   method: 'secret_signTransaction'
-  params: {
-    transaction: SecretSignTransaction
-  }
+  params: SecretSignTransactionParams
 }
 
 export interface SecretBroadcastTransactionRequest {
   method: 'secret_broadcastTransaction'
-  params: {
-    transaction: SecretSignedTransaction
-  }
+  params: SecretBroadcastTransactionParams
 }
 
 export interface TerraGetAddressRequest {
   method: 'terra_getAddress'
-  params: {
-    params: TerraGetAddressParams
-  }
+  params: TerraGetAddressParams
 }
 export interface TerraSignTransactionRequest {
   method: 'terra_signTransaction'
-  params: {
-    transaction: TerraSignTransaction
-  }
+  params: TerraSignTransactionParams
 }
 
 export interface TerraBroadcastTransactionRequest {
   method: 'terra_broadcastTransaction'
-  params: {
-    transaction: TerraSignedTransaction
-  }
+  params: TerraBroadcastTransactionParams
 }
 
 export interface ThorchainGetAddressRequest {
   method: 'thorchain_getAddress'
-  params: {
-    params: ThorchainGetAddressParams
-  }
+  params: ThorchainGetAddressParams
 }
 export interface ThorchainSignTransactionRequest {
   method: 'thorchain_signTransaction'
-  params: {
-    transaction: ThorchainSignTransaction
-  }
+  params: ThorchainSignTransactionParams
 }
 
 export interface ThorchainBroadcastTransactionRequest {
   method: 'thorchain_broadcastTransaction'
-  params: {
-    transaction: ThorchainSignedTransaction
-  }
+  params: ThorchainBroadcastTransactionParams
 }
 
 export type ShapeShiftSnapRPCRequest =
