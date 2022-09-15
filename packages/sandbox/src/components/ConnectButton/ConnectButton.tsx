@@ -81,7 +81,7 @@ export const ConnectButton = () => {
 
   return (
     <Button
-      bg={loading ? '#FFFFFF' : snapIsConnected ? '#00CD98' : '#EF5350'}
+      bg={loading ? '#323741' : snapIsConnected ? '#00CD98' : '#EF5350'}
       height='40px'
       leftIcon={loading ? undefined : snapIsConnected ? <LockIcon /> : <UnlockIcon />}
       onClick={async () => {
