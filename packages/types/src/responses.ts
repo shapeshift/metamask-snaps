@@ -1,75 +1,74 @@
 import { JsonRpcError } from '@metamask/types'
 
 import {
+  BinanceAddress,
   BinanceSignedTransaction,
-  BitcoinCashSignedMessage,
+  BitcoinAddress,
+  BitcoinCashAddress,
   BitcoinCashSignedTransaction,
-  BitcoinSignedMessage,
   BitcoinSignedTransaction,
+  CosmosAddress,
   CosmosSignedTransaction,
-  DogecoinSignedMessage,
+  DogecoinAddress,
   DogecoinSignedTransaction,
+  EthereumAddress,
   EthereumSignedMessage,
   EthereumSignedTransaction,
+  KavaAddress,
   KavaSignedTransaction,
-  LitecoinSignedMessage,
+  LitecoinAddress,
   LitecoinSignedTransaction,
+  OsmosisAddress,
   OsmosisSignedTransaction,
+  SecretAddress,
   SecretSignedTransaction,
+  TerraAddress,
   TerraSignedTransaction,
+  ThorchainAddress,
   ThorchainSignedTransaction,
 } from './common'
 
-export type RPCHandlerError = Error | JsonRpcError | string | null
-export type RPCHandlerResponse<T> = T | RPCHandlerError
+export type RPCHandlerError = Error | JsonRpcError
 
-export type BinanceBroadcastTransactionResponse = RPCHandlerResponse<string>
-export type BinanceGetAddressResponse = RPCHandlerResponse<string>
-export type BinanceSignTransactionResponse = RPCHandlerResponse<BinanceSignedTransaction>
-export type BitcoinBroadcastTransactionResponse = RPCHandlerResponse<string>
-export type BitcoinCashBroadcastTransactionResponse = RPCHandlerResponse<string>
-export type BitcoinCashGetAddressResponse = RPCHandlerResponse<string>
-export type BitcoinCashSignMessageResponse = RPCHandlerResponse<BitcoinCashSignedMessage | string>
-export type BitcoinCashSignTransactionResponse = RPCHandlerResponse<BitcoinCashSignedTransaction>
-export type BitcoinCashVerifyMessageResponse = RPCHandlerResponse<boolean>
-export type BitcoinGetAddressResponse = RPCHandlerResponse<string>
-export type BitcoinSignMessageResponse = RPCHandlerResponse<BitcoinSignedMessage>
-export type BitcoinSignTransactionResponse = RPCHandlerResponse<BitcoinSignedTransaction>
-export type BitcoinVerifyMessageResponse = RPCHandlerResponse<boolean>
-export type CosmosBroadcastTransactionResponse = RPCHandlerResponse<string>
-export type CosmosGetAddressResponse = RPCHandlerResponse<string>
-export type CosmosSignTransactionResponse = RPCHandlerResponse<CosmosSignedTransaction>
-export type DogecoinBroadcastTransactionResponse = RPCHandlerResponse<string>
-export type DogecoinGetAddressResponse = RPCHandlerResponse<string>
-export type DogecoinSignMessageResponse = RPCHandlerResponse<DogecoinSignedMessage>
-export type DogecoinSignTransactionResponse = RPCHandlerResponse<DogecoinSignedTransaction>
-export type DogecoinVerifyMessageResponse = RPCHandlerResponse<boolean>
-export type EthereumBroadcastTransactionResponse = RPCHandlerResponse<string>
-export type EthereumGetAddressResponse = RPCHandlerResponse<string>
-export type EthereumSignMessageResponse = RPCHandlerResponse<EthereumSignedMessage>
-export type EthereumSignTransactionResponse = RPCHandlerResponse<EthereumSignedTransaction>
-export type EthereumVerifyMessageResponse = RPCHandlerResponse<boolean>
-export type KavaBroadcastTransactionResponse = RPCHandlerResponse<string>
-export type KavaGetAddressResponse = RPCHandlerResponse<string>
-export type KavaSignTransactionResponse = RPCHandlerResponse<KavaSignedTransaction>
-export type LitecoinBroadcastTransactionResponse = RPCHandlerResponse<string>
-export type LitecoinGetAddressResponse = RPCHandlerResponse<string>
-export type LitecoinSignMessageResponse = RPCHandlerResponse<LitecoinSignedMessage>
-export type LitecoinSignTransactionResponse = RPCHandlerResponse<LitecoinSignedTransaction>
-export type LitecoinVerifyMessageResponse = RPCHandlerResponse<boolean>
-export type OsmosisBroadcastTransactionResponse = RPCHandlerResponse<string>
-export type OsmosisGetAddressResponse = RPCHandlerResponse<string>
-export type OsmosisSignTransactionResponse = RPCHandlerResponse<OsmosisSignedTransaction>
-export type PingResponse = RPCHandlerResponse<string>
-export type SecretBroadcastTransactionResponse = RPCHandlerResponse<string>
-export type SecretGetAddressResponse = RPCHandlerResponse<string>
-export type SecretSignTransactionResponse = RPCHandlerResponse<SecretSignedTransaction>
-export type TerraBroadcastTransactionResponse = RPCHandlerResponse<string>
-export type TerraGetAddressResponse = RPCHandlerResponse<string>
-export type TerraSignTransactionResponse = RPCHandlerResponse<TerraSignedTransaction>
-export type ThorchainBroadcastTransactionResponse = RPCHandlerResponse<string>
-export type ThorchainGetAddressResponse = RPCHandlerResponse<string>
-export type ThorchainSignTransactionResponse = RPCHandlerResponse<ThorchainSignedTransaction>
+export type BinanceBroadcastTransactionResponse = string
+export type BinanceGetAddressResponse = BinanceAddress
+export type BinanceSignTransactionResponse = BinanceSignedTransaction
+export type BitcoinBroadcastTransactionResponse = string
+export type BitcoinCashBroadcastTransactionResponse = string
+export type BitcoinCashGetAddressResponse = BitcoinCashAddress
+export type BitcoinCashSignTransactionResponse = BitcoinCashSignedTransaction
+export type BitcoinGetAddressResponse = BitcoinAddress
+export type BitcoinSignTransactionResponse = BitcoinSignedTransaction
+export type CosmosBroadcastTransactionResponse = string
+export type CosmosGetAddressResponse = CosmosAddress
+export type CosmosSignTransactionResponse = CosmosSignedTransaction
+export type DogecoinBroadcastTransactionResponse = string
+export type DogecoinGetAddressResponse = DogecoinAddress
+export type DogecoinSignTransactionResponse = DogecoinSignedTransaction
+export type EthereumBroadcastTransactionResponse = string
+export type EthereumGetAddressResponse = EthereumAddress
+export type EthereumSignMessageResponse = EthereumSignedMessage
+export type EthereumSignTransactionResponse = EthereumSignedTransaction
+export type EthereumVerifyMessageResponse = boolean
+export type KavaBroadcastTransactionResponse = string
+export type KavaGetAddressResponse = KavaAddress
+export type KavaSignTransactionResponse = KavaSignedTransaction
+export type LitecoinBroadcastTransactionResponse = string
+export type LitecoinGetAddressResponse = LitecoinAddress
+export type LitecoinSignTransactionResponse = LitecoinSignedTransaction
+export type OsmosisBroadcastTransactionResponse = string
+export type OsmosisGetAddressResponse = OsmosisAddress
+export type OsmosisSignTransactionResponse = OsmosisSignedTransaction
+export type PingResponse = string
+export type SecretBroadcastTransactionResponse = string
+export type SecretGetAddressResponse = SecretAddress
+export type SecretSignTransactionResponse = SecretSignedTransaction
+export type TerraBroadcastTransactionResponse = string
+export type TerraGetAddressResponse = TerraAddress
+export type TerraSignTransactionResponse = TerraSignedTransaction
+export type ThorchainBroadcastTransactionResponse = string
+export type ThorchainGetAddressResponse = ThorchainAddress
+export type ThorchainSignTransactionResponse = ThorchainSignedTransaction
 
 export type ShapeShiftSnapRPCResponse =
   | BinanceBroadcastTransactionResponse
@@ -78,21 +77,15 @@ export type ShapeShiftSnapRPCResponse =
   | BitcoinBroadcastTransactionResponse
   | BitcoinCashBroadcastTransactionResponse
   | BitcoinCashGetAddressResponse
-  | BitcoinCashSignMessageResponse
   | BitcoinCashSignTransactionResponse
-  | BitcoinCashVerifyMessageResponse
   | BitcoinGetAddressResponse
-  | BitcoinSignMessageResponse
   | BitcoinSignTransactionResponse
-  | BitcoinVerifyMessageResponse
   | CosmosBroadcastTransactionResponse
   | CosmosGetAddressResponse
   | CosmosSignTransactionResponse
   | DogecoinBroadcastTransactionResponse
   | DogecoinGetAddressResponse
-  | DogecoinSignMessageResponse
   | DogecoinSignTransactionResponse
-  | DogecoinVerifyMessageResponse
   | EthereumBroadcastTransactionResponse
   | EthereumGetAddressResponse
   | EthereumSignMessageResponse
@@ -103,9 +96,7 @@ export type ShapeShiftSnapRPCResponse =
   | KavaSignTransactionResponse
   | LitecoinBroadcastTransactionResponse
   | LitecoinGetAddressResponse
-  | LitecoinSignMessageResponse
   | LitecoinSignTransactionResponse
-  | LitecoinVerifyMessageResponse
   | OsmosisBroadcastTransactionResponse
   | OsmosisGetAddressResponse
   | OsmosisSignTransactionResponse

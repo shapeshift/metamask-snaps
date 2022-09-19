@@ -2,62 +2,52 @@
 
 import { OnRpcRequestHandler } from '@metamask/snap-types'
 import { ShapeShiftSnapRPCRequest } from '@shapeshiftoss/metamask-snaps-types'
-
 import {
   binanceBroadcastTransaction,
   binanceGetAddress,
   binanceSignTransaction,
-} from './rpc/binance'
+} from './rpc/cosmossdk/binance'
 import {
-  btcBroadcastTransaction,
-  btcGetAddress,
-  btcSignMessage,
-  btcSignTransaction,
-  btcVerifyMessage,
-} from './rpc/bitcoin'
+  bitcoinBroadcastTransaction,
+  bitcoinGetAddress,
+  bitcoinSignTransaction,
+} from './rpc/utxo/bitcoin'
 import {
-  bchBroadcastTransaction,
-  bchGetAddress,
-  bchSignMessage,
-  bchSignTransaction,
-  bchVerifyMessage,
-} from './rpc/bitcoincash'
-import { testFunction } from './rpc/common'
-import { cosmosBroadcastTransaction, cosmosGetAddress, cosmosSignTransaction } from './rpc/cosmos'
+  bitcoincashBroadcastTransaction,
+  bitcoincashGetAddress,
+  bitcoincashSignTransaction,
+} from './rpc/utxo/bitcoincash'
+import { cosmosBroadcastTransaction, cosmosGetAddress, cosmosSignTransaction } from './rpc/cosmossdk/cosmos'
 import {
-  dogeBroadcastTransaction,
-  dogeGetAddress,
-  dogeSignMessage,
-  dogeSignTransaction,
-  dogeVerifyMessage,
-} from './rpc/dogecoin'
+  dogecoinBroadcastTransaction,
+  dogecoinGetAddress,
+  dogecoinSignTransaction,
+} from './rpc/utxo/dogecoin'
 import {
-  ethBroadcastTransaction,
-  ethGetAddress,
-  ethSignMessage,
-  ethSignTransaction,
-  ethVerifyMessage,
-} from './rpc/ethereum'
-import { kavaBroadcastTransaction, kavaGetAddress, kavaSignTransaction } from './rpc/kava'
+  ethereumBroadcastTransaction,
+  ethereumGetAddress,
+  ethereumSignMessage,
+  ethereumSignTransaction,
+  ethereumVerifyMessage,
+} from './rpc/evm/ethereum'
+import { kavaBroadcastTransaction, kavaGetAddress, kavaSignTransaction } from './rpc/cosmossdk/kava'
 import {
-  ltcBroadcastTransaction,
-  ltcGetAddress,
-  ltcSignMessage,
-  ltcSignTransaction,
-  ltcVerifyMessage,
-} from './rpc/litecoin'
+  litecoinBroadcastTransaction,
+  litecoinGetAddress,
+  litecoinSignTransaction,
+} from './rpc/utxo/litecoin'
 import {
   osmosisBroadcastTransaction,
   osmosisGetAddress,
   osmosisSignTransaction,
-} from './rpc/osmosis'
-import { secretBroadcastTransaction, secretGetAddress, secretSignTransaction } from './rpc/secret'
-import { terraBroadcastTransaction, terraGetAddress, terraSignTransaction } from './rpc/terra'
+} from './rpc/cosmossdk/osmosis'
+import { secretBroadcastTransaction, secretGetAddress, secretSignTransaction } from './rpc/cosmossdk/secret'
+import { terraBroadcastTransaction, terraGetAddress, terraSignTransaction } from './rpc/cosmossdk/terra'
 import {
   thorchainBroadcastTransaction,
   thorchainGetAddress,
   thorchainSignTransaction,
-} from './rpc/thorchain'
+} from './rpc/cosmossdk/thorchain'
 
 /**
  * Handle incoming JSON-RPC requests, sent through `wallet_invokeSnap`.
@@ -86,25 +76,17 @@ export const onRpcRequest: OnRpcRequestHandler = async ({ request }) => {
     case 'binance_broadcastTransaction':
       return await binanceBroadcastTransaction(params)
     case 'bch_getAddress':
-      return await bchGetAddress(params)
+      return await bitcoincashGetAddress(params)
     case 'bch_signTransaction':
-      return await bchSignTransaction(params)
-    case 'bch_signMessage':
-      return await bchSignMessage(params)
-    case 'bch_verifyMessage':
-      return await bchVerifyMessage(params)
+      return await bitcoincashSignTransaction(params)
     case 'bch_broadcastTransaction':
-      return await bchBroadcastTransaction(params)
+      return await bitcoincashBroadcastTransaction(params)
     case 'btc_getAddress':
-      return await btcGetAddress(params)
+      return await bitcoinGetAddress(params)
     case 'btc_signTransaction':
-      return await btcSignTransaction(params)
-    case 'btc_signMessage':
-      return await btcSignMessage(params)
-    case 'btc_verifyMessage':
-      return await btcVerifyMessage(params)
+      return await bitcoinSignTransaction(params)
     case 'btc_broadcastTransaction':
-      return await btcBroadcastTransaction(params)
+      return await bitcoinBroadcastTransaction(params)
     case 'cosmos_getAddress':
       return await cosmosGetAddress(params)
     case 'cosmos_signTransaction':
@@ -112,25 +94,21 @@ export const onRpcRequest: OnRpcRequestHandler = async ({ request }) => {
     case 'cosmos_broadcastTransaction':
       return await cosmosBroadcastTransaction(params)
     case 'doge_getAddress':
-      return await dogeGetAddress(params)
+      return await dogecoinGetAddress(params)
     case 'doge_signTransaction':
-      return await dogeSignTransaction(params)
-    case 'doge_signMessage':
-      return await dogeSignMessage(params)
-    case 'doge_verifyMessage':
-      return await dogeVerifyMessage(params)
+      return await dogecoinSignTransaction(params)
     case 'doge_broadcastTransaction':
-      return await dogeBroadcastTransaction(params)
+      return await dogecoinBroadcastTransaction(params)
     case 'eth_getAddress':
-      return await ethGetAddress(params)
+      return await ethereumGetAddress(params)
     case 'eth_signMessage':
-      return await ethSignMessage(params)
+      return await ethereumSignMessage(params)
     case 'eth_signTransaction':
-      return await ethSignTransaction(params)
+      return await ethereumSignTransaction(params)
     case 'eth_verifyMessage':
-      return await ethVerifyMessage(params)
+      return await ethereumVerifyMessage(params)
     case 'eth_broadcastTransaction':
-      return await ethBroadcastTransaction(params)
+      return await ethereumBroadcastTransaction(params)
     case 'kava_getAddress':
       return await kavaGetAddress(params)
     case 'kava_signTransaction':
@@ -138,15 +116,11 @@ export const onRpcRequest: OnRpcRequestHandler = async ({ request }) => {
     case 'kava_broadcastTransaction':
       return await kavaBroadcastTransaction(params)
     case 'ltc_getAddress':
-      return await ltcGetAddress(params)
+      return await litecoinGetAddress(params)
     case 'ltc_signTransaction':
-      return await ltcSignTransaction(params)
-    case 'ltc_signMessage':
-      return await ltcSignMessage(params)
-    case 'ltc_verifyMessage':
-      return await ltcVerifyMessage(params)
+      return await litecoinSignTransaction(params)
     case 'ltc_broadcastTransaction':
-      return await ltcBroadcastTransaction(params)
+      return await litecoinBroadcastTransaction(params)
     case 'osmosis_getAddress':
       return await osmosisGetAddress(params)
     case 'osmosis_signTransaction':
@@ -171,11 +145,6 @@ export const onRpcRequest: OnRpcRequestHandler = async ({ request }) => {
       return await thorchainSignTransaction(params)
     case 'thorchain_broadcastTransaction':
       return await thorchainBroadcastTransaction(params)
-    case 'ping':
-      return await 'pong'
-    case 'test':
-      return await testFunction()
-
     default:
       throw new Error('Method not found.')
   }

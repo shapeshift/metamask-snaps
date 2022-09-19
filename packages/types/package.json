@@ -20,7 +20,9 @@
   "types": "dist/index.d.ts",
   "dependencies": {
     "@metamask/types": "^1.1.0",
-    "@shapeshiftoss/hdwallet-core": "^1.29.0"
+    "@shapeshiftoss/hdwallet-core": "^1.29.0",
+    "@shapeshiftoss/hdwallet-native": "^1.33.0",
+    "@shapeshiftoss/unchained-client": "^10.1.1"
   },
   "devDependencies": {
     "eslint": "^8.23.0",
