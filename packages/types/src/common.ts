@@ -3,26 +3,17 @@ export {
   BinanceSignedTx as BinanceSignedTransaction,
   BinanceSignTx as BinanceSignTransaction,
   BTCGetAddress as BitcoinCashGetAddress,
-  BTCSignedMessage as BitcoinCashSignedMessage,
   BTCSignedTx as BitcoinCashSignedTransaction,
-  BTCSignMessage as BitcoinCashSignMessage,
   BTCSignTx as BitcoinCashSignTransaction,
-  BTCVerifyMessage as BitcoinCashVerifyMessage,
   BTCGetAddress as BitcoinGetAddress,
-  BTCSignedMessage as BitcoinSignedMessage,
   BTCSignedTx as BitcoinSignedTransaction,
-  BTCSignMessage as BitcoinSignMessage,
   BTCSignTx as BitcoinSignTransaction,
-  BTCVerifyMessage as BitcoinVerifyMessage,
   CosmosGetAddress,
   CosmosSignedTx as CosmosSignedTransaction,
   CosmosSignTx as CosmosSignTransaction,
   BTCGetAddress as DogecoinGetAddress,
-  BTCSignedMessage as DogecoinSignedMessage,
   BTCSignedTx as DogecoinSignedTransaction,
-  BTCSignMessage as DogecoinSignMessage,
   BTCSignTx as DogecoinSignTransaction,
-  BTCVerifyMessage as DogecoinVerifyMessage,
   ETHGetAddress as EthereumGetAddress,
   ETHSignedMessage as EthereumSignedMessage,
   ETHSignedTx as EthereumSignedTransaction,
@@ -33,11 +24,8 @@ export {
   KavaSignedTx as KavaSignedTransaction,
   KavaSignTx as KavaSignTransaction,
   BTCGetAddress as LitecoinGetAddress,
-  BTCSignedMessage as LitecoinSignedMessage,
   BTCSignedTx as LitecoinSignedTransaction,
-  BTCSignMessage as LitecoinSignMessage,
   BTCSignTx as LitecoinSignTransaction,
-  BTCVerifyMessage as LitecoinVerifyMessage,
   OsmosisGetAddress,
   OsmosisSignedTx as OsmosisSignedTransaction,
   OsmosisSignTx as OsmosisSignTransaction,
@@ -51,6 +39,19 @@ export {
   ThorchainSignedTx as ThorchainSignedTransaction,
   ThorchainSignTx as ThorchainSignTransaction,
 } from '@shapeshiftoss/hdwallet-core'
+
+export type BinanceAddress = string | null
+export type BitcoinAddress = string | null
+export type BitcoinCashAddress = string | null
+export type CosmosAddress = string | null
+export type DogecoinAddress = string | null
+export type EthereumAddress = string | null
+export type KavaAddress = string | null
+export type LitecoinAddress = string | null
+export type OsmosisAddress = string | null
+export type SecretAddress = string | null
+export type TerraAddress = string | null
+export type ThorchainAddress = string | null
 
 export interface WalletEnableParam {
   [snapId: string]: {

@@ -17,19 +17,13 @@ import {
   BinanceSignedTransaction,
   BinanceSignTransaction,
   BitcoinCashSignedTransaction,
-  BitcoinCashSignMessage,
   BitcoinCashSignTransaction,
-  BitcoinCashVerifyMessage,
   BitcoinSignedTransaction,
-  BitcoinSignMessage,
   BitcoinSignTransaction,
-  BitcoinVerifyMessage,
   CosmosSignedTransaction,
   CosmosSignTransaction,
   DogecoinSignedTransaction,
-  DogecoinSignMessage,
   DogecoinSignTransaction,
-  DogecoinVerifyMessage,
   EthereumSignedTransaction,
   EthereumSignMessage,
   EthereumSignTransaction,
@@ -37,9 +31,7 @@ import {
   KavaSignedTransaction,
   KavaSignTransaction,
   LitecoinSignedTransaction,
-  LitecoinSignMessage,
   LitecoinSignTransaction,
-  LitecoinVerifyMessage,
   OsmosisSignedTransaction,
   OsmosisSignTransaction,
   SecretSignedTransaction,
@@ -75,16 +67,11 @@ export type BitcoinBroadcastTransactionAdapterParams =
 export type BitcoinCashBroadcastTransactionAdapterParams =
   BroadcastTransactionAdapterParams<BitcoinCashSignedTransaction>
 export type BitcoinCashGetAddressAdapterParams = GetAddressAdapterParams<BitcoinCashGetAddress>
-export type BitcoinCashSignMessageAdapterParams = SignMessageAdapterParams<BitcoinCashSignMessage>
 export type BitcoinCashSignTransactionAdapterParams =
   SignTransactionAdapterParams<BitcoinCashSignTransaction>
-export type BitcoinCashVerifyMessageAdapterParams =
-  VerifyMessageAdapterParams<BitcoinCashVerifyMessage>
 export type BitcoinGetAddressAdapterParams = GetAddressAdapterParams<BTCGetAddress>
-export type BitcoinSignMessageAdapterParams = SignMessageAdapterParams<BitcoinSignMessage>
 export type BitcoinSignTransactionAdapterParams =
   SignTransactionAdapterParams<BitcoinSignTransaction>
-export type BitcoinVerifyMessageAdapterParams = VerifyMessageAdapterParams<BitcoinVerifyMessage>
 export type CosmosBroadcastTransactionAdapterParams =
   BroadcastTransactionAdapterParams<CosmosSignedTransaction>
 export type CosmosGetAddressAdapterParams = GetAddressAdapterParams<CosmosGetAddress>
@@ -96,10 +83,8 @@ export type DecretSignTransactionAdapterParams = SignTransactionAdapterParams<Se
 export type DogecoinBroadcastTransactionAdapterParams =
   BroadcastTransactionAdapterParams<DogecoinSignedTransaction>
 export type DogecoinGetAddressAdapterParams = GetAddressAdapterParams<DogecoinGetAddress>
-export type DogecoinSignMessageAdapterParams = SignMessageAdapterParams<DogecoinSignMessage>
 export type DogecoinSignTransactionAdapterParams =
   SignTransactionAdapterParams<DogecoinSignTransaction>
-export type DogecoinVerifyMessageAdapterParams = VerifyMessageAdapterParams<DogecoinVerifyMessage>
 export type EthereumBroadcastTransactionAdapterParams =
   BroadcastTransactionAdapterParams<EthereumSignedTransaction>
 export type EthereumGetAddressAdapterParams = GetAddressAdapterParams<ETHGetAddress>
@@ -114,10 +99,8 @@ export type KavaSignTransactionAdapterParams = SignTransactionAdapterParams<Kava
 export type LitecoinBroadcastTransactionAdapterParams =
   BroadcastTransactionAdapterParams<LitecoinSignedTransaction>
 export type LitecoinGetAddressAdapterParams = GetAddressAdapterParams<LitecoinGetAddress>
-export type LitecoinSignMessageAdapterParams = SignMessageAdapterParams<LitecoinSignMessage>
 export type LitecoinSignTransactionAdapterParams =
   SignTransactionAdapterParams<LitecoinSignTransaction>
-export type LitecoinVerifyMessageAdapterParams = VerifyMessageAdapterParams<LitecoinVerifyMessage>
 export type OsmosisBroadcastTransactionAdapterParams =
   BroadcastTransactionAdapterParams<OsmosisSignedTransaction>
 export type OsmosisGetAddressAdapterParams = GetAddressAdapterParams<OsmosisGetAddress>

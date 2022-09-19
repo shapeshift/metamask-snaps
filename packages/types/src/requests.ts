@@ -5,21 +5,15 @@ import {
   BitcoinBroadcastTransactionParams,
   BitcoinCashBroadcastTransactionParams,
   BitcoinCashGetAddressParams,
-  BitcoinCashSignMessageParams,
   BitcoinCashSignTransactionParams,
-  BitcoinCashVerifyMessageParams,
   BitcoinGetAddressParams,
-  BitcoinSignMessageParams,
   BitcoinSignTransactionParams,
-  BitcoinVerifyMessageParams,
   CosmosBroadcastTransactionParams,
   CosmosGetAddressParams,
   CosmosSignTransactionParams,
   DogecoinBroadcastTransactionParams,
   DogecoinGetAddressParams,
-  DogecoinSignMessageParams,
   DogecoinSignTransactionParams,
-  DogecoinVerifyMessageParams,
   EthereumBroadcastTransactionParams,
   EthereumGetAddressParams,
   EthereumSignMessageParams,
@@ -30,9 +24,7 @@ import {
   KavaSignTransactionParams,
   LitecoinBroadcastTransactionParams,
   LitecoinGetAddressParams,
-  LitecoinSignMessageParams,
   LitecoinSignTransactionParams,
-  LitecoinVerifyMessageParams,
   OsmosisBroadcastTransactionParams,
   OsmosisGetAddressParams,
   OsmosisSignTransactionParams,
@@ -55,16 +47,6 @@ export interface BitcoinCashGetAddressRequest {
 export interface BitcoinCashSignTransactionRequest {
   method: 'bch_signTransaction'
   params: BitcoinCashSignTransactionParams
-}
-
-export interface BitcoinCashSignMessageRequest {
-  method: 'bch_signMessage'
-  params: BitcoinCashSignMessageParams
-}
-
-export interface BitcoinCashVerifyMessageRequest {
-  method: 'bch_verifyMessage'
-  params: BitcoinCashVerifyMessageParams
 }
 
 export interface BitcoinCashBroadcastTransactionRequest {
@@ -96,19 +78,9 @@ export interface BitcoinSignTransactionRequest {
   params: BitcoinSignTransactionParams
 }
 
-export interface BitcoinSignMessageRequest {
-  method: 'btc_signMessage'
-  params: BitcoinSignMessageParams
-}
-
 export interface BitcoinBroadcastTransactionRequest {
   method: 'btc_broadcastTransaction'
   params: BitcoinBroadcastTransactionParams
-}
-
-export interface BitcoinVerifyMessageRequest {
-  method: 'btc_verifyMessage'
-  params: BitcoinVerifyMessageParams
 }
 
 export interface CosmosGetAddressRequest {
@@ -133,16 +105,6 @@ export interface DogecoinGetAddressRequest {
 export interface DogecoinSignTransactionRequest {
   method: 'doge_signTransaction'
   params: DogecoinSignTransactionParams
-}
-
-export interface DogecoinSignMessageRequest {
-  method: 'doge_signMessage'
-  params: DogecoinSignMessageParams
-}
-
-export interface DogecoinVerifyMessageRequest {
-  method: 'doge_verifyMessage'
-  params: DogecoinVerifyMessageParams
 }
 
 export interface DogecoinBroadcastTransactionRequest {
@@ -197,16 +159,6 @@ export interface LitecoinGetAddressRequest {
 export interface LitecoinSignTransactionRequest {
   method: 'ltc_signTransaction'
   params: LitecoinSignTransactionParams
-}
-
-export interface LitecoinSignMessageRequest {
-  method: 'ltc_signMessage'
-  params: LitecoinSignMessageParams
-}
-
-export interface LitecoinVerifyMessageRequest {
-  method: 'ltc_verifyMessage'
-  params: LitecoinVerifyMessageParams
 }
 
 export interface LitecoinBroadcastTransactionRequest {
@@ -282,21 +234,15 @@ export type ShapeShiftSnapRPCRequest =
   | BitcoinBroadcastTransactionRequest
   | BitcoinCashBroadcastTransactionRequest
   | BitcoinCashGetAddressRequest
-  | BitcoinCashSignMessageRequest
   | BitcoinCashSignTransactionRequest
-  | BitcoinCashVerifyMessageRequest
   | BitcoinGetAddressRequest
-  | BitcoinSignMessageRequest
   | BitcoinSignTransactionRequest
-  | BitcoinVerifyMessageRequest
   | CosmosBroadcastTransactionRequest
   | CosmosGetAddressRequest
   | CosmosSignTransactionRequest
   | DogecoinBroadcastTransactionRequest
   | DogecoinGetAddressRequest
-  | DogecoinSignMessageRequest
   | DogecoinSignTransactionRequest
-  | DogecoinVerifyMessageRequest
   | EthereumBroadcastTransactionRequest
   | EthereumGetAddressRequest
   | EthereumSignMessageRequest
@@ -307,9 +253,7 @@ export type ShapeShiftSnapRPCRequest =
   | KavaSignTransactionRequest
   | LitecoinBroadcastTransactionRequest
   | LitecoinGetAddressRequest
-  | LitecoinSignMessageRequest
   | LitecoinSignTransactionRequest
-  | LitecoinVerifyMessageRequest
   | OsmosisBroadcastTransactionRequest
   | OsmosisGetAddressRequest
   | OsmosisSignTransactionRequest
