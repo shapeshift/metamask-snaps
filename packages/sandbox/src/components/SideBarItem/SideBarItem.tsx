@@ -1,4 +1,4 @@
-import { Button } from '@chakra-ui/react'
+import { Button, Text } from '@chakra-ui/react'
 import { Link, useLocation } from 'react-router-dom'
 
 export type SideBarItemProps = {
@@ -17,7 +17,7 @@ export const SideBarItem = ({ route, text }: SideBarItemProps) => {
         isActive={location.pathname === `/${route}`}
         color='#718096'
       >
-        {text}
+        <Text>{text}</Text>
       </Button>
     </Link>
   )
