@@ -302,24 +302,6 @@ export const AssetCardListConfig: Array<CardProps> = [
     },
   },
   {
-    name: 'Terra',
-    icon: 'luna.png',
-    symbol: 'LUNA',
-    actions: {
-      terra_getAddress: {
-        callback: terraGetAddress,
-        params: { addressParams: TerraTransactions.address, snapId: DEFAULT_SNAP_ID },
-        description: 'Generate a receive address',
-      },
-
-      terra_signTransaction: {
-        callback: terraSignTransaction,
-        params: { transaction: TerraTransactions.send, snapId: DEFAULT_SNAP_ID },
-        description: 'Sign a Terra send message',
-      },
-    },
-  },
-  {
     name: 'Secret',
     icon: 'scrt.png',
     symbol: 'SCRT',
@@ -334,6 +316,24 @@ export const AssetCardListConfig: Array<CardProps> = [
         callback: secretSignTransaction,
         params: { transaction: SecretTransactions.send, snapId: DEFAULT_SNAP_ID },
         description: 'Sign a Secret send message',
+      },
+    },
+  },
+  {
+    name: 'Terra',
+    icon: 'luna.png',
+    symbol: 'LUNA',
+    actions: {
+      terra_getAddress: {
+        callback: terraGetAddress,
+        params: { addressParams: TerraTransactions.address, snapId: DEFAULT_SNAP_ID },
+        description: 'Generate a receive address',
+      },
+
+      terra_signTransaction: {
+        callback: terraSignTransaction,
+        params: { transaction: TerraTransactions.send, snapId: DEFAULT_SNAP_ID },
+        description: 'Sign a Terra send message',
       },
     },
   },
