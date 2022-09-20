@@ -116,7 +116,6 @@ export type TerraGetAddressParams = GetAddressParams<TerraGetAddress>
 export type ThorchainGetAddressParams = GetAddressParams<ThorchainGetAddress>
 
 type GetAddressParamsTypeTable = {
-  //   [SupportedChainIds.AvalancheMainnet]: AvalancheGetAddressParams
   [SupportedChainIds.BinanceMainnet]: BinanceGetAddressParams
   [SupportedChainIds.BitcoinCashMainnet]: BitcoinCashGetAddressParams
   [SupportedChainIds.BitcoinMainnet]: BitcoinGetAddressParams
@@ -209,7 +208,6 @@ export type TerraGetAddressResponse = TerraAddress
 export type ThorchainGetAddressResponse = ThorchainAddress
 
 type GetAddressResponseTypeTable = {
-  // [SupportedChainIds.AvalancheMainnet]: AvalancheGetAddressResponse
   [SupportedChainIds.BinanceMainnet]: BinanceGetAddressResponse
   [SupportedChainIds.BitcoinCashMainnet]: BitcoinCashGetAddressResponse
   [SupportedChainIds.BitcoinMainnet]: BitcoinGetAddressResponse
@@ -223,22 +221,6 @@ type GetAddressResponseTypeTable = {
   [SupportedChainIds.TerraMainnet]: TerraGetAddressResponse
   [SupportedChainIds.ThorchainMainnet]: ThorchainGetAddressResponse
 }
-
-// type GetAddressResponseTypeTable = {
-//   // [SupportedChainIds.AvalancheMainnet]: AvalancheGetAddressResponse
-//   [SupportedChainIds.BinanceMainnet]: BinanceAddress
-//   [SupportedChainIds.BitcoinCashMainnet]: BitcoinCashAddress
-//   [SupportedChainIds.BitcoinMainnet]: BitcoinAddress
-//   [SupportedChainIds.CosmosMainnet]: CosmosAddress
-//   [SupportedChainIds.DogecoinMainnet]: DogecoinAddress
-//   [SupportedChainIds.EthereumMainnet]: EthereumAddress
-//   [SupportedChainIds.KavaMainnet]: KavaAddress
-//   [SupportedChainIds.LitecoinMainnet]: LitecoinAddress
-//   [SupportedChainIds.OsmosisMainnet]: OsmosisAddress
-//   [SupportedChainIds.SecretMainnet]: SecretAddress
-//   [SupportedChainIds.TerraMainnet]: TerraAddress
-//   [SupportedChainIds.ThorchainMainnet]: ThorchainAddress
-// }
 
 export type GetAddressResponseType<T> = T extends keyof GetAddressResponseTypeTable
   ? GetAddressResponseTypeTable[T]
@@ -263,7 +245,6 @@ export type TerraSignTransactionParams = SignTransactionParams<TerraSignTransact
 export type ThorchainSignTransactionParams = SignTransactionParams<ThorchainSignTransaction>
 
 type SignTransactionParamsTypeTable = {
-  // [SupportedChainIds.AvalancheMainnet]: AvalancheSignTransactionParams
   [SupportedChainIds.BinanceMainnet]: BinanceSignTransactionParams
   [SupportedChainIds.BitcoinCashMainnet]: BitcoinCashSignTransactionParams
   [SupportedChainIds.BitcoinMainnet]: BitcoinSignTransactionParams
@@ -354,7 +335,6 @@ export type TerraSignTransactionResponse = TerraSignedTransaction
 export type ThorchainSignTransactionResponse = ThorchainSignedTransaction
 
 export type SignTransactionResponseTypeTable = {
-  // [SupportedChainIds.AvalancheMainnet]: AvalancheSignTransactionResponse
   [SupportedChainIds.BinanceMainnet]: BinanceSignTransactionResponse
   [SupportedChainIds.BitcoinCashMainnet]: BitcoinCashSignTransactionResponse
   [SupportedChainIds.BitcoinMainnet]: BitcoinSignTransactionResponse
@@ -369,22 +349,6 @@ export type SignTransactionResponseTypeTable = {
   [SupportedChainIds.ThorchainMainnet]: ThorchainSignTransactionResponse
 }
 
-// export type SignTransactionResponseTypeTable = {
-//   [SupportedChainIds.AvalancheMainnet]: EthereumSignedTransaction
-//   [SupportedChainIds.BinanceMainnet]: BinanceSignedTransaction
-//   [SupportedChainIds.BitcoinCashMainnet]: BitcoinCashSignedTransaction
-//   [SupportedChainIds.BitcoinMainnet]: BitcoinSignedTransaction
-//   [SupportedChainIds.CosmosMainnet]: CosmosSignedTransaction
-//   [SupportedChainIds.DogecoinMainnet]: DogecoinSignedTransaction
-//   [SupportedChainIds.EthereumMainnet]: EthereumSignedTransaction
-//   [SupportedChainIds.KavaMainnet]: KavaSignedTransaction
-//   [SupportedChainIds.LitecoinMainnet]: LitecoinSignedTransaction
-//   [SupportedChainIds.OsmosisMainnet]: OsmosisSignedTransaction
-//   [SupportedChainIds.SecretMainnet]: SecretSignedTransaction
-//   [SupportedChainIds.TerraMainnet]: TerraSignedTransaction
-//   [SupportedChainIds.ThorchainMainnet]: ThorchainSignedTransaction
-// }
-
 export type SignTransactionResponseType<T> = T extends keyof SignTransactionResponseTypeTable
   ? SignTransactionResponseTypeTable[T]
   : never
@@ -397,7 +361,6 @@ export type SignMessageParams<T> = {
 export type EthereumSignMessageParams = SignMessageParams<EthereumSignMessage>
 
 type SignMessageParamsTypeTable = {
-  // [SupportedChainIds.AvalancheMainnet]: AvalancheSignMessageParams
   [SupportedChainIds.EthereumMainnet]: EthereumSignMessageParams
 }
 
@@ -413,7 +376,6 @@ export interface EthereumSignMessageRequest {
 export type EthereumSignMessageResponse = EthereumSignedMessage
 
 type SignMessageResponseTypeTable = {
-  // [SupportedChainIds.AvalancheMainnet]: AvalancheSignMessageResponse
   [SupportedChainIds.EthereumMainnet]: EthereumSignMessageResponse
 }
 
@@ -434,7 +396,6 @@ export interface EthereumVerifyMessageRequest {
 }
 
 type VerifyMessageParamsTypeTable = {
-  // [SupportedChainIds.AvalancheMainnet]: AvalancheVerifyMessageParams
   [SupportedChainIds.EthereumMainnet]: EthereumVerifyMessageParams
 }
 
@@ -445,7 +406,6 @@ export type VerifyMessageParamsType<T> = T extends keyof VerifyMessageParamsType
 export type EthereumVerifyMessageResponse = boolean
 
 type VerifyMessageResponseTypeTable = {
-  // [SupportedChainIds.AvalancheMainnet]: AvalancheVerifyMessageResponse
   [SupportedChainIds.EthereumMainnet]: EthereumVerifyMessageResponse
 }
 
@@ -478,7 +438,6 @@ export type ThorchainBroadcastTransactionParams =
   BroadcastTransactionParams<ThorchainSignedTransaction>
 
 type BroadcastTransactionParamsTypeTable = {
-  // [SupportedChainIds.AvalancheMainnet]: AvalancheBroadcastTransactionParams
   [SupportedChainIds.BinanceMainnet]: BroadcastTransactionParams<BinanceSignedTransaction>
   [SupportedChainIds.BitcoinCashMainnet]: BroadcastTransactionParams<BitcoinCashSignedTransaction>
   [SupportedChainIds.BitcoinMainnet]: BroadcastTransactionParams<BitcoinSignedTransaction>
@@ -591,7 +550,6 @@ export type BroadcastTransactionResponseType<T> =
     : never
 
 type SignerGetAddressTypeTable = {
-  [SupportedChainIds.AvalancheMainnet]: EthereumGetAddress
   [SupportedChainIds.BitcoinCashMainnet]: BitcoinCashGetAddress
   [SupportedChainIds.BitcoinMainnet]: BitcoinGetAddress
   [SupportedChainIds.CosmosMainnet]: CosmosGetAddress
@@ -611,7 +569,6 @@ export type SignerGetAddressType<T> = T extends keyof SignerGetAddressTypeTable
   : never
 
 type SignerGetAddressReturnTypeTable = {
-  [SupportedChainIds.AvalancheMainnet]: EthereumAddress
   [SupportedChainIds.BitcoinCashMainnet]: BitcoinCashAddress
   [SupportedChainIds.BitcoinMainnet]: BitcoinAddress
   [SupportedChainIds.CosmosMainnet]: CosmosAddress
@@ -663,7 +620,6 @@ export type SignerVerifyMessageReturnType<T> = T extends keyof SignerVerifyMessa
   : never
 
 type SignerSignTransactionTypeTable = {
-  [SupportedChainIds.AvalancheMainnet]: EthereumSignTransaction
   [SupportedChainIds.BinanceMainnet]: BinanceSignTransaction
   [SupportedChainIds.BitcoinCashMainnet]: BitcoinCashSignTransaction
   [SupportedChainIds.BitcoinMainnet]: BitcoinSignTransaction
@@ -683,7 +639,6 @@ export type SignerSignTransactionType<T> = T extends keyof SignerSignTransaction
   : never
 
 type SignerSignTransactionReturnTypeTable = {
-  [SupportedChainIds.AvalancheMainnet]: EthereumSignedTransaction
   [SupportedChainIds.BinanceMainnet]: BinanceSignedTransaction
   [SupportedChainIds.BitcoinCashMainnet]: BitcoinCashSignedTransaction
   [SupportedChainIds.BitcoinMainnet]: BitcoinSignedTransaction
@@ -704,7 +659,6 @@ export type SignerSignTransactionReturnType<T> =
     : never
 
 type HTTPConfigurationTypeTable = {
-  [SupportedChainIds.AvalancheMainnet]: unchained.avalanche.Configuration
   [SupportedChainIds.BinanceMainnet]: undefined
   [SupportedChainIds.BitcoinCashMainnet]: unchained.bitcoincash.Configuration
   [SupportedChainIds.BitcoinMainnet]: unchained.bitcoin.Configuration
@@ -724,7 +678,6 @@ export type HTTPConfigurationType<T> = T extends keyof HTTPConfigurationTypeTabl
   : never
 
 type HTTPProviderTypeTable = {
-  [SupportedChainIds.AvalancheMainnet]: unchained.avalanche.V1Api
   [SupportedChainIds.BinanceMainnet]: undefined
   [SupportedChainIds.BitcoinCashMainnet]: unchained.bitcoincash.V1Api
   [SupportedChainIds.BitcoinMainnet]: unchained.bitcoin.V1Api
