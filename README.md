@@ -11,7 +11,7 @@ Currently supported networks are:
 
 - Bitcoin
 - Cosmos
-- Ethereu
+- Ethereum
 
 ## Cloning
 
