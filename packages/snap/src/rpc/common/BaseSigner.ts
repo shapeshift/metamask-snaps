@@ -1,4 +1,4 @@
-import { getHDWalletNativeSigner, userConfirm } from '../common'
+import { Logger } from '@shapeshiftoss/logger'
 import {
   BroadcastTransactionParamsType,
   BroadcastTransactionResponseType,
@@ -15,11 +15,15 @@ import {
   SupportedChainIds,
 } from '@shapeshiftoss/metamask-snaps-types'
 
-import { Logger } from '@shapeshiftoss/logger'
+import { getHDWalletNativeSigner, userConfirm } from '../common'
 
 export interface SignerArgs {
   coin: string
   logger: Logger
+}
+
+export interface SignerInitializeArgs {
+  broadcastUrl?: string
 }
 
 export abstract class BaseSigner<T extends SupportedChainIds> {
