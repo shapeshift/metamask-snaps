@@ -46,6 +46,7 @@ const moduleLogger = logger.child({ namespace: ['Snap', 'Utils.ts'] })
 
 const getMetaMaskProvider = async (): Promise<ExternalProvider> => {
   try {
+    // eslint-disable-next-line no-undef
     const provider = window.ethereum
     if (!provider) {
       throw new Error('Could not detect Ethereum provider')

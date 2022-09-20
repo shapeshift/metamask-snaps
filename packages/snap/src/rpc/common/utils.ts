@@ -1,5 +1,5 @@
 import { ExternalProvider } from '@ethersproject/providers'
-import { getBIP44AddressKeyDeriver, SLIP10Node } from '@metamask/key-tree'
+import { SLIP10Node } from '@metamask/key-tree'
 import { Coin, Keyring } from '@shapeshiftoss/hdwallet-core'
 import { NativeAdapter, NativeHDWallet } from '@shapeshiftoss/hdwallet-native'
 import { Node } from '@shapeshiftoss/hdwallet-native/dist/crypto/isolation/engines/default/bip32'
@@ -9,19 +9,43 @@ import { logger } from './lib/logger'
 
 const moduleLogger = logger.child({ namespace: ['Snap', 'Common', 'Utils.ts'] })
 
-export const testFunction = (): string => {
-  return 'return from testFunction().'
+// https://github.com/satoshilabs/slips/blob/master/slip-0044.md
+const slip44AndCurveTable = Object.freeze({
+  Bitcoin: { slip44: 0, curve: 'secp256k1' },
+  Testnet: { slip44: 1, curve: 'secp256k1' },
+  BitcoinCash: { slip44: 145, curve: 'secp256k1' },
+  BitcoinGold: { slip44: 156, curve: 'secp256k1' },
+  Litecoin: { slip44: 2, curve: 'secp256k1' },
+  Dash: { slip44: 5, curve: 'secp256k1' },
+  DigiByte: { slip44: 20, curve: 'secp256k1' },
+  Dogecoin: { slip44: 3, curve: 'secp256k1' },
+  BitcoinSV: { slip44: 236, curve: 'secp256k1' },
+  Ethereum: { slip44: 60, curve: 'secp256k1' },
+  Atom: { slip44: 118, curve: 'secp256k1' },
+  Osmo: { slip44: 118, curve: 'secp256k1' },
+  Binance: { slip44: 714, curve: 'secp256k1' },
+  Ripple: { slip44: 144, curve: 'secp256k1' },
+  Eos: { slip44: 194, curve: 'secp256k1' },
+  Fio: { slip44: 235, curve: 'secp256k1' },
+  Thorchain: { slip44: 931, curve: 'secp256k1' },
+  Rune: { slip44: 931, curve: 'secp256k1' },
+  Cardano: { slip44: 1815, curve: 'secp256k1' },
+  Secret: { slip44: 529, curve: 'secp256k1' },
+  Terra: { slip44: 330, curve: 'secp256k1' },
+  Kava: { slip44: 459, curve: 'secp256k1' },
+} as const)
+
+type Curve = 'secp256k1' | 'ed25519'
+type Slip44AndCurve<T> = {
+  slip44: T extends keyof typeof slip44AndCurveTable ? number : undefined
+  curve: Curve
 }
+type Slip44AndCurveByCoin<T> = T extends keyof typeof slip44AndCurveTable
+  ? typeof slip44AndCurveTable[T]
+  : Slip44AndCurve<T> | undefined
 
-export const getAddress = async (wallet: any, params: any): Promise<string> => {
-  const node = await wallet.request({
-    method: `snap_getBip44Entropy_${params.chainId.toString()}`,
-  })
-
-  const deriveAddressAtPath = await getBIP44AddressKeyDeriver(node)
-
-  const { address } = await deriveAddressAtPath(params.derivationPath)
-  return address
+export const slip44AndCurveByCoin = <T extends Coin>(coin: T): Slip44AndCurveByCoin<T> => {
+  return (slip44AndCurveTable as any)[coin]
 }
 
 export const getHDWalletNativeSigner = async (coin: Coin): Promise<NativeHDWallet | null> => {
@@ -30,6 +54,7 @@ export const getHDWalletNativeSigner = async (coin: Coin): Promise<NativeHDWalle
     throw new Error(`Coin type: '${coin}' is invalid or unsupported`)
   }
   const path = ['m', "44'", `${slip44}'`]
+  // eslint-disable-next-line no-undef
   const node = await wallet.request({
     method: 'snap_getBip32Entropy',
     params: {
@@ -80,7 +105,7 @@ export const userConfirm = async (params: userConfirmParam): Promise<boolean> =>
   const n = Math.ceil(JSON.stringify(params.textAreaContent, null, 2).length / MAX_LENGTH)
   const textAreaContent = n ? new Array(n) : undefined
 
-  for (let i = 0, j = 0; i < n; ++i, j += MAX_LENGTH) {
+  for (let i = 0, j = 0; i < n; i += 1, j += MAX_LENGTH) {
     try {
       if (textAreaContent) {
         const start = i * MAX_LENGTH
@@ -112,47 +137,9 @@ export const userConfirm = async (params: userConfirmParam): Promise<boolean> =>
   return true
 }
 
-// https://github.com/satoshilabs/slips/blob/master/slip-0044.md
-const slip44AndCurveTable = Object.freeze({
-  Bitcoin: { slip44: 0, curve: 'secp256k1' },
-  Testnet: { slip44: 1, curve: 'secp256k1' },
-  BitcoinCash: { slip44: 145, curve: 'secp256k1' },
-  BitcoinGold: { slip44: 156, curve: 'secp256k1' },
-  Litecoin: { slip44: 2, curve: 'secp256k1' },
-  Dash: { slip44: 5, curve: 'secp256k1' },
-  DigiByte: { slip44: 20, curve: 'secp256k1' },
-  Dogecoin: { slip44: 3, curve: 'secp256k1' },
-  BitcoinSV: { slip44: 236, curve: 'secp256k1' },
-  Ethereum: { slip44: 60, curve: 'secp256k1' },
-  Atom: { slip44: 118, curve: 'secp256k1' },
-  Osmo: { slip44: 118, curve: 'secp256k1' },
-  Binance: { slip44: 714, curve: 'secp256k1' },
-  Ripple: { slip44: 144, curve: 'secp256k1' },
-  Eos: { slip44: 194, curve: 'secp256k1' },
-  Fio: { slip44: 235, curve: 'secp256k1' },
-  Thorchain: { slip44: 931, curve: 'secp256k1' },
-  Rune: { slip44: 931, curve: 'secp256k1' },
-  Cardano: { slip44: 1815, curve: 'secp256k1' },
-  Secret: { slip44: 529, curve: 'secp256k1' },
-  Terra: { slip44: 330, curve: 'secp256k1' },
-  Kava: { slip44: 459, curve: 'secp256k1' },
-} as const)
-
-type Curve = 'secp256k1' | 'ed25519'
-type Slip44AndCurve<T> = {
-  slip44: T extends keyof typeof slip44AndCurveTable ? number : undefined
-  curve: Curve
-}
-type Slip44AndCurveByCoin<T> = T extends keyof typeof slip44AndCurveTable
-  ? typeof slip44AndCurveTable[T]
-  : Slip44AndCurve<T> | undefined
-
-export const slip44AndCurveByCoin = <T extends Coin>(coin: T): Slip44AndCurveByCoin<T> => {
-  return (slip44AndCurveTable as any)[coin]
-}
-
 const getMetaMaskProvider = async (): Promise<ExternalProvider> => {
   try {
+    // eslint-disable-next-line no-undef
     const provider = window.ethereum
     if (!provider) {
       throw new Error('Could not detect Ethereum provider')

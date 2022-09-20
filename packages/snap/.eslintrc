@@ -22,6 +22,7 @@
     "import/newline-after-import": "error",
     "import/no-default-export": "error",
     "import/no-duplicates": "error",
+    "import/prefer-default-export": "off",
     "jsx-a11y/alt-text": "error",
     "jsx-a11y/no-autofocus": "off",
     "no-console": [
@@ -37,6 +38,7 @@
       }
     ],
     "no-underscore-dangle": "off",
+    "no-return-await": "off",
     "object-shorthand": "error",
     "prettier/prettier": [
       "error",
