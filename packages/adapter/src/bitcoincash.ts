@@ -3,12 +3,8 @@ import {
   BitcoinCashBroadcastTransactionResponse,
   BitcoinCashGetAddressAdapterParams,
   BitcoinCashGetAddressResponse,
-  BitcoinCashSignMessageAdapterParams,
-  BitcoinCashSignMessageResponse,
   BitcoinCashSignTransactionAdapterParams,
   BitcoinCashSignTransactionResponse,
-  BitcoinCashVerifyMessageAdapterParams,
-  BitcoinCashVerifyMessageResponse,
 } from '@shapeshiftoss/metamask-snaps-types'
 
 import { logger } from './lib/logger'
@@ -36,24 +32,6 @@ export const BCHGetAddress = async (
   }
 }
 
-export const BCHSignMessage = async (
-  params: BitcoinCashSignMessageAdapterParams,
-): Promise<BitcoinCashSignMessageResponse> => {
-  const { message, snapId } = params
-  try {
-    return await sendFlaskRPCRequest(
-      {
-        method: 'bch_signMessage',
-        params: { message },
-      },
-      snapId,
-    )
-  } catch (error) {
-    moduleLogger.error(error, { fn: 'BCHSignMessage' }, `bch_signMessage RPC call failed.`)
-    return Promise.reject(error)
-  }
-}
-
 export const BCHSignTransaction = async (
   params: BitcoinCashSignTransactionAdapterParams,
 ): Promise<BitcoinCashSignTransactionResponse> => {
@@ -68,24 +46,6 @@ export const BCHSignTransaction = async (
     )
   } catch (error) {
     moduleLogger.error(error, { fn: 'BCHSignTransaction' }, `bch_signTransaction RPC call failed.`)
-    return Promise.reject(error)
-  }
-}
-
-export const BCHVerifyMessage = async (
-  params: BitcoinCashVerifyMessageAdapterParams,
-): Promise<BitcoinCashVerifyMessageResponse> => {
-  const { message, snapId } = params
-  try {
-    return await sendFlaskRPCRequest(
-      {
-        method: 'bch_verifyMessage',
-        params: { message },
-      },
-      snapId,
-    )
-  } catch (error) {
-    moduleLogger.error(error, { fn: 'BCHVerifyMessage' }, `bch_verifyMessage RPC call failed.`)
     return Promise.reject(error)
   }
 }
