@@ -2,11 +2,45 @@
 
 import { OnRpcRequestHandler } from '@metamask/snap-types'
 import { ShapeShiftSnapRPCRequest } from '@shapeshiftoss/metamask-snaps-types'
+
 import {
   binanceBroadcastTransaction,
   binanceGetAddress,
   binanceSignTransaction,
 } from './rpc/cosmossdk/binance'
+import {
+  cosmosBroadcastTransaction,
+  cosmosGetAddress,
+  cosmosSignTransaction,
+} from './rpc/cosmossdk/cosmos'
+import { kavaBroadcastTransaction, kavaGetAddress, kavaSignTransaction } from './rpc/cosmossdk/kava'
+import {
+  osmosisBroadcastTransaction,
+  osmosisGetAddress,
+  osmosisSignTransaction,
+} from './rpc/cosmossdk/osmosis'
+import {
+  secretBroadcastTransaction,
+  secretGetAddress,
+  secretSignTransaction,
+} from './rpc/cosmossdk/secret'
+import {
+  terraBroadcastTransaction,
+  terraGetAddress,
+  terraSignTransaction,
+} from './rpc/cosmossdk/terra'
+import {
+  thorchainBroadcastTransaction,
+  thorchainGetAddress,
+  thorchainSignTransaction,
+} from './rpc/cosmossdk/thorchain'
+import {
+  ethereumBroadcastTransaction,
+  ethereumGetAddress,
+  ethereumSignMessage,
+  ethereumSignTransaction,
+  ethereumVerifyMessage,
+} from './rpc/evm/ethereum'
 import {
   bitcoinBroadcastTransaction,
   bitcoinGetAddress,
@@ -17,37 +51,16 @@ import {
   bitcoincashGetAddress,
   bitcoincashSignTransaction,
 } from './rpc/utxo/bitcoincash'
-import { cosmosBroadcastTransaction, cosmosGetAddress, cosmosSignTransaction } from './rpc/cosmossdk/cosmos'
 import {
   dogecoinBroadcastTransaction,
   dogecoinGetAddress,
   dogecoinSignTransaction,
 } from './rpc/utxo/dogecoin'
 import {
-  ethereumBroadcastTransaction,
-  ethereumGetAddress,
-  ethereumSignMessage,
-  ethereumSignTransaction,
-  ethereumVerifyMessage,
-} from './rpc/evm/ethereum'
-import { kavaBroadcastTransaction, kavaGetAddress, kavaSignTransaction } from './rpc/cosmossdk/kava'
-import {
   litecoinBroadcastTransaction,
   litecoinGetAddress,
   litecoinSignTransaction,
 } from './rpc/utxo/litecoin'
-import {
-  osmosisBroadcastTransaction,
-  osmosisGetAddress,
-  osmosisSignTransaction,
-} from './rpc/cosmossdk/osmosis'
-import { secretBroadcastTransaction, secretGetAddress, secretSignTransaction } from './rpc/cosmossdk/secret'
-import { terraBroadcastTransaction, terraGetAddress, terraSignTransaction } from './rpc/cosmossdk/terra'
-import {
-  thorchainBroadcastTransaction,
-  thorchainGetAddress,
-  thorchainSignTransaction,
-} from './rpc/cosmossdk/thorchain'
 
 /**
  * Handle incoming JSON-RPC requests, sent through `wallet_invokeSnap`.
