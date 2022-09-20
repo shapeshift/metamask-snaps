@@ -1,2 +1,2 @@
-export * from './OsmosisSigner'
 export * from './handlers'
+export * from './OsmosisSigner'

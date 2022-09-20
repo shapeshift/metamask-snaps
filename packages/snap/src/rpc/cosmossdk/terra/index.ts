@@ -1,2 +1,2 @@
-export * from './TerraSigner'
 export * from './handlers'
+export * from './TerraSigner'

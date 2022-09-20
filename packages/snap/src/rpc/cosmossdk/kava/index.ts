@@ -1,2 +1,2 @@
-export * from './KavaSigner'
 export * from './handlers'
+export * from './KavaSigner'
