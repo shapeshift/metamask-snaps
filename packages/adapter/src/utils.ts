@@ -8,16 +8,13 @@ import {
 } from '@shapeshiftoss/metamask-snaps-types'
 
 import { logger } from './lib/logger'
-import { walletEnable } from './metamask'
+import { walletEnable } from './metamask/metamask'
 
 const moduleLogger = logger.child({ namespace: ['Adapter', 'Utils.ts'] })
 
-export const DEFAULT_SNAP_ID = 'local:http://localhost:9000'
-
-export const getMetaMaskProvider = async (): Promise<ExternalProvider> => {
-  let ret
+export const getMetaMaskProvider = async (): Promise<ExternalProvider | undefined> => {
   try {
-    ret = await detectEthereumProvider({ mustBeMetaMask: true })
+    return await detectEthereumProvider({ mustBeMetaMask: true })
   } catch (error) {
     moduleLogger.error(
       error,
@@ -25,7 +22,7 @@ export const getMetaMaskProvider = async (): Promise<ExternalProvider> => {
       'Please install MetaMask browser extension.',
     )
   }
-  return ret
+  return undefined
 }
 
 export const metaMaskFlaskSupported = async (): Promise<boolean> => {
@@ -64,6 +61,28 @@ export const shapeShiftSnapInstalled = async (snapId: string): Promise<boolean> 
     return false
   }
 }
+
+export const isLocked = async (): Promise<boolean> => {
+  try {
+    const provider = (await getMetaMaskProvider()) as any
+    return !provider._metamask.isUnlocked()
+  } catch (error) {
+    moduleLogger.error({ fn: 'isLocked' }, error)
+    return false
+  }
+}
+
+// export const shapeShiftSnapDisabled = async (snapId: string): Promise<boolean> => {
+//   try {
+//     const ret = await sendFlaskRPCRequest({method: 'ping', params: null}, snapId )
+//     if (ret instanceof JsonRpcError && ret.code && ret.code === -32603){
+
+//     }
+//   } catch (error) {
+
+//   }
+
+// }
 
 /**
  * Prompt the user to allow the snap

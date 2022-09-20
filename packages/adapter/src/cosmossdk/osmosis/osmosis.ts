@@ -7,8 +7,8 @@ import {
   OsmosisSignTransactionResponse,
 } from '@shapeshiftoss/metamask-snaps-types'
 
-import { logger } from './lib/logger'
-import { sendFlaskRPCRequest } from './utils'
+import { logger } from '../../lib/logger'
+import { sendFlaskRPCRequest } from '../../utils'
 
 const moduleLogger = logger.child({ namespace: ['Adapter', 'Osmosis.ts'] })
 
