@@ -1,4 +1,5 @@
-export * from './cosmossdk/binance/binance'
+export * from './cosmossdk'
 export * from './evm'
 export * from './utxo'
 export * from './metamask'
+export * from './utils'
