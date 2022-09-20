@@ -13,17 +13,20 @@
     "simple-import-sort"
   ],
   "rules": {
-    "@typescript-eslint/no-unused-vars": "error",
     "@typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/no-shadow": ["error"],
+    "@typescript-eslint/no-unused-vars": "error",
     "default-case": "error",
-    "import/first": "error",
     "import/extensions": "off",
-    "import/no-unresolved": "off",
+    "import/first": "error",
     "import/newline-after-import": "error",
     "import/no-default-export": "error",
     "import/no-duplicates": "error",
+    "import/no-unresolved": "off",
+    "import/prefer-default-export": "off",
     "jsx-a11y/alt-text": "error",
     "jsx-a11y/no-autofocus": "off",
+    "no-shadow": "off",
     "no-console": [
       "error",
       {

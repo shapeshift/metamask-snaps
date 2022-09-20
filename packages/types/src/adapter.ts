@@ -1,43 +1,40 @@
 import {
   BinanceGetAddress,
-  BTCGetAddress as BitcoinCashGetAddress,
-  BTCGetAddress,
-  BTCGetAddress as DogecoinGetAddress,
-  BTCGetAddress as LitecoinGetAddress,
-  CosmosGetAddress,
-  ETHGetAddress,
-  KavaGetAddress,
-  OsmosisGetAddress,
-  SecretGetAddress,
-  TerraGetAddress,
-  ThorchainGetAddress,
-} from '@shapeshiftoss/hdwallet-core'
-
-import {
   BinanceSignedTransaction,
   BinanceSignTransaction,
+  BitcoinCashGetAddress,
   BitcoinCashSignedTransaction,
   BitcoinCashSignTransaction,
+  BitcoinGetAddress,
   BitcoinSignedTransaction,
   BitcoinSignTransaction,
+  CosmosGetAddress,
   CosmosSignedTransaction,
   CosmosSignTransaction,
+  DogecoinGetAddress,
   DogecoinSignedTransaction,
   DogecoinSignTransaction,
+  EthereumGetAddress,
   EthereumSignedTransaction,
   EthereumSignMessage,
   EthereumSignTransaction,
   EthereumVerifyMessage,
+  KavaGetAddress,
   KavaSignedTransaction,
   KavaSignTransaction,
+  LitecoinGetAddress,
   LitecoinSignedTransaction,
   LitecoinSignTransaction,
+  OsmosisGetAddress,
   OsmosisSignedTransaction,
   OsmosisSignTransaction,
+  SecretGetAddress,
   SecretSignedTransaction,
   SecretSignTransaction,
+  TerraGetAddress,
   TerraSignedTransaction,
   TerraSignTransaction,
+  ThorchainGetAddress,
   ThorchainSignedTransaction,
   ThorchainSignTransaction,
 } from './common'
@@ -47,7 +44,7 @@ import {
   SignMessageParams,
   SignTransactionParams,
   VerifyMessageParams,
-} from './params'
+} from './snap'
 
 export type BroadcastTransactionAdapterParams<T> = BroadcastTransactionParams<T> & {
   snapId: string
@@ -69,7 +66,7 @@ export type BitcoinCashBroadcastTransactionAdapterParams =
 export type BitcoinCashGetAddressAdapterParams = GetAddressAdapterParams<BitcoinCashGetAddress>
 export type BitcoinCashSignTransactionAdapterParams =
   SignTransactionAdapterParams<BitcoinCashSignTransaction>
-export type BitcoinGetAddressAdapterParams = GetAddressAdapterParams<BTCGetAddress>
+export type BitcoinGetAddressAdapterParams = GetAddressAdapterParams<BitcoinGetAddress>
 export type BitcoinSignTransactionAdapterParams =
   SignTransactionAdapterParams<BitcoinSignTransaction>
 export type CosmosBroadcastTransactionAdapterParams =
@@ -78,8 +75,6 @@ export type CosmosGetAddressAdapterParams = GetAddressAdapterParams<CosmosGetAdd
 export type CosmosSignTransactionAdapterParams = SignTransactionAdapterParams<CosmosSignTransaction>
 export type DecretBroadcastTransactionAdapterParams =
   BroadcastTransactionAdapterParams<SecretSignedTransaction>
-export type DecretGetAddressAdapterParams = GetAddressAdapterParams<SecretGetAddress>
-export type DecretSignTransactionAdapterParams = SignTransactionAdapterParams<SecretSignTransaction>
 export type DogecoinBroadcastTransactionAdapterParams =
   BroadcastTransactionAdapterParams<DogecoinSignedTransaction>
 export type DogecoinGetAddressAdapterParams = GetAddressAdapterParams<DogecoinGetAddress>
@@ -87,7 +82,7 @@ export type DogecoinSignTransactionAdapterParams =
   SignTransactionAdapterParams<DogecoinSignTransaction>
 export type EthereumBroadcastTransactionAdapterParams =
   BroadcastTransactionAdapterParams<EthereumSignedTransaction>
-export type EthereumGetAddressAdapterParams = GetAddressAdapterParams<ETHGetAddress>
+export type EthereumGetAddressAdapterParams = GetAddressAdapterParams<EthereumGetAddress>
 export type EthereumSignMessageAdapterParams = SignMessageAdapterParams<EthereumSignMessage>
 export type EthereumSignTransactionAdapterParams =
   SignTransactionAdapterParams<EthereumSignTransaction>

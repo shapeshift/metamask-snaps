@@ -1,3 +1,4 @@
+import { JsonRpcError } from '@metamask/types'
 import * as unchained from '@shapeshiftoss/unchained-client'
 
 import {
@@ -23,8 +24,11 @@ import {
   DogecoinSignTransaction,
   EthereumAddress,
   EthereumGetAddress,
+  EthereumSignedMessage,
   EthereumSignedTransaction,
+  EthereumSignMessage,
   EthereumSignTransaction,
+  EthereumVerifyMessage,
   KavaAddress,
   KavaGetAddress,
   KavaSignedTransaction,
@@ -50,151 +54,7 @@ import {
   ThorchainSignedTransaction,
   ThorchainSignTransaction,
 } from './common'
-import {
-  BinanceBroadcastTransactionParams,
-  BinanceGetAddressParams,
-  BinanceSignTransactionParams,
-  BitcoinBroadcastTransactionParams,
-  BitcoinCashBroadcastTransactionParams,
-  BitcoinCashGetAddressParams,
-  BitcoinCashSignTransactionParams,
-  BitcoinGetAddressParams,
-  BitcoinSignTransactionParams,
-  CosmosBroadcastTransactionParams,
-  CosmosGetAddressParams,
-  CosmosSignTransactionParams,
-  DogecoinBroadcastTransactionParams,
-  DogecoinGetAddressParams,
-  DogecoinSignTransactionParams,
-  EthereumBroadcastTransactionParams,
-  EthereumGetAddressParams,
-  EthereumSignMessageParams,
-  EthereumSignTransactionParams,
-  EthereumVerifyMessageParams,
-  KavaBroadcastTransactionParams,
-  KavaGetAddressParams,
-  KavaSignTransactionParams,
-  LitecoinBroadcastTransactionParams,
-  LitecoinGetAddressParams,
-  LitecoinSignTransactionParams,
-  OsmosisBroadcastTransactionParams,
-  OsmosisGetAddressParams,
-  OsmosisSignTransactionParams,
-  SecretBroadcastTransactionParams,
-  SecretGetAddressParams,
-  SecretSignTransactionParams,
-  TerraBroadcastTransactionParams,
-  TerraGetAddressParams,
-  TerraSignTransactionParams,
-  ThorchainBroadcastTransactionParams,
-  ThorchainGetAddressParams,
-  ThorchainSignTransactionParams,
-} from './params'
-import {
-  BinanceBroadcastTransactionResponse,
-  // BinanceGetAddressResponse,
-  // BinanceSignTransactionResponse,
-  BitcoinBroadcastTransactionResponse,
-  BitcoinCashBroadcastTransactionResponse,
-  // BitcoinCashGetAddressResponse,
-  // BitcoinCashSignTransactionResponse,
-  // BitcoinGetAddressResponse,
-  // BitcoinSignTransactionResponse,
-  CosmosBroadcastTransactionResponse,
-  // CosmosGetAddressResponse,
-  // CosmosSignTransactionResponse,
-  DogecoinBroadcastTransactionResponse,
-  // DogecoinGetAddressResponse,
-  // DogecoinSignTransactionResponse,
-  EthereumBroadcastTransactionResponse,
-  // EthereumGetAddressResponse,
-  EthereumSignMessageResponse,
-  // EthereumSignTransactionResponse,
-  // EthereumVerifyMessageResponse,
-  KavaBroadcastTransactionResponse,
-  // KavaGetAddressResponse,
-  // KavaSignTransactionResponse,
-  LitecoinBroadcastTransactionResponse,
-  // LitecoinGetAddressResponse,
-  // LitecoinSignTransactionResponse,
-  OsmosisBroadcastTransactionResponse,
-  // OsmosisGetAddressResponse,
-  // OsmosisSignTransactionResponse,
-  SecretBroadcastTransactionResponse,
-  // SecretGetAddressResponse,
-  // SecretSignTransactionResponse,
-  TerraBroadcastTransactionResponse,
-  // TerraGetAddressResponse,
-  // TerraSignTransactionResponse,
-  ThorchainBroadcastTransactionResponse,
-  // ThorchainGetAddressResponse,
-  // ThorchainSignTransactionResponse,
-} from './responses'
 
-export {
-  BinanceBroadcastTransactionParams,
-  BinanceGetAddressParams,
-  BinanceSignTransactionParams,
-  BitcoinBroadcastTransactionParams,
-  BitcoinCashBroadcastTransactionParams,
-  BitcoinCashGetAddressParams,
-  BitcoinCashSignTransactionParams,
-  BitcoinGetAddressParams,
-  BitcoinSignTransactionParams,
-  CosmosBroadcastTransactionParams,
-  CosmosGetAddressParams,
-  CosmosSignTransactionParams,
-  DogecoinBroadcastTransactionParams,
-  DogecoinGetAddressParams,
-  DogecoinSignTransactionParams,
-  EthereumBroadcastTransactionParams,
-  EthereumGetAddressParams,
-  EthereumSignTransactionParams,
-  KavaBroadcastTransactionParams,
-  KavaGetAddressParams,
-  KavaSignTransactionParams,
-  LitecoinBroadcastTransactionParams,
-  LitecoinGetAddressParams,
-  LitecoinSignTransactionParams,
-  OsmosisBroadcastTransactionParams,
-  OsmosisGetAddressParams,
-  OsmosisSignTransactionParams,
-  SecretBroadcastTransactionParams,
-  SecretGetAddressParams,
-  SecretSignTransactionParams,
-  TerraBroadcastTransactionParams,
-  TerraGetAddressParams,
-  TerraSignTransactionParams,
-  ThorchainBroadcastTransactionParams,
-  ThorchainGetAddressParams,
-  ThorchainSignTransactionParams,
-} from './params'
-export {
-  BinanceBroadcastTransactionResponse,
-  BinanceSignTransactionResponse,
-  BitcoinBroadcastTransactionResponse,
-  BitcoinCashBroadcastTransactionResponse,
-  BitcoinCashSignTransactionResponse,
-  BitcoinSignTransactionResponse,
-  CosmosBroadcastTransactionResponse,
-  CosmosSignTransactionResponse,
-  DogecoinBroadcastTransactionResponse,
-  DogecoinSignTransactionResponse,
-  EthereumBroadcastTransactionResponse,
-  EthereumSignTransactionResponse,
-  KavaBroadcastTransactionResponse,
-  KavaSignTransactionResponse,
-  LitecoinBroadcastTransactionResponse,
-  LitecoinSignTransactionResponse,
-  OsmosisBroadcastTransactionResponse,
-  OsmosisSignTransactionResponse,
-  SecretBroadcastTransactionResponse,
-  SecretSignTransactionResponse,
-  TerraBroadcastTransactionResponse,
-  TerraSignTransactionResponse,
-  ThorchainBroadcastTransactionResponse,
-  ThorchainSignTransactionResponse,
-} from './responses'
 export { NativeHDWallet } from '@shapeshiftoss/hdwallet-native'
 
 // TODO: Replace local definition with KnownChainIds imported from @shapeshiftoss/types once all chains here are added to KnownChainIds
@@ -212,266 +72,6 @@ export enum SupportedChainIds {
   KavaMainnet = 'cosmos:kava_2222-10',
   TerraMainnet = 'cosmos:phoenix-1',
   SecretMainnet = 'cosmos:secret-4',
-}
-
-type GetAddressParamsTypeTable = {
-  //   [SupportedChainIds.AvalancheMainnet]: AvalancheGetAddressParams
-  [SupportedChainIds.BinanceMainnet]: BinanceGetAddressParams
-  [SupportedChainIds.BitcoinCashMainnet]: BitcoinCashGetAddressParams
-  [SupportedChainIds.BitcoinMainnet]: BitcoinGetAddressParams
-  [SupportedChainIds.CosmosMainnet]: CosmosGetAddressParams
-  [SupportedChainIds.DogecoinMainnet]: DogecoinGetAddressParams
-  [SupportedChainIds.EthereumMainnet]: EthereumGetAddressParams
-  [SupportedChainIds.KavaMainnet]: KavaGetAddressParams
-  [SupportedChainIds.LitecoinMainnet]: LitecoinGetAddressParams
-  [SupportedChainIds.OsmosisMainnet]: OsmosisGetAddressParams
-  [SupportedChainIds.SecretMainnet]: SecretGetAddressParams
-  [SupportedChainIds.TerraMainnet]: TerraGetAddressParams
-  [SupportedChainIds.ThorchainMainnet]: ThorchainGetAddressParams
-}
-
-// type GetAddressResponseTypeTable = {
-//   // [SupportedChainIds.AvalancheMainnet]: AvalancheGetAddressResponse
-//   [SupportedChainIds.BinanceMainnet]: BinanceGetAddressResponse
-//   [SupportedChainIds.BitcoinCashMainnet]: BitcoinCashGetAddressResponse
-//   [SupportedChainIds.BitcoinMainnet]: BitcoinGetAddressResponse
-//   [SupportedChainIds.CosmosMainnet]: CosmosGetAddressResponse
-//   [SupportedChainIds.DogecoinMainnet]: DogecoinGetAddressResponse
-//   [SupportedChainIds.EthereumMainnet]: EthereumGetAddressResponse
-//   [SupportedChainIds.KavaMainnet]: KavaGetAddressResponse
-//   [SupportedChainIds.LitecoinMainnet]: LitecoinGetAddressResponse
-//   [SupportedChainIds.OsmosisMainnet]: OsmosisGetAddressResponse
-//   [SupportedChainIds.SecretMainnet]: SecretGetAddressResponse
-//   [SupportedChainIds.TerraMainnet]: TerraGetAddressResponse
-//   [SupportedChainIds.ThorchainMainnet]: ThorchainGetAddressResponse
-// }
-
-type GetAddressResponseTypeTable = {
-  [SupportedChainIds.AvalancheMainnet]: EthereumAddress
-  [SupportedChainIds.BitcoinCashMainnet]: BitcoinCashAddress
-  [SupportedChainIds.BitcoinMainnet]: BitcoinAddress
-  [SupportedChainIds.CosmosMainnet]: CosmosAddress
-  [SupportedChainIds.DogecoinMainnet]: DogecoinAddress
-  [SupportedChainIds.EthereumMainnet]: EthereumAddress
-  [SupportedChainIds.LitecoinMainnet]: LitecoinAddress
-  [SupportedChainIds.OsmosisMainnet]: OsmosisAddress
-  [SupportedChainIds.ThorchainMainnet]: ThorchainAddress
-  [SupportedChainIds.BinanceMainnet]: BinanceAddress
-  [SupportedChainIds.TerraMainnet]: TerraAddress
-  [SupportedChainIds.KavaMainnet]: KavaAddress
-  [SupportedChainIds.SecretMainnet]: SecretAddress
-}
-
-type SignTransactionParamsTypeTable = {
-  // [SupportedChainIds.AvalancheMainnet]: AvalancheSignTransactionParams
-  [SupportedChainIds.BinanceMainnet]: BinanceSignTransactionParams
-  [SupportedChainIds.BitcoinCashMainnet]: BitcoinCashSignTransactionParams
-  [SupportedChainIds.BitcoinMainnet]: BitcoinSignTransactionParams
-  [SupportedChainIds.CosmosMainnet]: CosmosSignTransactionParams
-  [SupportedChainIds.DogecoinMainnet]: DogecoinSignTransactionParams
-  [SupportedChainIds.EthereumMainnet]: EthereumSignTransactionParams
-  [SupportedChainIds.KavaMainnet]: KavaSignTransactionParams
-  [SupportedChainIds.LitecoinMainnet]: LitecoinSignTransactionParams
-  [SupportedChainIds.OsmosisMainnet]: OsmosisSignTransactionParams
-  [SupportedChainIds.SecretMainnet]: SecretSignTransactionParams
-  [SupportedChainIds.TerraMainnet]: TerraSignTransactionParams
-  [SupportedChainIds.ThorchainMainnet]: ThorchainSignTransactionParams
-}
-
-// type SignerSignTransactionTypeTable = {
-//   [SupportedChainIds.AvalancheMainnet]: EthereumSignTransaction
-//   [SupportedChainIds.BitcoinCashMainnet]: BitcoinCashSignTransaction
-//   [SupportedChainIds.BitcoinMainnet]: BitcoinSignTransaction
-//   [SupportedChainIds.CosmosMainnet]: CosmosSignTransaction
-//   [SupportedChainIds.DogecoinMainnet]: DogecoinSignTransaction
-//   [SupportedChainIds.EthereumMainnet]: EthereumSignTransaction
-//   [SupportedChainIds.LitecoinMainnet]: LitecoinSignTransaction
-//   [SupportedChainIds.OsmosisMainnet]: OsmosisSignTransaction
-//   [SupportedChainIds.ThorchainMainnet]: ThorchainSignTransaction
-//   [SupportedChainIds.BinanceMainnet]: BinanceSignTransaction
-//   [SupportedChainIds.TerraMainnet]: TerraSignTransaction
-//   [SupportedChainIds.KavaMainnet]: KavaSignTransaction
-//   [SupportedChainIds.SecretMainnet]: SecretSignTransaction
-// }
-
-// export type SignTransactionResponseTypeTable = {
-//   // [SupportedChainIds.AvalancheMainnet]: AvalancheSignTransactionResponse
-//   [SupportedChainIds.BinanceMainnet]: BinanceSignTransactionResponse
-//   [SupportedChainIds.BitcoinCashMainnet]: BitcoinCashSignTransactionResponse
-//   [SupportedChainIds.BitcoinMainnet]: BitcoinSignTransactionResponse
-//   [SupportedChainIds.CosmosMainnet]: CosmosSignTransactionResponse
-//   [SupportedChainIds.DogecoinMainnet]: DogecoinSignTransactionResponse
-//   [SupportedChainIds.EthereumMainnet]: EthereumSignTransactionResponse
-//   [SupportedChainIds.KavaMainnet]: KavaSignTransactionResponse
-//   [SupportedChainIds.LitecoinMainnet]: LitecoinSignTransactionResponse
-//   [SupportedChainIds.OsmosisMainnet]: OsmosisSignTransactionResponse
-//   [SupportedChainIds.SecretMainnet]: SecretSignTransactionResponse
-//   [SupportedChainIds.TerraMainnet]: TerraSignTransactionResponse
-//   [SupportedChainIds.ThorchainMainnet]: ThorchainSignTransactionResponse
-// }
-
-type SignTransactionResponseTypeTable = {
-  [SupportedChainIds.AvalancheMainnet]: EthereumSignedTransaction
-  [SupportedChainIds.BitcoinCashMainnet]: BitcoinCashSignedTransaction
-  [SupportedChainIds.BitcoinMainnet]: BitcoinSignedTransaction
-  [SupportedChainIds.CosmosMainnet]: CosmosSignedTransaction
-  [SupportedChainIds.DogecoinMainnet]: DogecoinSignedTransaction
-  [SupportedChainIds.EthereumMainnet]: EthereumSignedTransaction
-  [SupportedChainIds.LitecoinMainnet]: LitecoinSignedTransaction
-  [SupportedChainIds.OsmosisMainnet]: OsmosisSignedTransaction
-  [SupportedChainIds.ThorchainMainnet]: ThorchainSignedTransaction
-  [SupportedChainIds.BinanceMainnet]: BinanceSignedTransaction
-  [SupportedChainIds.TerraMainnet]: TerraSignedTransaction
-  [SupportedChainIds.KavaMainnet]: KavaSignedTransaction
-  [SupportedChainIds.SecretMainnet]: SecretSignedTransaction
-}
-
-type BroadcastTransactionParamsTypeTable = {
-  // [SupportedChainIds.AvalancheMainnet]: AvalancheBroadcastTransactionParams
-  [SupportedChainIds.BinanceMainnet]: BinanceBroadcastTransactionParams
-  [SupportedChainIds.BitcoinCashMainnet]: BitcoinCashBroadcastTransactionParams
-  [SupportedChainIds.BitcoinMainnet]: BitcoinBroadcastTransactionParams
-  [SupportedChainIds.CosmosMainnet]: CosmosBroadcastTransactionParams
-  [SupportedChainIds.DogecoinMainnet]: DogecoinBroadcastTransactionParams
-  [SupportedChainIds.EthereumMainnet]: EthereumBroadcastTransactionParams
-  [SupportedChainIds.KavaMainnet]: KavaBroadcastTransactionParams
-  [SupportedChainIds.LitecoinMainnet]: LitecoinBroadcastTransactionParams
-  [SupportedChainIds.OsmosisMainnet]: OsmosisBroadcastTransactionParams
-  [SupportedChainIds.SecretMainnet]: SecretBroadcastTransactionParams
-  [SupportedChainIds.TerraMainnet]: TerraBroadcastTransactionParams
-  [SupportedChainIds.ThorchainMainnet]: ThorchainBroadcastTransactionParams
-}
-
-type BroadcastTransactionResponseTypeTable = {
-  // [SupportedChainIds.AvalancheMainnet]: AvalancheBroadcastTransactionResponse
-  [SupportedChainIds.BinanceMainnet]: BinanceBroadcastTransactionResponse
-  [SupportedChainIds.BitcoinCashMainnet]: BitcoinCashBroadcastTransactionResponse
-  [SupportedChainIds.BitcoinMainnet]: BitcoinBroadcastTransactionResponse
-  [SupportedChainIds.CosmosMainnet]: CosmosBroadcastTransactionResponse
-  [SupportedChainIds.DogecoinMainnet]: DogecoinBroadcastTransactionResponse
-  [SupportedChainIds.EthereumMainnet]: EthereumBroadcastTransactionResponse
-  [SupportedChainIds.KavaMainnet]: KavaBroadcastTransactionResponse
-  [SupportedChainIds.LitecoinMainnet]: LitecoinBroadcastTransactionResponse
-  [SupportedChainIds.OsmosisMainnet]: OsmosisBroadcastTransactionResponse
-  [SupportedChainIds.SecretMainnet]: SecretBroadcastTransactionResponse
-  [SupportedChainIds.TerraMainnet]: TerraBroadcastTransactionResponse
-  [SupportedChainIds.ThorchainMainnet]: ThorchainBroadcastTransactionResponse
-}
-
-type SignMessageParamsTypeTable = {
-  // [SupportedChainIds.AvalancheMainnet]: AvalancheSignMessageParams
-  [SupportedChainIds.EthereumMainnet]: EthereumSignMessageParams
-}
-
-type VerifyMessageParamsTypeTable = {
-  // [SupportedChainIds.AvalancheMainnet]: AvalancheVerifyMessageParams
-  [SupportedChainIds.EthereumMainnet]: EthereumVerifyMessageParams
-}
-
-type SignMessageResponseTypeTable = {
-  // [SupportedChainIds.AvalancheMainnet]: AvalancheSignMessageResponse
-  [SupportedChainIds.EthereumMainnet]: EthereumSignMessageResponse
-}
-
-type VerifyMessageResponseTypeTable = {
-  // [SupportedChainIds.AvalancheMainnet]: AvalancheVerifyMessageResponse
-  [SupportedChainIds.EthereumMainnet]: boolean
-}
-
-type HTTPConfigurationTypeTable = {
-  [SupportedChainIds.AvalancheMainnet]: unchained.avalanche.Configuration
-  [SupportedChainIds.BinanceMainnet]: undefined
-  [SupportedChainIds.BitcoinCashMainnet]: unchained.bitcoincash.Configuration
-  [SupportedChainIds.BitcoinMainnet]: unchained.bitcoin.Configuration
-  [SupportedChainIds.CosmosMainnet]: unchained.cosmos.Configuration
-  [SupportedChainIds.DogecoinMainnet]: unchained.dogecoin.Configuration
-  [SupportedChainIds.EthereumMainnet]: unchained.ethereum.Configuration
-  [SupportedChainIds.KavaMainnet]: undefined
-  [SupportedChainIds.LitecoinMainnet]: unchained.litecoin.Configuration
-  [SupportedChainIds.OsmosisMainnet]: unchained.osmosis.Configuration
-  [SupportedChainIds.SecretMainnet]: undefined
-  [SupportedChainIds.TerraMainnet]: undefined
-  [SupportedChainIds.ThorchainMainnet]: unchained.thorchain.Configuration
-}
-
-type HTTPProviderTypeTable = {
-  [SupportedChainIds.AvalancheMainnet]: unchained.avalanche.V1Api
-  [SupportedChainIds.BinanceMainnet]: undefined
-  [SupportedChainIds.BitcoinCashMainnet]: unchained.bitcoincash.V1Api
-  [SupportedChainIds.BitcoinMainnet]: unchained.bitcoin.V1Api
-  [SupportedChainIds.CosmosMainnet]: unchained.cosmos.V1Api
-  [SupportedChainIds.DogecoinMainnet]: unchained.dogecoin.V1Api
-  [SupportedChainIds.EthereumMainnet]: unchained.ethereum.V1Api
-  [SupportedChainIds.KavaMainnet]: undefined
-  [SupportedChainIds.LitecoinMainnet]: unchained.litecoin.V1Api
-  [SupportedChainIds.OsmosisMainnet]: unchained.osmosis.V1Api
-  [SupportedChainIds.SecretMainnet]: undefined
-  [SupportedChainIds.TerraMainnet]: undefined
-  [SupportedChainIds.ThorchainMainnet]: unchained.thorchain.V1Api
-}
-
-type SignerSignTransactionTypeTable = {
-  [SupportedChainIds.AvalancheMainnet]: EthereumSignTransaction
-  [SupportedChainIds.BitcoinCashMainnet]: BitcoinCashSignTransaction
-  [SupportedChainIds.BitcoinMainnet]: BitcoinSignTransaction
-  [SupportedChainIds.CosmosMainnet]: CosmosSignTransaction
-  [SupportedChainIds.DogecoinMainnet]: DogecoinSignTransaction
-  [SupportedChainIds.EthereumMainnet]: EthereumSignTransaction
-  [SupportedChainIds.LitecoinMainnet]: LitecoinSignTransaction
-  [SupportedChainIds.OsmosisMainnet]: OsmosisSignTransaction
-  [SupportedChainIds.ThorchainMainnet]: ThorchainSignTransaction
-  [SupportedChainIds.BinanceMainnet]: BinanceSignTransaction
-  [SupportedChainIds.TerraMainnet]: TerraSignTransaction
-  [SupportedChainIds.KavaMainnet]: KavaSignTransaction
-  [SupportedChainIds.SecretMainnet]: SecretSignTransaction
-}
-
-type SignerSignTransactionReturnTypeTable = {
-  [SupportedChainIds.AvalancheMainnet]: EthereumSignedTransaction
-  [SupportedChainIds.BitcoinCashMainnet]: BitcoinCashSignedTransaction
-  [SupportedChainIds.BitcoinMainnet]: BitcoinSignedTransaction
-  [SupportedChainIds.CosmosMainnet]: CosmosSignedTransaction
-  [SupportedChainIds.DogecoinMainnet]: DogecoinSignedTransaction
-  [SupportedChainIds.EthereumMainnet]: EthereumSignedTransaction
-  [SupportedChainIds.LitecoinMainnet]: LitecoinSignedTransaction
-  [SupportedChainIds.OsmosisMainnet]: OsmosisSignedTransaction
-  [SupportedChainIds.ThorchainMainnet]: ThorchainSignedTransaction
-  [SupportedChainIds.BinanceMainnet]: BinanceSignedTransaction
-  [SupportedChainIds.TerraMainnet]: TerraSignedTransaction
-  [SupportedChainIds.KavaMainnet]: KavaSignedTransaction
-  [SupportedChainIds.SecretMainnet]: SecretSignedTransaction
-}
-
-type SignerGetAddressTypeTable = {
-  [SupportedChainIds.AvalancheMainnet]: EthereumGetAddress
-  [SupportedChainIds.BitcoinCashMainnet]: BitcoinCashGetAddress
-  [SupportedChainIds.BitcoinMainnet]: BitcoinGetAddress
-  [SupportedChainIds.CosmosMainnet]: CosmosGetAddress
-  [SupportedChainIds.DogecoinMainnet]: DogecoinGetAddress
-  [SupportedChainIds.EthereumMainnet]: EthereumGetAddress
-  [SupportedChainIds.LitecoinMainnet]: LitecoinGetAddress
-  [SupportedChainIds.OsmosisMainnet]: OsmosisGetAddress
-  [SupportedChainIds.ThorchainMainnet]: ThorchainGetAddress
-  [SupportedChainIds.BinanceMainnet]: BinanceGetAddress
-  [SupportedChainIds.TerraMainnet]: TerraGetAddress
-  [SupportedChainIds.KavaMainnet]: KavaGetAddress
-  [SupportedChainIds.SecretMainnet]: SecretGetAddress
-}
-
-type SignerGetAddressReturnTypeTable = {
-  [SupportedChainIds.AvalancheMainnet]: EthereumAddress
-  [SupportedChainIds.BitcoinCashMainnet]: BitcoinCashAddress
-  [SupportedChainIds.BitcoinMainnet]: BitcoinAddress
-  [SupportedChainIds.CosmosMainnet]: CosmosAddress
-  [SupportedChainIds.DogecoinMainnet]: DogecoinAddress
-  [SupportedChainIds.EthereumMainnet]: EthereumAddress
-  [SupportedChainIds.LitecoinMainnet]: LitecoinAddress
-  [SupportedChainIds.OsmosisMainnet]: OsmosisAddress
-  [SupportedChainIds.ThorchainMainnet]: ThorchainAddress
-  [SupportedChainIds.BinanceMainnet]: BinanceAddress
-  [SupportedChainIds.TerraMainnet]: TerraAddress
-  [SupportedChainIds.KavaMainnet]: KavaAddress
-  [SupportedChainIds.SecretMainnet]: SecretAddress
 }
 
 const CosmosSDKChainIdList = [
@@ -493,61 +93,735 @@ const UTXOChainIdList = [
   SupportedChainIds.LitecoinMainnet,
 ] as const
 
+export type CosmosSDKChainIds = typeof CosmosSDKChainIdList[number]
+export type EVMChainIds = typeof EVMChainIdList[number]
+export type UTXOChainIds = typeof UTXOChainIdList[number]
+
+/**  TYPES USED WITH GETADDRESS() METHODS ** */
+export type GetAddressParams<T> = {
+  addressParams: T
+}
+
+export type BinanceGetAddressParams = GetAddressParams<BinanceGetAddress>
+export type BitcoinCashGetAddressParams = GetAddressParams<BitcoinCashGetAddress>
+export type BitcoinGetAddressParams = GetAddressParams<BitcoinGetAddress>
+export type CosmosGetAddressParams = GetAddressParams<CosmosGetAddress>
+export type DogecoinGetAddressParams = GetAddressParams<DogecoinGetAddress>
+export type EthereumGetAddressParams = GetAddressParams<EthereumGetAddress>
+export type KavaGetAddressParams = GetAddressParams<KavaGetAddress>
+export type LitecoinGetAddressParams = GetAddressParams<LitecoinGetAddress>
+export type OsmosisGetAddressParams = GetAddressParams<OsmosisGetAddress>
+export type SecretGetAddressParams = GetAddressParams<SecretGetAddress>
+export type TerraGetAddressParams = GetAddressParams<TerraGetAddress>
+export type ThorchainGetAddressParams = GetAddressParams<ThorchainGetAddress>
+
+type GetAddressParamsTypeTable = {
+  //   [SupportedChainIds.AvalancheMainnet]: AvalancheGetAddressParams
+  [SupportedChainIds.BinanceMainnet]: BinanceGetAddressParams
+  [SupportedChainIds.BitcoinCashMainnet]: BitcoinCashGetAddressParams
+  [SupportedChainIds.BitcoinMainnet]: BitcoinGetAddressParams
+  [SupportedChainIds.CosmosMainnet]: CosmosGetAddressParams
+  [SupportedChainIds.DogecoinMainnet]: DogecoinGetAddressParams
+  [SupportedChainIds.EthereumMainnet]: EthereumGetAddressParams
+  [SupportedChainIds.KavaMainnet]: KavaGetAddressParams
+  [SupportedChainIds.LitecoinMainnet]: LitecoinGetAddressParams
+  [SupportedChainIds.OsmosisMainnet]: OsmosisGetAddressParams
+  [SupportedChainIds.SecretMainnet]: SecretGetAddressParams
+  [SupportedChainIds.TerraMainnet]: TerraGetAddressParams
+  [SupportedChainIds.ThorchainMainnet]: ThorchainGetAddressParams
+}
+
 export type GetAddressParamsType<T> = T extends keyof GetAddressParamsTypeTable
   ? GetAddressParamsTypeTable[T]
   : never
+
+export interface BinanceGetAddressRequest {
+  method: 'binance_getAddress'
+  params: BinanceGetAddressParams
+}
+
+export interface BitcoinCashGetAddressRequest {
+  method: 'bch_getAddress'
+  params: BitcoinCashGetAddressParams
+}
+
+export interface BitcoinGetAddressRequest {
+  method: 'btc_getAddress'
+  params: BitcoinGetAddressParams
+}
+
+export interface CosmosGetAddressRequest {
+  method: 'cosmos_getAddress'
+  params: CosmosGetAddressParams
+}
+
+export interface DogecoinGetAddressRequest {
+  method: 'doge_getAddress'
+  params: DogecoinGetAddressParams
+}
+
+export interface EthereumGetAddressRequest {
+  method: 'eth_getAddress'
+  params: EthereumGetAddressParams
+}
+
+export interface KavaGetAddressRequest {
+  method: 'kava_getAddress'
+  params: KavaGetAddressParams
+}
+
+export interface LitecoinGetAddressRequest {
+  method: 'ltc_getAddress'
+  params: LitecoinGetAddressParams
+}
+
+export interface OsmosisGetAddressRequest {
+  method: 'osmosis_getAddress'
+  params: OsmosisGetAddressParams
+}
+
+export interface SecretGetAddressRequest {
+  method: 'secret_getAddress'
+  params: SecretGetAddressParams
+}
+
+export interface TerraGetAddressRequest {
+  method: 'terra_getAddress'
+  params: TerraGetAddressParams
+}
+
+export interface ThorchainGetAddressRequest {
+  method: 'thorchain_getAddress'
+  params: ThorchainGetAddressParams
+}
+
+export type BinanceGetAddressResponse = BinanceAddress
+export type BitcoinCashGetAddressResponse = BitcoinCashAddress
+export type BitcoinGetAddressResponse = BitcoinAddress
+export type CosmosGetAddressResponse = CosmosAddress
+export type DogecoinGetAddressResponse = DogecoinAddress
+export type EthereumGetAddressResponse = EthereumAddress
+export type KavaGetAddressResponse = KavaAddress
+export type LitecoinGetAddressResponse = LitecoinAddress
+export type OsmosisGetAddressResponse = OsmosisAddress
+export type SecretGetAddressResponse = SecretAddress
+export type TerraGetAddressResponse = TerraAddress
+export type ThorchainGetAddressResponse = ThorchainAddress
+
+type GetAddressResponseTypeTable = {
+  // [SupportedChainIds.AvalancheMainnet]: AvalancheGetAddressResponse
+  [SupportedChainIds.BinanceMainnet]: BinanceGetAddressResponse
+  [SupportedChainIds.BitcoinCashMainnet]: BitcoinCashGetAddressResponse
+  [SupportedChainIds.BitcoinMainnet]: BitcoinGetAddressResponse
+  [SupportedChainIds.CosmosMainnet]: CosmosGetAddressResponse
+  [SupportedChainIds.DogecoinMainnet]: DogecoinGetAddressResponse
+  [SupportedChainIds.EthereumMainnet]: EthereumGetAddressResponse
+  [SupportedChainIds.KavaMainnet]: KavaGetAddressResponse
+  [SupportedChainIds.LitecoinMainnet]: LitecoinGetAddressResponse
+  [SupportedChainIds.OsmosisMainnet]: OsmosisGetAddressResponse
+  [SupportedChainIds.SecretMainnet]: SecretGetAddressResponse
+  [SupportedChainIds.TerraMainnet]: TerraGetAddressResponse
+  [SupportedChainIds.ThorchainMainnet]: ThorchainGetAddressResponse
+}
+
+// type GetAddressResponseTypeTable = {
+//   // [SupportedChainIds.AvalancheMainnet]: AvalancheGetAddressResponse
+//   [SupportedChainIds.BinanceMainnet]: BinanceAddress
+//   [SupportedChainIds.BitcoinCashMainnet]: BitcoinCashAddress
+//   [SupportedChainIds.BitcoinMainnet]: BitcoinAddress
+//   [SupportedChainIds.CosmosMainnet]: CosmosAddress
+//   [SupportedChainIds.DogecoinMainnet]: DogecoinAddress
+//   [SupportedChainIds.EthereumMainnet]: EthereumAddress
+//   [SupportedChainIds.KavaMainnet]: KavaAddress
+//   [SupportedChainIds.LitecoinMainnet]: LitecoinAddress
+//   [SupportedChainIds.OsmosisMainnet]: OsmosisAddress
+//   [SupportedChainIds.SecretMainnet]: SecretAddress
+//   [SupportedChainIds.TerraMainnet]: TerraAddress
+//   [SupportedChainIds.ThorchainMainnet]: ThorchainAddress
+// }
+
 export type GetAddressResponseType<T> = T extends keyof GetAddressResponseTypeTable
   ? GetAddressResponseTypeTable[T]
   : never
+
+/**  TYPES USED WITH SIGNTRANSACTION() METHODS ** */
+export type SignTransactionParams<T> = {
+  transaction: T
+}
+
+export type BinanceSignTransactionParams = SignTransactionParams<BinanceSignTransaction>
+export type BitcoinCashSignTransactionParams = SignTransactionParams<BitcoinCashSignTransaction>
+export type BitcoinSignTransactionParams = SignTransactionParams<BitcoinSignTransaction>
+export type CosmosSignTransactionParams = SignTransactionParams<CosmosSignTransaction>
+export type DogecoinSignTransactionParams = SignTransactionParams<DogecoinSignTransaction>
+export type EthereumSignTransactionParams = SignTransactionParams<EthereumSignTransaction>
+export type KavaSignTransactionParams = SignTransactionParams<KavaSignTransaction>
+export type LitecoinSignTransactionParams = SignTransactionParams<LitecoinSignTransaction>
+export type OsmosisSignTransactionParams = SignTransactionParams<OsmosisSignTransaction>
+export type SecretSignTransactionParams = SignTransactionParams<SecretSignTransaction>
+export type TerraSignTransactionParams = SignTransactionParams<TerraSignTransaction>
+export type ThorchainSignTransactionParams = SignTransactionParams<ThorchainSignTransaction>
+
+type SignTransactionParamsTypeTable = {
+  // [SupportedChainIds.AvalancheMainnet]: AvalancheSignTransactionParams
+  [SupportedChainIds.BinanceMainnet]: BinanceSignTransactionParams
+  [SupportedChainIds.BitcoinCashMainnet]: BitcoinCashSignTransactionParams
+  [SupportedChainIds.BitcoinMainnet]: BitcoinSignTransactionParams
+  [SupportedChainIds.CosmosMainnet]: CosmosSignTransactionParams
+  [SupportedChainIds.DogecoinMainnet]: DogecoinSignTransactionParams
+  [SupportedChainIds.EthereumMainnet]: EthereumSignTransactionParams
+  [SupportedChainIds.KavaMainnet]: KavaSignTransactionParams
+  [SupportedChainIds.LitecoinMainnet]: LitecoinSignTransactionParams
+  [SupportedChainIds.OsmosisMainnet]: OsmosisSignTransactionParams
+  [SupportedChainIds.SecretMainnet]: SecretSignTransactionParams
+  [SupportedChainIds.TerraMainnet]: TerraSignTransactionParams
+  [SupportedChainIds.ThorchainMainnet]: ThorchainSignTransactionParams
+}
+
 export type SignTransactionParamsType<T> = T extends keyof SignTransactionParamsTypeTable
   ? SignTransactionParamsTypeTable[T]
   : never
+
+export interface BinanceSignTransactionRequest {
+  method: 'binance_signTransaction'
+  params: BinanceSignTransactionParams
+}
+
+export interface BitcoinCashSignTransactionRequest {
+  method: 'bch_signTransaction'
+  params: BitcoinCashSignTransactionParams
+}
+
+export interface BitcoinSignTransactionRequest {
+  method: 'btc_signTransaction'
+  params: BitcoinSignTransactionParams
+}
+
+export interface CosmosSignTransactionRequest {
+  method: 'cosmos_signTransaction'
+  params: CosmosSignTransactionParams
+}
+
+export interface DogecoinSignTransactionRequest {
+  method: 'doge_signTransaction'
+  params: DogecoinSignTransactionParams
+}
+
+export interface EthereumSignTransactionRequest {
+  method: 'eth_signTransaction'
+  params: EthereumSignTransactionParams
+}
+export interface KavaSignTransactionRequest {
+  method: 'kava_signTransaction'
+  params: KavaSignTransactionParams
+}
+
+export interface LitecoinSignTransactionRequest {
+  method: 'ltc_signTransaction'
+  params: LitecoinSignTransactionParams
+}
+
+export interface OsmosisSignTransactionRequest {
+  method: 'osmosis_signTransaction'
+  params: OsmosisSignTransactionParams
+}
+export interface SecretSignTransactionRequest {
+  method: 'secret_signTransaction'
+  params: SecretSignTransactionParams
+}
+
+export interface TerraSignTransactionRequest {
+  method: 'terra_signTransaction'
+  params: TerraSignTransactionParams
+}
+
+export interface ThorchainSignTransactionRequest {
+  method: 'thorchain_signTransaction'
+  params: ThorchainSignTransactionParams
+}
+
+export type BinanceSignTransactionResponse = BinanceSignedTransaction
+export type BitcoinCashSignTransactionResponse = BitcoinCashSignedTransaction
+export type BitcoinSignTransactionResponse = BitcoinSignedTransaction
+export type CosmosSignTransactionResponse = CosmosSignedTransaction
+export type DogecoinSignTransactionResponse = DogecoinSignedTransaction
+export type EthereumSignTransactionResponse = EthereumSignedTransaction
+export type KavaSignTransactionResponse = KavaSignedTransaction
+export type LitecoinSignTransactionResponse = LitecoinSignedTransaction
+export type OsmosisSignTransactionResponse = OsmosisSignedTransaction
+export type SecretSignTransactionResponse = SecretSignedTransaction
+export type TerraSignTransactionResponse = TerraSignedTransaction
+export type ThorchainSignTransactionResponse = ThorchainSignedTransaction
+
+export type SignTransactionResponseTypeTable = {
+  // [SupportedChainIds.AvalancheMainnet]: AvalancheSignTransactionResponse
+  [SupportedChainIds.BinanceMainnet]: BinanceSignTransactionResponse
+  [SupportedChainIds.BitcoinCashMainnet]: BitcoinCashSignTransactionResponse
+  [SupportedChainIds.BitcoinMainnet]: BitcoinSignTransactionResponse
+  [SupportedChainIds.CosmosMainnet]: CosmosSignTransactionResponse
+  [SupportedChainIds.DogecoinMainnet]: DogecoinSignTransactionResponse
+  [SupportedChainIds.EthereumMainnet]: EthereumSignTransactionResponse
+  [SupportedChainIds.KavaMainnet]: KavaSignTransactionResponse
+  [SupportedChainIds.LitecoinMainnet]: LitecoinSignTransactionResponse
+  [SupportedChainIds.OsmosisMainnet]: OsmosisSignTransactionResponse
+  [SupportedChainIds.SecretMainnet]: SecretSignTransactionResponse
+  [SupportedChainIds.TerraMainnet]: TerraSignTransactionResponse
+  [SupportedChainIds.ThorchainMainnet]: ThorchainSignTransactionResponse
+}
+
+// export type SignTransactionResponseTypeTable = {
+//   [SupportedChainIds.AvalancheMainnet]: EthereumSignedTransaction
+//   [SupportedChainIds.BinanceMainnet]: BinanceSignedTransaction
+//   [SupportedChainIds.BitcoinCashMainnet]: BitcoinCashSignedTransaction
+//   [SupportedChainIds.BitcoinMainnet]: BitcoinSignedTransaction
+//   [SupportedChainIds.CosmosMainnet]: CosmosSignedTransaction
+//   [SupportedChainIds.DogecoinMainnet]: DogecoinSignedTransaction
+//   [SupportedChainIds.EthereumMainnet]: EthereumSignedTransaction
+//   [SupportedChainIds.KavaMainnet]: KavaSignedTransaction
+//   [SupportedChainIds.LitecoinMainnet]: LitecoinSignedTransaction
+//   [SupportedChainIds.OsmosisMainnet]: OsmosisSignedTransaction
+//   [SupportedChainIds.SecretMainnet]: SecretSignedTransaction
+//   [SupportedChainIds.TerraMainnet]: TerraSignedTransaction
+//   [SupportedChainIds.ThorchainMainnet]: ThorchainSignedTransaction
+// }
+
 export type SignTransactionResponseType<T> = T extends keyof SignTransactionResponseTypeTable
   ? SignTransactionResponseTypeTable[T]
   : never
-export type BroadcastTransactionParamsType<T> = T extends keyof Omit<
-  BroadcastTransactionParamsTypeTable,
-  SupportedChainIds.KavaMainnet | SupportedChainIds.SecretMainnet | SupportedChainIds.TerraMainnet
->
-  ? BroadcastTransactionParamsTypeTable[T]
-  : never
-export type BroadcastTransactionResponseType<T> =
-  T extends keyof BroadcastTransactionResponseTypeTable
-    ? BroadcastTransactionResponseTypeTable[T]
-    : never
+
+/**  TYPES USED WITH SIGNMESSAGE() METHODS * */
+export type SignMessageParams<T> = {
+  message: T
+}
+
+export type EthereumSignMessageParams = SignMessageParams<EthereumSignMessage>
+
+type SignMessageParamsTypeTable = {
+  // [SupportedChainIds.AvalancheMainnet]: AvalancheSignMessageParams
+  [SupportedChainIds.EthereumMainnet]: EthereumSignMessageParams
+}
+
 export type SignMessageParamsType<T> = T extends keyof SignMessageParamsTypeTable
   ? SignMessageParamsTypeTable[T]
   : never
-export type VerifyMessageParamsType<T> = T extends keyof VerifyMessageParamsTypeTable
-  ? VerifyMessageParamsTypeTable[T]
-  : never
+
+export interface EthereumSignMessageRequest {
+  method: 'eth_signMessage'
+  params: EthereumSignMessageParams
+}
+
+export type EthereumSignMessageResponse = EthereumSignedMessage
+
+type SignMessageResponseTypeTable = {
+  // [SupportedChainIds.AvalancheMainnet]: AvalancheSignMessageResponse
+  [SupportedChainIds.EthereumMainnet]: EthereumSignMessageResponse
+}
+
 export type SignMessageResponseType<T> = T extends keyof SignMessageResponseTypeTable
   ? SignMessageResponseTypeTable[T]
   : never
 
+/**  TYPES USED WITH VERIFYMESSAGE() METHODS ** */
+export type VerifyMessageParams<T> = {
+  message: T
+}
+
+export type EthereumVerifyMessageParams = VerifyMessageParams<EthereumVerifyMessage>
+
+export interface EthereumVerifyMessageRequest {
+  method: 'eth_verifyMessage'
+  params: EthereumVerifyMessageParams
+}
+
+type VerifyMessageParamsTypeTable = {
+  // [SupportedChainIds.AvalancheMainnet]: AvalancheVerifyMessageParams
+  [SupportedChainIds.EthereumMainnet]: EthereumVerifyMessageParams
+}
+
+export type VerifyMessageParamsType<T> = T extends keyof VerifyMessageParamsTypeTable
+  ? VerifyMessageParamsTypeTable[T]
+  : never
+
+export type EthereumVerifyMessageResponse = boolean
+
+type VerifyMessageResponseTypeTable = {
+  // [SupportedChainIds.AvalancheMainnet]: AvalancheVerifyMessageResponse
+  [SupportedChainIds.EthereumMainnet]: EthereumVerifyMessageResponse
+}
+
 export type VerifyMessageResponseType<T> = T extends keyof VerifyMessageResponseTypeTable
   ? VerifyMessageResponseTypeTable[T]
   : never
-export type HTTPConfigurationType<T> = T extends keyof HTTPConfigurationTypeTable
-  ? HTTPConfigurationTypeTable[T]
+
+/**  TYPES USED WITH BROADCASTTRANSACTION() METHODS ** */
+export type BroadcastTransactionParams<T> = {
+  transaction: T
+  baseUrl: string
+}
+
+export type BinanceBroadcastTransactionParams = BroadcastTransactionParams<BinanceSignedTransaction>
+export type BitcoinBroadcastTransactionParams = BroadcastTransactionParams<BitcoinSignedTransaction>
+export type BitcoinCashBroadcastTransactionParams =
+  BroadcastTransactionParams<BitcoinCashSignedTransaction>
+export type CosmosBroadcastTransactionParams = BroadcastTransactionParams<CosmosSignedTransaction>
+export type DogecoinBroadcastTransactionParams =
+  BroadcastTransactionParams<DogecoinSignedTransaction>
+export type EthereumBroadcastTransactionParams =
+  BroadcastTransactionParams<EthereumSignedTransaction>
+export type KavaBroadcastTransactionParams = BroadcastTransactionParams<KavaSignedTransaction>
+export type LitecoinBroadcastTransactionParams =
+  BroadcastTransactionParams<LitecoinSignedTransaction>
+export type OsmosisBroadcastTransactionParams = BroadcastTransactionParams<OsmosisSignedTransaction>
+export type SecretBroadcastTransactionParams = BroadcastTransactionParams<SecretSignedTransaction>
+export type TerraBroadcastTransactionParams = BroadcastTransactionParams<TerraSignedTransaction>
+export type ThorchainBroadcastTransactionParams =
+  BroadcastTransactionParams<ThorchainSignedTransaction>
+
+type BroadcastTransactionParamsTypeTable = {
+  // [SupportedChainIds.AvalancheMainnet]: AvalancheBroadcastTransactionParams
+  [SupportedChainIds.BinanceMainnet]: BroadcastTransactionParams<BinanceSignedTransaction>
+  [SupportedChainIds.BitcoinCashMainnet]: BroadcastTransactionParams<BitcoinCashSignedTransaction>
+  [SupportedChainIds.BitcoinMainnet]: BroadcastTransactionParams<BitcoinSignedTransaction>
+  [SupportedChainIds.CosmosMainnet]: BroadcastTransactionParams<CosmosSignedTransaction>
+  [SupportedChainIds.DogecoinMainnet]: BroadcastTransactionParams<DogecoinSignedTransaction>
+  [SupportedChainIds.EthereumMainnet]: BroadcastTransactionParams<EthereumSignedTransaction>
+  [SupportedChainIds.KavaMainnet]: BroadcastTransactionParams<KavaSignedTransaction>
+  [SupportedChainIds.LitecoinMainnet]: BroadcastTransactionParams<LitecoinSignedTransaction>
+  [SupportedChainIds.OsmosisMainnet]: BroadcastTransactionParams<OsmosisSignedTransaction>
+  [SupportedChainIds.SecretMainnet]: BroadcastTransactionParams<SecretSignedTransaction>
+  [SupportedChainIds.TerraMainnet]: BroadcastTransactionParams<TerraSignedTransaction>
+  [SupportedChainIds.ThorchainMainnet]: BroadcastTransactionParams<ThorchainSignedTransaction>
+}
+
+export type BroadcastTransactionParamsType<T> = T extends keyof BroadcastTransactionParamsTypeTable
+  ? BroadcastTransactionParamsTypeTable[T]
   : never
-export type HTTPProviderType<T> = T extends keyof HTTPProviderTypeTable
-  ? HTTPProviderTypeTable[T]
-  : never
-export type SignerSignTransactionType<T> = T extends keyof SignerSignTransactionTypeTable
-  ? SignerSignTransactionTypeTable[T]
-  : never
+
+export interface BinanceBroadcastTransactionRequest {
+  method: 'binance_broadcastTransaction'
+  params: BinanceBroadcastTransactionParams
+}
+export interface BitcoinCashBroadcastTransactionRequest {
+  method: 'bch_broadcastTransaction'
+  params: BitcoinCashBroadcastTransactionParams
+}
+
+export interface BitcoinBroadcastTransactionRequest {
+  method: 'btc_broadcastTransaction'
+  params: BitcoinBroadcastTransactionParams
+}
+
+export interface CosmosBroadcastTransactionRequest {
+  method: 'cosmos_broadcastTransaction'
+  params: CosmosBroadcastTransactionParams
+}
+
+export interface DogecoinBroadcastTransactionRequest {
+  method: 'doge_broadcastTransaction'
+  params: DogecoinBroadcastTransactionParams
+}
+
+export interface EthereumBroadcastTransactionRequest {
+  method: 'eth_broadcastTransaction'
+  params: EthereumBroadcastTransactionParams
+}
+
+export interface KavaBroadcastTransactionRequest {
+  method: 'kava_broadcastTransaction'
+  params: KavaBroadcastTransactionParams
+}
+
+export interface LitecoinBroadcastTransactionRequest {
+  method: 'ltc_broadcastTransaction'
+  params: LitecoinBroadcastTransactionParams
+}
+
+export interface OsmosisBroadcastTransactionRequest {
+  method: 'osmosis_broadcastTransaction'
+  params: OsmosisBroadcastTransactionParams
+}
+
+export interface SecretBroadcastTransactionRequest {
+  method: 'secret_broadcastTransaction'
+  params: SecretBroadcastTransactionParams
+}
+
+export interface TerraBroadcastTransactionRequest {
+  method: 'terra_broadcastTransaction'
+  params: TerraBroadcastTransactionParams
+}
+
+export interface ThorchainBroadcastTransactionRequest {
+  method: 'thorchain_broadcastTransaction'
+  params: ThorchainBroadcastTransactionParams
+}
+
+export type BinanceBroadcastTransactionResponse = string
+export type BitcoinBroadcastTransactionResponse = string
+export type BitcoinCashBroadcastTransactionResponse = string
+export type CosmosBroadcastTransactionResponse = string
+export type DogecoinBroadcastTransactionResponse = string
+export type EthereumBroadcastTransactionResponse = string
+export type KavaBroadcastTransactionResponse = string
+export type LitecoinBroadcastTransactionResponse = string
+export type OsmosisBroadcastTransactionResponse = string
+export type SecretBroadcastTransactionResponse = string
+export type TerraBroadcastTransactionResponse = string
+export type ThorchainBroadcastTransactionResponse = string
+
+type BroadcastTransactionResponseTypeTable = {
+  // [SupportedChainIds.AvalancheMainnet]: AvalancheBroadcastTransactionResponse
+  [SupportedChainIds.BinanceMainnet]: BinanceBroadcastTransactionResponse
+  [SupportedChainIds.BitcoinCashMainnet]: BitcoinCashBroadcastTransactionResponse
+  [SupportedChainIds.BitcoinMainnet]: BitcoinBroadcastTransactionResponse
+  [SupportedChainIds.CosmosMainnet]: CosmosBroadcastTransactionResponse
+  [SupportedChainIds.DogecoinMainnet]: DogecoinBroadcastTransactionResponse
+  [SupportedChainIds.EthereumMainnet]: EthereumBroadcastTransactionResponse
+  [SupportedChainIds.KavaMainnet]: KavaBroadcastTransactionResponse
+  [SupportedChainIds.LitecoinMainnet]: LitecoinBroadcastTransactionResponse
+  [SupportedChainIds.OsmosisMainnet]: OsmosisBroadcastTransactionResponse
+  [SupportedChainIds.SecretMainnet]: SecretBroadcastTransactionResponse
+  [SupportedChainIds.TerraMainnet]: TerraBroadcastTransactionResponse
+  [SupportedChainIds.ThorchainMainnet]: ThorchainBroadcastTransactionResponse
+}
+
+export type BroadcastTransactionResponseType<T> =
+  T extends keyof BroadcastTransactionResponseTypeTable
+    ? BroadcastTransactionResponseTypeTable[T]
+    : never
+
+type SignerGetAddressTypeTable = {
+  [SupportedChainIds.AvalancheMainnet]: EthereumGetAddress
+  [SupportedChainIds.BitcoinCashMainnet]: BitcoinCashGetAddress
+  [SupportedChainIds.BitcoinMainnet]: BitcoinGetAddress
+  [SupportedChainIds.CosmosMainnet]: CosmosGetAddress
+  [SupportedChainIds.DogecoinMainnet]: DogecoinGetAddress
+  [SupportedChainIds.EthereumMainnet]: EthereumGetAddress
+  [SupportedChainIds.LitecoinMainnet]: LitecoinGetAddress
+  [SupportedChainIds.OsmosisMainnet]: OsmosisGetAddress
+  [SupportedChainIds.ThorchainMainnet]: ThorchainGetAddress
+  [SupportedChainIds.BinanceMainnet]: BinanceGetAddress
+  [SupportedChainIds.TerraMainnet]: TerraGetAddress
+  [SupportedChainIds.KavaMainnet]: KavaGetAddress
+  [SupportedChainIds.SecretMainnet]: SecretGetAddress
+}
+
 export type SignerGetAddressType<T> = T extends keyof SignerGetAddressTypeTable
   ? SignerGetAddressTypeTable[T]
   : never
-export type SignerSignTransactionReturnType<T> =
-  T extends keyof SignerSignTransactionReturnTypeTable
-    ? SignerSignTransactionReturnTypeTable[T]
-    : never
+
+type SignerGetAddressReturnTypeTable = {
+  [SupportedChainIds.AvalancheMainnet]: EthereumAddress
+  [SupportedChainIds.BitcoinCashMainnet]: BitcoinCashAddress
+  [SupportedChainIds.BitcoinMainnet]: BitcoinAddress
+  [SupportedChainIds.CosmosMainnet]: CosmosAddress
+  [SupportedChainIds.DogecoinMainnet]: DogecoinAddress
+  [SupportedChainIds.EthereumMainnet]: EthereumAddress
+  [SupportedChainIds.LitecoinMainnet]: LitecoinAddress
+  [SupportedChainIds.OsmosisMainnet]: OsmosisAddress
+  [SupportedChainIds.ThorchainMainnet]: ThorchainAddress
+  [SupportedChainIds.BinanceMainnet]: BinanceAddress
+  [SupportedChainIds.TerraMainnet]: TerraAddress
+  [SupportedChainIds.KavaMainnet]: KavaAddress
+  [SupportedChainIds.SecretMainnet]: SecretAddress
+}
+
 export type SignerGetAddressReturnType<T> = T extends keyof SignerGetAddressReturnTypeTable
   ? SignerGetAddressReturnTypeTable[T]
   : never
 
-export type CosmosSDKChainIds = typeof CosmosSDKChainIdList[number]
-export type EVMChainIds = typeof EVMChainIdList[number]
-export type UTXOChainIds = typeof UTXOChainIdList[number]
+type SignerSignMessageTypeTable = {
+  [SupportedChainIds.EthereumMainnet]: EthereumSignMessage
+}
+
+export type SignerSignMessageType<T> = T extends keyof SignerSignMessageTypeTable
+  ? SignerSignMessageTypeTable[T]
+  : never
+
+type SignerSignMessageReturnTypeTable = {
+  [SupportedChainIds.EthereumMainnet]: EthereumSignedMessage
+}
+
+export type SignerSignMessageReturnType<T> = T extends keyof SignerSignMessageReturnTypeTable
+  ? SignerSignMessageReturnTypeTable[T]
+  : never
+
+type SignerVerifyMessageTypeTable = {
+  [SupportedChainIds.EthereumMainnet]: EthereumVerifyMessage
+}
+
+export type SignerVerifyMessageType<T> = T extends keyof SignerVerifyMessageTypeTable
+  ? SignerVerifyMessageTypeTable[T]
+  : never
+
+type SignerVerifyMessageReturnTypeTable = {
+  [SupportedChainIds.EthereumMainnet]: boolean
+}
+
+export type SignerVerifyMessageReturnType<T> = T extends keyof SignerVerifyMessageReturnTypeTable
+  ? SignerVerifyMessageReturnTypeTable[T]
+  : never
+
+type SignerSignTransactionTypeTable = {
+  [SupportedChainIds.AvalancheMainnet]: EthereumSignTransaction
+  [SupportedChainIds.BinanceMainnet]: BinanceSignTransaction
+  [SupportedChainIds.BitcoinCashMainnet]: BitcoinCashSignTransaction
+  [SupportedChainIds.BitcoinMainnet]: BitcoinSignTransaction
+  [SupportedChainIds.CosmosMainnet]: CosmosSignTransaction
+  [SupportedChainIds.DogecoinMainnet]: DogecoinSignTransaction
+  [SupportedChainIds.EthereumMainnet]: EthereumSignTransaction
+  [SupportedChainIds.KavaMainnet]: KavaSignTransaction
+  [SupportedChainIds.LitecoinMainnet]: LitecoinSignTransaction
+  [SupportedChainIds.OsmosisMainnet]: OsmosisSignTransaction
+  [SupportedChainIds.SecretMainnet]: SecretSignTransaction
+  [SupportedChainIds.TerraMainnet]: TerraSignTransaction
+  [SupportedChainIds.ThorchainMainnet]: ThorchainSignTransaction
+}
+
+export type SignerSignTransactionType<T> = T extends keyof SignerSignTransactionTypeTable
+  ? SignerSignTransactionTypeTable[T]
+  : never
+
+type SignerSignTransactionReturnTypeTable = {
+  [SupportedChainIds.AvalancheMainnet]: EthereumSignedTransaction
+  [SupportedChainIds.BinanceMainnet]: BinanceSignedTransaction
+  [SupportedChainIds.BitcoinCashMainnet]: BitcoinCashSignedTransaction
+  [SupportedChainIds.BitcoinMainnet]: BitcoinSignedTransaction
+  [SupportedChainIds.CosmosMainnet]: CosmosSignedTransaction
+  [SupportedChainIds.DogecoinMainnet]: DogecoinSignedTransaction
+  [SupportedChainIds.EthereumMainnet]: EthereumSignedTransaction
+  [SupportedChainIds.KavaMainnet]: KavaSignedTransaction
+  [SupportedChainIds.LitecoinMainnet]: LitecoinSignedTransaction
+  [SupportedChainIds.OsmosisMainnet]: OsmosisSignedTransaction
+  [SupportedChainIds.SecretMainnet]: SecretSignedTransaction
+  [SupportedChainIds.TerraMainnet]: TerraSignedTransaction
+  [SupportedChainIds.ThorchainMainnet]: ThorchainSignedTransaction
+}
+
+export type SignerSignTransactionReturnType<T> =
+  T extends keyof SignerSignTransactionReturnTypeTable
+    ? SignerSignTransactionReturnTypeTable[T]
+    : never
+
+type HTTPConfigurationTypeTable = {
+  [SupportedChainIds.AvalancheMainnet]: unchained.avalanche.Configuration
+  [SupportedChainIds.BinanceMainnet]: undefined
+  [SupportedChainIds.BitcoinCashMainnet]: unchained.bitcoincash.Configuration
+  [SupportedChainIds.BitcoinMainnet]: unchained.bitcoin.Configuration
+  [SupportedChainIds.CosmosMainnet]: unchained.cosmos.Configuration
+  [SupportedChainIds.DogecoinMainnet]: unchained.dogecoin.Configuration
+  [SupportedChainIds.EthereumMainnet]: unchained.ethereum.Configuration
+  [SupportedChainIds.KavaMainnet]: undefined
+  [SupportedChainIds.LitecoinMainnet]: unchained.litecoin.Configuration
+  [SupportedChainIds.OsmosisMainnet]: unchained.osmosis.Configuration
+  [SupportedChainIds.SecretMainnet]: undefined
+  [SupportedChainIds.TerraMainnet]: undefined
+  [SupportedChainIds.ThorchainMainnet]: unchained.thorchain.Configuration
+}
+
+export type HTTPConfigurationType<T> = T extends keyof HTTPConfigurationTypeTable
+  ? HTTPConfigurationTypeTable[T]
+  : never
+
+type HTTPProviderTypeTable = {
+  [SupportedChainIds.AvalancheMainnet]: unchained.avalanche.V1Api
+  [SupportedChainIds.BinanceMainnet]: undefined
+  [SupportedChainIds.BitcoinCashMainnet]: unchained.bitcoincash.V1Api
+  [SupportedChainIds.BitcoinMainnet]: unchained.bitcoin.V1Api
+  [SupportedChainIds.CosmosMainnet]: unchained.cosmos.V1Api
+  [SupportedChainIds.DogecoinMainnet]: unchained.dogecoin.V1Api
+  [SupportedChainIds.EthereumMainnet]: unchained.ethereum.V1Api
+  [SupportedChainIds.KavaMainnet]: undefined
+  [SupportedChainIds.LitecoinMainnet]: unchained.litecoin.V1Api
+  [SupportedChainIds.OsmosisMainnet]: unchained.osmosis.V1Api
+  [SupportedChainIds.SecretMainnet]: undefined
+  [SupportedChainIds.TerraMainnet]: undefined
+  [SupportedChainIds.ThorchainMainnet]: unchained.thorchain.V1Api
+}
+
+export type HTTPProviderType<T> = T extends keyof HTTPProviderTypeTable
+  ? HTTPProviderTypeTable[T]
+  : never
+
+export type RPCHandlerError = Error | JsonRpcError | string | null
+export type RPCHandlerResponse<T> = T
+
+export type ShapeShiftSnapRPCRequest =
+  | BinanceBroadcastTransactionRequest
+  | BinanceGetAddressRequest
+  | BinanceSignTransactionRequest
+  | BitcoinBroadcastTransactionRequest
+  | BitcoinCashBroadcastTransactionRequest
+  | BitcoinCashGetAddressRequest
+  | BitcoinCashSignTransactionRequest
+  | BitcoinGetAddressRequest
+  | BitcoinSignTransactionRequest
+  | CosmosBroadcastTransactionRequest
+  | CosmosGetAddressRequest
+  | CosmosSignTransactionRequest
+  | DogecoinBroadcastTransactionRequest
+  | DogecoinGetAddressRequest
+  | DogecoinSignTransactionRequest
+  | EthereumBroadcastTransactionRequest
+  | EthereumGetAddressRequest
+  | EthereumSignMessageRequest
+  | EthereumSignTransactionRequest
+  | EthereumVerifyMessageRequest
+  | KavaBroadcastTransactionRequest
+  | KavaGetAddressRequest
+  | KavaSignTransactionRequest
+  | LitecoinBroadcastTransactionRequest
+  | LitecoinGetAddressRequest
+  | LitecoinSignTransactionRequest
+  | OsmosisBroadcastTransactionRequest
+  | OsmosisGetAddressRequest
+  | OsmosisSignTransactionRequest
+  | SecretBroadcastTransactionRequest
+  | SecretGetAddressRequest
+  | SecretSignTransactionRequest
+  | TerraBroadcastTransactionRequest
+  | TerraGetAddressRequest
+  | TerraSignTransactionRequest
+  | ThorchainBroadcastTransactionRequest
+  | ThorchainGetAddressRequest
+  | ThorchainSignTransactionRequest
+
+export type ShapeShiftSnapRPCResponse =
+  | BinanceBroadcastTransactionResponse
+  | BinanceGetAddressResponse
+  | BinanceSignTransactionResponse
+  | BitcoinBroadcastTransactionResponse
+  | BitcoinCashBroadcastTransactionResponse
+  | BitcoinCashGetAddressResponse
+  | BitcoinCashSignTransactionResponse
+  | BitcoinGetAddressResponse
+  | BitcoinSignTransactionResponse
+  | CosmosBroadcastTransactionResponse
+  | CosmosGetAddressResponse
+  | CosmosSignTransactionResponse
+  | DogecoinBroadcastTransactionResponse
+  | DogecoinGetAddressResponse
+  | DogecoinSignTransactionResponse
+  | EthereumBroadcastTransactionResponse
+  | EthereumGetAddressResponse
+  | EthereumSignMessageResponse
+  | EthereumSignTransactionResponse
+  | EthereumVerifyMessageResponse
+  | KavaBroadcastTransactionResponse
+  | KavaGetAddressResponse
+  | KavaSignTransactionResponse
+  | LitecoinBroadcastTransactionResponse
+  | LitecoinGetAddressResponse
+  | LitecoinSignTransactionResponse
+  | OsmosisBroadcastTransactionResponse
+  | OsmosisGetAddressResponse
+  | OsmosisSignTransactionResponse
+  | SecretBroadcastTransactionResponse
+  | SecretGetAddressResponse
+  | SecretSignTransactionResponse
+  | TerraBroadcastTransactionResponse
+  | TerraGetAddressResponse
+  | TerraSignTransactionResponse
+  | ThorchainBroadcastTransactionResponse
+  | ThorchainGetAddressResponse
+  | ThorchainSignTransactionResponse
