@@ -1,18 +1,24 @@
+import {
+  BroadcastTransactionResponseType,
+  SupportedChainIds,
+} from '@shapeshiftoss/metamask-snaps-types'
+
 import { SignerArgs } from '../../common/BaseSigner'
 import { logger } from '../../common/lib/logger'
-import { BroadcastTransactionParamsType, BroadcastTransactionResponseType, SupportedChainIds } from '@shapeshiftoss/metamask-snaps-types'
 import { CosmosSDKSigner } from '../common/CosmosSDKSigner'
 
 export class SecretSigner extends CosmosSDKSigner<SupportedChainIds.SecretMainnet> {
   constructor() {
     const args: SignerArgs = {
       coin: 'Secret',
-      logger: logger.child({ namespace: ['Snap', 'RPC', 'CosmosSDK', 'Secret', 'SecretSigner.ts'] }),
+      logger: logger.child({
+        namespace: ['Snap', 'RPC', 'CosmosSDK', 'Secret', 'SecretSigner.ts'],
+      }),
     }
     super(args)
   }
 
-  async initialize(broadcastUrl?: string) {
+  async initialize() {
     try {
       this.signer = await this.initializeSigner()
       this.signerGetAddress = this.signer.secretGetAddress
@@ -23,9 +29,11 @@ export class SecretSigner extends CosmosSDKSigner<SupportedChainIds.SecretMainne
     }
   }
 
-  async broadcastTransaction({
-    transaction,
-  }: BroadcastTransactionParamsType<SupportedChainIds.SecretMainnet>): Promise<BroadcastTransactionResponseType<SupportedChainIds.SecretMainnet>> {
-    return Promise.reject(new Error(`Broadcast disabled pending Unchained support for ${this.coin}.`))
+  async broadcastTransaction(): Promise<
+    BroadcastTransactionResponseType<SupportedChainIds.SecretMainnet>
+  > {
+    return Promise.reject(
+      new Error(`Broadcast disabled pending Unchained support for ${this.coin}.`),
+    )
   }
 }

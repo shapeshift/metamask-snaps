@@ -1,9 +1,9 @@
+import { SupportedChainIds } from '@shapeshiftoss/metamask-snaps-types'
 import * as unchained from '@shapeshiftoss/unchained-client'
 
-import { SignerArgs } from '../../common/BaseSigner'
+import { SignerArgs, SignerInitializeArgs } from '../../common/BaseSigner'
 import { broadcastUrls } from '../../common/constants'
 import { logger } from '../../common/lib/logger'
-import { SupportedChainIds } from '../../types'
 import { UTXOSigner } from '../common/UTXOSigner'
 
 export class DogecoinSigner extends UTXOSigner<SupportedChainIds.DogecoinMainnet> {
@@ -15,9 +15,11 @@ export class DogecoinSigner extends UTXOSigner<SupportedChainIds.DogecoinMainnet
     super(args)
   }
 
-  async initialize(broadcastUrl?: string) {
+  async initialize({
+    broadcastUrl = broadcastUrls.DEFAULT_UNCHAINED_DOGECOIN_HTTP_URL,
+  }: SignerInitializeArgs) {
     const httpProviderConfiguration = new unchained.dogecoin.Configuration({
-      basePath: broadcastUrl || broadcastUrls.DEFAULT_UNCHAINED_BITCOIN_HTTP_URL,
+      basePath: broadcastUrl,
     })
     try {
       this.signer = await this.initializeSigner()

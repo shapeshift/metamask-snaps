@@ -1,9 +1,9 @@
+import { SupportedChainIds } from '@shapeshiftoss/metamask-snaps-types'
 import * as unchained from '@shapeshiftoss/unchained-client'
 
-import { SignerArgs } from '../../common/BaseSigner'
+import { SignerArgs, SignerInitializeArgs } from '../../common/BaseSigner'
 import { broadcastUrls } from '../../common/constants'
 import { logger } from '../../common/lib/logger'
-import { SupportedChainIds } from '../../types'
 import { UTXOSigner } from '../common/UTXOSigner'
 
 export class LitecoinSigner extends UTXOSigner<SupportedChainIds.LitecoinMainnet> {
@@ -15,9 +15,11 @@ export class LitecoinSigner extends UTXOSigner<SupportedChainIds.LitecoinMainnet
     super(args)
   }
 
-  async initialize(broadcastUrl?: string) {
+  async initialize({
+    broadcastUrl = broadcastUrls.DEFAULT_UNCHAINED_LITECOIN_HTTP_URL,
+  }: SignerInitializeArgs) {
     const httpProviderConfiguration = new unchained.litecoin.Configuration({
-      basePath: broadcastUrl || broadcastUrls.DEFAULT_UNCHAINED_LITECOIN_HTTP_URL,
+      basePath: broadcastUrl,
     })
     try {
       this.signer = await this.initializeSigner()
