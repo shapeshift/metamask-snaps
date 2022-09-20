@@ -1,20 +1,17 @@
-import { BaseSigner, SignerArgs } from '../../common'
 import {
   BroadcastTransactionParamsType,
   BroadcastTransactionResponseType,
-  UTXOChainIds,
   GetAddressParamsType,
   GetAddressResponseType,
   SignerGetAddressType,
   SignTransactionParamsType,
   SignTransactionResponseType,
+  UTXOChainIds,
 } from '@shapeshiftoss/metamask-snaps-types'
 
-export abstract class UTXOSigner<T extends UTXOChainIds> extends BaseSigner<T> {
-  constructor(args: SignerArgs) {
-    super(args)
-  }
+import { BaseSigner } from '../../common'
 
+export abstract class UTXOSigner<T extends UTXOChainIds> extends BaseSigner<T> {
   async getAddress({ addressParams }: GetAddressParamsType<T>): Promise<GetAddressResponseType<T>> {
     const { addressNList } = addressParams
     try {
@@ -54,7 +51,9 @@ export abstract class UTXOSigner<T extends UTXOChainIds> extends BaseSigner<T> {
     transaction,
   }: BroadcastTransactionParamsType<T>): Promise<BroadcastTransactionResponseType<T>> {
     try {
-      return (await this.httpProvider.sendTx({sendTxBody: {hex: transaction.serializedTx}})) as BroadcastTransactionResponseType<T>
+      return (await this.httpProvider.sendTx({
+        sendTxBody: { hex: transaction.serializedTx },
+      })) as BroadcastTransactionResponseType<T>
     } catch (error) {
       this.logger.error(transaction, { fn: 'broadcastTransaction' }, error)
       return Promise.reject(error)

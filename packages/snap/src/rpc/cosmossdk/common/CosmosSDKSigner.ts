@@ -1,4 +1,3 @@
-import { BaseSigner, SignerArgs } from '../../common'
 import {
   BroadcastTransactionParamsType,
   BroadcastTransactionResponseType,
@@ -10,11 +9,9 @@ import {
   SignTransactionResponseType,
 } from '@shapeshiftoss/metamask-snaps-types'
 
-export abstract class CosmosSDKSigner<T extends CosmosSDKChainIds> extends BaseSigner<T> {
-  constructor(args: SignerArgs) {
-    super(args)
-  }
+import { BaseSigner } from '../../common'
 
+export abstract class CosmosSDKSigner<T extends CosmosSDKChainIds> extends BaseSigner<T> {
   async getAddress({ addressParams }: GetAddressParamsType<T>): Promise<GetAddressResponseType<T>> {
     const { addressNList } = addressParams
     try {
@@ -50,14 +47,7 @@ export abstract class CosmosSDKSigner<T extends CosmosSDKChainIds> extends BaseS
     }
   }
 
-  async broadcastTransaction({
-    transaction,
-  }: BroadcastTransactionParamsType<T>): Promise<BroadcastTransactionResponseType<T>> {
-    try {
-      return (await this.httpProvider.sendTx({ body: { rawTx: transaction.serialized } })) as BroadcastTransactionResponseType<T>
-    } catch (error) {
-      this.logger.error(transaction, { fn: 'broadcastTransaction' }, error)
-      return Promise.reject(error)
-    }
-  }
+  abstract broadcastTransaction(
+    params: BroadcastTransactionParamsType<T>,
+  ): Promise<BroadcastTransactionResponseType<T>>
 }

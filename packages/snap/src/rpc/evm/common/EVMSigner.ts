@@ -1,4 +1,3 @@
-import { BaseSigner, SignerArgs } from '../../common'
 import {
   BroadcastTransactionParamsType,
   BroadcastTransactionResponseType,
@@ -6,6 +5,10 @@ import {
   GetAddressParamsType,
   GetAddressResponseType,
   SignerGetAddressType,
+  SignerSignMessageReturnType,
+  SignerSignMessageType,
+  SignerVerifyMessageReturnType,
+  SignerVerifyMessageType,
   SignMessageParamsType,
   SignMessageResponseType,
   SignTransactionParamsType,
@@ -14,10 +17,16 @@ import {
   VerifyMessageResponseType,
 } from '@shapeshiftoss/metamask-snaps-types'
 
+import { BaseSigner } from '../../common'
+
 export abstract class EVMSigner<T extends EVMChainIds> extends BaseSigner<T> {
-  constructor(args: SignerArgs) {
-    super(args)
-  }
+  protected signerSignMessage: (
+    params: SignerSignMessageType<T>,
+  ) => Promise<SignerSignMessageReturnType<T>>
+
+  protected signerVerifyMessage: (
+    params: SignerVerifyMessageType<T>,
+  ) => Promise<SignerVerifyMessageReturnType<T>>
 
   async getAddress({ addressParams }: GetAddressParamsType<T>): Promise<GetAddressResponseType<T>> {
     const { addressNList } = addressParams
@@ -38,7 +47,7 @@ export abstract class EVMSigner<T extends EVMChainIds> extends BaseSigner<T> {
 
   async signMessage({ message }: SignMessageParamsType<T>): Promise<SignMessageResponseType<T>> {
     try {
-      return await this.signer.ethSignMessage(message)
+      return await this.signerSignMessage(message)
     } catch (error) {
       this.logger.error(message, { fn: 'ethSignMessage' }, error)
       return Promise.reject(error)
@@ -49,7 +58,7 @@ export abstract class EVMSigner<T extends EVMChainIds> extends BaseSigner<T> {
     message,
   }: VerifyMessageParamsType<T>): Promise<VerifyMessageResponseType<T>> {
     try {
-      return await this.signer.ethVerifyMessage(message)
+      return await this.signerVerifyMessage(message)
     } catch (error) {
       this.logger.error(message, { fn: 'ethVerifyMessage' }, error)
       return Promise.reject(error)
