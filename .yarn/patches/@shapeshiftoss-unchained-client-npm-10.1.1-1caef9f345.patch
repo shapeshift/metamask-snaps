@@ -1,0 +1,128 @@
+diff --git a/dist/evm/ethereum/index.js b/dist/evm/ethereum/index.js
+index 8b8b64290200faf6fc4fd7a2494bea878679ac47..2f4cd1047b7d297e71f1c7190b8915ecfba699fa 100644
+--- a/dist/evm/ethereum/index.js
++++ b/dist/evm/ethereum/index.js
+@@ -15,4 +15,3 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
+ };
+ Object.defineProperty(exports, "__esModule", { value: true });
+ __exportStar(require("../../generated/ethereum"), exports);
+-__exportStar(require("./parser"), exports);
+diff --git a/dist/evm/index.js b/dist/evm/index.js
+index e7f5fa70f9a193a8590f05d4af496937da907b37..0321069a9025d6d05a74d1c66778ece907ac6fff 100644
+--- a/dist/evm/index.js
++++ b/dist/evm/index.js
+@@ -27,6 +27,5 @@ var __importStar = (this && this.__importStar) || function (mod) {
+ };
+ Object.defineProperty(exports, "__esModule", { value: true });
+ exports.avalanche = exports.ethereum = void 0;
+-__exportStar(require("./parser"), exports);
+ exports.ethereum = __importStar(require("./ethereum"));
+ exports.avalanche = __importStar(require("./avalanche"));
+diff --git a/dist/generated/avalanche/runtime.js b/dist/generated/avalanche/runtime.js
+index 92cf4828e755b8fb3ef6367e298b20ede296503f..8cdcaff855c6d4e969f7ac68fc701ca3604f8205 100644
+--- a/dist/generated/avalanche/runtime.js
++++ b/dist/generated/avalanche/runtime.js
+@@ -16,6 +16,7 @@
+ Object.defineProperty(exports, "__esModule", { value: true });
+ exports.TextApiResponse = exports.BlobApiResponse = exports.VoidApiResponse = exports.JSONApiResponse = exports.canConsumeForm = exports.mapValues = exports.querystring = exports.exists = exports.COLLECTION_FORMATS = exports.RequiredError = exports.FetchError = exports.ResponseError = exports.BaseAPI = exports.DefaultConfig = exports.Configuration = exports.BASE_PATH = void 0;
+ exports.BASE_PATH = "https://dev-api.avalanche.shapeshift.com".replace(/\/+$/, "");
++const URLSearchParams = require("@ungap/url-search-params/cjs")
+ class Configuration {
+     constructor(configuration = {}) {
+         this.configuration = configuration;
+diff --git a/dist/generated/bitcoin/runtime.js b/dist/generated/bitcoin/runtime.js
+index 38990e029035faebc1228652da2578d56bf287ba..58a266bdc322aa8050524ce21ef6fee3b988a797 100644
+--- a/dist/generated/bitcoin/runtime.js
++++ b/dist/generated/bitcoin/runtime.js
+@@ -16,6 +16,7 @@
+ Object.defineProperty(exports, "__esModule", { value: true });
+ exports.TextApiResponse = exports.BlobApiResponse = exports.VoidApiResponse = exports.JSONApiResponse = exports.canConsumeForm = exports.mapValues = exports.querystring = exports.exists = exports.COLLECTION_FORMATS = exports.RequiredError = exports.FetchError = exports.ResponseError = exports.BaseAPI = exports.DefaultConfig = exports.Configuration = exports.BASE_PATH = void 0;
+ exports.BASE_PATH = "https://dev-api.bitcoin.shapeshift.com".replace(/\/+$/, "");
++const URLSearchParams = require("@ungap/url-search-params/cjs")
+ class Configuration {
+     constructor(configuration = {}) {
+         this.configuration = configuration;
+diff --git a/dist/generated/bitcoincash/runtime.js b/dist/generated/bitcoincash/runtime.js
+index 280014894afe772761a0008c84f2bdc54278ce9f..37fc8c42be9ff5d4d885d8894903f66358c2f491 100644
+--- a/dist/generated/bitcoincash/runtime.js
++++ b/dist/generated/bitcoincash/runtime.js
+@@ -16,6 +16,7 @@
+ Object.defineProperty(exports, "__esModule", { value: true });
+ exports.TextApiResponse = exports.BlobApiResponse = exports.VoidApiResponse = exports.JSONApiResponse = exports.canConsumeForm = exports.mapValues = exports.querystring = exports.exists = exports.COLLECTION_FORMATS = exports.RequiredError = exports.FetchError = exports.ResponseError = exports.BaseAPI = exports.DefaultConfig = exports.Configuration = exports.BASE_PATH = void 0;
+ exports.BASE_PATH = "https://dev-api.bitcoincash.shapeshift.com".replace(/\/+$/, "");
++const URLSearchParams = require("@ungap/url-search-params/cjs")
+ class Configuration {
+     constructor(configuration = {}) {
+         this.configuration = configuration;
+diff --git a/dist/generated/cosmos/runtime.js b/dist/generated/cosmos/runtime.js
+index a35c7fb5d98e734a06924e702abb3a36cb583fe9..e2e7321e19d10a1f2066f20db2ec14ad5bdd85de 100644
+--- a/dist/generated/cosmos/runtime.js
++++ b/dist/generated/cosmos/runtime.js
+@@ -16,6 +16,7 @@
+ Object.defineProperty(exports, "__esModule", { value: true });
+ exports.TextApiResponse = exports.BlobApiResponse = exports.VoidApiResponse = exports.JSONApiResponse = exports.canConsumeForm = exports.mapValues = exports.querystring = exports.exists = exports.COLLECTION_FORMATS = exports.RequiredError = exports.FetchError = exports.ResponseError = exports.BaseAPI = exports.DefaultConfig = exports.Configuration = exports.BASE_PATH = void 0;
+ exports.BASE_PATH = "http://localhost".replace(/\/+$/, "");
++const URLSearchParams = require("@ungap/url-search-params/cjs")
+ class Configuration {
+     constructor(configuration = {}) {
+         this.configuration = configuration;
+diff --git a/dist/generated/dogecoin/runtime.js b/dist/generated/dogecoin/runtime.js
+index b9159145214c81a41a69c7d88d200e8a894a0d2d..cefb69a5c0f148d86bd6cc80cc692df7c6fd2139 100644
+--- a/dist/generated/dogecoin/runtime.js
++++ b/dist/generated/dogecoin/runtime.js
+@@ -16,6 +16,7 @@
+ Object.defineProperty(exports, "__esModule", { value: true });
+ exports.TextApiResponse = exports.BlobApiResponse = exports.VoidApiResponse = exports.JSONApiResponse = exports.canConsumeForm = exports.mapValues = exports.querystring = exports.exists = exports.COLLECTION_FORMATS = exports.RequiredError = exports.FetchError = exports.ResponseError = exports.BaseAPI = exports.DefaultConfig = exports.Configuration = exports.BASE_PATH = void 0;
+ exports.BASE_PATH = "https://dev-api.dogecoin.shapeshift.com".replace(/\/+$/, "");
++const URLSearchParams = require("@ungap/url-search-params/cjs")
+ class Configuration {
+     constructor(configuration = {}) {
+         this.configuration = configuration;
+diff --git a/dist/generated/ethereum/runtime.js b/dist/generated/ethereum/runtime.js
+index 9ba854e68830270d98c62db07778615122949986..6bbd1377714f8042a604c49b0219e16bf89f3932 100644
+--- a/dist/generated/ethereum/runtime.js
++++ b/dist/generated/ethereum/runtime.js
+@@ -16,6 +16,7 @@
+ Object.defineProperty(exports, "__esModule", { value: true });
+ exports.TextApiResponse = exports.BlobApiResponse = exports.VoidApiResponse = exports.JSONApiResponse = exports.canConsumeForm = exports.mapValues = exports.querystring = exports.exists = exports.COLLECTION_FORMATS = exports.RequiredError = exports.FetchError = exports.ResponseError = exports.BaseAPI = exports.DefaultConfig = exports.Configuration = exports.BASE_PATH = void 0;
+ exports.BASE_PATH = "https://dev-api.ethereum.shapeshift.com".replace(/\/+$/, "");
++const URLSearchParams = require("@ungap/url-search-params/cjs")
+ class Configuration {
+     constructor(configuration = {}) {
+         this.configuration = configuration;
+diff --git a/dist/generated/litecoin/runtime.js b/dist/generated/litecoin/runtime.js
+index f07e6a2f532221abf4c79215a5c8189af3d684a5..7af60e3652d890618eea56f47258df64ebefd1d6 100644
+--- a/dist/generated/litecoin/runtime.js
++++ b/dist/generated/litecoin/runtime.js
+@@ -16,6 +16,7 @@
+ Object.defineProperty(exports, "__esModule", { value: true });
+ exports.TextApiResponse = exports.BlobApiResponse = exports.VoidApiResponse = exports.JSONApiResponse = exports.canConsumeForm = exports.mapValues = exports.querystring = exports.exists = exports.COLLECTION_FORMATS = exports.RequiredError = exports.FetchError = exports.ResponseError = exports.BaseAPI = exports.DefaultConfig = exports.Configuration = exports.BASE_PATH = void 0;
+ exports.BASE_PATH = "https://dev-api.litecoin.shapeshift.com".replace(/\/+$/, "");
++const URLSearchParams = require("@ungap/url-search-params/cjs")
+ class Configuration {
+     constructor(configuration = {}) {
+         this.configuration = configuration;
+diff --git a/dist/generated/osmosis/runtime.js b/dist/generated/osmosis/runtime.js
+index d80803e1510ae72f4183ef8e3197a0db28972201..3ed5109c82f5bc64fd28c389b51d55208390a0de 100644
+--- a/dist/generated/osmosis/runtime.js
++++ b/dist/generated/osmosis/runtime.js
+@@ -16,6 +16,7 @@
+ Object.defineProperty(exports, "__esModule", { value: true });
+ exports.TextApiResponse = exports.BlobApiResponse = exports.VoidApiResponse = exports.JSONApiResponse = exports.canConsumeForm = exports.mapValues = exports.querystring = exports.exists = exports.COLLECTION_FORMATS = exports.RequiredError = exports.FetchError = exports.ResponseError = exports.BaseAPI = exports.DefaultConfig = exports.Configuration = exports.BASE_PATH = void 0;
+ exports.BASE_PATH = "http://localhost".replace(/\/+$/, "");
++const URLSearchParams = require("@ungap/url-search-params/cjs")
+ class Configuration {
+     constructor(configuration = {}) {
+         this.configuration = configuration;
+diff --git a/dist/generated/thorchain/runtime.js b/dist/generated/thorchain/runtime.js
+index 41a1e762c5bf7f09dfb2ffdb54ba888c9d02ef1f..fe48d3d2acb4458abd65ec4af159390d52ce4b4f 100644
+--- a/dist/generated/thorchain/runtime.js
++++ b/dist/generated/thorchain/runtime.js
+@@ -16,6 +16,7 @@
+ Object.defineProperty(exports, "__esModule", { value: true });
+ exports.TextApiResponse = exports.BlobApiResponse = exports.VoidApiResponse = exports.JSONApiResponse = exports.canConsumeForm = exports.mapValues = exports.querystring = exports.exists = exports.COLLECTION_FORMATS = exports.RequiredError = exports.FetchError = exports.ResponseError = exports.BaseAPI = exports.DefaultConfig = exports.Configuration = exports.BASE_PATH = void 0;
+ exports.BASE_PATH = "http://localhost".replace(/\/+$/, "");
++const URLSearchParams = require("@ungap/url-search-params/cjs")
+ class Configuration {
+     constructor(configuration = {}) {
+         this.configuration = configuration;
