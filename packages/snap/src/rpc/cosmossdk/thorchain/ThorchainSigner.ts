@@ -1,6 +1,12 @@
 import {
   BroadcastTransactionParamsType,
   BroadcastTransactionResponseType,
+  GetAddressParamsType,
+  GetAddressResponseType,
+  SignerGetAddressType,
+  SignerSignTransactionType,
+  SignTransactionParamsType,
+  SignTransactionResponseType,
   SupportedChainIds,
 } from '@shapeshiftoss/metamask-snaps-types'
 import * as unchained from '@shapeshiftoss/unchained-client'
@@ -21,20 +27,63 @@ export class ThorchainSigner extends CosmosSDKSigner<SupportedChainIds.Thorchain
     super(args)
   }
 
-  async initialize({
-    broadcastUrl = broadcastUrls.DEFAULT_UNCHAINED_THORCHAIN_HTTP_URL,
-  }: SignerInitializeArgs) {
+  async initialize(
+    { broadcastUrl }: SignerInitializeArgs = {
+      broadcastUrl: broadcastUrls.DEFAULT_UNCHAINED_THORCHAIN_HTTP_URL,
+    },
+  ) {
     const httpProviderConfiguration = new unchained.thorchain.Configuration({
       basePath: broadcastUrl,
     })
     try {
       this.signer = await this.initializeSigner()
-      this.signerGetAddress = this.signer.thorchainGetAddress
-      this.signerSignTransaction = this.signer.thorchainSignTx
       this.httpProvider = new unchained.thorchain.V1Api(httpProviderConfiguration)
       this.initialized = true
     } catch (error) {
       this.logger.error(error, { fn: 'getSigner' }, `Failed to initialize ${this.coin}Signer`)
+    }
+  }
+
+  async getAddress({
+    addressParams,
+  }: GetAddressParamsType<SupportedChainIds.ThorchainMainnet>): Promise<
+    GetAddressResponseType<SupportedChainIds.ThorchainMainnet>
+  > {
+    const { addressNList } = addressParams
+    try {
+      const address = await this.signer.thorchainGetAddress({
+        addressNList,
+        showDisplay: false,
+      } as SignerGetAddressType<SupportedChainIds.ThorchainMainnet>)
+      if (address === null) {
+        throw new Error('Address generation failed')
+      }
+      return address
+    } catch (error) {
+      this.logger.error({ fn: 'getAddress' }, error)
+      return Promise.reject(error)
+    }
+  }
+
+  async signTransaction({
+    transaction,
+  }: SignTransactionParamsType<SupportedChainIds.ThorchainMainnet>): Promise<
+    SignTransactionResponseType<SupportedChainIds.ThorchainMainnet>
+  > {
+    try {
+      if (!(await this.confirmTransaction(transaction))) {
+        throw new Error('User rejected the signing request')
+      }
+      const signedTransaction = await this.signer.thorchainSignTx(
+        transaction as SignerSignTransactionType<SupportedChainIds.ThorchainMainnet>,
+      )
+      if (signedTransaction === null) {
+        throw new Error('Transaction signing failed')
+      }
+      return signedTransaction
+    } catch (error) {
+      this.logger.error(transaction, { fn: 'signTransaction' }, error)
+      return Promise.reject(error)
     }
   }
 

@@ -5,9 +5,8 @@ import {
   GetAddressParamsType,
   GetAddressResponseType,
   SignerGetAddressType,
-  SignerSignMessageReturnType,
   SignerSignMessageType,
-  SignerVerifyMessageReturnType,
+  SignerSignTransactionType,
   SignerVerifyMessageType,
   SignMessageParamsType,
   SignMessageResponseType,
@@ -20,25 +19,17 @@ import {
 import { BaseSigner } from '../../common'
 
 export abstract class EVMSigner<T extends EVMChainIds> extends BaseSigner<T> {
-  protected signerSignMessage: (
-    params: SignerSignMessageType<T>,
-  ) => Promise<SignerSignMessageReturnType<T>>
-
-  protected signerVerifyMessage: (
-    params: SignerVerifyMessageType<T>,
-  ) => Promise<SignerVerifyMessageReturnType<T>>
-
   async getAddress({ addressParams }: GetAddressParamsType<T>): Promise<GetAddressResponseType<T>> {
     const { addressNList } = addressParams
     try {
-      const address = await this.signerGetAddress({
+      const address = await this.signer.ethGetAddress({
         addressNList,
         showDisplay: false,
       } as SignerGetAddressType<T>)
       if (address === null) {
         throw new Error('Address generation failed')
       }
-      return address
+      return address as GetAddressResponseType<T>
     } catch (error) {
       this.logger.error({ fn: 'getAddress' }, error)
       return Promise.reject(error)
@@ -47,7 +38,9 @@ export abstract class EVMSigner<T extends EVMChainIds> extends BaseSigner<T> {
 
   async signMessage({ message }: SignMessageParamsType<T>): Promise<SignMessageResponseType<T>> {
     try {
-      return await this.signerSignMessage(message)
+      return (await this.signer.ethSignMessage(
+        message as SignerSignMessageType<T>,
+      )) as SignMessageResponseType<T>
     } catch (error) {
       this.logger.error(message, { fn: 'ethSignMessage' }, error)
       return Promise.reject(error)
@@ -58,7 +51,9 @@ export abstract class EVMSigner<T extends EVMChainIds> extends BaseSigner<T> {
     message,
   }: VerifyMessageParamsType<T>): Promise<VerifyMessageResponseType<T>> {
     try {
-      return await this.signerVerifyMessage(message)
+      return (await this.signer.ethVerifyMessage(
+        message as SignerVerifyMessageType<T>,
+      )) as VerifyMessageResponseType<T>
     } catch (error) {
       this.logger.error(message, { fn: 'ethVerifyMessage' }, error)
       return Promise.reject(error)
@@ -69,14 +64,16 @@ export abstract class EVMSigner<T extends EVMChainIds> extends BaseSigner<T> {
     transaction,
   }: SignTransactionParamsType<T>): Promise<SignTransactionResponseType<T>> {
     try {
-      if (!this.confirmTransaction(transaction)) {
+      if (!(await this.confirmTransaction(transaction))) {
         throw new Error('User rejected the signing request')
       }
-      const signedTransaction = await this.signerSignTransaction(transaction)
+      const signedTransaction = await this.signer.ethSignTx(
+        transaction as SignerSignTransactionType<T>,
+      )
       if (signedTransaction === null) {
         throw new Error('Transaction signing failed')
       }
-      return signedTransaction
+      return signedTransaction as SignTransactionResponseType<T>
     } catch (error) {
       this.logger.error(transaction, { fn: 'signTransaction' }, error)
       return Promise.reject(error)

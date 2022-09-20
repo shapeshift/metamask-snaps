@@ -45,7 +45,7 @@ export const thorchainBroadcastTransaction = async (
 ): Promise<ThorchainBroadcastTransactionResponse> => {
   try {
     const thorchainSigner = new ThorchainSigner()
-    await thorchainSigner.initialize(params.baseUrl)
+    await thorchainSigner.initialize({ broadcastUrl: params.baseUrl })
     return await thorchainSigner.broadcastTransaction(params)
   } catch (error) {
     moduleLogger.error({ fn: 'thorchainSignTransaction' }, error)

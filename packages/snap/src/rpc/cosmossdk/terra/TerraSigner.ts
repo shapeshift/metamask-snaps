@@ -1,5 +1,11 @@
 import {
   BroadcastTransactionResponseType,
+  GetAddressParamsType,
+  GetAddressResponseType,
+  SignerGetAddressType,
+  SignerSignTransactionType,
+  SignTransactionParamsType,
+  SignTransactionResponseType,
   SupportedChainIds,
 } from '@shapeshiftoss/metamask-snaps-types'
 
@@ -19,11 +25,52 @@ export class TerraSigner extends CosmosSDKSigner<SupportedChainIds.TerraMainnet>
   async initialize() {
     try {
       this.signer = await this.initializeSigner()
-      this.signerGetAddress = this.signer.terraGetAddress
-      this.signerSignTransaction = this.signer.terraSignTx
       this.initialized = true
     } catch (error) {
       this.logger.error(error, { fn: 'getSigner' }, `Failed to initialize ${this.coin}Signer`)
+    }
+  }
+
+  async getAddress({
+    addressParams,
+  }: GetAddressParamsType<SupportedChainIds.TerraMainnet>): Promise<
+    GetAddressResponseType<SupportedChainIds.TerraMainnet>
+  > {
+    const { addressNList } = addressParams
+    try {
+      const address = await this.signer.terraGetAddress({
+        addressNList,
+        showDisplay: false,
+      } as SignerGetAddressType<SupportedChainIds.TerraMainnet>)
+      if (address === null) {
+        throw new Error('Address generation failed')
+      }
+      return address
+    } catch (error) {
+      this.logger.error({ fn: 'getAddress' }, error)
+      return Promise.reject(error)
+    }
+  }
+
+  async signTransaction({
+    transaction,
+  }: SignTransactionParamsType<SupportedChainIds.TerraMainnet>): Promise<
+    SignTransactionResponseType<SupportedChainIds.TerraMainnet>
+  > {
+    try {
+      if (!(await this.confirmTransaction(transaction))) {
+        throw new Error('User rejected the signing request')
+      }
+      const signedTransaction = await this.signer.terraSignTx(
+        transaction as SignerSignTransactionType<SupportedChainIds.TerraMainnet>,
+      )
+      if (signedTransaction === null) {
+        throw new Error('Transaction signing failed')
+      }
+      return signedTransaction
+    } catch (error) {
+      this.logger.error(transaction, { fn: 'signTransaction' }, error)
+      return Promise.reject(error)
     }
   }
 

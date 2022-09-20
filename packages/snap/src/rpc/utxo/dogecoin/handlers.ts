@@ -45,7 +45,7 @@ export const dogecoinBroadcastTransaction = async (
 ): Promise<DogecoinBroadcastTransactionResponse> => {
   try {
     const dogecoinSigner = new DogecoinSigner()
-    await dogecoinSigner.initialize(params.baseUrl)
+    await dogecoinSigner.initialize({ broadcastUrl: params.baseUrl })
     return await dogecoinSigner.broadcastTransaction(params)
   } catch (error) {
     moduleLogger.error({ fn: 'dogecoinSignTransaction' }, error)

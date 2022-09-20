@@ -45,7 +45,7 @@ export const cosmosBroadcastTransaction = async (
 ): Promise<CosmosBroadcastTransactionResponse> => {
   try {
     const cosmosSigner = new CosmosSigner()
-    await cosmosSigner.initialize(params.baseUrl)
+    await cosmosSigner.initialize({ broadcastUrl: params.baseUrl })
     return await cosmosSigner.broadcastTransaction(params)
   } catch (error) {
     moduleLogger.error({ fn: 'cosmosSignTransaction' }, error)

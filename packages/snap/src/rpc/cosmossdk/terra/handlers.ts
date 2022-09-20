@@ -45,8 +45,8 @@ export const terraBroadcastTransaction = async (
 ): Promise<TerraBroadcastTransactionResponse> => {
   try {
     const terraSigner = new TerraSigner()
-    await terraSigner.initialize(params.baseUrl)
-    return await terraSigner.broadcastTransaction(params)
+    await terraSigner.initialize()
+    return await terraSigner.broadcastTransaction()
   } catch (error) {
     moduleLogger.error({ fn: 'terraSignTransaction' }, error)
     return Promise.reject(error)

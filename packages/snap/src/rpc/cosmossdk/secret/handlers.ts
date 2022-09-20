@@ -45,8 +45,8 @@ export const secretBroadcastTransaction = async (
 ): Promise<SecretBroadcastTransactionResponse> => {
   try {
     const secretSigner = new SecretSigner()
-    await secretSigner.initialize(params.baseUrl)
-    return await secretSigner.broadcastTransaction(params)
+    await secretSigner.initialize()
+    return await secretSigner.broadcastTransaction()
   } catch (error) {
     moduleLogger.error({ fn: 'secretSignTransaction' }, error)
     return Promise.reject(error)

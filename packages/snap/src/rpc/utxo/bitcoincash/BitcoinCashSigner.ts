@@ -15,16 +15,16 @@ export class BitcoinCashSigner extends UTXOSigner<SupportedChainIds.BitcoinCashM
     super(args)
   }
 
-  async initialize({
-    broadcastUrl = broadcastUrls.DEFAULT_UNCHAINED_BITCOINCASH_HTTP_URL,
-  }: SignerInitializeArgs) {
+  async initialize(
+    { broadcastUrl }: SignerInitializeArgs = {
+      broadcastUrl: broadcastUrls.DEFAULT_UNCHAINED_BITCOINCASH_HTTP_URL,
+    },
+  ) {
     const httpProviderConfiguration = new unchained.bitcoincash.Configuration({
       basePath: broadcastUrl,
     })
     try {
       this.signer = await this.initializeSigner()
-      this.signerGetAddress = this.signer.btcGetAddress
-      this.signerSignTransaction = this.signer.btcSignTx
       this.httpProvider = new unchained.bitcoincash.V1Api(httpProviderConfiguration)
       this.initialized = true
     } catch (error) {

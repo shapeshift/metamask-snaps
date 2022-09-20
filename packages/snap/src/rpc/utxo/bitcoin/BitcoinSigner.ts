@@ -1,4 +1,4 @@
-import { SupportedChainIds } from '@shapeshiftoss/metamask-snaps-types'
+import { NativeHDWallet, SupportedChainIds } from '@shapeshiftoss/metamask-snaps-types'
 import * as unchained from '@shapeshiftoss/unchained-client'
 
 import { SignerArgs, SignerInitializeArgs } from '../../common/BaseSigner'
@@ -7,6 +7,8 @@ import { logger } from '../../common/lib/logger'
 import { UTXOSigner } from '../common/UTXOSigner'
 
 export class BitcoinSigner extends UTXOSigner<SupportedChainIds.BitcoinMainnet> {
+  protected signer: NativeHDWallet
+
   constructor() {
     const args: SignerArgs = {
       coin: 'Bitcoin',
@@ -15,16 +17,16 @@ export class BitcoinSigner extends UTXOSigner<SupportedChainIds.BitcoinMainnet> 
     super(args)
   }
 
-  async initialize({
-    broadcastUrl = broadcastUrls.DEFAULT_UNCHAINED_BITCOIN_HTTP_URL,
-  }: SignerInitializeArgs) {
+  async initialize(
+    { broadcastUrl }: SignerInitializeArgs = {
+      broadcastUrl: broadcastUrls.DEFAULT_UNCHAINED_BITCOIN_HTTP_URL,
+    },
+  ) {
     const httpProviderConfiguration = new unchained.bitcoin.Configuration({
       basePath: broadcastUrl,
     })
     try {
       this.signer = await this.initializeSigner()
-      this.signerGetAddress = this.signer.btcGetAddress
-      this.signerSignTransaction = this.signer.btcSignTx
       this.httpProvider = new unchained.bitcoin.V1Api(httpProviderConfiguration)
       this.initialized = true
     } catch (error) {

@@ -6,10 +6,6 @@ import {
   GetAddressResponseType,
   HTTPProviderType,
   NativeHDWallet,
-  SignerGetAddressReturnType,
-  SignerGetAddressType,
-  SignerSignTransactionReturnType,
-  SignerSignTransactionType,
   SignTransactionParamsType,
   SignTransactionResponseType,
   SupportedChainIds,
@@ -23,7 +19,7 @@ export interface SignerArgs {
 }
 
 export interface SignerInitializeArgs {
-  broadcastUrl?: string
+  broadcastUrl: string
 }
 
 export abstract class BaseSigner<T extends SupportedChainIds> {
@@ -34,14 +30,6 @@ export abstract class BaseSigner<T extends SupportedChainIds> {
   protected logger: Logger
 
   protected httpProvider: HTTPProviderType<T>
-
-  protected signerGetAddress: (
-    params: SignerGetAddressType<T>,
-  ) => Promise<SignerGetAddressReturnType<T>>
-
-  protected signerSignTransaction: (
-    params: SignerSignTransactionType<T>,
-  ) => Promise<SignerSignTransactionReturnType<T>>
 
   protected initialized: boolean
 

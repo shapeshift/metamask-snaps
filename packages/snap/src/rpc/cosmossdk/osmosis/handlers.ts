@@ -45,7 +45,7 @@ export const osmosisBroadcastTransaction = async (
 ): Promise<OsmosisBroadcastTransactionResponse> => {
   try {
     const osmosisSigner = new OsmosisSigner()
-    await osmosisSigner.initialize(params.baseUrl)
+    await osmosisSigner.initialize({ broadcastUrl: params.baseUrl })
     return await osmosisSigner.broadcastTransaction(params)
   } catch (error) {
     moduleLogger.error({ fn: 'osmosisSignTransaction' }, error)

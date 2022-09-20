@@ -45,7 +45,7 @@ export const litecoinBroadcastTransaction = async (
 ): Promise<LitecoinBroadcastTransactionResponse> => {
   try {
     const litecoinSigner = new LitecoinSigner()
-    await litecoinSigner.initialize(params.baseUrl)
+    await litecoinSigner.initialize({ broadcastUrl: params.baseUrl })
     return await litecoinSigner.broadcastTransaction(params)
   } catch (error) {
     moduleLogger.error({ fn: 'litecoinSignTransaction' }, error)

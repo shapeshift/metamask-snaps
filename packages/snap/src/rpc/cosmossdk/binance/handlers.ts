@@ -45,8 +45,8 @@ export const binanceBroadcastTransaction = async (
 ): Promise<BinanceBroadcastTransactionResponse> => {
   try {
     const binanceSigner = new BinanceSigner()
-    await binanceSigner.initialize(params.baseUrl)
-    return await binanceSigner.broadcastTransaction(params)
+    await binanceSigner.initialize()
+    return await binanceSigner.broadcastTransaction()
   } catch (error) {
     moduleLogger.error({ fn: 'binanceSignTransaction' }, error)
     return Promise.reject(error)

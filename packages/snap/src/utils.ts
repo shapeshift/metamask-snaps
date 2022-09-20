@@ -3,6 +3,8 @@ import { Coin } from '@shapeshiftoss/hdwallet-core'
 
 import { logger } from './lib/logger'
 
+const moduleLogger = logger.child({ namespace: ['Snap', 'Utils.ts'] })
+
 // https://github.com/satoshilabs/slips/blob/master/slip-0044.md
 const slip44AndCurveTable = Object.freeze({
   Bitcoin: { slip44: 0, curve: 'secp256k1' },
@@ -34,15 +36,14 @@ type Slip44AndCurve<T> = {
   slip44: T extends keyof typeof slip44AndCurveTable ? number : undefined
   curve: Curve
 }
+
 type Slip44AndCurveByCoin<T> = T extends keyof typeof slip44AndCurveTable
   ? typeof slip44AndCurveTable[T]
-  : Slip44AndCurve<T> | undefined
+  : Slip44AndCurve<T> | never
 
 export const slip44AndCurveByCoin = <T extends Coin>(coin: T): Slip44AndCurveByCoin<T> => {
   return (slip44AndCurveTable as any)[coin]
 }
-
-const moduleLogger = logger.child({ namespace: ['Snap', 'Utils.ts'] })
 
 const getMetaMaskProvider = async (): Promise<ExternalProvider> => {
   try {

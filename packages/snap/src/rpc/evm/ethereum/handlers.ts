@@ -75,7 +75,7 @@ export const ethereumBroadcastTransaction = async (
 ): Promise<EthereumBroadcastTransactionResponse> => {
   try {
     const ethereumSigner = new EthereumSigner()
-    await ethereumSigner.initialize(params.baseUrl)
+    await ethereumSigner.initialize({ broadcastUrl: params.baseUrl })
     return await ethereumSigner.broadcastTransaction(params)
   } catch (error) {
     moduleLogger.error({ fn: 'ethereumSignTransaction' }, error)

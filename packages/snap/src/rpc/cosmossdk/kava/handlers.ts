@@ -45,8 +45,8 @@ export const kavaBroadcastTransaction = async (
 ): Promise<KavaBroadcastTransactionResponse> => {
   try {
     const kavaSigner = new KavaSigner()
-    await kavaSigner.initialize(params.baseUrl)
-    return await kavaSigner.broadcastTransaction(params)
+    await kavaSigner.initialize()
+    return await kavaSigner.broadcastTransaction()
   } catch (error) {
     moduleLogger.error({ fn: 'kavaSignTransaction' }, error)
     return Promise.reject(error)

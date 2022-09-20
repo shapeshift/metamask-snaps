@@ -15,16 +15,16 @@ export class DogecoinSigner extends UTXOSigner<SupportedChainIds.DogecoinMainnet
     super(args)
   }
 
-  async initialize({
-    broadcastUrl = broadcastUrls.DEFAULT_UNCHAINED_DOGECOIN_HTTP_URL,
-  }: SignerInitializeArgs) {
+  async initialize(
+    { broadcastUrl }: SignerInitializeArgs = {
+      broadcastUrl: broadcastUrls.DEFAULT_UNCHAINED_DOGECOIN_HTTP_URL,
+    },
+  ) {
     const httpProviderConfiguration = new unchained.dogecoin.Configuration({
       basePath: broadcastUrl,
     })
     try {
       this.signer = await this.initializeSigner()
-      this.signerGetAddress = this.signer.btcGetAddress
-      this.signerSignTransaction = this.signer.btcSignTx
       this.httpProvider = new unchained.dogecoin.V1Api(httpProviderConfiguration)
       this.initialized = true
     } catch (error) {

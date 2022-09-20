@@ -45,7 +45,7 @@ export const bitcoinBroadcastTransaction = async (
 ): Promise<BitcoinBroadcastTransactionResponse> => {
   try {
     const bitcoinSigner = new BitcoinSigner()
-    await bitcoinSigner.initialize(params.baseUrl)
+    await bitcoinSigner.initialize({ broadcastUrl: params.baseUrl })
     return await bitcoinSigner.broadcastTransaction(params)
   } catch (error) {
     moduleLogger.error({ fn: 'bitcoinSignTransaction' }, error)

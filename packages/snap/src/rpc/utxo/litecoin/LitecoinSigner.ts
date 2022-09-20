@@ -15,16 +15,16 @@ export class LitecoinSigner extends UTXOSigner<SupportedChainIds.LitecoinMainnet
     super(args)
   }
 
-  async initialize({
-    broadcastUrl = broadcastUrls.DEFAULT_UNCHAINED_LITECOIN_HTTP_URL,
-  }: SignerInitializeArgs) {
+  async initialize(
+    { broadcastUrl }: SignerInitializeArgs = {
+      broadcastUrl: broadcastUrls.DEFAULT_UNCHAINED_LITECOIN_HTTP_URL,
+    },
+  ) {
     const httpProviderConfiguration = new unchained.litecoin.Configuration({
       basePath: broadcastUrl,
     })
     try {
       this.signer = await this.initializeSigner()
-      this.signerGetAddress = this.signer.btcGetAddress
-      this.signerSignTransaction = this.signer.btcSignTx
       this.httpProvider = new unchained.litecoin.V1Api(httpProviderConfiguration)
       this.initialized = true
     } catch (error) {

@@ -45,7 +45,7 @@ export const bitcoincashBroadcastTransaction = async (
 ): Promise<BitcoinCashBroadcastTransactionResponse> => {
   try {
     const bitcoincashSigner = new BitcoinCashSigner()
-    await bitcoincashSigner.initialize(params.baseUrl)
+    await bitcoincashSigner.initialize({ broadcastUrl: params.baseUrl })
     return await bitcoincashSigner.broadcastTransaction(params)
   } catch (error) {
     moduleLogger.error({ fn: 'bitcoincashSignTransaction' }, error)
