@@ -16,8 +16,8 @@ export const Main = () => {
         paddingRight='48px'
       >
         <Routes>
-          <Route path='/' element={<Navigate to='metamask-utils' />} />
-          <Route path='*' element={<Navigate to='metamask-utils' />} />
+          <Route path='/' element={<Navigate to='chain-specific' />} />
+          <Route path='*' element={<Navigate to='chain-specific' />} />
           <Route
             path='/chain-specific'
             element={<CardList cards={AssetCardListConfig}></CardList>}
