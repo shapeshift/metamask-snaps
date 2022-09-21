@@ -27,7 +27,8 @@
     "build:snap:eval": "yarn workspace @shapeshiftoss/metamask-snaps build:snap:eval",
     "build": "yarn workspaces foreach --verbose --parallel --topological run build",
     "clean": "yarn workspaces foreach --verbose --parallel run clean",
-    "dev:sandbox": "concurrently --prefix \"{time}-[{name}]\" --names \"SNAP,SANDBOX\" -c \"bgBlue.bold,bgMagenta.bold\" \"yarn build && yarn link-packages\" \"cd examples/react-sandbox && yarn dev\"",
+    "dev": "concurrently --prefix \"{time}-[{name}]\" --names \"ADAPTER,SNAP,TYPES\" -c \"bgBlue.bold,bgMagenta.bold\" \"cd packages/adapter && yarn dev\" \"cd packages/snap && yarn dev\" \"cd packages/types && yarn dev\"",
+    "dev:sandbox": "concurrently --prefix \"{time}-[{name}]\" --names \"ADAPTER,SANDBOX,SNAP,TYPES\" -c \"bgBlue.bold,bgMagenta.bold\" \"cd packages/adapter && yarn dev\" \"cd packages/sandbox && yarn dev\" \"cd packages/snap && yarn dev\" \"cd packages/types && yarn dev\"",
     "link-packages": "./scripts/link-packages.sh",
     "lint:fix": "yarn workspaces foreach --verbose --parallel run lint:fix",
     "lint": "yarn workspaces foreach --verbose --parallel run lint",
@@ -75,8 +76,6 @@
     "registry": "https://registry.npmjs.org/"
   },
   "resolutions": {
-    "@shapeshiftoss/hdwallet-native@1.29.0": "patch:@shapeshiftoss/hdwallet-native@npm:1.29.0#.yarn/patches/@shapeshiftoss-hdwallet-native-npm-1.29.0-24f6e0c8dd.patch",
-    "@shapeshiftoss/hdwallet-core@1.29.0": "patch:@shapeshiftoss/hdwallet-core@npm:1.29.0#.yarn/patches/@shapeshiftoss-hdwallet-core-npm-1.29.0-ce03499ac8.patch",
     "libsodium-wrappers": "patch:libsodium-wrappers@npm:0.7.10#.yarn/patches/libsodium-wrappers-npm-0.7.10-1e41dfad84.patch",
     "@bithighlander/bitcoin-cash-js-lib@5.2.1": "patch:@bithighlander/bitcoin-cash-js-lib@npm:^5.2.1#.yarn/patches/@bithighlander-bitcoin-cash-js-lib-npm-5.2.1-92e8f8436e.patch",
     "@shapeshiftoss/bitcoinjs-lib@5.2.0-shapeshift.2": "patch:@shapeshiftoss/bitcoinjs-lib@npm:^5.2.0-shapeshift.2#.yarn/patches/@shapeshiftoss-bitcoinjs-lib-npm-5.2.0-shapeshift.2-e59ff81828.patch",
@@ -88,8 +87,7 @@
     "@noble/secp256k1": "patch:@noble/secp256k1@npm:1.6.3#.yarn/patches/@noble-secp256k1-npm-1.6.3-d06f711103.patch",
     "randombytes": "patch:randombytes@npm:2.1.0#.yarn/patches/randombytes-npm-2.1.0-e3da76bccf.patch",
     "randombytes@2.1.0": "patch:randombytes@npm:2.1.0#.yarn/patches/randombytes-npm-2.1.0-e3da76bccf.patch",
-    "@shapeshiftoss/caip@^6.16.0": "/Users/nicholasmorrow/Work/shapeshiftdao/lib/packages/caip",
-    "@shapeshiftoss/unchained-client": "patch:@shapeshiftoss/unchained-client@npm:9.9.0#.yarn/patches/@shapeshiftoss-unchained-client-npm-9.9.0-7a9b09d533.patch"
+    "@shapeshiftoss/unchained-client@10.1.1": "patch:@shapeshiftoss/unchained-client@npm:10.1.1#.yarn/patches/@shapeshiftoss-unchained-client-npm-10.1.1-1caef9f345.patch"
   },
   "peerDependencies": {
     "@babel/core": "*",
@@ -103,6 +101,7 @@
     "eslint-plugin-react-hooks": "*"
   },
   "dependencies": {
-    "@shapeshiftoss/caip": "^6.16.0"
+    "@shapeshiftoss/caip": "^8.1.0",
+    "@ungap/url-search-params": "^0.2.2"
   }
 }
