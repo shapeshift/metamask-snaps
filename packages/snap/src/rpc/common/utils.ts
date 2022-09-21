@@ -1,5 +1,5 @@
 import { ExternalProvider } from '@ethersproject/providers'
-import { SLIP10Node } from '@metamask/key-tree'
+import { BIP44CoinTypeNode, SLIP10Node } from '@metamask/key-tree'
 import { Coin, Keyring } from '@shapeshiftoss/hdwallet-core'
 import { NativeAdapter, NativeHDWallet } from '@shapeshiftoss/hdwallet-native'
 import { Node } from '@shapeshiftoss/hdwallet-native/dist/crypto/isolation/engines/default/bip32'
@@ -53,9 +53,9 @@ export const getHDWalletNativeSigner = async (coin: Coin): Promise<NativeHDWalle
   if (!(typeof slip44 === 'number' && curve)) {
     throw new Error(`Coin type: '${coin}' is invalid or unsupported`)
   }
+
   const path = ['m', "44'", `${slip44}'`]
-  // eslint-disable-next-line no-undef
-  const node = await wallet.request({
+  const node:BIP44CoinTypeNode = await wallet.request({
     method: 'snap_getBip32Entropy',
     params: {
       path,
@@ -69,10 +69,8 @@ export const getHDWalletNativeSigner = async (coin: Coin): Promise<NativeHDWalle
     }
 
     const slip10Node = await SLIP10Node.fromJSON(node) // node at depth 2
-
     const privateKey = slip10Node.privateKeyBuffer
     const chainCode = slip10Node.chainCodeBuffer
-
     const keyring = new Keyring()
     const nativeAdapter = NativeAdapter.useKeyring(keyring)
     await nativeAdapter.initialize()
@@ -140,7 +138,7 @@ export const userConfirm = async (params: userConfirmParam): Promise<boolean> =>
 const getMetaMaskProvider = async (): Promise<ExternalProvider> => {
   try {
     // eslint-disable-next-line no-undef
-    const provider = window.ethereum
+    const provider = (window as any).ethereum
     if (!provider) {
       throw new Error('Could not detect Ethereum provider')
     }
