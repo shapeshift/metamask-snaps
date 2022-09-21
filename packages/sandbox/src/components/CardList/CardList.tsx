@@ -13,7 +13,7 @@ export const CardList = ({ cards }: { cards: Array<CardProps> }) => {
       maxWidth='1440px'
     >
       {cards.map((card, idx) => {
-        return (
+        return card.enabled ? (
           <Card
             key={card.name}
             name={card.name}
@@ -21,8 +21,9 @@ export const CardList = ({ cards }: { cards: Array<CardProps> }) => {
             symbol={card.symbol}
             actions={card.actions}
             hasInputField={card.hasInputField}
+            enabled={card.enabled}
           ></Card>
-        )
+        ) : null
       })}
     </Stack>
   )

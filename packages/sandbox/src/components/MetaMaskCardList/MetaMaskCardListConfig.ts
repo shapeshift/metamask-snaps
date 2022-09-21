@@ -16,6 +16,7 @@ export const MetaMaskCardListConfig: Array<CardProps> = [
   {
     name: 'Unrestricted Methods',
     icon: 'metamask.png',
+    enabled: true,
     actions: {
       wallet_enable: {
         callback: walletEnable,
@@ -50,6 +51,7 @@ export const MetaMaskCardListConfig: Array<CardProps> = [
     name: 'Restricted Methods',
     icon: 'metamask.png',
     hasInputField: true,
+    enabled: true,
     actions: {
       'wallet_snap_*': {
         callback: walletSnap,

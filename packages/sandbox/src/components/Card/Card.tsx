@@ -31,6 +31,7 @@ export type CardProps = {
   symbol?: string
   actions: Record<string, CardActionProps>
   hasInputField?: boolean
+  enabled: boolean
 }
 
 const moduleLogger = logger.child({ namespace: ['Card'] })

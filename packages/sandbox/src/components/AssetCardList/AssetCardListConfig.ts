@@ -59,6 +59,7 @@ export const AssetCardListConfig: Array<CardProps> = [
     name: 'Binance Chain',
     icon: 'bnb.png',
     symbol: 'BNB',
+    enabled: true,
     actions: {
       bnb_getAddress: {
         callback: binanceGetAddress,
@@ -77,6 +78,7 @@ export const AssetCardListConfig: Array<CardProps> = [
     name: 'Bitcoin',
     icon: 'btc.png',
     symbol: 'BTC',
+    enabled: true,
     actions: {
       btc_getAddress: {
         callback: BTCGetAddress,
@@ -106,6 +108,7 @@ export const AssetCardListConfig: Array<CardProps> = [
     name: 'Bitcoin Cash',
     icon: 'bch.png',
     symbol: 'BCH',
+    enabled: true,
     actions: {
       bch_getAddress: {
         callback: BCHGetAddress,
@@ -135,6 +138,7 @@ export const AssetCardListConfig: Array<CardProps> = [
     name: 'Cosmos',
     icon: 'atom.png',
     symbol: 'ATOM',
+    enabled: true,
     actions: {
       cosmos_getAddress: {
         callback: cosmosGetAddress,
@@ -163,6 +167,7 @@ export const AssetCardListConfig: Array<CardProps> = [
     name: 'Dogecoin',
     icon: 'doge.png',
     symbol: 'DOGE',
+    enabled: true,
     actions: {
       doge_getAddress: {
         callback: dogecoinGetAddress,
@@ -191,6 +196,7 @@ export const AssetCardListConfig: Array<CardProps> = [
     name: 'Ethereum',
     icon: 'eth.png',
     symbol: 'ETH',
+    enabled: true,
     actions: {
       eth_getAddress: {
         callback: ETHGetAddress,
@@ -231,6 +237,7 @@ export const AssetCardListConfig: Array<CardProps> = [
     name: 'Kava',
     icon: 'kava.png',
     symbol: 'KAVA',
+    enabled: true,
     actions: {
       kava_getAddress: {
         callback: kavaGetAddress,
@@ -249,6 +256,7 @@ export const AssetCardListConfig: Array<CardProps> = [
     name: 'Litecoin',
     icon: 'ltc.png',
     symbol: 'LTC',
+    enabled: true,
     actions: {
       ltc_getAddress: {
         callback: LTCGetAddress,
@@ -277,6 +285,7 @@ export const AssetCardListConfig: Array<CardProps> = [
     name: 'Osmosis',
     icon: 'osmo.png',
     symbol: 'OSMO',
+    enabled: true,
     actions: {
       osmosis_getAddress: {
         callback: osmosisGetAddress,
@@ -305,6 +314,7 @@ export const AssetCardListConfig: Array<CardProps> = [
     name: 'Secret',
     icon: 'scrt.png',
     symbol: 'SCRT',
+    enabled: true,
     actions: {
       secret_getAddress: {
         callback: secretGetAddress,
@@ -323,6 +333,7 @@ export const AssetCardListConfig: Array<CardProps> = [
     name: 'Terra',
     icon: 'luna.png',
     symbol: 'LUNA',
+    enabled: true,
     actions: {
       terra_getAddress: {
         callback: terraGetAddress,
@@ -341,6 +352,7 @@ export const AssetCardListConfig: Array<CardProps> = [
     name: 'THORChain',
     icon: 'rune.png',
     symbol: 'RUNE',
+    enabled: true,
     actions: {
       thorchain_getAddress: {
         callback: thorchainGetAddress,
