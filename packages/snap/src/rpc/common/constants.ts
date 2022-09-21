@@ -1,6 +1,3 @@
-// REACT_APP_LOG_LEVEL=debug
-// REACT_APP_SNAP_ID=local:http://localhost:9000
-
 export const broadcastUrls = {
   DEFAULT_UNCHAINED_ETHEREUM_HTTP_URL: 'https://dev-api.ethereum.shapeshift.com',
   DEFAULT_UNCHAINED_AVALANCHE_HTTP_URL: 'https://dev-api.avalanche.shapeshift.com',
