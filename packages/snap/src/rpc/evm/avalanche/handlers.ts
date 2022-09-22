@@ -75,7 +75,7 @@ export const avalancheBroadcastTransaction = async (
 ): Promise<AvalancheBroadcastTransactionResponse> => {
   try {
     const avalancheSigner = new AvalancheSigner()
-    await avalancheSigner.initialize(params.baseUrl)
+    await avalancheSigner.initialize({ broadcastUrl: params.baseUrl })
     return await avalancheSigner.broadcastTransaction(params)
   } catch (error) {
     moduleLogger.error({ fn: 'avalancheSignTransaction' }, error)

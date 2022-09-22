@@ -17,18 +17,18 @@ export class AvalancheSigner extends EVMSigner<SupportedChainIds.AvalancheMainne
     super(args)
   }
 
-  async initialize({
-    broadcastUrl = broadcastUrls.DEFAULT_UNCHAINED_AVALANCHE_HTTP_URL,
-  }: SignerInitializeArgs) {
+  async initialize(
+    { broadcastUrl }: SignerInitializeArgs = {
+      broadcastUrl: broadcastUrls.DEFAULT_UNCHAINED_AVALANCHE_HTTP_URL,
+    },
+  ) {
     const httpProviderConfiguration = new unchained.avalanche.Configuration({
       basePath: broadcastUrl,
     })
     try {
       this.signer = await this.initializeSigner()
-      this.signerGetAddress = this.signer.ethGetAddress
-      this.signerSignTransaction = this.signer.ethSignTx
       this.httpProvider = new unchained.avalanche.V1Api(httpProviderConfiguration)
-      this.initialized = true
+      this._initialized = true
     } catch (error) {
       this.logger.error(error, { fn: 'getSigner' }, `Failed to initialize ${this.coin}Signer`)
     }

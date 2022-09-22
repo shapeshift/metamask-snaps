@@ -1,4 +1,10 @@
 export {
+  ETHGetAddress as AvalancheGetAddress,
+  ETHSignedMessage as AvalancheSignedMessage,
+  ETHSignedTx as AvalancheSignedTransaction,
+  ETHSignMessage as AvalancheSignMessage,
+  ETHSignTx as AvalancheSignTransaction,
+  ETHVerifyMessage as AvalancheVerifyMessage,
   BinanceGetAddress,
   BinanceSignedTx as BinanceSignedTransaction,
   BinanceSignTx as BinanceSignTransaction,
@@ -40,6 +46,7 @@ export {
   ThorchainSignTx as ThorchainSignTransaction,
 } from '@shapeshiftoss/hdwallet-core'
 
+export type AvalancheAddress = string | null
 export type BinanceAddress = string | null
 export type BitcoinAddress = string | null
 export type BitcoinCashAddress = string | null

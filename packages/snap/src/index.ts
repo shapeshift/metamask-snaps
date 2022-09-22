@@ -35,6 +35,12 @@ import {
   thorchainSignTransaction,
 } from './rpc/cosmossdk/thorchain'
 import {
+  avalancheGetAddress,
+  avalancheSignMessage,
+  avalancheSignTransaction,
+  avalancheVerifyMessage,
+} from './rpc/evm/avalanche'
+import {
   ethereumBroadcastTransaction,
   ethereumGetAddress,
   ethereumSignMessage,
@@ -82,6 +88,16 @@ interface RPCRequest {
 export const onRpcRequest: OnRpcRequestHandler = async ({ request }) => {
   const { method, params } = request
   switch (method) {
+    case 'avax_getAddress':
+      return await avalancheGetAddress(params)
+    case 'avax_signMessage':
+      return await avalancheSignMessage(params)
+    case 'avax_signTransaction':
+      return await avalancheSignTransaction(params)
+    case 'avax_verifyMessage':
+      return await avalancheVerifyMessage(params)
+    case 'avax_broadcastTransaction':
+      return await ethereumBroadcastTransaction(params)
     case 'binance_getAddress':
       return await binanceGetAddress(params)
     case 'binance_signTransaction':

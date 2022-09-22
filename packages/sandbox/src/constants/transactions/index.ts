@@ -1,3 +1,4 @@
+export * from './AvalancheTransactions'
 export * from './BinanceTransactions'
 export * from './BitcoinCashTransactions'
 export * from './BitcoinTransactions'

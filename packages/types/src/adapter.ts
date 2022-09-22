@@ -1,4 +1,9 @@
 import {
+  AvalancheGetAddress,
+  AvalancheSignedTransaction,
+  AvalancheSignMessage,
+  AvalancheSignTransaction,
+  AvalancheVerifyMessage,
   BinanceGetAddress,
   BinanceSignedTransaction,
   BinanceSignTransaction,
@@ -54,6 +59,13 @@ export type SignMessageAdapterParams<T> = SignMessageParams<T> & { snapId: strin
 export type SignTransactionAdapterParams<T> = SignTransactionParams<T> & { snapId: string }
 export type VerifyMessageAdapterParams<T> = VerifyMessageParams<T> & { snapId: string }
 
+export type AvalancheBroadcastTransactionAdapterParams =
+  BroadcastTransactionAdapterParams<AvalancheSignedTransaction>
+export type AvalancheGetAddressAdapterParams = GetAddressAdapterParams<AvalancheGetAddress>
+export type AvalancheSignMessageAdapterParams = SignMessageAdapterParams<AvalancheSignMessage>
+export type AvalancheSignTransactionAdapterParams =
+  SignTransactionAdapterParams<AvalancheSignTransaction>
+export type AvalancheVerifyMessageAdapterParams = VerifyMessageAdapterParams<AvalancheVerifyMessage>
 export type BinanceBroadcastTransactionAdapterParams =
   BroadcastTransactionAdapterParams<BinanceSignedTransaction>
 export type BinanceGetAddressAdapterParams = GetAddressAdapterParams<BinanceGetAddress>
