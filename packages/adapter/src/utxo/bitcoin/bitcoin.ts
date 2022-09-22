@@ -27,7 +27,6 @@ export const BTCGetAddress = async (
   }
 }
 
-
 export const BTCSignTransaction = async (
   params: BitcoinSignTransactionAdapterParams,
 ): Promise<BitcoinSignTransactionResponse> => {
@@ -42,7 +41,6 @@ export const BTCSignTransaction = async (
     return Promise.reject(error)
   }
 }
-
 
 export const BTCBroadcastTransaction = async (
   params: BitcoinBroadcastTransactionAdapterParams,
