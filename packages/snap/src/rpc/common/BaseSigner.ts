@@ -31,10 +31,10 @@ export abstract class BaseSigner<T extends SupportedChainIds> {
 
   protected httpProvider: HTTPProviderType<T>
 
-  protected initialized: boolean
+  protected _initialized: boolean
 
   protected constructor(args: SignerArgs) {
-    this.initialized = false
+    this._initialized = false
     this.coin = args.coin
     this.logger = args.logger
   }
@@ -58,6 +58,10 @@ export abstract class BaseSigner<T extends SupportedChainIds> {
       description: 'Please verify the transaction data below',
       textAreaContent: JSON.stringify(transaction, null, 2),
     })
+  }
+
+  get initialized(){
+    return this._initialized
   }
 
   abstract getAddress(params: GetAddressParamsType<T>): Promise<GetAddressResponseType<T>>

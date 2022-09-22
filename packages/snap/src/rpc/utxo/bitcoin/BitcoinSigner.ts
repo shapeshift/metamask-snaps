@@ -28,7 +28,7 @@ export class BitcoinSigner extends UTXOSigner<SupportedChainIds.BitcoinMainnet> 
     try {
       this.signer = await this.initializeSigner()
       this.httpProvider = new unchained.bitcoin.V1Api(httpProviderConfiguration)
-      this.initialized = true
+      this._initialized = true
     } catch (error) {
       this.logger.error(error, { fn: 'getSigner' }, `Failed to initialize ${this.coin}Signer`)
     }

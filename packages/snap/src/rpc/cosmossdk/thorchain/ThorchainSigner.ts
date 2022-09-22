@@ -38,7 +38,7 @@ export class ThorchainSigner extends CosmosSDKSigner<SupportedChainIds.Thorchain
     try {
       this.signer = await this.initializeSigner()
       this.httpProvider = new unchained.thorchain.V1Api(httpProviderConfiguration)
-      this.initialized = true
+      this._initialized = true
     } catch (error) {
       this.logger.error(error, { fn: 'getSigner' }, `Failed to initialize ${this.coin}Signer`)
     }

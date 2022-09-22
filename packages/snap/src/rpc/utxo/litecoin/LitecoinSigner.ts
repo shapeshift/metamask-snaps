@@ -26,7 +26,7 @@ export class LitecoinSigner extends UTXOSigner<SupportedChainIds.LitecoinMainnet
     try {
       this.signer = await this.initializeSigner()
       this.httpProvider = new unchained.litecoin.V1Api(httpProviderConfiguration)
-      this.initialized = true
+      this._initialized = true
     } catch (error) {
       this.logger.error(error, { fn: 'getSigner' }, `Failed to initialize ${this.coin}Signer`)
     }

@@ -27,7 +27,7 @@ export class SecretSigner extends CosmosSDKSigner<SupportedChainIds.SecretMainne
   async initialize() {
     try {
       this.signer = await this.initializeSigner()
-      this.initialized = true
+      this._initialized = true
     } catch (error) {
       this.logger.error(error, { fn: 'getSigner' }, `Failed to initialize ${this.coin}Signer`)
     }
