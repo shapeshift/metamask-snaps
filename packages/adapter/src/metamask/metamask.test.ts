@@ -1,0 +1,11 @@
+describe('metamask', () => {
+    describe('walletEnable', () => {})
+    describe('walletGetSnaps', () => {})
+    describe('WalletInstallSnaps', () => {})
+    describe('walletInvokeSnap', () => {})
+    describe('walletSnap', () => {})
+    describe('snapConfirm', () => {})
+    describe('snapGetBIP44Entropy', () => {})
+    describe('snapManageState', () => {})
+    describe('snapNotify', () => {})
+})
