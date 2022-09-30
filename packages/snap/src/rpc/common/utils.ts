@@ -4,6 +4,7 @@ import { Coin, Keyring } from '@shapeshiftoss/hdwallet-core'
 import { NativeAdapter, NativeHDWallet } from '@shapeshiftoss/hdwallet-native'
 import { Node } from '@shapeshiftoss/hdwallet-native/dist/crypto/isolation/engines/default/bip32'
 import { userConfirmParam } from '@shapeshiftoss/metamask-snaps-types'
+import assert from 'assert'
 
 import { logger } from './lib/logger'
 
@@ -50,12 +51,9 @@ export const slip44AndCurveByCoin = <T extends Coin>(coin: T): Slip44AndCurveByC
 
 export const getHDWalletNativeSigner = async (coin: Coin): Promise<NativeHDWallet | null> => {
   const { slip44, curve } = slip44AndCurveByCoin(coin)
-  if (!(typeof slip44 === 'number' && curve)) {
-    throw new Error(`Coin type: '${coin}' is invalid or unsupported`)
-  }
-
+  assert((typeof slip44 === 'number' && curve), `Coin type: '${coin}' is invalid or unsupported`)
   const path = ['m', "44'", `${slip44}'`]
-  const node:BIP44CoinTypeNode = await wallet.request({
+  const node: BIP44CoinTypeNode = await wallet.request({
     method: 'snap_getBip32Entropy',
     params: {
       path,
@@ -64,21 +62,16 @@ export const getHDWalletNativeSigner = async (coin: Coin): Promise<NativeHDWalle
   })
 
   try {
-    if (node.privateKey === undefined) {
-      throw new Error('No private key provided in BIP44CoinTypeNode')
-    }
-
+    assert(node.privateKey !== undefined, 'No private key provided in BIP44CoinTypeNode')
     const slip10Node = await SLIP10Node.fromJSON(node) // node at depth 2
     const privateKey = slip10Node.privateKeyBuffer
     const chainCode = slip10Node.chainCodeBuffer
+
     const keyring = new Keyring()
     const nativeAdapter = NativeAdapter.useKeyring(keyring)
     await nativeAdapter.initialize()
     const wallet = await nativeAdapter.pairDevice('@shapeshiftoss/metamask-snaps')
-
-    if (wallet === null) {
-      throw new Error('Unable to pair ShapeShift Native signer')
-    }
+    assert(wallet !== null, 'Unable to pair ShapeShift Native signer')
 
     const nativeNode = await Node.create(privateKey, chainCode, `m/44'/${slip44}'`)
     await wallet.loadDevice({ masterKey: nativeNode })
@@ -139,9 +132,7 @@ const getMetaMaskProvider = async (): Promise<ExternalProvider> => {
   try {
     // eslint-disable-next-line no-undef
     const provider = (window as any).ethereum
-    if (!provider) {
-      throw new Error('Could not detect Ethereum provider')
-    }
+    assert(provider, 'Could not detect Ethereum provider')
     return provider
   } catch (error) {
     moduleLogger.error(

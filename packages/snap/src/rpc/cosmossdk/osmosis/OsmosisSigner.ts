@@ -10,6 +10,7 @@ import {
   SupportedChainIds,
 } from '@shapeshiftoss/metamask-snaps-types'
 import * as unchained from '@shapeshiftoss/unchained-client'
+import assert from 'assert'
 
 import { SignerArgs, SignerInitializeArgs } from '../../common/BaseSigner'
 import { broadcastUrls } from '../../common/constants'
@@ -55,9 +56,7 @@ export class OsmosisSigner extends CosmosSDKSigner<SupportedChainIds.OsmosisMain
         addressNList,
         showDisplay: false,
       } as SignerGetAddressType<SupportedChainIds.OsmosisMainnet>)
-      if (address === null) {
-        throw new Error('Address generation failed')
-      }
+      assert( address !== null, 'Address generation failed')
       return address
     } catch (error) {
       this.logger.error({ fn: 'getAddress' }, error)
@@ -71,15 +70,12 @@ export class OsmosisSigner extends CosmosSDKSigner<SupportedChainIds.OsmosisMain
     SignTransactionResponseType<SupportedChainIds.OsmosisMainnet>
   > {
     try {
-      if (!(await this.confirmTransaction(transaction))) {
-        throw new Error('User rejected the signing request')
-      }
+      const confirmed = await this.confirmTransaction(transaction)
+      assert(confirmed, 'User rejected the signing request')
       const signedTransaction = await this.signer.osmosisSignTx(
         transaction as SignerSignTransactionType<SupportedChainIds.OsmosisMainnet>,
       )
-      if (signedTransaction === null) {
-        throw new Error('Transaction signing failed')
-      }
+      assert(signedTransaction !== null, 'Transaction signing failed')
       return signedTransaction
     } catch (error) {
       this.logger.error(transaction, { fn: 'signTransaction' }, error)

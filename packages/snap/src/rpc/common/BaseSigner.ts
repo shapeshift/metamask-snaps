@@ -10,6 +10,7 @@ import {
   SignTransactionResponseType,
   SupportedChainIds,
 } from '@shapeshiftoss/metamask-snaps-types'
+import assert from 'assert'
 
 import { getHDWalletNativeSigner, userConfirm } from '../common'
 
@@ -42,9 +43,7 @@ export abstract class BaseSigner<T extends SupportedChainIds> {
   protected async initializeSigner(): Promise<NativeHDWallet> {
     try {
       const signer = await getHDWalletNativeSigner(this.coin)
-      if (signer === null) {
-        throw new Error(`Could not initialize ${this.coin} signer`)
-      }
+      assert(signer !== null, `Could not initialize ${this.coin} signer`)
       return signer
     } catch (error) {
       this.logger.error({ fn: 'getSigner' }, error)

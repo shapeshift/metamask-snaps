@@ -8,6 +8,7 @@ import {
   SignTransactionResponseType,
   SupportedChainIds,
 } from '@shapeshiftoss/metamask-snaps-types'
+import assert from 'assert'
 
 import { SignerArgs } from '../../common/BaseSigner'
 import { logger } from '../../common/lib/logger'
@@ -44,9 +45,7 @@ export class BinanceSigner extends CosmosSDKSigner<SupportedChainIds.BinanceMain
         addressNList,
         showDisplay: false,
       } as SignerGetAddressType<SupportedChainIds.BinanceMainnet>)
-      if (address === null) {
-        throw new Error('Address generation failed')
-      }
+      assert( address !== null, 'Address generation failed')
       return address
     } catch (error) {
       this.logger.error({ fn: 'getAddress' }, error)
@@ -60,15 +59,12 @@ export class BinanceSigner extends CosmosSDKSigner<SupportedChainIds.BinanceMain
     SignTransactionResponseType<SupportedChainIds.BinanceMainnet>
   > {
     try {
-      if (!(await this.confirmTransaction(transaction))) {
-        throw new Error('User rejected the signing request')
-      }
+      const confirmed = await this.confirmTransaction(transaction)
+      assert(confirmed, 'User rejected the signing request')
       const signedTransaction = await this.signer.binanceSignTx(
         transaction as SignerSignTransactionType<SupportedChainIds.BinanceMainnet>,
       )
-      if (signedTransaction === null) {
-        throw new Error('Transaction signing failed')
-      }
+      assert(signedTransaction !== null, 'Transaction signing failed')
       return signedTransaction
     } catch (error) {
       this.logger.error(transaction, { fn: 'signTransaction' }, error)

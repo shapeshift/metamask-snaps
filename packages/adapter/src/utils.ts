@@ -6,6 +6,7 @@ import {
   ShapeShiftSnapRPCRequest,
   ShapeShiftSnapRPCResponse,
 } from '@shapeshiftoss/metamask-snaps-types'
+import assert from 'assert'
 
 import { logger } from './lib/logger'
 import { walletEnable } from './metamask/metamask'
@@ -30,9 +31,7 @@ export const metaMaskFlaskSupported = async (): Promise<boolean> => {
     const provider = await getMetaMaskProvider()
 
     const isFlask = (await provider.request({ method: 'web3_clientVersion' }))?.includes('flask')
-    if (!isFlask) {
-      throw new Error('Please install MetaMask Flask.')
-    }
+    assert(isFlask, 'Please install MetaMask Flask.')
   } catch (error) {
     moduleLogger.error({ fn: 'metaMaskFlaskSupported' }, error)
   }
@@ -101,9 +100,7 @@ export const enableShapeShiftSnap = async (
     },
   }
   try {
-    if (!metaMaskFlaskSupported()) {
-      throw new Error('Please install MetaMask Flask.')
-    }
+    assert(metaMaskFlaskSupported(), 'Please install MetaMask Flask.')
     const snapIsInstalled = await shapeShiftSnapInstalled(snapId)
     if (!snapIsInstalled) {
       const res = await walletEnable([
@@ -113,9 +110,7 @@ export const enableShapeShiftSnap = async (
           },
         },
       ])
-      if (res.errors?.length) {
-        throw new Error(JSON.stringify(res.errors, null, 2))
-      }
+      assert(res.errors?.length === 0, JSON.stringify(res.errors, null, 2))
       ret.success = true
       ret.message = res
     }

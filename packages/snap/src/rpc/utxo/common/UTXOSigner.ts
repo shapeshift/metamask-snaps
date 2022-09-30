@@ -9,6 +9,7 @@ import {
   SignTransactionResponseType,
   UTXOChainIds,
 } from '@shapeshiftoss/metamask-snaps-types'
+import assert from 'assert'
 
 import { BaseSigner } from '../../common'
 
@@ -22,9 +23,7 @@ export abstract class UTXOSigner<T extends UTXOChainIds> extends BaseSigner<T> {
         scriptType,
         showDisplay: false,
       } as SignerGetAddressType<T>)
-      if (address === null) {
-        throw new Error('Address generation failed')
-      }
+      assert( address !== null, 'Address generation failed')
       return address as GetAddressResponseType<T>
     } catch (error) {
       this.logger.error({ fn: 'getAddress' }, error)
@@ -36,15 +35,12 @@ export abstract class UTXOSigner<T extends UTXOChainIds> extends BaseSigner<T> {
     transaction,
   }: SignTransactionParamsType<T>): Promise<SignTransactionResponseType<T>> {
     try {
-      if (!(await this.confirmTransaction(transaction))) {
-        throw new Error('User rejected the signing request')
-      }
+      const confirmed = await this.confirmTransaction(transaction)
+      assert(confirmed, 'User rejected the signing request')
       const signedTransaction = await this.signer.btcSignTx(
         transaction as SignerSignTransactionType<T>,
       )
-      if (signedTransaction === null) {
-        throw new Error('Transaction signing failed')
-      }
+      assert(signedTransaction !== null, 'Transaction signing failed')
       return signedTransaction as SignTransactionResponseType<T>
     } catch (error) {
       this.logger.error(transaction, { fn: 'signTransaction' }, error)
