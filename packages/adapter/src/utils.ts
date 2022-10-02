@@ -26,9 +26,9 @@ export const getMetaMaskProvider = async (): Promise<ExternalProvider | undefine
   return undefined
 }
 
-export const metaMaskFlaskSupported = async (): Promise<boolean> => {
+export const metaMaskFlaskSupported = async (externalProvider?: any): Promise<boolean> => {
   try {
-    const provider = await getMetaMaskProvider()
+    const provider = externalProvider || await getMetaMaskProvider()
 
     const isFlask = (await provider.request({ method: 'web3_clientVersion' }))?.includes('flask')
     assert(isFlask, 'Please install MetaMask Flask.')
