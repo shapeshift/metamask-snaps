@@ -4,6 +4,8 @@ on:
     types:
       - opened
       - edited
+  workflow_dispatch:
+
 jobs:
   add_issue:
     runs-on: ubuntu-latest
