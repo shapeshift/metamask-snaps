@@ -5006,6 +5006,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@metamask/snap-types@npm:^0.22.2":
+  version: 0.22.2
+  resolution: "@metamask/snap-types@npm:0.22.2"
+  dependencies:
+    "@metamask/providers": ^9.0.0
+    "@metamask/snap-utils": ^0.22.2
+    "@metamask/types": ^1.1.0
+  checksum: 3c4182b51e31059eaa6f46c94bdacb0543a190cca30e648c3d17411d6e56d10161948d1062a8811ee2ee058c9118f9ad4831bad787b7d24d8aff7466994d5b5d
+  languageName: node
+  linkType: hard
+
 "@metamask/snap-utils@npm:^0.21.0":
   version: 0.21.0
   resolution: "@metamask/snap-utils@npm:0.21.0"
@@ -5023,19 +5034,39 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@metamask/snaps-browserify-plugin@npm:^0.21.0":
-  version: 0.21.0
-  resolution: "@metamask/snaps-browserify-plugin@npm:0.21.0"
+"@metamask/snap-utils@npm:^0.22.2":
+  version: 0.22.2
+  resolution: "@metamask/snap-utils@npm:0.22.2"
   dependencies:
-    "@metamask/snap-utils": ^0.21.0
-    convert-source-map: ^1.8.0
-  checksum: dea54f615d7c2a8d7a39baf065cdcba20adee088956e2dd3cca14011d8a840e4f47623047ef987ef5184db20ee94e16eda4697d873cc787b576384f00a66052f
+    "@babel/core": ^7.18.6
+    "@metamask/snap-types": ^0.22.2
+    "@metamask/utils": ^3.1.0
+    "@noble/hashes": ^1.1.3
+    "@scure/base": ^1.1.1
+    ajv: ^8.11.0
+    eth-rpc-errors: ^4.0.3
+    fast-deep-equal: ^3.1.3
+    rfdc: ^1.3.0
+    semver: ^7.3.7
+    ses: ^0.15.17
+    superstruct: ^0.16.5
+  checksum: 1cc2c7b346013f5592b1ffd20c239fd562c6cd7e8cd7818de14007ccc72f7732bc6e04f5aafed032167b48b33374b89b89d712422224aa2e365a63658dd3777f
   languageName: node
   linkType: hard
 
-"@metamask/snaps-cli@npm:^0.21.0":
-  version: 0.21.0
-  resolution: "@metamask/snaps-cli@npm:0.21.0"
+"@metamask/snaps-browserify-plugin@npm:^0.22.2":
+  version: 0.22.2
+  resolution: "@metamask/snaps-browserify-plugin@npm:0.22.2"
+  dependencies:
+    "@metamask/snap-utils": ^0.22.2
+    convert-source-map: ^1.8.0
+  checksum: 242ae661b3615d8015a8fc0018a763e826bf120ba2b3bf3a99b929fd99f8422dd17010afc17cc9e93bac0ae9be41afc81bdfc0635976c6325e908c4a42ee9e5c
+  languageName: node
+  linkType: hard
+
+"@metamask/snaps-cli@npm:^0.22.2":
+  version: 0.22.2
+  resolution: "@metamask/snaps-cli@npm:0.22.2"
   dependencies:
     "@babel/core": ^7.16.7
     "@babel/plugin-proposal-class-properties": ^7.16.7
@@ -5045,9 +5076,9 @@ __metadata:
     "@babel/plugin-transform-runtime": ^7.16.7
     "@babel/preset-env": ^7.16.7
     "@babel/preset-typescript": ^7.16.7
-    "@metamask/snap-utils": ^0.21.0
-    "@metamask/snaps-browserify-plugin": ^0.21.0
-    "@metamask/utils": ^2.0.0
+    "@metamask/snap-utils": ^0.22.2
+    "@metamask/snaps-browserify-plugin": ^0.22.2
+    "@metamask/utils": ^3.1.0
     babelify: ^10.0.0
     browserify: ^17.0.0
     chokidar: ^3.5.2
@@ -5061,7 +5092,7 @@ __metadata:
     yargs-parser: ^20.2.2
   bin:
     mm-snap: dist/main.js
-  checksum: 34ded12349d650c35066b7feb1d6057319cc7e016ce7ed6a98577b35632fdd6cc1e18a2fa5f065d7c9e095727ef8e210b5d84a94abc6f82ba8231a48ead57860
+  checksum: 29d64002b32eaec40b2de737204a468705c6853252a6c3a51978c0de3db2ee6f7a48a48c5b8ce8bb4c90ef36fe798a29cac4aab97ad7f97cc9a1df7449bc999d
   languageName: node
   linkType: hard
 
@@ -5078,6 +5109,18 @@ __metadata:
   dependencies:
     fast-deep-equal: ^3.1.3
   checksum: 50970fe28cbf98fbc34fb4f69d9bc90f5db94929c69ab532f57b48f42163ea77fb080ab31854efd984361c3e29e67831a78d94d1211ac3bcc6b9557769c73127
+  languageName: node
+  linkType: hard
+
+"@metamask/utils@npm:^3.1.0":
+  version: 3.2.0
+  resolution: "@metamask/utils@npm:3.2.0"
+  dependencies:
+    "@types/debug": ^4.1.7
+    debug: ^4.3.4
+    fast-deep-equal: ^3.1.3
+    superstruct: ^0.16.5
+  checksum: 99adcbd273c69075628913259f8c3fb843291898eba813f4f5fe0bfc060ae5955e2c69e70e15b04156793f8d84edd077d1fac3f8c3927e067d0f311eef9d4469
   languageName: node
   linkType: hard
 
@@ -5166,6 +5209,13 @@ __metadata:
   version: 1.1.2
   resolution: "@noble/hashes@npm:1.1.2"
   checksum: 3c2a8cb7c2e053811032f242155d870c5eb98844d924d69702244d48804cb03b42d4a666c49c2b71164420d8229cb9a6f242b972d50d5bb2f1d673b98b041de2
+  languageName: node
+  linkType: hard
+
+"@noble/hashes@npm:^1.1.3":
+  version: 1.1.3
+  resolution: "@noble/hashes@npm:1.1.3"
+  checksum: a6f9783d2a33fc528c8709532b1c26cc3f5866f79c66256e881b28c61a1585be3899b008aa4e5e2b4e01b95c713722f52591cbb18ec51aa0ec63e7eaece1b89c
   languageName: node
   linkType: hard
 
@@ -5836,7 +5886,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@scure/base@npm:^1.0.0, @scure/base@npm:~1.1.0":
+"@scure/base@npm:^1.0.0, @scure/base@npm:^1.1.1, @scure/base@npm:~1.1.0":
   version: 1.1.1
   resolution: "@scure/base@npm:1.1.1"
   checksum: b4fc810b492693e7e8d0107313ac74c3646970c198bbe26d7332820886fa4f09441991023ec9aa3a2a51246b74409ab5ebae2e8ef148bbc253da79ac49130309
@@ -6192,7 +6242,7 @@ __metadata:
     "@metamask/eslint-config-typescript": ^10.0.0
     "@metamask/key-tree": ^5.0.2
     "@metamask/snap-types": ^0.21.0
-    "@metamask/snaps-cli": ^0.21.0
+    "@metamask/snaps-cli": ^0.22.2
     "@metamask/types": ^1.1.0
     "@shapeshiftoss/caip": ^8.4.0
     "@shapeshiftoss/hdwallet-core": ^1.34.0
@@ -6287,7 +6337,7 @@ __metadata:
 
 "@shapeshiftoss/unchained-client@patch:@shapeshiftoss/unchained-client@npm:10.1.1#.yarn/patches/@shapeshiftoss-unchained-client-npm-10.1.1-1caef9f345.patch::locator=root%40workspace%3A.":
   version: 10.1.1
-  resolution: "@shapeshiftoss/unchained-client@patch:@shapeshiftoss/unchained-client@npm%3A10.1.1#.yarn/patches/@shapeshiftoss-unchained-client-npm-10.1.1-1caef9f345.patch::version=10.1.1&hash=6c065a&locator=root%40workspace%3A."
+  resolution: "@shapeshiftoss/unchained-client@patch:@shapeshiftoss/unchained-client@npm%3A10.1.1#.yarn/patches/@shapeshiftoss-unchained-client-npm-10.1.1-1caef9f345.patch::version=10.1.1&hash=62165a&locator=root%40workspace%3A."
   dependencies:
     "@yfi/sdk": ^1.0.30
     bignumber.js: ^9.0.2
@@ -6298,7 +6348,7 @@ __metadata:
     "@shapeshiftoss/caip": ^8.0.0
     "@shapeshiftoss/logger": ^1.1.2
     "@shapeshiftoss/types": ^8.1.0
-  checksum: 5dd40b91ed70c64056be09a323a531f0dfe85d351dcd561546dcdaf79750d9426af5492a3c0fdbc829752e687de3b16bd0a7614ff710fac4f6b3063d935aca67
+  checksum: 39d03d80417f691cd03f8edbecdd4e696b65ae902f6b405ba40f723d7883ca82826273708146f1bd1c49478f0684c5e671127a6cbff68ce1dfe9c7944642e17f
   languageName: node
   linkType: hard
 
@@ -6699,6 +6749,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/debug@npm:^4.1.7":
+  version: 4.1.7
+  resolution: "@types/debug@npm:4.1.7"
+  dependencies:
+    "@types/ms": "*"
+  checksum: 0a7b89d8ed72526858f0b61c6fd81f477853e8c4415bb97f48b1b5545248d2ae389931680b94b393b993a7cfe893537a200647d93defe6d87159b96812305adc
+  languageName: node
+  linkType: hard
+
 "@types/eslint-scope@npm:^3.7.3":
   version: 3.7.4
   resolution: "@types/eslint-scope@npm:3.7.4"
@@ -6957,6 +7016,13 @@ __metadata:
   version: 1.2.2
   resolution: "@types/minimist@npm:1.2.2"
   checksum: b8da83c66eb4aac0440e64674b19564d9d86c80ae273144db9681e5eeff66f238ade9515f5006ffbfa955ceff8b89ad2bd8ec577d7caee74ba101431fb07045d
+  languageName: node
+  linkType: hard
+
+"@types/ms@npm:*":
+  version: 0.7.31
+  resolution: "@types/ms@npm:0.7.31"
+  checksum: daadd354aedde024cce6f5aa873fefe7b71b22cd0e28632a69e8b677aeb48ae8caa1c60e5919bb781df040d116b01cb4316335167a3fc0ef6a63fa3614c0f6da
   languageName: node
   linkType: hard
 
@@ -21924,6 +21990,13 @@ __metadata:
   dependencies:
     minimist: ^1.1.0
   checksum: 8359df72e9a2d03c35702ba58e49cac04daae8f27dff26837e12687c7d10cb800a036fd33fdc5eb0e8c24fb25d804f657fe8bde18dd3dd6ec7dab8eff7aac27e
+  languageName: node
+  linkType: hard
+
+"superstruct@npm:^0.16.5":
+  version: 0.16.5
+  resolution: "superstruct@npm:0.16.5"
+  checksum: 9f843c38695b584a605ae9b028629de18a85bd0dca0e9449b4ab98bb7b9ac3d82599870acbab9fbd2ee454c6b187af7e61562e252dfadabd974191ab4ab2e3ce
   languageName: node
   linkType: hard
 
