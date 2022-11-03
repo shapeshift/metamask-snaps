@@ -40,7 +40,7 @@
     "@ethersproject/providers": "^5.7.0",
     "@metamask/detect-provider": "^1.2.0",
     "@metamask/key-tree": "^5.0.2",
-    "@metamask/snap-types": "^0.21.0",
+    "@metamask/snap-types": "^0.22.3",
     "@shapeshiftoss/caip": "^8.4.0",
     "@shapeshiftoss/hdwallet-core": "^1.34.0",
     "@shapeshiftoss/hdwallet-native": "^1.34.0",
