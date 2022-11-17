@@ -4912,14 +4912,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@metamask/eslint-config-jest@npm:^10.0.0":
-  version: 10.0.0
-  resolution: "@metamask/eslint-config-jest@npm:10.0.0"
+"@metamask/eslint-config-jest@npm:^11.0.0":
+  version: 11.0.0
+  resolution: "@metamask/eslint-config-jest@npm:11.0.0"
   peerDependencies:
-    "@metamask/eslint-config": ^10.0.0
-    eslint: ^8.21.0
-    eslint-plugin-jest: ^26.8.2
-  checksum: 60a6f849d21cefef6956680b9dd229d76b961ac6d291de3d5eb0df401e08fcb849b65feecef00a3506e254b967d615c63cca7ca4145acc110e084d49cc6c6f13
+    "@metamask/eslint-config": ^11.0.0
+    eslint: ^8.27.0
+    eslint-plugin-jest: ^27.1.5
+  checksum: 844a3fabb0a758c842fd8567ed6ebee41e43692d9f1f17de516cfafef33df1f549f9f2eb28d5b0eeb8a7c277cde310a2f31adadf80abb2802d87daa46412c046
   languageName: node
   linkType: hard
 
@@ -6204,7 +6204,7 @@ __metadata:
     "@metamask/auto-changelog": ^2.5.0
     "@metamask/detect-provider": ^1.2.0
     "@metamask/eslint-config": ^10.0.0
-    "@metamask/eslint-config-jest": ^10.0.0
+    "@metamask/eslint-config-jest": ^11.0.0
     "@metamask/eslint-config-nodejs": ^10.0.0
     "@metamask/eslint-config-typescript": ^10.0.0
     "@metamask/key-tree": ^5.0.2
@@ -6321,7 +6321,7 @@ __metadata:
 
 "@shapeshiftoss/unchained-client@patch:@shapeshiftoss/unchained-client@npm:10.1.1#.yarn/patches/@shapeshiftoss-unchained-client-npm-10.1.1-1caef9f345.patch::locator=root%40workspace%3A.":
   version: 10.1.1
-  resolution: "@shapeshiftoss/unchained-client@patch:@shapeshiftoss/unchained-client@npm%3A10.1.1#.yarn/patches/@shapeshiftoss-unchained-client-npm-10.1.1-1caef9f345.patch::version=10.1.1&hash=6c065a&locator=root%40workspace%3A."
+  resolution: "@shapeshiftoss/unchained-client@patch:@shapeshiftoss/unchained-client@npm%3A10.1.1#.yarn/patches/@shapeshiftoss-unchained-client-npm-10.1.1-1caef9f345.patch::version=10.1.1&hash=62165a&locator=root%40workspace%3A."
   dependencies:
     "@yfi/sdk": ^1.0.30
     bignumber.js: ^9.0.2
@@ -6332,7 +6332,7 @@ __metadata:
     "@shapeshiftoss/caip": ^8.0.0
     "@shapeshiftoss/logger": ^1.1.2
     "@shapeshiftoss/types": ^8.1.0
-  checksum: 5dd40b91ed70c64056be09a323a531f0dfe85d351dcd561546dcdaf79750d9426af5492a3c0fdbc829752e687de3b16bd0a7614ff710fac4f6b3063d935aca67
+  checksum: 39d03d80417f691cd03f8edbecdd4e696b65ae902f6b405ba40f723d7883ca82826273708146f1bd1c49478f0684c5e671127a6cbff68ce1dfe9c7944642e17f
   languageName: node
   linkType: hard
 
