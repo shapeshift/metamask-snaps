@@ -1,6 +1,6 @@
 import { ExternalProvider } from '@ethersproject/providers'
 import { BIP44CoinTypeNode, SLIP10Node } from '@metamask/key-tree'
-import { Coin, Keyring } from '@shapeshiftoss/hdwallet-core'
+import { Coin, Keyring, fromHexString, stripHexPrefix } from '@shapeshiftoss/hdwallet-core'
 import { NativeAdapter, NativeHDWallet } from '@shapeshiftoss/hdwallet-native'
 import { Node } from '@shapeshiftoss/hdwallet-native/dist/crypto/isolation/engines/default/bip32'
 import { userConfirmParam } from '@shapeshiftoss/metamask-snaps-types'
@@ -60,13 +60,11 @@ export const getHDWalletNativeSigner = async (coin: Coin): Promise<NativeHDWalle
       curve,
     },
   })
-
   try {
     assert(node.privateKey !== undefined, 'No private key provided in BIP44CoinTypeNode')
     const slip10Node = await SLIP10Node.fromJSON(node) // node at depth 2
-    const privateKey = slip10Node.privateKeyBuffer
-    const chainCode = slip10Node.chainCodeBuffer
-
+    const privateKey = fromHexString(stripHexPrefix(slip10Node.privateKey))
+    const chainCode =  fromHexString(stripHexPrefix(slip10Node.chainCode))
     const keyring = new Keyring()
     const nativeAdapter = NativeAdapter.useKeyring(keyring)
     await nativeAdapter.initialize()
