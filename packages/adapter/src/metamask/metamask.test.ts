@@ -1,7 +1,7 @@
 describe('metamask', () => {
     describe('walletEnable', () => {})
     describe('walletGetSnaps', () => {})
-    describe('WalletInstallSnaps', () => {})
+    describe('WalletRequestSnaps', () => {})
     describe('walletInvokeSnap', () => {})
     describe('walletSnap', () => {})
     describe('snapConfirm', () => {})

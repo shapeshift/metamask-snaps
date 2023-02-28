@@ -5,8 +5,8 @@ import {
   snapNotify,
   walletEnable,
   walletGetSnaps,
-  walletInstallSnaps,
   walletInvokeSnap,
+  walletRequestSnaps,
   walletSnap,
 } from '@shapeshiftoss/metamask-snaps-adapter'
 
@@ -22,7 +22,7 @@ export const MetaMaskCardListConfig: Array<CardProps> = [
         callback: walletEnable,
         params: undefined,
         description:
-          "This is a convenience method for requesting the user's accounts and connecting to / installing snaps. You can think of it as a combination of eth_requestAccounts, wallet_installSnaps, and wallet_requestPermissions.",
+          "This is a convenience method for requesting the user's accounts and connecting to / installing snaps. You can think of it as a combination of eth_requestAccounts, wallet_requestSnaps, and wallet_requestPermissions.",
       },
 
       wallet_getSnaps: {
@@ -32,8 +32,8 @@ export const MetaMaskCardListConfig: Array<CardProps> = [
           "This method returns the IDs of the caller's permitted snaps and some relevant metadata.",
       },
 
-      wallet_installSnaps: {
-        callback: walletInstallSnaps,
+      wallet_requestSnaps: {
+        callback: walletRequestSnaps,
         params: undefined,
         description:
           'This method attempts to install the requested snaps, if they are permitted. If the installation of any snap fails, its object value on the result will contain an error property with the error that caused the installation to fail.',

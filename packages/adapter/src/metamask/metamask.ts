@@ -39,7 +39,7 @@ export const walletGetSnaps = async (): Promise<any> => {
   }
 }
 
-export const walletInstallSnaps = async ({
+export const walletRequestSnaps = async ({
   snaps,
 }: {
   [snapId: string]: { version?: string }
@@ -48,12 +48,12 @@ export const walletInstallSnaps = async ({
 
   try {
     const ret = await provider.request({
-      method: 'wallet_installSnaps',
+      method: 'wallet_requestSnaps',
       params: [{ snaps }],
     })
     return ret
   } catch (error) {
-    moduleLogger.error(error, { fn: 'walletInstallSnaps' }, `wallet_installSnaps RPC call failed.`)
+    moduleLogger.error(error, { fn: 'walletRequestSnaps' }, `wallet_requestSnaps RPC call failed.`)
     return Promise.reject(error)
   }
 }
