@@ -15,7 +15,7 @@ import { logger } from '../../common/lib/logger'
 import { EthereumSigner } from './EthereumSigner'
 
 const moduleLogger = logger.child({
-  namespace: ['Snap', 'RPC', 'EthereumSDK', 'Ethereum', 'Handlers.ts'],
+  namespace: ['Snap', 'RPC', 'EVM', 'Ethereum', 'Handlers.ts'],
 })
 
 export const ethereumGetAddress = async (
