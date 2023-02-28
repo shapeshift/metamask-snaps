@@ -132,7 +132,7 @@ export const sendFlaskRPCRequest = async <T extends ShapeShiftSnapRPCResponse>(
     })
     return ret as T
   } catch (error) {
-    moduleLogger.error(error, { fn: 'makeFlaskRPCRequest' }, `${request.method} RPC call failed.`)
+    moduleLogger.error(error, { fn: 'sendFlaskRPCRequest' }, `${request.method} RPC call failed.`)
     return error
   }
 }
