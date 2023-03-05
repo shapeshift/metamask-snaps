@@ -9,11 +9,13 @@ import {
 import assert from 'assert'
 
 import { logger } from './lib/logger'
-import { walletEnable } from './metamask/metamask'
+import { walletRequestSnaps } from './metamask/metamask'
 
 const moduleLogger = logger.child({ namespace: ['Adapter', 'Utils.ts'] })
 
-export const getMetaMaskProvider = async (): Promise<ExternalProvider | undefined> => {
+export type Provider = Omit<ExternalProvider, 'request'> & { request?: (request: { method: string, params?: any }) => Promise<any>}
+
+export const getMetaMaskProvider = async (): Promise<Provider | undefined> => {
   try {
     return await detectEthereumProvider({ mustBeMetaMask: true })
   } catch (error) {
@@ -103,19 +105,13 @@ export const enableShapeShiftSnap = async (
     assert(metaMaskFlaskSupported(), 'Please install MetaMask Flask.')
     const snapIsInstalled = await shapeShiftSnapInstalled(snapId)
     if (!snapIsInstalled) {
-      const res = await walletEnable([
-        {
-          [`wallet_snap_${snapId}`]: {
-            version,
-          },
-        },
-      ])
+      const res = await walletRequestSnaps(snapId, version);
       assert(res.errors?.length === 0, JSON.stringify(res.errors, null, 2))
       ret.success = true
       ret.message = res
     }
   } catch (error) {
-    moduleLogger.error(error, { fn: 'walletEnable' }, 'wallet_enable RPC call failed.')
+    moduleLogger.error(error, { fn: 'enableShapeShiftSnap' }, 'walletRequestSnaps RPC call failed.')
   }
   return ret
 }
@@ -127,9 +123,14 @@ export const sendFlaskRPCRequest = async <T extends ShapeShiftSnapRPCResponse>(
   try {
     const provider = await getMetaMaskProvider()
     const ret = await provider.request({
-      method: `wallet_snap_${snapId}`,
-      params: [request],
+      method: 'wallet_invokeSnap',
+      params: {
+        snapId,
+        request
+      },
     })
+    debugger
+    moduleLogger.info(JSON.stringify(ret, null, 2), "RET")
     return ret as T
   } catch (error) {
     moduleLogger.error(error, { fn: 'sendFlaskRPCRequest' }, `${request.method} RPC call failed.`)
