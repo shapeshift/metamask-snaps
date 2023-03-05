@@ -1,5 +1,4 @@
 import { slip44ByCoin } from '@shapeshiftoss/hdwallet-core'
-import { WalletEnableParam, WalletEnableResult } from '@shapeshiftoss/metamask-snaps-types'
 
 import { logger } from '../lib/logger'
 import { getMetaMaskProvider } from '../utils'
@@ -11,21 +10,6 @@ const moduleLogger = logger.child({ namespace: ['Adapter', 'Metamask.ts'] })
  */
 
 /** Unrestricted Methods */
-export const walletEnable = async (params: WalletEnableParam[]): Promise<WalletEnableResult> => {
-  const provider = await getMetaMaskProvider()
-
-  try {
-    const ret = await provider.request({
-      method: 'wallet_enable',
-      params,
-    })
-    return ret
-  } catch (error) {
-    moduleLogger.error(error, { fn: 'walletGetSnaps' }, `wallet_enable RPC call failed.`)
-    return Promise.reject(error)
-  }
-}
-
 export const walletGetSnaps = async (): Promise<any> => {
   const provider = await getMetaMaskProvider()
   try {
@@ -39,17 +23,15 @@ export const walletGetSnaps = async (): Promise<any> => {
   }
 }
 
-export const walletRequestSnaps = async ({
-  snaps,
-}: {
-  [snapId: string]: { version?: string }
-}): Promise<any> => {
+export const walletRequestSnaps = async (snapId: string, version?: string): Promise<any> => {
   const provider = await getMetaMaskProvider()
 
   try {
     const ret = await provider.request({
       method: 'wallet_requestSnaps',
-      params: [{ snaps }],
+      params: {
+        [snapId]: {version}
+      },
     })
     return ret
   } catch (error) {
