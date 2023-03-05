@@ -1,3 +1,24 @@
+diff --git a/dist/evm/avalanche/index.js b/dist/evm/avalanche/index.js
+index 796c58c09c4694971926235a5e94683b8f7c816f..a19c4cfdeb51cb6f088b6d2c1856d9e820478faa 100644
+--- a/dist/evm/avalanche/index.js
++++ b/dist/evm/avalanche/index.js
+@@ -15,4 +15,3 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
+ };
+ Object.defineProperty(exports, "__esModule", { value: true });
+ __exportStar(require("../../generated/avalanche"), exports);
+-__exportStar(require("./parser"), exports);
+diff --git a/dist/evm/avalanche/parser/index.js b/dist/evm/avalanche/parser/index.js
+index dd5342ff826f1c8eec45ba5d623cbcb9bbd6c945..3320e51e3e22850335873bd23e7eef6b23274974 100644
+--- a/dist/evm/avalanche/parser/index.js
++++ b/dist/evm/avalanche/parser/index.js
+@@ -25,7 +25,6 @@ var __importStar = (this && this.__importStar) || function (mod) {
+ Object.defineProperty(exports, "__esModule", { value: true });
+ exports.TransactionParser = void 0;
+ const caip_1 = require("@shapeshiftoss/caip");
+-const parser_1 = require("../../parser");
+ const zrx = __importStar(require("../../parser/zrx"));
+ class TransactionParser extends parser_1.BaseTransactionParser {
+     constructor(args) {
 diff --git a/dist/evm/ethereum/index.js b/dist/evm/ethereum/index.js
 index 8b8b64290200faf6fc4fd7a2494bea878679ac47..2f4cd1047b7d297e71f1c7190b8915ecfba699fa 100644
 --- a/dist/evm/ethereum/index.js
