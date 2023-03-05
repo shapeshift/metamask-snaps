@@ -7,7 +7,7 @@
     "url": "https://github.com/shapeshift/metamask-snaps.git"
   },
   "source": {
-    "shasum": "JgR+CuV4pb6BIoiB2IKZo1vAfwhcglPyF6qOQy3dBvs=",
+    "shasum": "lxWMQK2Z9Enki9G38jfTcERALQRUv313xtJm+Sx0S84=",
     "location": {
       "npm": {
         "filePath": "dist/bundle.js",
@@ -113,7 +113,8 @@
     "endowment:network-access": {},
     "endowment:long-running": {},
     "endowment:rpc": {
-      "dapps": true
+      "dapps": true,
+      "snaps": false
     }
   },
   "manifestVersion": "0.1"
