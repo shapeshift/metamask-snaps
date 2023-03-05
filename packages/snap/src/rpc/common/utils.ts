@@ -53,7 +53,7 @@ export const getHDWalletNativeSigner = async (coin: Coin): Promise<NativeHDWalle
   const { slip44, curve } = slip44AndCurveByCoin(coin)
   assert((typeof slip44 === 'number' && curve), `Coin type: '${coin}' is invalid or unsupported`)
   const path = ['m', "44'", `${slip44}'`]
-  const node: BIP44CoinTypeNode = await wallet.request({
+  const node: BIP44CoinTypeNode = await snap.request({
     method: 'snap_getBip32Entropy',
     params: {
       path,
@@ -105,7 +105,7 @@ export const userConfirm = async (params: userConfirmParam): Promise<boolean> =>
         textAreaContent[i] = params.textAreaContent.substring(start, end)
       }
       // eslint-disable-next-line no-undef, no-await-in-loop
-      const ret = await wallet.request({
+      const ret = await snap.request({
         method: 'snap_confirm',
         params: [
           {
