@@ -24,7 +24,7 @@
   "types": "dist/index.d.ts",
   "dependencies": {
     "@ethersproject/providers": "^5.7.2",
-    "@metamask/detect-provider": "^1.2.0",
+    "@metamask/detect-provider": "^2.0.0",
     "@metamask/snaps-ui": "^0.30.0",
     "@shapeshiftoss/hdwallet-core": "^1.29.0",
     "@shapeshiftoss/logger": "^1.1.3",

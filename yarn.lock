@@ -4986,13 +4986,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@metamask/detect-provider@npm:^1.2.0":
-  version: 1.2.0
-  resolution: "@metamask/detect-provider@npm:1.2.0"
-  checksum: 2c152534a8dd15bc1430bb5159cdf58993549a644cff344a1ff43f4ede8f041aad72b909e822747f6545de3ed293a740ecffc86a859daf7a925c4096efd61eb3
-  languageName: node
-  linkType: hard
-
 "@metamask/detect-provider@npm:^2.0.0":
   version: 2.0.0
   resolution: "@metamask/detect-provider@npm:2.0.0"
@@ -6349,7 +6342,7 @@ __metadata:
   resolution: "@shapeshiftoss/metamask-snaps-adapter@workspace:packages/adapter"
   dependencies:
     "@ethersproject/providers": ^5.7.2
-    "@metamask/detect-provider": ^1.2.0
+    "@metamask/detect-provider": ^2.0.0
     "@metamask/snaps-ui": ^0.30.0
     "@shapeshiftoss/hdwallet-core": ^1.29.0
     "@shapeshiftoss/logger": ^1.1.3
