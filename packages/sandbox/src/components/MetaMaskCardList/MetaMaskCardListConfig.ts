@@ -3,7 +3,6 @@ import {
   snapGetBIP44Entropy,
   snapManageState,
   snapNotify,
-  walletEnable,
   walletGetSnaps,
   walletInvokeSnap,
   walletRequestSnaps,
@@ -18,13 +17,6 @@ export const MetaMaskCardListConfig: Array<CardProps> = [
     icon: 'metamask.png',
     enabled: true,
     actions: {
-      wallet_enable: {
-        callback: walletEnable,
-        params: undefined,
-        description:
-          "This is a convenience method for requesting the user's accounts and connecting to / installing snaps. You can think of it as a combination of eth_requestAccounts, wallet_requestSnaps, and wallet_requestPermissions.",
-      },
-
       wallet_getSnaps: {
         callback: walletGetSnaps,
         params: undefined,
