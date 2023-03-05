@@ -6,7 +6,7 @@
   "scripts": {
     "build": "rimraf ./build && react-app-rewired build",
     "clean": "rimraf node_modules",
-    "dev": "rimraf ./build && react-app-rewired start",
+    "dev": "rimraf ./build && GENERATE_SOURCEMAP=false react-app-rewired start",
     "eject": "react-scripts eject",
     "lint:fix": "yarn lint --fix && yarn lint:package-json",
     "lint:package-json": "prettier-package-json --write ./package.json",
