@@ -20,6 +20,7 @@
     "packages/types"
   ],
   "scripts": {
+    "build:adapter": "yarn workspace @shapeshiftoss/metamask-snaps-adapter build",
     "build:clean": "yarn clean && yarn build",
     "build:sandbox": "yarn workspace sandbox build",
     "build:snap": "yarn workspace @shapeshiftoss/metamask-snaps build",
