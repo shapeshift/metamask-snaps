@@ -1,23 +1,33 @@
 {
-    "compilerOptions": {
-      "declaration": true,
-      "esModuleInterop": true,
-      "listEmittedFiles": false /* Print names of generated files part of the compilation. */,
-      "listFiles": false /* Print names of files part of the compilation. */,
-      "noFallthroughCasesInSwitch": true /* Report errors for fallthrough cases in switch statement. */,
-      "noImplicitReturns": true /* Report error when not all code paths in function return a value. */,
-      /* Additional Checks */
-      "noUnusedLocals": true /* Report errors on unused locals. */,
-      "noUnusedParameters": true /* Report errors on unused parameters. */,
-      "outDir": "./dist",
-      "pretty": true /* Stylize errors and messages using color and context. */,
-      "rootDir": "./src",
-      "skipLibCheck": true,
-      /* Debugging Options */
-      "traceResolution": false /* Report module resolution log messages. */
-    },
-    "exclude": ["node_modules", "dist"],
-    "extends": "../../tsconfig.json",
-    "include": ["src/**/*.ts", "test/**/*ts"]
-  }
-  
+  "compilerOptions": {
+    "alwaysStrict": false,
+    "declaration": true,
+    "esModuleInterop": true,
+    "listEmittedFiles": false /* Print names of generated files part of the compilation. */,
+    "listFiles": false /* Print names of files part of the compilation. */,
+    "noFallthroughCasesInSwitch": true /* Report errors for fallthrough cases in switch statement. */,
+    "noImplicitAny": true,
+    "noImplicitOverride": true,
+    "noImplicitReturns": true /* Report error when not all code paths in function return a value. */,
+    "noImplicitThis": true,
+    "noUnusedLocals": true /* Report errors on unused locals. */,
+    "noUnusedParameters": true /* Report errors on unused parameters. */,
+    "outDir": "./dist",
+    "pretty": true /* Stylize errors and messages using color and context. */,
+    "rootDir": "./src",
+    "skipLibCheck": true,
+    "strictBindCallApply": true,
+    "strictFunctionTypes": true,
+    "strictNullChecks": true,
+    "traceResolution": false /* Report module resolution log messages. */
+  },
+  "exclude": ["node_modules", "dist"],
+  "extends": "../../tsconfig.json",
+  "include": [
+    "src/adapter.ts",
+    "src/common.ts",
+    "src/constants.ts",
+    "src/index.ts",
+    "src/snap.ts"
+  ]
+}
