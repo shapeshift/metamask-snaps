@@ -12,6 +12,12 @@ const moduleLogger = logger.child({ namespace: ['Adapter', 'Metamask.ts'] })
 /** Unrestricted Methods */
 export const walletGetSnaps = async (): Promise<any> => {
   const provider = await getMetaMaskProvider()
+  if (provider === undefined) {
+    throw new Error('Could not get MetaMask provider')
+  }
+  if (provider.request === undefined) {
+    throw new Error('MetaMask provider does not define a .request() method')
+  }
   try {
     const ret = await provider.request({
       method: 'wallet_getSnaps',
@@ -25,12 +31,18 @@ export const walletGetSnaps = async (): Promise<any> => {
 
 export const walletRequestSnaps = async (snapId: string, version?: string): Promise<any> => {
   const provider = await getMetaMaskProvider()
+  if (provider === undefined) {
+    throw new Error('Could not get MetaMask provider')
+  }
+  if (provider.request === undefined) {
+    throw new Error('MetaMask provider does not define a .request() method')
+  }
 
   try {
     const ret = await provider.request({
       method: 'wallet_requestSnaps',
       params: {
-        [snapId]: {version}
+        [snapId]: { version },
       },
     })
     return ret
@@ -48,6 +60,12 @@ export const walletInvokeSnap = async ({
   params?: unknown[] | Record<string, unknown>[]
 }): Promise<any> => {
   const provider = await getMetaMaskProvider()
+  if (provider === undefined) {
+    throw new Error('Could not get MetaMask provider')
+  }
+  if (provider.request === undefined) {
+    throw new Error('MetaMask provider does not define a .request() method')
+  }
   try {
     const ret = await provider.request({
       method,
@@ -70,6 +88,12 @@ export const walletSnap = async ({
   paramMethod: string
 }): Promise<any> => {
   const provider = await getMetaMaskProvider()
+  if (provider === undefined) {
+    throw new Error('Could not get MetaMask provider')
+  }
+  if (provider.request === undefined) {
+    throw new Error('MetaMask provider does not define a .request() method')
+  }
   try {
     const ret = await provider.request({
       method: `wallet_snap_${method}`,
@@ -99,6 +123,12 @@ export const snapConfirm = async ({
   textAreaContent: string
 }): Promise<boolean> => {
   const provider = await getMetaMaskProvider()
+  if (provider === undefined) {
+    throw new Error('Could not get MetaMask provider')
+  }
+  if (provider.request === undefined) {
+    throw new Error('MetaMask provider does not define a .request() method')
+  }
   if (textAreaContent.length > 1800) {
     throw new Error('Length of textAreaContent string may not exceed 1800 characters.')
   }
@@ -127,6 +157,12 @@ export const snapConfirm = async ({
  */
 export const snapGetBIP44Entropy = async (coinType: string): Promise<any> => {
   const provider = await getMetaMaskProvider()
+  if (provider === undefined) {
+    throw new Error('Could not get MetaMask provider')
+  }
+  if (provider.request === undefined) {
+    throw new Error('MetaMask provider does not define a .request() method')
+  }
   const chainCode = slip44ByCoin(coinType)
   if (chainCode === undefined) {
     throw new Error('Coin type {coinType} invalid or unsupported.')
@@ -157,6 +193,12 @@ export const snapManageState = async ({
   value?: Record<string, unknown>
 }): Promise<any> => {
   const provider = await getMetaMaskProvider()
+  if (provider === undefined) {
+    throw new Error('Could not get MetaMask provider')
+  }
+  if (provider.request === undefined) {
+    throw new Error('MetaMask provider does not define a .request() method')
+  }
   try {
     const ret = await provider.request({
       method: 'snap_manageState',
@@ -180,6 +222,12 @@ export const snapNotify = async ({
   message: string
 }): Promise<any> => {
   const provider = await getMetaMaskProvider()
+  if (provider === undefined) {
+    throw new Error('Could not get MetaMask provider')
+  }
+  if (provider.request === undefined) {
+    throw new Error('MetaMask provider does not define a .request() method')
+  }
   try {
     const ret = await provider.request({
       method: 'snap_notify',
