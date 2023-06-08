@@ -27,7 +27,7 @@
     "build:snap:bundle": "yarn workspace @shapeshiftoss/metamask-snaps build:snap:bundle",
     "build:snap:eval": "yarn workspace @shapeshiftoss/metamask-snaps build:snap:eval",
     "build:exclude-sandbox": "yarn workspaces foreach --include @shapeshiftoss/metamask-snaps --include @shapeshiftoss/metamask-snaps-adapter --include @shapeshiftoss/metamask-snaps-types --interlaced --verbose --parallel --topological run build",
-    "build": "yarn workspaces foreach --verbose --parallel --topological --jobs 4 run build",
+    "build": "yarn workspaces foreach --interlaced --verbose --parallel --topological --jobs 4 run build",
     "clean": "yarn workspaces foreach --verbose --parallel run clean",
     "dev": "concurrently --prefix \"{time}-[{name}]\" --names \"ADAPTER,SNAP,TYPES\" -c \"bgBlue.bold,bgMagenta.bold\" \"cd packages/adapter && yarn dev\" \"cd packages/snap && yarn dev\" \"cd packages/types && yarn dev\"",
     "dev:sandbox": "concurrently --prefix \"{time}-[{name}]\" --names \"ADAPTER,SANDBOX,SNAP,TYPES\" -c \"bgBlue.bold,bgMagenta.bold\" \"cd packages/adapter && yarn dev\" \"cd packages/sandbox && yarn dev\" \"cd packages/snap && yarn dev\" \"cd packages/types && yarn dev\"",
