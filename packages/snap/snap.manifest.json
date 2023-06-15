@@ -7,7 +7,7 @@
     "url": "https://github.com/shapeshift/metamask-snaps.git"
   },
   "source": {
-    "shasum": "lxWMQK2Z9Enki9G38jfTcERALQRUv313xtJm+Sx0S84=",
+    "shasum": "RRciGhsXQTMctbuw/4tQycGyvCvDTCmMOXQCq0HffCU=",
     "location": {
       "npm": {
         "filePath": "dist/bundle.js",
@@ -18,7 +18,7 @@
     }
   },
   "initialPermissions": {
-    "snap_confirm": {},
+    "snap_dialog": {},
     "snap_getBip32Entropy": [
       {
         "path": [
