@@ -3,6 +3,8 @@ import { slip44ByCoin } from '@shapeshiftoss/hdwallet-core'
 import { logger } from '../lib/logger'
 import { getMetaMaskProvider } from '../utils'
 
+import { heading, panel, text } from '@metamask/snaps-ui'
+
 const moduleLogger = logger.child({ namespace: ['Adapter', 'Metamask.ts'] })
 
 /** Wrapper functions for MetaMask snap native calls
@@ -111,6 +113,7 @@ export const walletSnap = async ({
 }
 
 /**
+ * @deprecated
  * TODO: This is a snap-native call - a handler must be added to the snap onRpcRequest() method to support this.
  */
 export const snapConfirm = async ({
@@ -142,6 +145,48 @@ export const snapConfirm = async ({
           textAreaContent,
         },
       ],
+    })
+    return ret
+  } catch (error) {
+    /** User did not confirm the action or an error was encountered */
+    moduleLogger.error(error, { fn: 'walletSnap' }, `wallet_snap_* RPC call failed.`)
+
+    return Promise.reject(error)
+  }
+}
+
+/**
+ * TODO: This is a snap-native call - a handler must be added to the snap onRpcRequest() method to support this.
+ */
+export const snapDialog = async ({
+  prompt,
+  description,
+  textAreaContent,
+}: {
+  prompt: string
+  description: string
+  textAreaContent: string
+}): Promise<boolean> => {
+  const provider = await getMetaMaskProvider()
+  if (provider === undefined) {
+    throw new Error('Could not get MetaMask provider')
+  } 
+  if (provider.request === undefined) {
+    throw new Error('MetaMask provider does not define a .request() method')
+  }
+  if (textAreaContent.length > 1800) {
+    throw new Error('Length of textAreaContent string may not exceed 1800 characters.')
+  }
+  try {
+    const ret = await provider.request({
+      method: 'snap_dialog',
+      params: {
+          type: 'Confirmation',
+          content: panel([
+            heading(`${prompt}: ${description}`),
+            text(textAreaContent)
+          ])
+        },
     })
     return ret
   } catch (error) {

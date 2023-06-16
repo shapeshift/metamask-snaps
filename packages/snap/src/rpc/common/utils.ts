@@ -6,6 +6,8 @@ import { Node } from '@shapeshiftoss/hdwallet-native/dist/crypto/isolation/engin
 import { userConfirmParam } from '@shapeshiftoss/metamask-snaps-types'
 import assert from 'assert'
 
+import { heading, panel, text } from '@metamask/snaps-ui'
+
 import { logger } from './lib/logger'
 
 const moduleLogger = logger.child({ namespace: ['Snap', 'Common', 'Utils.ts'] })
@@ -104,16 +106,29 @@ export const userConfirm = async (params: userConfirmParam): Promise<boolean> =>
         const end = start + MAX_LENGTH
         textAreaContent[i] = params.textAreaContent.substring(start, end)
       }
+      const headingData = n > 1 ? `${params.description} (${i + 1} of ${n})` : params.description
+      const textData = textAreaContent ? textAreaContent[i] : undefined
       // eslint-disable-next-line no-undef, no-await-in-loop
+      // const ret = await snap.request({
+      //   method: 'snap_dialog',
+      //   params: {
+      //     type: 'Confirmation',
+      //     content: panel([
+      //       heading('test'),
+      //       text('test')
+      //     ])
+      //   }
+      // })
       const ret = await snap.request({
-        method: 'snap_confirm',
-        params: [
+        method: 'snap_dialog',
+        params: 
           {
-            prompt: params.prompt,
-            description: n > 1 ? `${params.description} (${i + 1} of ${n})` : params.description,
-            textAreaContent: textAreaContent ? textAreaContent[i] : undefined,
+            type: 'Confirmation',
+            content: panel([
+              heading(`${prompt}: ${headingData}`),
+              text(textData)
+            ]),
           },
-        ],
       })
       if (!ret) {
         return false
