@@ -112,7 +112,7 @@
     "eslint-plugin-react-hooks": "*"
   },
   "dependencies": {
-    "@shapeshiftoss/caip": "^8.1.0",
+    "@shapeshiftoss/caip": "^8.15.0",
     "@ungap/url-search-params": "^0.2.2"
   }
 }

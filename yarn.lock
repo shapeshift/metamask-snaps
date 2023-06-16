@@ -6368,12 +6368,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@shapeshiftoss/caip@npm:^8.1.0, @shapeshiftoss/caip@npm:^8.4.0":
-  version: 8.4.2
-  resolution: "@shapeshiftoss/caip@npm:8.4.2"
+"@shapeshiftoss/caip@npm:^8.15.0":
+  version: 8.15.0
+  resolution: "@shapeshiftoss/caip@npm:8.15.0"
   peerDependencies:
     "@shapeshiftoss/types": ^8.1.0
-  checksum: 39f89d5ae2a80325f323c8471ee6ab590853ebd371ece4649dac5e4a928f3f269648f281bedae52ded433ac885b43847ec9ab6139e5f88544affd31942d11bfc
+  checksum: d9cde4e0fac3a2dbebd5054d7a985e6a828b9028b9914cbbfbd293ff59cf48b195b425b620decfc54988cf2bf3a8a59a3809475f26af264b77034136736aa4e4
   languageName: node
   linkType: hard
 
@@ -6537,7 +6537,7 @@ __metadata:
     "@metamask/snaps-cli": 0.32.2
     "@metamask/snaps-types": 0.32.2
     "@metamask/types": ^1.1.0
-    "@shapeshiftoss/caip": ^8.4.0
+    "@shapeshiftoss/caip": ^8.15.0
     "@shapeshiftoss/hdwallet-core": ^1.34.0
     "@shapeshiftoss/hdwallet-native": ^1.34.0
     "@shapeshiftoss/logger": ^1.1.2
@@ -21023,7 +21023,7 @@ __metadata:
     "@commitlint/config-conventional": ^17.1.0
     "@semantic-release/changelog": ^6.0.1
     "@semantic-release/git": ^10.0.1
-    "@shapeshiftoss/caip": ^8.1.0
+    "@shapeshiftoss/caip": ^8.15.0
     "@types/node": ^18.7.8
     "@typescript-eslint/eslint-plugin": ^5.33.1
     "@typescript-eslint/parser": ^5.33.1
