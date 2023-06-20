@@ -87,56 +87,22 @@ export const getHDWalletNativeSigner = async (coin: Coin): Promise<NativeHDWalle
 }
 
 export const userConfirm = async (params: userConfirmParam): Promise<boolean> => {
-  /**
-   * The text area content is limited to 1800 characters. If the transaction
-   * contains more than 1800 characters, we need to display multiple
-   * confirmation windows to the user.
-   */
-  const MAX_LENGTH = 1800
-  const n = Math.ceil(JSON.stringify(params.textAreaContent, null, 2).length / MAX_LENGTH)
-  const textAreaContent = n ? new Array(n) : undefined
-
-  for (let i = 0, j = 0; i < n; i += 1, j += MAX_LENGTH) {
-    try {
-      if (textAreaContent) {
-        const start = i * MAX_LENGTH
-        /** Technically, this can put the value of 'end' past the end-of-string boundary for
-         * textAreaContent[n-1], but the call to .substring() is safe and writing it this way
-         * is cleaner and more readable than adding an explicit string length check. */
-        const end = start + MAX_LENGTH
-        textAreaContent[i] = params.textAreaContent.substring(start, end)
-      }
-      const headingData = n > 1 ? `${params.description} (${i + 1} of ${n})` : params.description
-      const textData = textAreaContent ? textAreaContent[i] : undefined
-      // eslint-disable-next-line no-undef, no-await-in-loop
-      // const ret = await snap.request({
-      //   method: 'snap_dialog',
-      //   params: {
-      //     type: 'Confirmation',
-      //     content: panel([
-      //       heading('test'),
-      //       text('test')
-      //     ])
-      //   }
-      // })
-      const ret = await snap.request({
-        method: 'snap_dialog',
-        params: 
-          {
-            type: 'Confirmation',
-            content: panel([
-              heading(`${prompt}: ${headingData}`),
-              text(textData)
-            ]),
-          },
-      })
-      if (!ret) {
-        return false
-      }
-    } catch (error) {
-      moduleLogger.error(error, { fn: 'userConfirm' }, 'Could not display confirmation dialog')
-      return false
-    }
+  try {
+    const ret = await snap.request({
+      method: 'snap_dialog',
+      params: 
+        {
+          type: 'confirmation',
+          content: panel([
+            heading(`${params.prompt}: ${params.description}`),
+            text(params.textAreaContent)
+          ]),
+        },
+    })
+    
+  } catch (error) {
+    moduleLogger.error(error, { fn: 'userConfirm' }, 'Could not display confirmation dialog')
+    return false
   }
   return true
 }
