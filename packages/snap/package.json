@@ -34,7 +34,7 @@
     "lint:package-json": "prettier-package-json ./package.json",
     "manifest": "mm-snap manifest --fix",
     "serve": "mm-snap serve",
-    "test": "echo 'TODO'"
+    "test": "echo 'No test suite defined for snap.'"
   },
   "dependencies": {
     "@ethersproject/providers": "^5.7.0",
