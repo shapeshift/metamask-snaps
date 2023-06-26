@@ -7,11 +7,11 @@
     "url": "https://github.com/shapeshift/metamask-snaps.git"
   },
   "source": {
-    "shasum": "lrXF8WJDpRam2xuW7hixRe2lLphaz4xiNgzlzHJie28=",
+    "shasum": "49PNXlckod7wmGEsofGcRRB85x65kv0VLB/23sTMUsc=",
     "location": {
       "npm": {
         "filePath": "dist/bundle.js",
-        "iconPath": "images/FOX_32x32_SVG.svg",
+        "iconPath": "images/Fox_32x32_SVG.svg",
         "packageName": "@shapeshiftoss/metamask-snaps",
         "registry": "https://registry.npmjs.org/"
       }
