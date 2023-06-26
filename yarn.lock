@@ -6536,6 +6536,7 @@ __metadata:
     "@metamask/key-tree": ^7.0.0
     "@metamask/snaps-cli": 0.32.2
     "@metamask/snaps-types": 0.32.2
+    "@metamask/snaps-ui": ^0.32.2
     "@metamask/types": ^1.1.0
     "@shapeshiftoss/caip": ^8.15.0
     "@shapeshiftoss/hdwallet-core": ^1.34.0
