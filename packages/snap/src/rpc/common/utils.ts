@@ -1,12 +1,11 @@
 import { ExternalProvider } from '@ethersproject/providers'
 import { BIP44CoinTypeNode, SLIP10Node } from '@metamask/key-tree'
-import { Coin, Keyring, fromHexString, stripHexPrefix } from '@shapeshiftoss/hdwallet-core'
+import { heading, panel, text } from '@metamask/snaps-ui'
+import { Coin, fromHexString, Keyring, stripHexPrefix } from '@shapeshiftoss/hdwallet-core'
 import { NativeAdapter, NativeHDWallet } from '@shapeshiftoss/hdwallet-native'
 import { Node } from '@shapeshiftoss/hdwallet-native/dist/crypto/isolation/engines/default/bip32'
 import { userConfirmParam } from '@shapeshiftoss/metamask-snaps-types'
 import assert from 'assert'
-
-import { heading, panel, text } from '@metamask/snaps-ui'
 
 import { logger } from './lib/logger'
 
@@ -53,8 +52,9 @@ export const slip44AndCurveByCoin = <T extends Coin>(coin: T): Slip44AndCurveByC
 
 export const getHDWalletNativeSigner = async (coin: Coin): Promise<NativeHDWallet | null> => {
   const { slip44, curve } = slip44AndCurveByCoin(coin)
-  assert((typeof slip44 === 'number' && curve), `Coin type: '${coin}' is invalid or unsupported`)
+  assert(typeof slip44 === 'number' && curve, `Coin type: '${coin}' is invalid or unsupported`)
   const path = ['m', "44'", `${slip44}'`]
+  /* eslint-disable-next-line no-undef */
   const node: BIP44CoinTypeNode = await snap.request({
     method: 'snap_getBip32Entropy',
     params: {
@@ -66,7 +66,7 @@ export const getHDWalletNativeSigner = async (coin: Coin): Promise<NativeHDWalle
     assert(node.privateKey !== undefined, 'No private key provided in BIP44CoinTypeNode')
     const slip10Node = await SLIP10Node.fromJSON(node) // node at depth 2
     const privateKey = fromHexString(stripHexPrefix(slip10Node.privateKey))
-    const chainCode =  fromHexString(stripHexPrefix(slip10Node.chainCode))
+    const chainCode = fromHexString(stripHexPrefix(slip10Node.chainCode))
     const keyring = new Keyring()
     const nativeAdapter = NativeAdapter.useKeyring(keyring)
     await nativeAdapter.initialize()
@@ -88,18 +88,20 @@ export const getHDWalletNativeSigner = async (coin: Coin): Promise<NativeHDWalle
 
 export const userConfirm = async (params: userConfirmParam): Promise<boolean> => {
   try {
+    /* eslint-disable-next-line no-undef */
     const ret = await snap.request({
       method: 'snap_dialog',
-      params: 
-        {
-          type: 'confirmation',
-          content: panel([
-            heading(`${params.prompt}: ${params.description}`),
-            text(params.textAreaContent)
-          ]),
-        },
+      params: {
+        type: 'confirmation',
+        content: panel([
+          heading(`${params.prompt}: ${params.description}`),
+          text(params.textAreaContent),
+        ]),
+      },
     })
-    
+    if (!ret) {
+      return false
+    }
   } catch (error) {
     moduleLogger.error(error, { fn: 'userConfirm' }, 'Could not display confirmation dialog')
     return false

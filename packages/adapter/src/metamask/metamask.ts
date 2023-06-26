@@ -1,9 +1,8 @@
+import { heading, panel, text } from '@metamask/snaps-ui'
 import { slip44ByCoin } from '@shapeshiftoss/hdwallet-core'
 
 import { logger } from '../lib/logger'
 import { getMetaMaskProvider } from '../utils'
-
-import { heading, panel, text } from '@metamask/snaps-ui'
 
 const moduleLogger = logger.child({ namespace: ['Adapter', 'Metamask.ts'] })
 
@@ -127,7 +126,7 @@ export const snapDialog = async ({
   const provider = await getMetaMaskProvider()
   if (provider === undefined) {
     throw new Error('Could not get MetaMask provider')
-  } 
+  }
   if (provider.request === undefined) {
     throw new Error('MetaMask provider does not define a .request() method')
   }
@@ -135,12 +134,9 @@ export const snapDialog = async ({
     const ret = await provider.request({
       method: 'snap_dialog',
       params: {
-          type: 'confirmation',
-          content: panel([
-            heading(`${prompt}: ${description}`),
-            text(textAreaContent)
-          ])
-        },
+        type: 'confirmation',
+        content: panel([heading(`${prompt}: ${description}`), text(textAreaContent)]),
+      },
     })
     return ret
   } catch (error) {

@@ -56,7 +56,7 @@ export class OsmosisSigner extends CosmosSDKSigner<SupportedChainIds.OsmosisMain
         addressNList,
         showDisplay: false,
       } as SignerGetAddressType<SupportedChainIds.OsmosisMainnet>)
-      assert( address !== null, 'Address generation failed')
+      assert(address !== null, 'Address generation failed')
       return address
     } catch (error) {
       this.logger.error({ fn: 'getAddress' }, error)

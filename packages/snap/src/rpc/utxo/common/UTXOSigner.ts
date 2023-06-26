@@ -23,7 +23,7 @@ export abstract class UTXOSigner<T extends UTXOChainIds> extends BaseSigner<T> {
         scriptType,
         showDisplay: false,
       } as SignerGetAddressType<T>)
-      assert( address !== null, 'Address generation failed')
+      assert(address !== null, 'Address generation failed')
       return address as GetAddressResponseType<T>
     } catch (error) {
       this.logger.error({ fn: 'getAddress' }, error)

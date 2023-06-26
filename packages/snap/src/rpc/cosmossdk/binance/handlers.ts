@@ -41,7 +41,7 @@ export const binanceSignTransaction = async (
 }
 
 export const binanceBroadcastTransaction = async (
-  params: BinanceBroadcastTransactionParams,
+  params: BinanceBroadcastTransactionParams /* eslint-disable-line no-unused-vars, @typescript-eslint/no-unused-vars */,
 ): Promise<BinanceBroadcastTransactionResponse> => {
   try {
     const binanceSigner = new BinanceSigner()

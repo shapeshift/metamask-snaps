@@ -41,7 +41,7 @@ export const secretSignTransaction = async (
 }
 
 export const secretBroadcastTransaction = async (
-  params: SecretBroadcastTransactionParams,
+  params: SecretBroadcastTransactionParams /* eslint-disable-line no-unused-vars, @typescript-eslint/no-unused-vars */,
 ): Promise<SecretBroadcastTransactionResponse> => {
   try {
     const secretSigner = new SecretSigner()
