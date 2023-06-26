@@ -1,6 +1,6 @@
 {
   "name": "@shapeshiftoss/metamask-snaps-adapter",
-  "version": "0.7.0",
+  "version": "1.0.0",
   "description": "",
   "author": "pastaghost <pastaghost@2520.io> (http://www.github.com/pastaghost)",
   "homepage": "https://github.com/shapeshift/metamask-snaps/tree/main/packages/adapter",

@@ -1,6 +1,6 @@
 {
   "name": "root",
-  "version": "0.7.0",
+  "version": "1.0.0",
   "description": "A multi-chain Snap for MetaMask by ShapeShift.",
   "repository": {
     "type": "git",
