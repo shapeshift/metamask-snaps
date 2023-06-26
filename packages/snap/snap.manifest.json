@@ -1,17 +1,17 @@
 {
   "version": "0.7.0",
-  "description": "A Multi-chain Snap for MetaMask by ShapeShift.",
-  "proposedName": "ShapeShift MetaMask Snap",
+  "description": "The ShapeShift Multichain snap evolves your wallet to support 11 chains in one snap, including Bitcoin, Dogecoin, Litecoin, Cosmos, Binance Chain, Bitcoin Cash, THORChain, Osmosis, and Secret Network.",
+  "proposedName": "ShapeShift Multichain",
   "repository": {
     "type": "git",
     "url": "https://github.com/shapeshift/metamask-snaps.git"
   },
   "source": {
-    "shasum": "RRciGhsXQTMctbuw/4tQycGyvCvDTCmMOXQCq0HffCU=",
+    "shasum": "lrXF8WJDpRam2xuW7hixRe2lLphaz4xiNgzlzHJie28=",
     "location": {
       "npm": {
         "filePath": "dist/bundle.js",
-        "iconPath": "images/FOX_icon_dark.svg",
+        "iconPath": "images/FOX_32x32_SVG.svg",
         "packageName": "@shapeshiftoss/metamask-snaps",
         "registry": "https://registry.npmjs.org/"
       }
