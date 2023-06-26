@@ -1,111 +1,67 @@
 {
-  "version": "0.7.0",
-  "description": "A Multi-chain Snap for MetaMask by ShapeShift.",
-  "proposedName": "ShapeShift MetaMask Snap",
+  "version": "1.0.0",
+  "description": "The ShapeShift Multichain snap evolves your wallet to support 11 chains in one snap, including Bitcoin, Dogecoin, Litecoin, Cosmos, Binance Chain, Bitcoin Cash, THORChain, Osmosis, and Secret Network.",
+  "proposedName": "ShapeShift Multichain",
   "repository": {
     "type": "git",
     "url": "https://github.com/shapeshift/metamask-snaps.git"
   },
   "source": {
-    "shasum": "lxWMQK2Z9Enki9G38jfTcERALQRUv313xtJm+Sx0S84=",
+    "shasum": "aS9p2HJESIwkYNAf5LCpi02cdfWe/X8mBRCOHQy2Yqg=",
     "location": {
       "npm": {
         "filePath": "dist/bundle.js",
-        "iconPath": "images/FOX_icon_dark.svg",
+        "iconPath": "images/Fox_32x32_SVG.svg",
         "packageName": "@shapeshiftoss/metamask-snaps",
         "registry": "https://registry.npmjs.org/"
       }
     }
   },
   "initialPermissions": {
-    "snap_confirm": {},
+    "snap_dialog": {},
     "snap_getBip32Entropy": [
       {
-        "path": [
-          "m",
-          "44'",
-          "0'"
-        ],
+        "path": ["m", "44'", "0'"],
         "curve": "secp256k1"
       },
       {
-        "path": [
-          "m",
-          "44'",
-          "2'"
-        ],
+        "path": ["m", "44'", "2'"],
         "curve": "secp256k1"
       },
       {
-        "path": [
-          "m",
-          "44'",
-          "3'"
-        ],
+        "path": ["m", "44'", "3'"],
         "curve": "secp256k1"
       },
       {
-        "path": [
-          "m",
-          "44'",
-          "60'"
-        ],
+        "path": ["m", "44'", "60'"],
         "curve": "secp256k1"
       },
       {
-        "path": [
-          "m",
-          "44'",
-          "118'"
-        ],
+        "path": ["m", "44'", "118'"],
         "curve": "secp256k1"
       },
       {
-        "path": [
-          "m",
-          "44'",
-          "145'"
-        ],
+        "path": ["m", "44'", "145'"],
         "curve": "secp256k1"
       },
       {
-        "path": [
-          "m",
-          "44'",
-          "714'"
-        ],
+        "path": ["m", "44'", "714'"],
         "curve": "secp256k1"
       },
       {
-        "path": [
-          "m",
-          "44'",
-          "931'"
-        ],
+        "path": ["m", "44'", "931'"],
         "curve": "secp256k1"
       },
       {
-        "path": [
-          "m",
-          "44'",
-          "330'"
-        ],
+        "path": ["m", "44'", "330'"],
         "curve": "secp256k1"
       },
       {
-        "path": [
-          "m",
-          "44'",
-          "459'"
-        ],
+        "path": ["m", "44'", "459'"],
         "curve": "secp256k1"
       },
       {
-        "path": [
-          "m",
-          "44'",
-          "529'"
-        ],
+        "path": ["m", "44'", "529'"],
         "curve": "secp256k1"
       }
     ],

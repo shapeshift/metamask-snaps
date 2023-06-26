@@ -61,8 +61,10 @@ export type TerraAddress = string | null
 export type ThorchainAddress = string | null
 
 export interface WalletEnableParam {
-  [snapId: string]: {
-    version?: string
+  params: {
+    [snapId: string]: {
+      version?: string
+    }
   }
   permissionName?: Record<string, never>
 }
@@ -87,4 +89,39 @@ export interface WalletEnableResult {
 export interface EnableShapeShiftSnapResult {
   success: boolean
   message: WalletEnableResult
+}
+
+export interface RequestSnapsParams {
+  [snapId: string]: {
+    version?: string
+  }
+}
+
+export interface WalletGetSnapsResult {
+  [snapId: string]: {
+    /**
+     * The ID of the Snap.
+     */
+    id: string
+
+    /**
+     * The initial permissions of the Snap, which will be requested when it is
+     * installed.
+     */
+    initialPermissions: any[]
+
+    /**
+     * The name of the permission used to invoke the Snap.
+     */
+    permissionName: string
+
+    /**
+     * The version of the Snap.
+     */
+    version: string
+  }
+}
+
+export interface RequestSnapsResult {
+  [snapId: string]: WalletGetSnapsResult[string]
 }

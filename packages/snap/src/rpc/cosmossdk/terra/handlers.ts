@@ -41,7 +41,7 @@ export const terraSignTransaction = async (
 }
 
 export const terraBroadcastTransaction = async (
-  params: TerraBroadcastTransactionParams,
+  params: TerraBroadcastTransactionParams /* eslint-disable-line no-unused-vars, @typescript-eslint/no-unused-vars */,
 ): Promise<TerraBroadcastTransactionResponse> => {
   try {
     const terraSigner = new TerraSigner()

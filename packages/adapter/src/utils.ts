@@ -13,11 +13,22 @@ import { walletRequestSnaps } from './metamask/metamask'
 
 const moduleLogger = logger.child({ namespace: ['Adapter', 'Utils.ts'] })
 
-export type Provider = Omit<ExternalProvider, 'request'> & { request?: (request: { method: string, params?: any }) => Promise<any>}
+export type Provider = Omit<ExternalProvider, 'request'> & {
+  request?: (request: { method: string; params?: any }) => Promise<any>
+}
 
 export const getMetaMaskProvider = async (): Promise<Provider | undefined> => {
   try {
-    return await detectEthereumProvider({ mustBeMetaMask: true })
+    const provider = await (<Promise<Provider | undefined>>(
+      detectEthereumProvider({ mustBeMetaMask: true })
+    ))
+    if (provider === undefined) {
+      throw new Error('Could not get MetaMask provider')
+    }
+    if (provider.request === undefined) {
+      throw new Error('MetaMask provider does not define a .request() method')
+    }
+    return provider
   } catch (error) {
     moduleLogger.error(
       error,
@@ -30,7 +41,7 @@ export const getMetaMaskProvider = async (): Promise<Provider | undefined> => {
 
 export const metaMaskFlaskSupported = async (externalProvider?: any): Promise<boolean> => {
   try {
-    const provider = externalProvider || await getMetaMaskProvider()
+    const provider = externalProvider || (await getMetaMaskProvider())
 
     const isFlask = (await provider.request({ method: 'web3_clientVersion' }))?.includes('flask')
     assert(isFlask, 'Please install MetaMask Flask.')
@@ -42,6 +53,12 @@ export const metaMaskFlaskSupported = async (externalProvider?: any): Promise<bo
 
 export const shapeShiftSnapInstalled = async (snapId: string): Promise<boolean> => {
   const provider = await getMetaMaskProvider()
+  if (provider === undefined) {
+    throw new Error('Could not get MetaMask provider')
+  }
+  if (provider.request === undefined) {
+    throw new Error('MetaMask provider does not define a .request() method')
+  }
   try {
     const ret = await provider.request({
       method: 'wallet_getSnaps',
@@ -98,14 +115,14 @@ export const enableShapeShiftSnap = async (
       accounts: [],
       permissions: [],
       snaps: null,
-      errors: null,
+      errors: undefined,
     },
   }
   try {
     assert(metaMaskFlaskSupported(), 'Please install MetaMask Flask.')
     const snapIsInstalled = await shapeShiftSnapInstalled(snapId)
     if (!snapIsInstalled) {
-      const res = await walletRequestSnaps(snapId, version);
+      const res = await walletRequestSnaps(snapId, version)
       assert(res.errors?.length === 0, JSON.stringify(res.errors, null, 2))
       ret.success = true
       ret.message = res
@@ -122,11 +139,17 @@ export const sendFlaskRPCRequest = async <T extends ShapeShiftSnapRPCResponse>(
 ): Promise<RPCHandlerResponse<T>> => {
   try {
     const provider = await getMetaMaskProvider()
+    if (provider === undefined) {
+      throw new Error('Could not get MetaMask provider')
+    }
+    if (provider.request === undefined) {
+      throw new Error('MetaMask provider does not define a .request() method')
+    }
     const ret = await provider.request({
       method: 'wallet_invokeSnap',
       params: {
         snapId,
-        request
+        request,
       },
     })
     return ret as T

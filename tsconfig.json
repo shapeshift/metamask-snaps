@@ -1,23 +1,21 @@
 {
   "compilerOptions": {
     "allowSyntheticDefaultImports": true,
+    "alwaysStrict": true,
     "esModuleInterop": true,
-    "lib": [
-      "dom",
-      "ES2017"
-    ],
+    "lib": ["dom", "ES2017"],
     "module": "commonjs",
     "noImplicitAny": true,
+    "noImplicitOverride": true,
     "noImplicitReturns": true,
     "noImplicitThis": true,
+    "noUnusedParameters": true,
     "outDir": "./build",
     "sourceMap": true,
     "strictBindCallApply": true,
     "strictFunctionTypes": true,
+    "strictNullChecks": true,
     "target": "ES2017",
-    "typeRoots": [
-      "./node_modules/@types",
-      "./@types"
-    ]
+    "typeRoots": ["./node_modules/@types", "./@types"]
   }
 }

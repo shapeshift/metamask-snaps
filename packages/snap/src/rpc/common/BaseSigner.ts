@@ -59,7 +59,7 @@ export abstract class BaseSigner<T extends SupportedChainIds> {
     })
   }
 
-  get initialized(){
+  get initialized() {
     return this._initialized
   }
 

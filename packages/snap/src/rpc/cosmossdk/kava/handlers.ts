@@ -41,7 +41,7 @@ export const kavaSignTransaction = async (
 }
 
 export const kavaBroadcastTransaction = async (
-  params: KavaBroadcastTransactionParams,
+  params: KavaBroadcastTransactionParams /* eslint-disable-line no-unused-vars, @typescript-eslint/no-unused-vars */,
 ): Promise<KavaBroadcastTransactionResponse> => {
   try {
     const kavaSigner = new KavaSigner()

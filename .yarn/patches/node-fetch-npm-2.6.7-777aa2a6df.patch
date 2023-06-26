@@ -1,0 +1,27 @@
+diff --git a/browser.js b/browser.js
+index 83c54c584424db362d563217988895aecbc2719c..d758732c8dbde10030467df971d60e1a82c49dce 100644
+--- a/browser.js
++++ b/browser.js
+@@ -12,14 +12,14 @@ var getGlobal = function () {
+ }
+ 
+ var global = getGlobal();
+-
+-module.exports = exports = global.fetch;
++exports = global.fetch;
++Object.assign(module.exports, global.fetch);
+ 
+ // Needed for TypeScript and Webpack.
+ if (global.fetch) {
+-	exports.default = global.fetch.bind(global);
++	module.exports.default = global.fetch.bind(global);
+ }
+ 
+-exports.Headers = global.Headers;
+-exports.Request = global.Request;
+-exports.Response = global.Response;
+\ No newline at end of file
++module.exports.Headers = global.Headers;
++module.exports.Request = global.Request;
++module.exports.Response = global.Response;
+\ No newline at end of file

@@ -56,7 +56,7 @@ export class ThorchainSigner extends CosmosSDKSigner<SupportedChainIds.Thorchain
         addressNList,
         showDisplay: false,
       } as SignerGetAddressType<SupportedChainIds.ThorchainMainnet>)
-      assert( address !== null, 'Address generation failed')
+      assert(address !== null, 'Address generation failed')
       return address
     } catch (error) {
       this.logger.error({ fn: 'getAddress' }, error)

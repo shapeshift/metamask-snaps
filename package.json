@@ -1,6 +1,6 @@
 {
   "name": "root",
-  "version": "0.7.0",
+  "version": "1.0.0",
   "description": "A multi-chain Snap for MetaMask by ShapeShift.",
   "repository": {
     "type": "git",
@@ -20,12 +20,14 @@
     "packages/types"
   ],
   "scripts": {
+    "build:adapter": "yarn workspace @shapeshiftoss/metamask-snaps-adapter build",
     "build:clean": "yarn clean && yarn build",
     "build:sandbox": "yarn workspace sandbox build",
     "build:snap": "yarn workspace @shapeshiftoss/metamask-snaps build",
     "build:snap:bundle": "yarn workspace @shapeshiftoss/metamask-snaps build:snap:bundle",
     "build:snap:eval": "yarn workspace @shapeshiftoss/metamask-snaps build:snap:eval",
-    "build": "yarn workspaces foreach --verbose --parallel --topological run build",
+    "build:exclude-sandbox": "yarn workspaces foreach --include @shapeshiftoss/metamask-snaps --include @shapeshiftoss/metamask-snaps-adapter --include @shapeshiftoss/metamask-snaps-types --interlaced --verbose --parallel --topological run build",
+    "build": "yarn workspaces foreach --interlaced --verbose --parallel --topological --jobs 4 run build",
     "clean": "yarn workspaces foreach --verbose --parallel run clean",
     "dev": "concurrently --prefix \"{time}-[{name}]\" --names \"ADAPTER,SNAP,TYPES\" -c \"bgBlue.bold,bgMagenta.bold\" \"cd packages/adapter && yarn dev\" \"cd packages/snap && yarn dev\" \"cd packages/types && yarn dev\"",
     "dev:sandbox": "concurrently --prefix \"{time}-[{name}]\" --names \"ADAPTER,SANDBOX,SNAP,TYPES\" -c \"bgBlue.bold,bgMagenta.bold\" \"cd packages/adapter && yarn dev\" \"cd packages/sandbox && yarn dev\" \"cd packages/snap && yarn dev\" \"cd packages/types && yarn dev\"",
@@ -94,9 +96,9 @@
     "randomfill@1.0.4": "patch:randomfill@npm:1.0.4#.yarn/patches/randomfill-npm-1.0.4-a08651a679.patch",
     "buffer": "patch:buffer@npm:5.7.1#.yarn/patches/buffer-npm-5.7.1-513ef8259e.patch",
     "@noble/secp256k1": "patch:@noble/secp256k1@npm:1.6.3#.yarn/patches/@noble-secp256k1-npm-1.6.3-d06f711103.patch",
-    "randombytes": "patch:randombytes@npm:2.1.0#.yarn/patches/randombytes-npm-2.1.0-e3da76bccf.patch",
-    "randombytes@2.1.0": "patch:randombytes@npm:2.1.0#.yarn/patches/randombytes-npm-2.1.0-e3da76bccf.patch",
-    "@shapeshiftoss/unchained-client@10.1.1": "patch:@shapeshiftoss/unchained-client@npm:10.1.1#.yarn/patches/@shapeshiftoss-unchained-client-npm-10.1.1-1caef9f345.patch"
+    "@shapeshiftoss/unchained-client@10.1.1": "patch:@shapeshiftoss/unchained-client@npm:10.1.1#.yarn/patches/@shapeshiftoss-unchained-client-npm-10.1.1-1caef9f345.patch",
+    "node-fetch": "patch:node-fetch@npm:2.6.7#.yarn/patches/node-fetch-npm-2.6.7-777aa2a6df.patch",
+    "randombytes": "patch:randombytes@npm:2.1.0#.yarn/patches/randombytes-npm-2.1.0-e3da76bccf.patch"
   },
   "peerDependencies": {
     "@babel/core": "*",
@@ -110,7 +112,7 @@
     "eslint-plugin-react-hooks": "*"
   },
   "dependencies": {
-    "@shapeshiftoss/caip": "^8.1.0",
+    "@shapeshiftoss/caip": "^8.15.0",
     "@ungap/url-search-params": "^0.2.2"
   }
 }

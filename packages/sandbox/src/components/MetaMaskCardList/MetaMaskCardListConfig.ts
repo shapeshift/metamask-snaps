@@ -1,5 +1,5 @@
 import {
-  snapConfirm,
+  snapDialog,
   snapGetBIP44Entropy,
   snapManageState,
   snapNotify,
@@ -54,7 +54,7 @@ export const MetaMaskCardListConfig: Array<CardProps> = [
       },
 
       snap_confirm: {
-        callback: snapConfirm,
+        callback: snapDialog,
         params: undefined,
         description:
           "Calling this method causes a confirmation to be displayed in the MetaMask UI. The contents of the confirmation depend on the parameters, see above for their meaning and format. The user can either approve or reject the confirmation, which will be indicated by the method's return value.",
