@@ -46,6 +46,8 @@ jobs:
           restore-keys: ${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
       - name: Yarn Install
         run: yarn install --immutable
+      - name: Configure Build
+        run: cp github-pages.env .env
       - name: Build Sandbox and Packages
         run: yarn build
       - name: Setup Pages
