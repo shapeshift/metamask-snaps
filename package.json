@@ -35,7 +35,7 @@
     "link-packages": "./scripts/link-packages.sh",
     "lint:fix": "yarn workspaces foreach --verbose --parallel run lint:fix",
     "lint": "yarn workspaces foreach --verbose --parallel run lint",
-    "release": "yarn workspaces foreach run semantic-release -e semantic-release-monorepo",
+    "release": "echo 'Release operation temporarily disabled.'",
     "test": "yarn workspaces foreach --verbose --parallel run test",
     "unlink-packages": "./scripts/unlink-packages.sh",
     "precommit": "yarn lint:fix && lint-staged"
