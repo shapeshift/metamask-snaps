@@ -3,6 +3,7 @@
   "name": "sandbox",
   "version": "0.1.0",
   "license": "MIT",
+  "homepage": "https://shapeshift.github.io/metamask-snaps/",
   "scripts": {
     "analyze": "source-map-explorer 'build/static/js/*.js'",
     "build": "rimraf ./build && react-app-rewired build",
@@ -13,7 +14,9 @@
     "lint:fix": "yarn lint --fix && yarn lint:package-json",
     "lint:package-json": "prettier-package-json --write ./package.json",
     "show-linked-packages": "find node_modules node_modules/@* -maxdepth 1 -type l -print",
-    "test": "echo 'No test suite defined for sandbox.'"
+    "test": "echo 'No test suite defined for sandbox.'",
+    "predeploy": "yarn build",
+    "deploy": "gh-pages -d build"
   },
   "dependencies": {
     "@chakra-ui/icons": "^2.0.4",
@@ -75,6 +78,7 @@
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-simple-import-sort": "^7.0.0",
+    "github-pages": "^3.0.2",
     "prettier": "^2.7.1",
     "prettier-package-json": "^2.6.4",
     "process": "^0.11.10",
