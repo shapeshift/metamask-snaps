@@ -2,7 +2,7 @@ import '@fontsource/inter'
 import '@fontsource/work-sans'
 
 import { Box, ChakraProvider, Grid, GridItem } from '@chakra-ui/react'
-import { BrowserRouter } from 'react-router-dom'
+import { HashRouter as Router } from 'react-router-dom'
 
 // import { ColorModeSwitcher } from './ColorModeSwitcher'
 import { Footer } from './components/Layout/Footer/Footer'
@@ -13,7 +13,7 @@ import { theme } from './theme'
 
 export const App = () => (
   <ChakraProvider theme={theme}>
-    <BrowserRouter>
+    <Router>
       <Box textAlign='center' fontSize='xl'>
         <Grid
           minH='100vh'
@@ -45,6 +45,6 @@ export const App = () => (
           </GridItem>
         </Grid>
       </Box>
-    </BrowserRouter>
+    </Router>
   </ChakraProvider>
 )
