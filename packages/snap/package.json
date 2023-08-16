@@ -41,7 +41,7 @@
     "@metamask/detect-provider": "^2.0.0",
     "@metamask/key-tree": "^7.0.0",
     "@metamask/snaps-types": "0.32.2",
-    "@metamask/snaps-ui": "^0.32.2",
+    "@metamask/snaps-ui": "^1.0.1",
     "@shapeshiftoss/caip": "^8.15.0",
     "@shapeshiftoss/hdwallet-core": "^1.34.0",
     "@shapeshiftoss/hdwallet-native": "^1.34.0",
