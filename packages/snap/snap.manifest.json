@@ -103,7 +103,6 @@
     ],
     "snap_manageState": {},
     "endowment:network-access": {},
-    "endowment:long-running": {},
     "endowment:rpc": {
       "dapps": true,
       "snaps": false
