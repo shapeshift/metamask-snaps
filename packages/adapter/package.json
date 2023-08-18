@@ -26,7 +26,7 @@
     "@ethersproject/providers": "^5.7.2",
     "@metamask/detect-provider": "^2.0.0",
     "@metamask/snaps-ui": "1.0.1",
-    "@shapeshiftoss/hdwallet-core": "^1.29.0",
+    "@shapeshiftoss/hdwallet-core": "^1.50.4",
     "@shapeshiftoss/logger": "^1.1.3",
     "@shapeshiftoss/metamask-snaps": "workspace:^",
     "@shapeshiftoss/metamask-snaps-types": "workspace:^"

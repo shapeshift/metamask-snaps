@@ -24,7 +24,7 @@
     "@fontsource/inter": "^5.0.2",
     "@fontsource/work-sans": "^5.0.2",
     "@reduxjs/toolkit": "^1.8.3",
-    "@shapeshiftoss/hdwallet-core": "^1.29.0",
+    "@shapeshiftoss/hdwallet-core": "^1.50.4",
     "@shapeshiftoss/logger": "^1.1.2",
     "@shapeshiftoss/metamask-snaps-adapter": "workspace:*",
     "@testing-library/jest-dom": "^5.16.4",
