@@ -141,7 +141,7 @@ export const snapDialog = async ({
     return ret
   } catch (error) {
     /** User did not confirm the action or an error was encountered */
-    moduleLogger.error(error, { fn: 'walletSnap' }, `wallet_snap_* RPC call failed.`)
+    moduleLogger.error(error, { fn: 'snapDialog' }, `snap_dialog RPC call failed.`)
 
     return Promise.reject(error)
   }
