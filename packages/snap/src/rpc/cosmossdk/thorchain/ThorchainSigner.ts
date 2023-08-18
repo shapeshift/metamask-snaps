@@ -76,6 +76,7 @@ export class ThorchainSigner extends CosmosSDKSigner<SupportedChainIds.Thorchain
         transaction as SignerSignTransactionType<SupportedChainIds.ThorchainMainnet>,
       )
       assert(signedTransaction !== null, 'Transaction signing failed')
+      this.logEvent("signTransaction", {unsignedTransaction: transaction, signedTransaction})
       return signedTransaction
     } catch (error) {
       this.logger.error(transaction, { fn: 'signTransaction' }, error)

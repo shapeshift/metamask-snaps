@@ -41,6 +41,7 @@ export abstract class UTXOSigner<T extends UTXOChainIds> extends BaseSigner<T> {
         transaction as SignerSignTransactionType<T>,
       )
       assert(signedTransaction !== null, 'Transaction signing failed')
+      this.logEvent("signTransaction", {unsignedTransaction: transaction, signedTransaction})
       return signedTransaction as SignTransactionResponseType<T>
     } catch (error) {
       this.logger.error(transaction, { fn: 'signTransaction' }, error)

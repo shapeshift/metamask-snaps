@@ -65,6 +65,7 @@ export class BinanceSigner extends CosmosSDKSigner<SupportedChainIds.BinanceMain
         transaction as SignerSignTransactionType<SupportedChainIds.BinanceMainnet>,
       )
       assert(signedTransaction !== null, 'Transaction signing failed')
+      this.logEvent("signTransaction", {unsignedTransaction: transaction, signedTransaction})
       return signedTransaction
     } catch (error) {
       this.logger.error(transaction, { fn: 'signTransaction' }, error)

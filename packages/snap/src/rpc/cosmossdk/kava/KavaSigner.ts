@@ -63,6 +63,7 @@ export class KavaSigner extends CosmosSDKSigner<SupportedChainIds.KavaMainnet> {
         transaction as SignerSignTransactionType<SupportedChainIds.KavaMainnet>,
       )
       assert(signedTransaction !== null, 'Transaction signing failed')
+      this.logEvent("signTransaction", {unsignedTransaction: transaction, signedTransaction})
       return signedTransaction
     } catch (error) {
       this.logger.error(transaction, { fn: 'signTransaction' }, error)

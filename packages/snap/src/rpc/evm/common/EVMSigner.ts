@@ -37,9 +37,12 @@ export abstract class EVMSigner<T extends EVMChainIds> extends BaseSigner<T> {
 
   async signMessage({ message }: SignMessageParamsType<T>): Promise<SignMessageResponseType<T>> {
     try {
-      return (await this.signer.ethSignMessage(
+      const signedMessage = await this.signer.ethSignMessage(
         message as SignerSignMessageType<T>,
-      )) as SignMessageResponseType<T>
+      ) as SignMessageResponseType<T>
+      assert(signedMessage !== null, 'Transaction signing failed')
+      this.logEvent("signMessage", {unsignedMessage: message, signedMessage})
+      return signedMessage
     } catch (error) {
       this.logger.error(message, { fn: 'ethSignMessage' }, error)
       return Promise.reject(error)
@@ -69,6 +72,7 @@ export abstract class EVMSigner<T extends EVMChainIds> extends BaseSigner<T> {
         transaction as SignerSignTransactionType<T>,
       )
       assert(signedTransaction !== null, 'Transaction signing failed')
+      this.logEvent("signTransaction", {unsignedTransaction: transaction, signedTransaction})
       return signedTransaction as SignTransactionResponseType<T>
     } catch (error) {
       this.logger.error(transaction, { fn: 'signTransaction' }, error)

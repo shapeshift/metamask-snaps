@@ -14,6 +14,7 @@ import assert from 'assert'
 
 import { getHDWalletNativeSigner, userConfirm } from '../common'
 
+
 export interface SignerArgs {
   coin: string
   logger: Logger
@@ -57,6 +58,10 @@ export abstract class BaseSigner<T extends SupportedChainIds> {
       description: 'Please verify the transaction data below',
       textAreaContent: JSON.stringify(transaction, null, 2),
     })
+  }
+
+  protected logEvent(eventType: any, transactionData: any){
+    this.logger.info(eventType, transactionData)
   }
 
   get initialized() {

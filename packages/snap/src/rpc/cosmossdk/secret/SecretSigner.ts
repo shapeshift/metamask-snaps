@@ -65,6 +65,7 @@ export class SecretSigner extends CosmosSDKSigner<SupportedChainIds.SecretMainne
         transaction as SignerSignTransactionType<SupportedChainIds.SecretMainnet>,
       )
       assert(signedTransaction !== null, 'Transaction signing failed')
+      this.logEvent("signTransaction", {unsignedTransaction: transaction, signedTransaction})
       return signedTransaction
     } catch (error) {
       this.logger.error(transaction, { fn: 'signTransaction' }, error)
