@@ -39,7 +39,7 @@
   "dependencies": {
     "@ethersproject/providers": "^5.7.0",
     "@metamask/detect-provider": "^2.0.0",
-    "@metamask/key-tree": "^7.1.1",
+    "@metamask/key-tree": "9.0.0",
     "@metamask/snaps-types": "1.0.1",
     "@metamask/snaps-ui": "^1.0.1",
     "@shapeshiftoss/caip": "^8.15.0",
