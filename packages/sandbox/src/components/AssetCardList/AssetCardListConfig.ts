@@ -61,7 +61,7 @@ export const AssetCardListConfig: Array<CardProps> = [
     name: 'Avalanche',
     icon: 'avax.png',
     symbol: 'AVAX',
-    enabled: false,
+    enabled: true,
     actions: {
       avax_getAddress: {
         callback: AVAXGetAddress,
