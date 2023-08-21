@@ -1,9 +1,7 @@
 import {
-  AVAXBroadcastTransaction,
   AVAXGetAddress,
+  AVAXSendTransaction,
   AVAXSignMessage,
-  AVAXSignTransaction,
-  AVAXVerifyMessage,
   BCHBroadcastTransaction,
   BCHGetAddress,
   BCHSignTransaction,
@@ -18,11 +16,9 @@ import {
   dogecoinBroadcastTransaction,
   dogecoinGetAddress,
   dogecoinSignTransaction,
-  ETHBroadcastTransaction,
   ETHGetAddress,
+  ETHSendTransaction,
   ETHSignMessage,
-  ETHSignTransaction,
-  ETHVerifyMessage,
   kavaGetAddress,
   kavaSignTransaction,
   LTCBroadcastTransaction,
@@ -69,7 +65,11 @@ export const AssetCardListConfig: Array<CardProps> = [
     actions: {
       avax_getAddress: {
         callback: AVAXGetAddress,
-        params: { addressParams: AvalancheTransactions.address, snapId: DEFAULT_SNAP_ID },
+        params: {
+          addressParams: AvalancheTransactions.address,
+          chainId: '0xa86a',
+          snapId: DEFAULT_SNAP_ID,
+        },
         description: 'Generate a receive address',
       },
 
@@ -79,26 +79,10 @@ export const AssetCardListConfig: Array<CardProps> = [
         description: 'Sign a test message',
       },
 
-      avax_signTransaction: {
-        callback: AVAXSignTransaction,
+      avax_sendTransaction: {
+        callback: AVAXSendTransaction,
         params: { transaction: AvalancheTransactions.tx, snapId: DEFAULT_SNAP_ID },
-        description: 'Sign a test transaction',
-      },
-
-      avax_verifyMessage: {
-        callback: AVAXVerifyMessage,
-        params: { message: AvalancheTransactions.verify, snapId: DEFAULT_SNAP_ID },
-        description: 'Verify the signature from a previously-signed test message',
-      },
-
-      avax_broadcastTransaction: {
-        callback: AVAXBroadcastTransaction,
-        params: {
-          transaction: AvalancheTransactions.broadcast,
-          baseUrl: process.env.REACT_APP_UNCHAINED_AVALANCHE_HTTP_URL,
-          snapId: DEFAULT_SNAP_ID,
-        },
-        description: 'Broadcast a test transaction',
+        description: 'Sign/broadcast a test transaction',
       },
     },
   },
@@ -247,7 +231,11 @@ export const AssetCardListConfig: Array<CardProps> = [
     actions: {
       eth_getAddress: {
         callback: ETHGetAddress,
-        params: { addressParams: EthereumTransactions.address, snapId: DEFAULT_SNAP_ID },
+        params: {
+          addressParams: EthereumTransactions.address,
+          chainId: '0x1',
+          snapId: DEFAULT_SNAP_ID,
+        },
         description: 'Generate a receive address',
       },
 
@@ -257,26 +245,10 @@ export const AssetCardListConfig: Array<CardProps> = [
         description: 'Sign a test message',
       },
 
-      eth_signTransaction: {
-        callback: ETHSignTransaction,
+      eth_sendTransaction: {
+        callback: ETHSendTransaction,
         params: { transaction: EthereumTransactions.tx, snapId: DEFAULT_SNAP_ID },
-        description: 'Sign a test transaction',
-      },
-
-      eth_verifyMessage: {
-        callback: ETHVerifyMessage,
-        params: { message: EthereumTransactions.verify, snapId: DEFAULT_SNAP_ID },
-        description: 'Verify the signature from a previously-signed test message',
-      },
-
-      eth_broadcastTransaction: {
-        callback: ETHBroadcastTransaction,
-        params: {
-          transaction: EthereumTransactions.broadcast,
-          baseUrl: process.env.REACT_APP_UNCHAINED_ETHEREUM_HTTP_URL,
-          snapId: DEFAULT_SNAP_ID,
-        },
-        description: 'Broadcast a test transaction',
+        description: 'Sign/broadcast a test transaction',
       },
     },
   },

@@ -37,15 +37,12 @@ import {
 import {
   avalancheGetAddress,
   avalancheSignMessage,
-  avalancheSignTransaction,
-  avalancheVerifyMessage,
+  avalancheSendTransaction,
 } from './rpc/evm/avalanche'
 import {
-  ethereumBroadcastTransaction,
   ethereumGetAddress,
   ethereumSignMessage,
-  ethereumSignTransaction,
-  ethereumVerifyMessage,
+  ethereumSendTransaction,
 } from './rpc/evm/ethereum'
 import {
   bitcoinBroadcastTransaction,
@@ -92,12 +89,8 @@ export const onRpcRequest: OnRpcRequestHandler = async ({ request }) => {
       return await avalancheGetAddress(params)
     case 'avax_signMessage':
       return await avalancheSignMessage(params)
-    case 'avax_signTransaction':
-      return await avalancheSignTransaction(params)
-    case 'avax_verifyMessage':
-      return await avalancheVerifyMessage(params)
-    case 'avax_broadcastTransaction':
-      return await ethereumBroadcastTransaction(params)
+    case 'avax_sendTransaction':
+      return await avalancheSendTransaction(params)
     case 'binance_getAddress':
       return await binanceGetAddress(params)
     case 'binance_signTransaction':
@@ -132,12 +125,8 @@ export const onRpcRequest: OnRpcRequestHandler = async ({ request }) => {
       return await ethereumGetAddress(params)
     case 'eth_signMessage':
       return await ethereumSignMessage(params)
-    case 'eth_signTransaction':
-      return await ethereumSignTransaction(params)
-    case 'eth_verifyMessage':
-      return await ethereumVerifyMessage(params)
-    case 'eth_broadcastTransaction':
-      return await ethereumBroadcastTransaction(params)
+    case 'eth_sendTransaction':
+      return await ethereumSendTransaction(params)
     case 'kava_getAddress':
       return await kavaGetAddress(params)
     case 'kava_signTransaction':

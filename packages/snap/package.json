@@ -48,7 +48,8 @@
     "@shapeshiftoss/logger": "^1.1.2",
     "@shapeshiftoss/metamask-snaps-types": "workspace:^",
     "@shapeshiftoss/types": "^8.3.0",
-    "@shapeshiftoss/unchained-client": "10.1.1"
+    "@shapeshiftoss/unchained-client": "10.1.1",
+    "eth-rpc-errors": "^4.0.3"
   },
   "peerDependencies": {
     "@babel/core": "*",

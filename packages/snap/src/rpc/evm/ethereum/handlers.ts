@@ -1,14 +1,10 @@
 import {
-  EthereumBroadcastTransactionParams,
-  EthereumBroadcastTransactionResponse,
   EthereumGetAddressParams,
   EthereumGetAddressResponse,
+  EthereumSendTransactionParams,
+  EthereumSendTransactionResponse,
   EthereumSignMessageParams,
   EthereumSignMessageResponse,
-  EthereumSignTransactionParams,
-  EthereumSignTransactionResponse,
-  EthereumVerifyMessageParams,
-  EthereumVerifyMessageResponse,
 } from '@shapeshiftoss/metamask-snaps-types'
 
 import { logger } from '../../common/lib/logger'
@@ -44,41 +40,15 @@ export const ethereumSignMessage = async (
   }
 }
 
-export const ethereumVerifyMessage = async (
-  params: EthereumVerifyMessageParams,
-): Promise<EthereumVerifyMessageResponse> => {
-  try {
-    const ethereumSigner = new EthereumSigner()
-    await ethereumSigner.initialize()
-    return await ethereumSigner.verifyMessage(params)
-  } catch (error) {
-    moduleLogger.error({ fn: 'ethereumVerifyMessage' }, error)
-    return Promise.reject(error)
-  }
-}
-
-export const ethereumSignTransaction = async (
-  params: EthereumSignTransactionParams,
-): Promise<EthereumSignTransactionResponse> => {
+export const ethereumSendTransaction = async (
+  params: EthereumSendTransactionParams,
+): Promise<EthereumSendTransactionResponse> => {
   try {
     const ethereumSigner = new EthereumSigner()
     await ethereumSigner.initialize()
     return await ethereumSigner.signTransaction(params)
   } catch (error) {
-    moduleLogger.error({ fn: 'ethereumSignTransaction' }, error)
-    return Promise.reject(error)
-  }
-}
-
-export const ethereumBroadcastTransaction = async (
-  params: EthereumBroadcastTransactionParams,
-): Promise<EthereumBroadcastTransactionResponse> => {
-  try {
-    const ethereumSigner = new EthereumSigner()
-    await ethereumSigner.initialize({ broadcastUrl: params.baseUrl })
-    return await ethereumSigner.broadcastTransaction(params)
-  } catch (error) {
-    moduleLogger.error({ fn: 'ethereumSignTransaction' }, error)
+    moduleLogger.error({ fn: 'ethereumSendTransaction' }, error)
     return Promise.reject(error)
   }
 }
