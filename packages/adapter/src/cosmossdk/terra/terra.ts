@@ -1,4 +1,4 @@
-import {
+import type {
   TerraBroadcastTransactionAdapterParams,
   TerraBroadcastTransactionResponse,
   TerraGetAddressAdapterParams,

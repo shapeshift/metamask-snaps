@@ -1,10 +1,10 @@
-import {
+import type {
   EthereumGetAddressAdapterParams,
   EthereumGetAddressResponse,
-  EthereumSignMessageAdapterParams,
-  EthereumSignMessageResponse,
   EthereumSendTransactionAdapterParams,
   EthereumSendTransactionResponse,
+  EthereumSignMessageAdapterParams,
+  EthereumSignMessageResponse,
 } from '@shapeshiftoss/metamask-snaps-types'
 
 import { logger } from '../../lib/logger'

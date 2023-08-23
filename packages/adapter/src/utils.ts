@@ -1,6 +1,6 @@
-import { ExternalProvider } from '@ethersproject/providers'
+import type { ExternalProvider } from '@ethersproject/providers'
 import detectEthereumProvider from '@metamask/detect-provider'
-import {
+import type {
   EnableShapeShiftSnapResult,
   RPCHandlerResponse,
   ShapeShiftSnapRPCRequest,
@@ -19,9 +19,9 @@ export type Provider = Omit<ExternalProvider, 'request'> & {
 
 export const getMetaMaskProvider = async (): Promise<Provider | undefined> => {
   try {
-    const provider = await (<Promise<Provider | undefined>>(
-      detectEthereumProvider({ mustBeMetaMask: true })
-    ))
+    const provider = await (detectEthereumProvider({ mustBeMetaMask: true }) as Promise<
+      Provider | undefined
+    >)
     if (provider === undefined) {
       throw new Error('Could not get MetaMask provider')
     }

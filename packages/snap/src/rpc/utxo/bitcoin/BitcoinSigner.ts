@@ -1,7 +1,7 @@
-import { NativeHDWallet, SupportedChainIds } from '@shapeshiftoss/metamask-snaps-types'
+import type { NativeHDWallet, SupportedChainIds } from '@shapeshiftoss/metamask-snaps-types'
 import * as unchained from '@shapeshiftoss/unchained-client'
 
-import { SignerArgs, SignerInitializeArgs } from '../../common/BaseSigner'
+import type { SignerArgs, SignerInitializeArgs } from '../../common/BaseSigner'
 import { broadcastUrls } from '../../common/constants'
 import { logger } from '../../common/lib/logger'
 import { UTXOSigner } from '../common/UTXOSigner'
@@ -12,7 +12,9 @@ export class BitcoinSigner extends UTXOSigner<SupportedChainIds.BitcoinMainnet> 
   constructor() {
     const args: SignerArgs = {
       coin: 'Bitcoin',
-      logger: logger.child({ namespace: ['Snap', 'RPC', 'UTXO', 'Bitcoin', 'BitcoinSigner.ts'] }),
+      logger: logger.child({
+        namespace: ['Snap', 'RPC', 'UTXO', 'Bitcoin', 'BitcoinSigner.ts'],
+      }),
     }
     super(args)
   }

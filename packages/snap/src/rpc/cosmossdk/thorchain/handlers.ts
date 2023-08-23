@@ -1,4 +1,4 @@
-import {
+import type {
   ThorchainBroadcastTransactionParams,
   ThorchainBroadcastTransactionResponse,
   ThorchainGetAddressParams,

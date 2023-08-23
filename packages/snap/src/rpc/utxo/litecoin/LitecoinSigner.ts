@@ -1,7 +1,7 @@
-import { SupportedChainIds } from '@shapeshiftoss/metamask-snaps-types'
+import type { SupportedChainIds } from '@shapeshiftoss/metamask-snaps-types'
 import * as unchained from '@shapeshiftoss/unchained-client'
 
-import { SignerArgs, SignerInitializeArgs } from '../../common/BaseSigner'
+import type { SignerArgs, SignerInitializeArgs } from '../../common/BaseSigner'
 import { broadcastUrls } from '../../common/constants'
 import { logger } from '../../common/lib/logger'
 import { UTXOSigner } from '../common/UTXOSigner'
@@ -10,7 +10,9 @@ export class LitecoinSigner extends UTXOSigner<SupportedChainIds.LitecoinMainnet
   constructor() {
     const args: SignerArgs = {
       coin: 'Litecoin',
-      logger: logger.child({ namespace: ['Snap', 'UTXO', 'Litecoin', 'LitecoinSigner.ts'] }),
+      logger: logger.child({
+        namespace: ['Snap', 'UTXO', 'Litecoin', 'LitecoinSigner.ts'],
+      }),
     }
     super(args)
   }

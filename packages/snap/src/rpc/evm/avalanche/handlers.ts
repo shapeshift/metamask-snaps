@@ -1,4 +1,4 @@
-import {
+import type {
   AvalancheGetAddressParams,
   AvalancheGetAddressResponse,
   AvalancheSendTransactionParams,
@@ -52,4 +52,3 @@ export const avalancheSendTransaction = async (
     return Promise.reject(error)
   }
 }
-

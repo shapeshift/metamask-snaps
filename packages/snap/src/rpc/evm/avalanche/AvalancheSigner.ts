@@ -1,7 +1,7 @@
-import { SupportedChainIds } from '@shapeshiftoss/metamask-snaps-types'
+import type { SupportedChainIds } from '@shapeshiftoss/metamask-snaps-types'
 import * as unchained from '@shapeshiftoss/unchained-client'
 
-import { SignerArgs, SignerInitializeArgs } from '../../common/BaseSigner'
+import type { SignerArgs, SignerInitializeArgs } from '../../common/BaseSigner'
 import { broadcastUrls } from '../../common/constants'
 import { logger } from '../../common/lib/logger'
 import { EVMSigner } from '../common/EVMSigner'
