@@ -1,4 +1,4 @@
-import {
+import type {
   BroadcastTransactionResponseType,
   GetAddressParamsType,
   GetAddressResponseType,
@@ -10,7 +10,7 @@ import {
 } from '@shapeshiftoss/metamask-snaps-types'
 import assert from 'assert'
 
-import { SignerArgs } from '../../common/BaseSigner'
+import type { SignerArgs } from '../../common/BaseSigner'
 import { logger } from '../../common/lib/logger'
 import { CosmosSDKSigner } from '../common/CosmosSDKSigner'
 
@@ -54,18 +54,22 @@ export class SecretSigner extends CosmosSDKSigner<SupportedChainIds.SecretMainne
   }
 
   async signTransaction({
+    origin,
     transaction,
   }: SignTransactionParamsType<SupportedChainIds.SecretMainnet>): Promise<
     SignTransactionResponseType<SupportedChainIds.SecretMainnet>
   > {
     try {
-      const confirmed = await this.confirmTransaction(transaction)
+      const confirmed = await this.confirmTransaction(origin, transaction)
       assert(confirmed, 'User rejected the signing request')
       const signedTransaction = await this.signer.secretSignTx(
         transaction as SignerSignTransactionType<SupportedChainIds.SecretMainnet>,
       )
       assert(signedTransaction !== null, 'Transaction signing failed')
-      this.logEvent("signTransaction", {unsignedTransaction: transaction, signedTransaction})
+      this.logEvent('signTransaction', {
+        unsignedTransaction: transaction,
+        signedTransaction,
+      })
       return signedTransaction
     } catch (error) {
       this.logger.error(transaction, { fn: 'signTransaction' }, error)

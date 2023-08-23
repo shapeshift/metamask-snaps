@@ -1,4 +1,4 @@
-import {
+import type {
   AvalancheGetAddress,
   AvalancheSignMessage,
   AvalancheSignTransaction,
@@ -39,7 +39,7 @@ import {
   ThorchainSignedTransaction,
   ThorchainSignTransaction,
 } from './common'
-import {
+import type {
   BroadcastTransactionParams,
   GetAddressParams,
   SignMessageParams,

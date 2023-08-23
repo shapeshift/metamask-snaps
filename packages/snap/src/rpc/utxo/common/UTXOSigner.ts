@@ -1,4 +1,4 @@
-import {
+import type {
   BroadcastTransactionParamsType,
   BroadcastTransactionResponseType,
   GetAddressParamsType,
@@ -11,7 +11,7 @@ import {
 } from '@shapeshiftoss/metamask-snaps-types'
 import assert from 'assert'
 
-import { BaseSigner } from '../../common'
+import { asyncCallWithTimeout, BaseSigner } from '../../common'
 
 export abstract class UTXOSigner<T extends UTXOChainIds> extends BaseSigner<T> {
   async getAddress({ addressParams }: GetAddressParamsType<T>): Promise<GetAddressResponseType<T>> {
@@ -32,16 +32,20 @@ export abstract class UTXOSigner<T extends UTXOChainIds> extends BaseSigner<T> {
   }
 
   async signTransaction({
+    origin,
     transaction,
   }: SignTransactionParamsType<T>): Promise<SignTransactionResponseType<T>> {
     try {
-      const confirmed = await this.confirmTransaction(transaction)
+      const confirmed = await this.confirmTransaction(origin, transaction)
       assert(confirmed, 'User rejected the signing request')
-      const signedTransaction = await this.signer.btcSignTx(
-        transaction as SignerSignTransactionType<T>,
+      const signedTransaction = await asyncCallWithTimeout(
+        this.signer.btcSignTx(transaction as SignerSignTransactionType<T>),
       )
       assert(signedTransaction !== null, 'Transaction signing failed')
-      this.logEvent("signTransaction", {unsignedTransaction: transaction, signedTransaction})
+      this.logEvent('signTransaction', {
+        unsignedTransaction: transaction,
+        signedTransaction,
+      })
       return signedTransaction as SignTransactionResponseType<T>
     } catch (error) {
       this.logger.error(transaction, { fn: 'signTransaction' }, error)

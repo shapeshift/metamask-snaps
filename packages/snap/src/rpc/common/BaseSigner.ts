@@ -1,5 +1,5 @@
-import { Logger } from '@shapeshiftoss/logger'
-import {
+import type { Logger } from '@shapeshiftoss/logger'
+import type {
   BroadcastTransactionParamsType,
   BroadcastTransactionResponseType,
   GetAddressParamsType,
@@ -13,7 +13,6 @@ import {
 import assert from 'assert'
 
 import { getHDWalletNativeSigner, userConfirm } from '../common'
-
 
 export interface SignerArgs {
   coin: string
@@ -52,15 +51,15 @@ export abstract class BaseSigner<T extends SupportedChainIds> {
     }
   }
 
-  protected async confirmTransaction(transaction: any): Promise<boolean> {
+  protected async confirmTransaction(origin: string | undefined, transaction: any): Promise<boolean> {
     return await userConfirm({
-      prompt: `Sign ${this.coin} Transaction?`,
+      prompt: `Sign ${this.coin} network transaction from ${origin}?`,
       description: 'Please verify the transaction data below',
       textAreaContent: JSON.stringify(transaction, null, 2),
     })
   }
 
-  protected logEvent(eventType: any, transactionData: any){
+  protected logEvent(eventType: any, transactionData: any) {
     this.logger.info(eventType, transactionData)
   }
 

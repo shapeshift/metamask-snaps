@@ -1,4 +1,4 @@
-import {
+import type {
   BroadcastTransactionResponseType,
   GetAddressParamsType,
   GetAddressResponseType,
@@ -10,7 +10,7 @@ import {
 } from '@shapeshiftoss/metamask-snaps-types'
 import assert from 'assert'
 
-import { SignerArgs } from '../../common/BaseSigner'
+import type { SignerArgs } from '../../common/BaseSigner'
 import { logger } from '../../common/lib/logger'
 import { CosmosSDKSigner } from '../common/CosmosSDKSigner'
 
@@ -18,7 +18,9 @@ export class KavaSigner extends CosmosSDKSigner<SupportedChainIds.KavaMainnet> {
   constructor() {
     const args: SignerArgs = {
       coin: 'Kava',
-      logger: logger.child({ namespace: ['Snap', 'RPC', 'CosmosSDK', 'Kava', 'KavaSigner.ts'] }),
+      logger: logger.child({
+        namespace: ['Snap', 'RPC', 'CosmosSDK', 'Kava', 'KavaSigner.ts'],
+      }),
     }
     super(args)
   }
@@ -52,18 +54,22 @@ export class KavaSigner extends CosmosSDKSigner<SupportedChainIds.KavaMainnet> {
   }
 
   async signTransaction({
+    origin,
     transaction,
   }: SignTransactionParamsType<SupportedChainIds.KavaMainnet>): Promise<
     SignTransactionResponseType<SupportedChainIds.KavaMainnet>
   > {
     try {
-      const confirmed = await this.confirmTransaction(transaction)
+      const confirmed = await this.confirmTransaction(origin, transaction)
       assert(confirmed, 'User rejected the signing request')
       const signedTransaction = await this.signer.kavaSignTx(
         transaction as SignerSignTransactionType<SupportedChainIds.KavaMainnet>,
       )
       assert(signedTransaction !== null, 'Transaction signing failed')
-      this.logEvent("signTransaction", {unsignedTransaction: transaction, signedTransaction})
+      this.logEvent('signTransaction', {
+        unsignedTransaction: transaction,
+        signedTransaction,
+      })
       return signedTransaction
     } catch (error) {
       this.logger.error(transaction, { fn: 'signTransaction' }, error)

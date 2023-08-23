@@ -1,7 +1,7 @@
-import { JsonRpcError } from '@metamask/types'
-import * as unchained from '@shapeshiftoss/unchained-client'
+import type { JsonRpcError } from '@metamask/types'
+import type * as unchained from '@shapeshiftoss/unchained-client'
 
-import {
+import type {
   AvalancheAddress,
   AvalancheGetAddress,
   AvalancheSignedMessage,
@@ -245,6 +245,7 @@ export type GetAddressResponseType<T> = T extends keyof GetAddressResponseTypeTa
 export type SendTransactionParams<T> = {
   transaction: T
   chainId?: string
+  origin?: string
 }
 
 export type AvalancheSendTransactionParams = SendTransactionParams<AvalancheSignTransaction>
@@ -285,6 +286,7 @@ export type SendTransactionResponseType<T> = T extends keyof SendTransactionResp
 export type SignTransactionParams<T> = {
   transaction: T
   chainId?: string
+  origin?: string
 }
 
 export type BinanceSignTransactionParams = SignTransactionParams<BinanceSignTransaction>
@@ -405,6 +407,7 @@ export type SignTransactionResponseType<T> = T extends keyof SignTransactionResp
 export type SignMessageParams<T> = {
   message: T
   chainId?: string
+  origin?: string
 }
 
 export type AvalancheSignMessageParams = SignMessageParams<AvalancheSignMessage>
@@ -450,6 +453,7 @@ export type VerifyMessageParams<T> = {
 export type BroadcastTransactionParams<T> = {
   transaction: T
   baseUrl: string
+  origin?: string
 }
 
 export type BinanceBroadcastTransactionParams = BroadcastTransactionParams<BinanceSignedTransaction>

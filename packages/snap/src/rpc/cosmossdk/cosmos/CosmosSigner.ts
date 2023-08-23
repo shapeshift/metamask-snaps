@@ -1,4 +1,4 @@
-import {
+import type {
   BroadcastTransactionParamsType,
   BroadcastTransactionResponseType,
   GetAddressParamsType,
@@ -12,7 +12,7 @@ import {
 import * as unchained from '@shapeshiftoss/unchained-client'
 import assert from 'assert'
 
-import { SignerArgs, SignerInitializeArgs } from '../../common/BaseSigner'
+import type { SignerArgs, SignerInitializeArgs } from '../../common/BaseSigner'
 import { broadcastUrls } from '../../common/constants'
 import { logger } from '../../common/lib/logger'
 import { CosmosSDKSigner } from '../common/CosmosSDKSigner'
@@ -65,18 +65,22 @@ export class CosmosSigner extends CosmosSDKSigner<SupportedChainIds.CosmosMainne
   }
 
   async signTransaction({
+    origin,
     transaction,
   }: SignTransactionParamsType<SupportedChainIds.CosmosMainnet>): Promise<
     SignTransactionResponseType<SupportedChainIds.CosmosMainnet>
   > {
     try {
-      const confirmed = await this.confirmTransaction(transaction)
+      const confirmed = await this.confirmTransaction(origin, transaction)
       assert(confirmed, 'User rejected the signing request')
       const signedTransaction = await this.signer.cosmosSignTx(
         transaction as SignerSignTransactionType<SupportedChainIds.CosmosMainnet>,
       )
       assert(signedTransaction !== null, 'Transaction signing failed')
-      this.logEvent("signTransaction", {unsignedTransaction: transaction, signedTransaction})
+      this.logEvent('signTransaction', {
+        unsignedTransaction: transaction,
+        signedTransaction,
+      })
       return signedTransaction
     } catch (error) {
       this.logger.error(transaction, { fn: 'signTransaction' }, error)
