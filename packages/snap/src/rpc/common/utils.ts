@@ -1,15 +1,20 @@
-import { ExternalProvider } from '@ethersproject/providers'
-import { BIP44CoinTypeNode, SLIP10Node } from '@metamask/key-tree'
-import { heading, panel, text } from '@metamask/snaps-ui'
-import { Coin, fromHexString, Keyring, stripHexPrefix } from '@shapeshiftoss/hdwallet-core'
-import { NativeAdapter, NativeHDWallet } from '@shapeshiftoss/hdwallet-native'
+import type { ExternalProvider } from '@ethersproject/providers'
+import type { BIP44CoinTypeNode } from '@metamask/key-tree'
+import { SLIP10Node } from '@metamask/key-tree'
+import { copyable, divider, heading, panel } from '@metamask/snaps-ui'
+import type { Coin } from '@shapeshiftoss/hdwallet-core'
+import { addressNListToBIP32, bip32ToAddressNList, fromHexString, Keyring, stripHexPrefix } from '@shapeshiftoss/hdwallet-core'
+import type { NativeHDWallet } from '@shapeshiftoss/hdwallet-native'
+import { NativeAdapter } from '@shapeshiftoss/hdwallet-native'
 import { Node } from '@shapeshiftoss/hdwallet-native/dist/crypto/isolation/engines/default/bip32'
-import { userConfirmParam } from '@shapeshiftoss/metamask-snaps-types'
+import type { userConfirmParam } from '@shapeshiftoss/metamask-snaps-types'
 import assert from 'assert'
 
 import { logger } from './lib/logger'
 
-const moduleLogger = logger.child({ namespace: ['Snap', 'Common', 'Utils.ts'] })
+const moduleLogger = logger.child({
+  namespace: ['Snap', 'Common', 'Utils.ts'],
+})
 
 // https://github.com/satoshilabs/slips/blob/master/slip-0044.md
 const slip44AndCurveTable = Object.freeze({
@@ -43,7 +48,7 @@ type Slip44AndCurve<T> = {
   curve: Curve
 }
 type Slip44AndCurveByCoin<T> = T extends keyof typeof slip44AndCurveTable
-  ? typeof slip44AndCurveTable[T]
+  ? (typeof slip44AndCurveTable)[T]
   : Slip44AndCurve<T> | undefined
 
 export const slip44AndCurveByCoin = <T extends Coin>(coin: T): Slip44AndCurveByCoin<T> => {
@@ -80,7 +85,7 @@ export const getHDWalletNativeSigner = async (coin: Coin): Promise<NativeHDWalle
     moduleLogger.error(
       error,
       { fn: 'getHDWalletNativeSigner' },
-      `Failed to initialize HDWallet signer.`,
+      'Failed to initialize HDWallet signer.',
     )
   }
   return null
@@ -88,14 +93,26 @@ export const getHDWalletNativeSigner = async (coin: Coin): Promise<NativeHDWalle
 
 export const userConfirm = async (params: userConfirmParam): Promise<boolean> => {
   try {
+    // Format addressNList for UTXO-like transactions
+    const textAreaContentJSON = JSON.parse(params.textAreaContent)
+    if(textAreaContentJSON.inputs && textAreaContentJSON.inputs[0] && textAreaContentJSON.inputs[0].addressNList){
+      textAreaContentJSON.inputs[0].addressNList = addressNListToBIP32(textAreaContentJSON.inputs[0].addressNList)
+    }
+    // Format addressNList for Cosmos-SDK-like transactions
+    if(textAreaContentJSON.addressNList){
+      textAreaContentJSON.addressNList = addressNListToBIP32(textAreaContentJSON.addressNList)
+    }
     /* eslint-disable-next-line no-undef */
     const ret = await snap.request({
       method: 'snap_dialog',
       params: {
         type: 'confirmation',
         content: panel([
-          heading(`${params.prompt}: ${params.description}`),
-          text(params.textAreaContent),
+          heading(`${params.prompt}`),
+          divider(),
+          heading(`${params.description}:`),
+          divider(),
+          copyable(JSON.stringify(textAreaContentJSON, null, 2)),
         ]),
       },
     })
