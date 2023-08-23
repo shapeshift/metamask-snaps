@@ -16,6 +16,8 @@ const moduleLogger = logger.child({
   namespace: ['Snap', 'Common', 'Utils.ts'],
 })
 
+const DEFAULT_TIMEOUT_MS = 60000
+
 // https://github.com/satoshilabs/slips/blob/master/slip-0044.md
 const slip44AndCurveTable = Object.freeze({
   Bitcoin: { slip44: 0, curve: 'secp256k1' },
@@ -103,7 +105,7 @@ export const userConfirm = async (params: userConfirmParam): Promise<boolean> =>
       textAreaContentJSON.addressNList = addressNListToBIP32(textAreaContentJSON.addressNList)
     }
     /* eslint-disable-next-line no-undef */
-    const ret = await snap.request({
+    const ret = await asyncCallWithTimeout(snap.request({
       method: 'snap_dialog',
       params: {
         type: 'confirmation',
@@ -111,11 +113,10 @@ export const userConfirm = async (params: userConfirmParam): Promise<boolean> =>
           heading(`${params.prompt}`),
           divider(),
           heading(`${params.description}:`),
-          divider(),
           copyable(JSON.stringify(textAreaContentJSON, null, 2)),
         ]),
       },
-    })
+    }))
     if (!ret) {
       return false
     }
@@ -191,4 +192,32 @@ export const metaMaskVersionGreaterThanOrEqualTo = async (version: string): Prom
     moduleLogger.error({ fn: 'metaMaskVersionGreaterThanOrEqualTo' }, error)
     return false
   }
+}
+
+
+export const asyncCallWithTimeout = async (
+  asyncPromise: any,
+  timeout = DEFAULT_TIMEOUT_MS,
+): Promise<any> => {
+  let timeoutHandle: NodeJS.Timeout
+
+  // eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
+  const timeoutPromise = new Promise((resolve, _reject) => {
+    timeoutHandle = setTimeout(
+      () => {resolve(new Error('Async call timeout limit reached'))},
+      timeout,
+    )
+  })
+
+  const result = await Promise.race([asyncPromise, timeoutPromise])
+  if (timeoutHandle) {
+    clearTimeout(timeoutHandle)
+  }
+
+  if (result instanceof Error) {
+    moduleLogger.error({fn:'asyncCallWithTimeout'}, 'Async call timeout expired')
+    return null
+  }
+
+  return result
 }
