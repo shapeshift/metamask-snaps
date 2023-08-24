@@ -84,7 +84,7 @@ export interface WalletEnableResult {
   errors?: Error[] // Any errors encountered during processing.
 }
 
-export interface EnableShapeShiftSnapResult {
+export interface EnableShapeShiftMultichainResult {
   success: boolean
   message: WalletEnableResult
 }

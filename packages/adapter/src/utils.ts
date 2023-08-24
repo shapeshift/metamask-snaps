@@ -1,7 +1,7 @@
 import type { ExternalProvider } from '@ethersproject/providers'
 import detectEthereumProvider from '@metamask/detect-provider'
 import type {
-  EnableShapeShiftSnapResult,
+  EnableShapeShiftMultichainResult,
   RPCHandlerResponse,
   ShapeShiftSnapRPCRequest,
   ShapeShiftSnapRPCResponse,
@@ -51,7 +51,7 @@ export const metaMaskFlaskSupported = async (externalProvider?: any): Promise<bo
   return true
 }
 
-export const shapeShiftSnapInstalled = async (snapId: string): Promise<boolean> => {
+export const shapeShiftMultichainInstalled = async (snapId: string): Promise<boolean> => {
   const provider = await getMetaMaskProvider()
   if (provider === undefined) {
     throw new Error('Could not get MetaMask provider')
@@ -75,7 +75,7 @@ export const shapeShiftSnapInstalled = async (snapId: string): Promise<boolean> 
     }
     return true
   } catch (error) {
-    moduleLogger.error({ fn: 'shapeShiftSnapInstalled' }, error)
+    moduleLogger.error({ fn: 'shapeShiftMultichainInstalled' }, error)
     return false
   }
 }
@@ -105,11 +105,11 @@ export const isLocked = async (): Promise<boolean> => {
 /**
  * Prompt the user to allow the snap
  */
-export const enableShapeShiftSnap = async (
+export const enableShapeShiftMultichain = async (
   snapId: string,
   version?: string,
-): Promise<EnableShapeShiftSnapResult> => {
-  const ret: EnableShapeShiftSnapResult = {
+): Promise<EnableShapeShiftMultichainResult> => {
+  const ret: EnableShapeShiftMultichainResult = {
     success: false,
     message: {
       accounts: [],
@@ -120,7 +120,7 @@ export const enableShapeShiftSnap = async (
   }
   try {
     assert(metaMaskFlaskSupported(), 'Please install MetaMask Flask.')
-    const snapIsInstalled = await shapeShiftSnapInstalled(snapId)
+    const snapIsInstalled = await shapeShiftMultichainInstalled(snapId)
     if (!snapIsInstalled) {
       const res = await walletRequestSnaps(snapId, version)
       assert(res.errors?.length === 0, JSON.stringify(res.errors, null, 2))
@@ -128,7 +128,7 @@ export const enableShapeShiftSnap = async (
       ret.message = res
     }
   } catch (error) {
-    moduleLogger.error(error, { fn: 'enableShapeShiftSnap' }, 'walletRequestSnaps RPC call failed.')
+    moduleLogger.error(error, { fn: 'enableShapeShiftMultichain' }, 'walletRequestSnaps RPC call failed.')
   }
   return ret
 }

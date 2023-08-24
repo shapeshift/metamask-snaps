@@ -1,6 +1,6 @@
 import { LockIcon, UnlockIcon } from '@chakra-ui/icons'
 import { Button, Spinner, useToast } from '@chakra-ui/react'
-import { enableShapeShiftSnap } from '@shapeshiftoss/metamask-snaps-adapter'
+import { enableShapeShiftMultichain } from '@shapeshiftoss/metamask-snaps-adapter'
 import { useState } from 'react'
 
 import { logger } from '../../lib/logger'
@@ -18,7 +18,7 @@ export const ConnectButton = () => {
     try {
       /** Prompt the user to allow the snap */
       setLoading(true)
-      const response = await enableShapeShiftSnap(snapId)
+      const response = await enableShapeShiftMultichain(snapId)
       setLoading(false)
 
       if (response.message.errors) {
