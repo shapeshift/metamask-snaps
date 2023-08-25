@@ -85,7 +85,7 @@
   },
   "publishConfig": {
     "access": "public",
-    "registry": "http://localhost:4873"
+    "registry": "https://registry.npmjs.org/"
   },
   "resolutions": {
     "libsodium-wrappers": "patch:libsodium-wrappers@npm:0.7.10#.yarn/patches/libsodium-wrappers-npm-0.7.10-1e41dfad84.patch",

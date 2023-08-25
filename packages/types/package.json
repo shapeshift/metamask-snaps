@@ -40,7 +40,6 @@
     "typescript": "^4.8.2"
   },
   "publishConfig": {
-    "access": "public",
-    "registry": "http://localhost:4873"
+    "access": "public"
   }
 }
