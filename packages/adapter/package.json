@@ -28,8 +28,15 @@
     "@metamask/snaps-ui": "0.32.2",
     "@shapeshiftoss/hdwallet-core": "^1.29.0",
     "@shapeshiftoss/logger": "^1.1.3",
-    "@shapeshiftoss/metamask-snaps": "workspace:^",
-    "@shapeshiftoss/metamask-snaps-types": "workspace:^"
+    "@shapeshiftoss/metamask-snaps": "^1.0.0",
+    "@shapeshiftoss/metamask-snaps-types": "^1.0.0"
+  },
+  "peerDependencies": {
+    "@shapeshiftoss/caip": "*",
+    "@shapeshiftoss/types": "*",
+    "eslint-plugin-react": "*",
+    "eslint-plugin-react-hooks": "*",
+    "webpack": "*"
   },
   "peerDependencies": {
     "@shapeshiftoss/caip": "*",
