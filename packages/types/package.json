@@ -40,7 +40,8 @@
     "typescript": "^4.8.2"
   },
   "publishConfig": {
-    "access": "public"
+    "access": "public",
+    "registry": "http://localhost:4873"
   },
   "gitHead": "eef9bd51f773eaefa59340b75647bd0d4592ba53"
 }
