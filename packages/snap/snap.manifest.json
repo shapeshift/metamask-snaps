@@ -21,16 +21,16 @@
     "snap_dialog": {},
     "snap_getBip44Entropy": [
       {
-        coinType: 0 // BTC
+        "coinType": 0
       },
       {
-        coinType: 2 // LTC
+        "coinType": 2
       },
       {
-        coinType: 3 // DOGE
+        "coinType": 3
       },
       {
-        coinType: 145 // BCH
+        "coinType": 145
       }
     ],
     "snap_getBip32Entropy": [
