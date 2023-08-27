@@ -56,6 +56,7 @@ import {
 import {
   bitcoincashBroadcastTransaction,
   bitcoincashGetAddress,
+  bitcoincashGetPublicKeys,
   bitcoincashSignTransaction,
 } from './rpc/utxo/bitcoincash'
 import {
@@ -109,6 +110,8 @@ export const onRpcRequest: OnRpcRequestHandler = async ({ request }) => {
       return await binanceBroadcastTransaction(params)
     case 'bch_getAddress':
       return await bitcoincashGetAddress(params)
+    case 'bch_getPublicKeys':
+      return await bitcoincashGetPublicKeys(params)
     case 'bch_signTransaction':
       return await bitcoincashSignTransaction(params)
     case 'bch_broadcastTransaction':

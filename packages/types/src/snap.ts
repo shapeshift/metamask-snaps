@@ -161,6 +161,11 @@ export interface BitcoinCashGetAddressRequest {
   params: BitcoinCashGetAddressParams
 }
 
+export interface BitcoinCashGetPublicKeysRequest {
+  method: 'bch_getPublicKeys'
+  params: BitcoinCashGetAddressParams
+}
+
 export interface BitcoinGetAddressRequest {
   method: 'btc_getAddress'
   params: BitcoinGetAddressParams
@@ -788,6 +793,7 @@ export type ShapeShiftSnapRPCRequest =
   | BitcoinBroadcastTransactionRequest
   | BitcoinCashBroadcastTransactionRequest
   | BitcoinCashGetAddressRequest
+  | BitcoinCashGetPublicKeysRequest
   | BitcoinCashSignTransactionRequest
   | BitcoinGetAddressRequest
   | BitcoinGetPublicKeysRequest
