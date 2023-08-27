@@ -1,3 +1,4 @@
+import { PublicKey } from '@shapeshiftoss/hdwallet-core'
 import {
   LitecoinBroadcastTransactionAdapterParams,
   LitecoinBroadcastTransactionResponse,
@@ -29,6 +30,22 @@ export const LTCGetAddress = async (
     return Promise.reject(error)
   }
 }
+
+export const LTCGetPublicKeys = async (
+  params: LitecoinGetAddressAdapterParams,
+): Promise<Array<PublicKey | null>> => {
+  const { addressParams, snapId } = params
+  try {
+    return await sendFlaskRPCRequest(
+      { method: 'ltc_getPublicKeys', params: { addressParams } },
+      snapId,
+    )
+  } catch (error) {
+    moduleLogger.error(error, { fn: 'LTCGetPublicKeys' }, `ltc_getPublicKeys RPC call failed.`)
+    return Promise.reject(error)
+  }
+}
+
 
 export const LTCSignTransaction = async (
   params: LitecoinSignTransactionAdapterParams,

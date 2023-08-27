@@ -196,6 +196,11 @@ export interface LitecoinGetAddressRequest {
   params: LitecoinGetAddressParams
 }
 
+export interface LitecoinGetPublicKeysRequest {
+  method: 'ltc_getPublicKeys'
+  params: LitecoinGetAddressParams
+}
+
 export interface OsmosisGetAddressRequest {
   method: 'osmosis_getAddress'
   params: OsmosisGetAddressParams
@@ -798,6 +803,7 @@ export type ShapeShiftSnapRPCRequest =
   | KavaSignTransactionRequest
   | LitecoinBroadcastTransactionRequest
   | LitecoinGetAddressRequest
+  | LitecoinGetPublicKeysRequest
   | LitecoinSignTransactionRequest
   | OsmosisBroadcastTransactionRequest
   | OsmosisGetAddressRequest

@@ -66,6 +66,7 @@ import {
 import {
   litecoinBroadcastTransaction,
   litecoinGetAddress,
+  litecoinGetPublicKeys,
   litecoinSignTransaction,
 } from './rpc/utxo/litecoin'
 
@@ -149,6 +150,8 @@ export const onRpcRequest: OnRpcRequestHandler = async ({ request }) => {
       return await kavaBroadcastTransaction(params)
     case 'ltc_getAddress':
       return await litecoinGetAddress(params)
+    case 'ltc_getPublicKeys':
+      return await litecoinGetPublicKeys(params)
     case 'ltc_signTransaction':
       return await litecoinSignTransaction(params)
     case 'ltc_broadcastTransaction':
