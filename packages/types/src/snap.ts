@@ -165,6 +165,11 @@ export interface BitcoinGetAddressRequest {
   params: BitcoinGetAddressParams
 }
 
+export interface BitcoinGetPublicKeysRequest {
+  method: 'btc_getPublicKeys'
+  params: BitcoinGetAddressParams
+}
+
 export interface CosmosGetAddressRequest {
   method: 'cosmos_getAddress'
   params: CosmosGetAddressParams
@@ -773,6 +778,7 @@ export type ShapeShiftSnapRPCRequest =
   | BitcoinCashGetAddressRequest
   | BitcoinCashSignTransactionRequest
   | BitcoinGetAddressRequest
+  | BitcoinGetPublicKeysRequest
   | BitcoinSignTransactionRequest
   | CosmosBroadcastTransactionRequest
   | CosmosGetAddressRequest

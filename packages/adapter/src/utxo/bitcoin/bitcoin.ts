@@ -27,6 +27,22 @@ export const BTCGetAddress = async (
   }
 }
 
+export const BTCGetPublicKeys = async (
+  params: BitcoinGetAddressAdapterParams,
+): Promise<BitcoinGetAddressResponse> => {
+  const { addressParams, snapId } = params
+  try {
+    return await sendFlaskRPCRequest(
+      { method: 'btc_getPublicKeys', params: { addressParams } },
+      snapId,
+    )
+  } catch (error) {
+    moduleLogger.error(error, { fn: 'BTCGetPublicKeys' }, `btc_getPublicKeys RPC call failed.`)
+    return Promise.reject(error)
+  }
+}
+
+
 export const BTCSignTransaction = async (
   params: BitcoinSignTransactionAdapterParams,
 ): Promise<BitcoinSignTransactionResponse> => {
