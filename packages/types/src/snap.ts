@@ -1,4 +1,5 @@
 import { JsonRpcError } from '@metamask/types'
+import { PublicKey } from '@shapeshiftoss/hdwallet-core'
 import * as unchained from '@shapeshiftoss/unchained-client'
 
 import {
@@ -219,6 +220,7 @@ export type AvalancheGetAddressResponse = AvalancheAddress
 export type BinanceGetAddressResponse = BinanceAddress
 export type BitcoinCashGetAddressResponse = BitcoinCashAddress
 export type BitcoinGetAddressResponse = BitcoinAddress
+export type BitcoinGetPublicKeysResponse = Array<PublicKey | null>
 export type CosmosGetAddressResponse = CosmosAddress
 export type DogecoinGetAddressResponse = DogecoinAddress
 export type EthereumGetAddressResponse = EthereumAddress
@@ -824,6 +826,7 @@ export type ShapeShiftSnapRPCResponse =
   | BitcoinCashGetAddressResponse
   | BitcoinCashSignTransactionResponse
   | BitcoinGetAddressResponse
+  | BitcoinGetPublicKeysResponse
   | BitcoinSignTransactionResponse
   | CosmosBroadcastTransactionResponse
   | CosmosGetAddressResponse
