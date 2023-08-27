@@ -61,6 +61,7 @@ import {
 import {
   dogecoinBroadcastTransaction,
   dogecoinGetAddress,
+  dogecoinGetPublicKeys,
   dogecoinSignTransaction,
 } from './rpc/utxo/dogecoin'
 import {
@@ -128,6 +129,8 @@ export const onRpcRequest: OnRpcRequestHandler = async ({ request }) => {
       return await cosmosBroadcastTransaction(params)
     case 'doge_getAddress':
       return await dogecoinGetAddress(params)
+    case 'doge_getPublicKeys':
+      return await dogecoinGetPublicKeys(params)
     case 'doge_signTransaction':
       return await dogecoinSignTransaction(params)
     case 'doge_broadcastTransaction':

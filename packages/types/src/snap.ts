@@ -181,6 +181,11 @@ export interface DogecoinGetAddressRequest {
   params: DogecoinGetAddressParams
 }
 
+export interface DogecoinGetPublicKeysRequest {
+  method: 'doge_getPublicKeys'
+  params: DogecoinGetAddressParams
+}
+
 export interface EthereumGetAddressRequest {
   method: 'eth_getAddress'
   params: EthereumGetAddressParams
@@ -792,6 +797,7 @@ export type ShapeShiftSnapRPCRequest =
   | CosmosSignTransactionRequest
   | DogecoinBroadcastTransactionRequest
   | DogecoinGetAddressRequest
+  | DogecoinGetPublicKeysRequest
   | DogecoinSignTransactionRequest
   | EthereumBroadcastTransactionRequest
   | EthereumGetAddressRequest

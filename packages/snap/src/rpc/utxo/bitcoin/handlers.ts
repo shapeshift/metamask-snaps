@@ -36,7 +36,7 @@ export const bitcoinGetPublicKeys = async (
     await bitcoinSigner.initialize()
     return await bitcoinSigner.getPublicKeys(params)
   } catch (error) {
-    moduleLogger.error({ fn: 'bitcoinGetAddress' }, error)
+    moduleLogger.error({ fn: 'bitcoinGetPublicKeys' }, error)
     return Promise.reject(error)
   }
 }

@@ -1,3 +1,4 @@
+import { PublicKey } from '@shapeshiftoss/hdwallet-core'
 import {
   DogecoinBroadcastTransactionParams,
   DogecoinBroadcastTransactionResponse,
@@ -26,6 +27,20 @@ export const dogecoinGetAddress = async (
     return Promise.reject(error)
   }
 }
+
+export const dogecoinGetPublicKeys = async (
+  params: DogecoinGetAddressParams,
+): Promise<PublicKey[]> => {
+  try {
+    const dogecoinSigner = new DogecoinSigner()
+    await dogecoinSigner.initialize()
+    return await dogecoinSigner.getPublicKeys(params)
+  } catch (error) {
+    moduleLogger.error({ fn: 'dogecoinGetPublicKeys' }, error)
+    return Promise.reject(error)
+  }
+}
+
 
 export const dogecoinSignTransaction = async (
   params: DogecoinSignTransactionParams,
