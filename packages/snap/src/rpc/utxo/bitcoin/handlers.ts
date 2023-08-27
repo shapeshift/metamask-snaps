@@ -1,3 +1,4 @@
+import { PublicKey } from '@shapeshiftoss/hdwallet-core'
 import {
   BitcoinBroadcastTransactionParams,
   BitcoinBroadcastTransactionResponse,
@@ -21,6 +22,19 @@ export const bitcoinGetAddress = async (
     const bitcoinSigner = new BitcoinSigner()
     await bitcoinSigner.initialize()
     return await bitcoinSigner.getAddress(params)
+  } catch (error) {
+    moduleLogger.error({ fn: 'bitcoinGetAddress' }, error)
+    return Promise.reject(error)
+  }
+}
+
+export const bitcoinGetPublicKeys = async (
+  params: BitcoinGetAddressParams,
+): Promise<PublicKey[]> => {
+  try {
+    const bitcoinSigner = new BitcoinSigner()
+    await bitcoinSigner.initialize()
+    return await bitcoinSigner.getPublicKeys(params)
   } catch (error) {
     moduleLogger.error({ fn: 'bitcoinGetAddress' }, error)
     return Promise.reject(error)

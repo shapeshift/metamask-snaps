@@ -1,3 +1,4 @@
+import { PublicKey } from '@shapeshiftoss/hdwallet-core'
 import {
   BroadcastTransactionParamsType,
   BroadcastTransactionResponseType,
@@ -25,6 +26,23 @@ export abstract class UTXOSigner<T extends UTXOChainIds> extends BaseSigner<T> {
       } as SignerGetAddressType<T>)
       assert(address !== null, 'Address generation failed')
       return address as GetAddressResponseType<T>
+    } catch (error) {
+      this.logger.error({ fn: 'getAddress' }, error)
+      return Promise.reject(error)
+    }
+  }
+
+  async getPublicKeys({ addressParams }: GetAddressParamsType<T>): Promise<PublicKey[]> {
+    const { coin, addressNList, scriptType } = addressParams
+    try {
+      const publicKeys = await this.signer.getPublicKeys([{
+        coin,
+        addressNList,
+        curve: 'secp256k1',
+        scriptType,
+      }])
+      assert(publicKeys !== null, 'Error getting public keys from native signer')
+      return publicKeys
     } catch (error) {
       this.logger.error({ fn: 'getAddress' }, error)
       return Promise.reject(error)
