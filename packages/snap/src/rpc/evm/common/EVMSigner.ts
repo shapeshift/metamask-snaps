@@ -31,7 +31,7 @@ export abstract class EVMSigner<T extends EVMChainIds> extends BaseSigner<T> {
       // eslint-disable-next-line no-undef
       const err = await window.ethereum.request({
         method: 'wallet_switchEthereumChain',
-        params: { chainId },
+        params: [{ chainId: chainId?.toLowerCase() }],
       })
       if (err != null) {
         const serializedError = serializeError(err)
@@ -59,6 +59,18 @@ export abstract class EVMSigner<T extends EVMChainIds> extends BaseSigner<T> {
       const confirmed = await this.confirmTransaction(origin, message)
       assert(confirmed, 'User rejected the signing request')
       // eslint-disable-next-line no-undef
+      const err = await window.ethereum.request({
+        method: 'wallet_switchEthereumChain',
+        params: [{ chainId: chainId?.toLowerCase() }],
+      })
+      if (err != null) {
+        const serializedError = serializeError(err)
+        if (serializedError.code === ERR_CHAIN_NOT_ADDED_TO_WALLET) {
+          throw new Error(
+            `Selected chain with id ${chainId} has not yet been added to your MetaMask configuration. Try adding chain with id ${chainId} manually.`,
+          )
+        }
+      }
       const fromAddress = (await window.ethereum.request({ method: 'eth_requestAccounts' }))[0]
       assert(fromAddress !== null, 'Address generation failed')
       // eslint-disable-next-line no-undef
@@ -83,6 +95,19 @@ export abstract class EVMSigner<T extends EVMChainIds> extends BaseSigner<T> {
     try {
       const confirmed = await this.confirmTransaction(origin, transaction)
       assert(confirmed, 'User rejected the signing request')
+      // eslint-disable-next-line no-undef
+      const err = await window.ethereum.request({
+        method: 'wallet_switchEthereumChain',
+        params: [{ chainId: chainId?.toLowerCase() }],
+      })
+      if (err != null) {
+        const serializedError = serializeError(err)
+        if (serializedError.code === ERR_CHAIN_NOT_ADDED_TO_WALLET) {
+          throw new Error(
+            `Selected chain with id ${chainId} has not yet been added to your MetaMask configuration. Try adding chain with id ${chainId} manually.`,
+          )
+        }
+      }
       // eslint-disable-next-line no-undef
       const fromAddress = (await window.ethereum.request({ method: 'eth_requestAccounts' }))[0]
       assert(fromAddress !== null, 'Address generation failed')
