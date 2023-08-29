@@ -7,7 +7,7 @@
     "url": "https://github.com/shapeshift/metamask-snaps.git"
   },
   "source": {
-    "shasum": "EUUz3l/K+zfGru2vWckw4npguneDlTWNK8j01k8dI70=",
+    "shasum": "3lnYw06hiTdrvoInWXI2N4KHrVgHFid9RANqq6LX0eo=",
     "location": {
       "npm": {
         "filePath": "dist/bundle.js",
