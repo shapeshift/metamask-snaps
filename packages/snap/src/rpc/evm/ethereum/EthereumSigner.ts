@@ -26,7 +26,6 @@ export class EthereumSigner extends EVMSigner<SupportedChainIds.EthereumMainnet>
       basePath: broadcastUrl,
     })
     try {
-      this.signer = await this.initializeSigner()
       this.httpProvider = new unchained.ethereum.V1Api(httpProviderConfiguration)
       this._initialized = true
     } catch (error) {

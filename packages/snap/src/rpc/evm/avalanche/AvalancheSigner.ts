@@ -26,7 +26,6 @@ export class AvalancheSigner extends EVMSigner<SupportedChainIds.AvalancheMainne
       basePath: broadcastUrl,
     })
     try {
-      this.signer = await this.initializeSigner()
       this.httpProvider = new unchained.avalanche.V1Api(httpProviderConfiguration)
       this._initialized = true
     } catch (error) {
