@@ -14,6 +14,7 @@
     "dist/",
     "src",
     "images/",
+    "README.md",
     "snap.manifest.json"
   ],
   "scripts": {
