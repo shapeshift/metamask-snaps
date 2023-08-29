@@ -1,6 +1,6 @@
 {
   "name": "@shapeshiftoss/metamask-snaps",
-  "version": "1.0.0-alpha.2",
+  "version": "1.0.0-alpha.3",
   "description": "A multi-chain Snap for MetaMask by ShapeShift.",
   "license": "MIT",
   "author": "pastaghost <pastaghost@2520.io> (http://www.github.com/pastaghost)",
