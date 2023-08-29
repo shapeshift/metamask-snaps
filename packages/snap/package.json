@@ -12,6 +12,7 @@
   "main": "dist/index.js",
   "files": [
     "dist/",
+    "src",
     "images/",
     "snap.manifest.json"
   ],
