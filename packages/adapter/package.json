@@ -57,6 +57,9 @@
     "tslib": "^2.4.0",
     "typescript": "^4.7.4"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "installConfig": {
     "hoistingLimits": "dependencies"
   },
