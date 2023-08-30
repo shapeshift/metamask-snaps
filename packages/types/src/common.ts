@@ -1,3 +1,5 @@
+import { PublicKey } from '@shapeshiftoss/hdwallet-core'
+
 export {
   ETHGetAddress as AvalancheGetAddress,
   ETHSignedMessage as AvalancheSignedMessage,
@@ -59,6 +61,7 @@ export type OsmosisAddress = string | null
 export type SecretAddress = string | null
 export type TerraAddress = string | null
 export type ThorchainAddress = string | null
+export type PublicKeys = Array<PublicKey | null>
 
 export interface WalletEnableParam {
   params: {

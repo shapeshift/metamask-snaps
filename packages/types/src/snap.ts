@@ -1,5 +1,4 @@
 import { JsonRpcError } from '@metamask/types'
-import { PublicKey } from '@shapeshiftoss/hdwallet-core'
 import * as unchained from '@shapeshiftoss/unchained-client'
 
 import {
@@ -49,6 +48,7 @@ import {
   OsmosisGetAddress,
   OsmosisSignedTransaction,
   OsmosisSignTransaction,
+  PublicKeys,
   SecretAddress,
   SecretGetAddress,
   SecretSignedTransaction,
@@ -231,20 +231,21 @@ export interface ThorchainGetAddressRequest {
   params: ThorchainGetAddressParams
 }
 
-export type AvalancheGetAddressResponse = AvalancheAddress
-export type BinanceGetAddressResponse = BinanceAddress
-export type BitcoinCashGetAddressResponse = BitcoinCashAddress
-export type BitcoinGetAddressResponse = BitcoinAddress
-export type BitcoinGetPublicKeysResponse = Array<PublicKey | null>
-export type CosmosGetAddressResponse = CosmosAddress
-export type DogecoinGetAddressResponse = DogecoinAddress
-export type EthereumGetAddressResponse = EthereumAddress
-export type KavaGetAddressResponse = KavaAddress
-export type LitecoinGetAddressResponse = LitecoinAddress
-export type OsmosisGetAddressResponse = OsmosisAddress
-export type SecretGetAddressResponse = SecretAddress
-export type TerraGetAddressResponse = TerraAddress
-export type ThorchainGetAddressResponse = ThorchainAddress
+export type MaybeRpcResponse<T> = T | JsonRpcError
+export type AvalancheGetAddressResponse = MaybeRpcResponse<AvalancheAddress>
+export type BinanceGetAddressResponse = MaybeRpcResponse<BinanceAddress>
+export type BitcoinCashGetAddressResponse = MaybeRpcResponse<BitcoinCashAddress>
+export type BitcoinGetAddressResponse = MaybeRpcResponse<BitcoinAddress>
+export type BitcoinGetPublicKeysResponse = MaybeRpcResponse<PublicKeys>
+export type CosmosGetAddressResponse = MaybeRpcResponse<CosmosAddress>
+export type DogecoinGetAddressResponse = MaybeRpcResponse<DogecoinAddress>
+export type EthereumGetAddressResponse = MaybeRpcResponse<EthereumAddress>
+export type KavaGetAddressResponse = MaybeRpcResponse<KavaAddress>
+export type LitecoinGetAddressResponse = MaybeRpcResponse<LitecoinAddress>
+export type OsmosisGetAddressResponse = MaybeRpcResponse<OsmosisAddress>
+export type SecretGetAddressResponse = MaybeRpcResponse<SecretAddress>
+export type TerraGetAddressResponse = MaybeRpcResponse<TerraAddress>
+export type ThorchainGetAddressResponse = MaybeRpcResponse<ThorchainAddress>
 
 type GetAddressResponseTypeTable = {
   [SupportedChainIds.AvalancheMainnet]: AvalancheGetAddressResponse
