@@ -41,11 +41,14 @@ export const dogecoinGetPublicKeys = async (
       snapId,
     )
   } catch (error) {
-    moduleLogger.error(error, { fn: 'dogecoinGetPublicKeys' }, `doge_getPublicKeys RPC call failed.`)
+    moduleLogger.error(
+      error,
+      { fn: 'dogecoinGetPublicKeys' },
+      `doge_getPublicKeys RPC call failed.`,
+    )
     return Promise.reject(error)
   }
 }
-
 
 export const dogecoinSignTransaction = async (
   params: DogecoinSignTransactionAdapterParams,

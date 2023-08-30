@@ -43,7 +43,6 @@ export const BTCGetPublicKeys = async (
   }
 }
 
-
 export const BTCSignTransaction = async (
   params: BitcoinSignTransactionAdapterParams,
 ): Promise<BitcoinSignTransactionResponse> => {

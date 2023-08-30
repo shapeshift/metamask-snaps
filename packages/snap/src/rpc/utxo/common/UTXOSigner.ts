@@ -35,12 +35,14 @@ export abstract class UTXOSigner<T extends UTXOChainIds> extends BaseSigner<T> {
   async getPublicKeys({ addressParams }: GetAddressParamsType<T>): Promise<PublicKey[]> {
     const { coin, addressNList, scriptType } = addressParams
     try {
-      const publicKeys = await this.signer.getPublicKeys([{
-        coin,
-        addressNList,
-        curve: 'secp256k1',
-        scriptType,
-      }])
+      const publicKeys = await this.signer.getPublicKeys([
+        {
+          coin,
+          addressNList,
+          curve: 'secp256k1',
+          scriptType,
+        },
+      ])
       assert(publicKeys !== null, 'Error getting public keys from native signer')
       return publicKeys
     } catch (error) {

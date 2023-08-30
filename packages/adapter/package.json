@@ -60,9 +60,9 @@
   "publishConfig": {
     "access": "public"
   },
+  "gitHead": "c1446ad91b05e36f092afd712dd334215d18a5c5",
   "installConfig": {
     "hoistingLimits": "dependencies"
   },
-  "packageManager": "yarn@3.2.2",
-  "gitHead": "c1446ad91b05e36f092afd712dd334215d18a5c5"
+  "packageManager": "yarn@3.2.2"
 }

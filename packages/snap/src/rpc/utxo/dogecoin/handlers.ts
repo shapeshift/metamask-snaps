@@ -41,7 +41,6 @@ export const dogecoinGetPublicKeys = async (
   }
 }
 
-
 export const dogecoinSignTransaction = async (
   params: DogecoinSignTransactionParams,
 ): Promise<DogecoinSignTransactionResponse> => {

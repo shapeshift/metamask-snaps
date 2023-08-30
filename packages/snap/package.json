@@ -12,10 +12,9 @@
   "main": "dist/index.js",
   "files": [
     "dist/",
-    "src",
     "images/",
-    "README.md",
-    "snap.manifest.json"
+    "snap.manifest.json",
+    "src"
   ],
   "scripts": {
     "build": "rm -rf dist; yarn run build:snap",

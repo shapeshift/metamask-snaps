@@ -46,7 +46,6 @@ export const LTCGetPublicKeys = async (
   }
 }
 
-
 export const LTCSignTransaction = async (
   params: LitecoinSignTransactionAdapterParams,
 ): Promise<LitecoinSignTransactionResponse> => {
