@@ -1,3 +1,4 @@
+import { PublicKey } from '@shapeshiftoss/hdwallet-core'
 import type {
   DogecoinBroadcastTransactionAdapterParams,
   DogecoinBroadcastTransactionResponse,
@@ -26,6 +27,25 @@ export const dogecoinGetAddress = async (
     )
   } catch (error) {
     moduleLogger.error(error, { fn: 'DogeGetAddress' }, `doge_getAddress RPC call failed.`)
+    return Promise.reject(error)
+  }
+}
+
+export const dogecoinGetPublicKeys = async (
+  params: DogecoinGetAddressAdapterParams,
+): Promise<Array<PublicKey | null>> => {
+  const { addressParams, snapId } = params
+  try {
+    return await sendFlaskRPCRequest(
+      { method: 'doge_getPublicKeys', params: { addressParams } },
+      snapId,
+    )
+  } catch (error) {
+    moduleLogger.error(
+      error,
+      { fn: 'dogecoinGetPublicKeys' },
+      `doge_getPublicKeys RPC call failed.`,
+    )
     return Promise.reject(error)
   }
 }

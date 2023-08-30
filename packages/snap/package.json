@@ -1,6 +1,6 @@
 {
   "name": "@shapeshiftoss/metamask-snaps",
-  "version": "1.0.0",
+  "version": "1.0.0-alpha.11",
   "description": "A multi-chain Snap for MetaMask by ShapeShift.",
   "license": "MIT",
   "author": "pastaghost <pastaghost@2520.io> (http://www.github.com/pastaghost)",
@@ -9,11 +9,12 @@
     "type": "git",
     "url": "https://github.com/shapeshift/metamask-snaps.git"
   },
-  "main": "build/index.js",
+  "main": "dist/index.js",
   "files": [
     "dist/",
     "images/",
-    "snap.manifest.json"
+    "snap.manifest.json",
+    "src"
   ],
   "scripts": {
     "build": "rm -rf dist; yarn run build:snap",
@@ -39,14 +40,14 @@
   "dependencies": {
     "@ethersproject/providers": "^5.7.0",
     "@metamask/detect-provider": "^2.0.0",
-    "@metamask/key-tree": "9.0.0",
-    "@metamask/snaps-types": "1.0.1",
+    "@metamask/key-tree": "^9.0.0",
+    "@metamask/snaps-types": "^1.0.1",
     "@metamask/snaps-ui": "^1.0.1",
     "@shapeshiftoss/caip": "^8.15.0",
     "@shapeshiftoss/hdwallet-core": "^1.50.4",
     "@shapeshiftoss/hdwallet-native": "^1.50.4",
     "@shapeshiftoss/logger": "^1.1.2",
-    "@shapeshiftoss/metamask-snaps-types": "workspace:^",
+    "@shapeshiftoss/metamask-snaps-types": "^1.0.0-alpha.11",
     "@shapeshiftoss/types": "^8.3.0",
     "@shapeshiftoss/unchained-client": "10.1.1",
     "eth-rpc-errors": "^4.0.3"
@@ -110,8 +111,7 @@
     "node": ">=16.0.0"
   },
   "publishConfig": {
-    "access": "public",
-    "registry": "https://registry.npmjs.org/"
+    "access": "public"
   },
   "installConfig": {
     "hoistingLimits": "workspaces"

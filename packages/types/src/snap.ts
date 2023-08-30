@@ -44,6 +44,7 @@ import type {
   OsmosisGetAddress,
   OsmosisSignedTransaction,
   OsmosisSignTransaction,
+  PublicKeys,
   SecretAddress,
   SecretGetAddress,
   SecretSignedTransaction,
@@ -157,8 +158,18 @@ export interface BitcoinCashGetAddressRequest {
   params: BitcoinCashGetAddressParams
 }
 
+export interface BitcoinCashGetPublicKeysRequest {
+  method: 'bch_getPublicKeys'
+  params: BitcoinCashGetAddressParams
+}
+
 export interface BitcoinGetAddressRequest {
   method: 'btc_getAddress'
+  params: BitcoinGetAddressParams
+}
+
+export interface BitcoinGetPublicKeysRequest {
+  method: 'btc_getPublicKeys'
   params: BitcoinGetAddressParams
 }
 
@@ -169,6 +180,11 @@ export interface CosmosGetAddressRequest {
 
 export interface DogecoinGetAddressRequest {
   method: 'doge_getAddress'
+  params: DogecoinGetAddressParams
+}
+
+export interface DogecoinGetPublicKeysRequest {
+  method: 'doge_getPublicKeys'
   params: DogecoinGetAddressParams
 }
 
@@ -184,6 +200,11 @@ export interface KavaGetAddressRequest {
 
 export interface LitecoinGetAddressRequest {
   method: 'ltc_getAddress'
+  params: LitecoinGetAddressParams
+}
+
+export interface LitecoinGetPublicKeysRequest {
+  method: 'ltc_getPublicKeys'
   params: LitecoinGetAddressParams
 }
 
@@ -207,19 +228,21 @@ export interface ThorchainGetAddressRequest {
   params: ThorchainGetAddressParams
 }
 
-export type AvalancheGetAddressResponse = AvalancheAddress
-export type BinanceGetAddressResponse = BinanceAddress
-export type BitcoinCashGetAddressResponse = BitcoinCashAddress
-export type BitcoinGetAddressResponse = BitcoinAddress
-export type CosmosGetAddressResponse = CosmosAddress
-export type DogecoinGetAddressResponse = DogecoinAddress
-export type EthereumGetAddressResponse = EthereumAddress
-export type KavaGetAddressResponse = KavaAddress
-export type LitecoinGetAddressResponse = LitecoinAddress
-export type OsmosisGetAddressResponse = OsmosisAddress
-export type SecretGetAddressResponse = SecretAddress
-export type TerraGetAddressResponse = TerraAddress
-export type ThorchainGetAddressResponse = ThorchainAddress
+export type MaybeRpcResponse<T> = T | JsonRpcError
+export type AvalancheGetAddressResponse = MaybeRpcResponse<AvalancheAddress>
+export type BinanceGetAddressResponse = MaybeRpcResponse<BinanceAddress>
+export type BitcoinCashGetAddressResponse = MaybeRpcResponse<BitcoinCashAddress>
+export type BitcoinGetAddressResponse = MaybeRpcResponse<BitcoinAddress>
+export type BitcoinGetPublicKeysResponse = MaybeRpcResponse<PublicKeys>
+export type CosmosGetAddressResponse = MaybeRpcResponse<CosmosAddress>
+export type DogecoinGetAddressResponse = MaybeRpcResponse<DogecoinAddress>
+export type EthereumGetAddressResponse = MaybeRpcResponse<EthereumAddress>
+export type KavaGetAddressResponse = MaybeRpcResponse<KavaAddress>
+export type LitecoinGetAddressResponse = MaybeRpcResponse<LitecoinAddress>
+export type OsmosisGetAddressResponse = MaybeRpcResponse<OsmosisAddress>
+export type SecretGetAddressResponse = MaybeRpcResponse<SecretAddress>
+export type TerraGetAddressResponse = MaybeRpcResponse<TerraAddress>
+export type ThorchainGetAddressResponse = MaybeRpcResponse<ThorchainAddress>
 
 type GetAddressResponseTypeTable = {
   [SupportedChainIds.AvalancheMainnet]: AvalancheGetAddressResponse
@@ -725,14 +748,17 @@ export type ShapeShiftSnapRPCRequest =
   | BitcoinBroadcastTransactionRequest
   | BitcoinCashBroadcastTransactionRequest
   | BitcoinCashGetAddressRequest
+  | BitcoinCashGetPublicKeysRequest
   | BitcoinCashSignTransactionRequest
   | BitcoinGetAddressRequest
+  | BitcoinGetPublicKeysRequest
   | BitcoinSignTransactionRequest
   | CosmosBroadcastTransactionRequest
   | CosmosGetAddressRequest
   | CosmosSignTransactionRequest
   | DogecoinBroadcastTransactionRequest
   | DogecoinGetAddressRequest
+  | DogecoinGetPublicKeysRequest
   | DogecoinSignTransactionRequest
   | EthereumGetAddressRequest
   | EthereumSignMessageRequest
@@ -742,6 +768,7 @@ export type ShapeShiftSnapRPCRequest =
   | KavaSignTransactionRequest
   | LitecoinBroadcastTransactionRequest
   | LitecoinGetAddressRequest
+  | LitecoinGetPublicKeysRequest
   | LitecoinSignTransactionRequest
   | OsmosisBroadcastTransactionRequest
   | OsmosisGetAddressRequest
@@ -768,6 +795,7 @@ export type ShapeShiftSnapRPCResponse =
   | BitcoinCashGetAddressResponse
   | BitcoinCashSignTransactionResponse
   | BitcoinGetAddressResponse
+  | BitcoinGetPublicKeysResponse
   | BitcoinSignTransactionResponse
   | CosmosBroadcastTransactionResponse
   | CosmosGetAddressResponse

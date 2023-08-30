@@ -1,3 +1,4 @@
+import { PublicKey } from '@shapeshiftoss/hdwallet-core'
 import type {
   LitecoinBroadcastTransactionParams,
   LitecoinBroadcastTransactionResponse,
@@ -23,6 +24,19 @@ export const litecoinGetAddress = async (
     return await litecoinSigner.getAddress(params)
   } catch (error) {
     moduleLogger.error({ fn: 'litecoinGetAddress' }, error)
+    return Promise.reject(error)
+  }
+}
+
+export const litecoinGetPublicKeys = async (
+  params: LitecoinGetAddressParams,
+): Promise<PublicKey[]> => {
+  try {
+    const litecoinSigner = new LitecoinSigner()
+    await litecoinSigner.initialize()
+    return await litecoinSigner.getPublicKeys(params)
+  } catch (error) {
+    moduleLogger.error({ fn: 'litecoinGetPublicKeys' }, error)
     return Promise.reject(error)
   }
 }

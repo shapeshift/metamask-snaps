@@ -5,8 +5,8 @@ import {
   BCHBroadcastTransaction,
   BCHGetAddress,
   BCHSignTransaction,
-  binanceGetAddress,
-  binanceSignTransaction,
+  // binanceGetAddress,
+  // binanceSignTransaction,
   BTCBroadcastTransaction,
   BTCGetAddress,
   BTCSignTransaction,
@@ -24,13 +24,13 @@ import {
   LTCBroadcastTransaction,
   LTCGetAddress,
   LTCSignTransaction,
-  osmosisBroadcastTransaction,
-  osmosisGetAddress,
-  osmosisSignTransaction,
-  secretGetAddress,
-  secretSignTransaction,
-  terraGetAddress,
-  terraSignTransaction,
+  // osmosisBroadcastTransaction,
+  // osmosisGetAddress,
+  // osmosisSignTransaction,
+  // secretGetAddress,
+  // secretSignTransaction,
+  // terraGetAddress,
+  // terraSignTransaction,
   thorchainBroadcastTransaction,
   thorchainGetAddress,
   thorchainSignTransaction,
@@ -38,18 +38,18 @@ import {
 import { DEFAULT_SNAP_ID } from '@shapeshiftoss/metamask-snaps-types'
 
 import {
-  AvalancheTransactions,
-  BinanceTransactions,
+  // AvalancheTransactions,
+  // BinanceTransactions,
   BitcoinCashTransactions,
   BitcoinTransactions,
   CosmosTransactions,
   DogecoinTransactions,
-  EthereumTransactions,
-  KavaTransactions,
+  // EthereumTransactions,
+  // KavaTransactions,
   LitecoinTransactions,
-  OsmosisTransactions,
-  SecretTransactions,
-  TerraTransactions,
+  // OsmosisTransactions,
+  // SecretTransactions,
+  // TerraTransactions,
   ThorchainTransactions,
 } from '../../constants/transactions'
 import { CardProps } from '../Card/Card'
@@ -57,6 +57,7 @@ import { CardProps } from '../Card/Card'
 /**TODO: Add reference transactions for BCH, DOGE, LTC */
 
 export const AssetCardListConfig: Array<CardProps> = [
+  /*
   {
     name: 'Avalanche',
     icon: 'avax.png',
@@ -86,6 +87,8 @@ export const AssetCardListConfig: Array<CardProps> = [
       },
     },
   },
+  */
+  /*
   {
     name: 'Binance Chain',
     icon: 'bnb.png',
@@ -105,6 +108,7 @@ export const AssetCardListConfig: Array<CardProps> = [
       },
     },
   },
+  */
   {
     name: 'Bitcoin',
     icon: 'btc.png',
@@ -223,6 +227,7 @@ export const AssetCardListConfig: Array<CardProps> = [
       },
     },
   },
+  /*
   {
     name: 'Ethereum',
     icon: 'eth.png',
@@ -252,6 +257,8 @@ export const AssetCardListConfig: Array<CardProps> = [
       },
     },
   },
+  */
+  /*
   {
     name: 'Kava',
     icon: 'kava.png',
@@ -271,6 +278,7 @@ export const AssetCardListConfig: Array<CardProps> = [
       },
     },
   },
+  */
   {
     name: 'Litecoin',
     icon: 'ltc.png',
@@ -300,6 +308,7 @@ export const AssetCardListConfig: Array<CardProps> = [
       },
     },
   },
+  /*
   {
     name: 'Osmosis',
     icon: 'osmo.png',
@@ -329,6 +338,8 @@ export const AssetCardListConfig: Array<CardProps> = [
       },
     },
   },
+  */
+  /*
   {
     name: 'Secret',
     icon: 'scrt.png',
@@ -348,6 +359,8 @@ export const AssetCardListConfig: Array<CardProps> = [
       },
     },
   },
+  */
+  /*
   {
     name: 'Terra',
     icon: 'luna.png',
@@ -367,6 +380,7 @@ export const AssetCardListConfig: Array<CardProps> = [
       },
     },
   },
+  */
   {
     name: 'THORChain',
     icon: 'rune.png',
