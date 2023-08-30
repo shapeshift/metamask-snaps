@@ -36,7 +36,7 @@ export const litecoinGetPublicKeys = async (
     await litecoinSigner.initialize()
     return await litecoinSigner.getPublicKeys(params)
   } catch (error) {
-    moduleLogger.error({ fn: 'litecoinGetAddress' }, error)
+    moduleLogger.error({ fn: 'litecoinGetPublicKeys' }, error)
     return Promise.reject(error)
   }
 }
