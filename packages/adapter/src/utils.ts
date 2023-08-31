@@ -75,7 +75,7 @@ export const shapeShiftSnapInstalled = async (snapId: string): Promise<boolean> 
     }
     return true
   } catch (error) {
-    moduleLogger.error({ fn: 'shapeShiftMultichainInstalled' }, error)
+    moduleLogger.error({ fn: 'shapeshiftSnapInstalled' }, error)
     return false
   }
 }
@@ -128,7 +128,7 @@ export const enableShapeShiftSnap = async (
       ret.message = res
     }
   } catch (error) {
-    moduleLogger.error(error, { fn: 'enableShapeShiftMultichain' }, 'walletRequestSnaps RPC call failed.')
+    moduleLogger.error(error, { fn: 'enableShapeShiftSnap' }, 'walletRequestSnaps RPC call failed.')
   }
   return ret
 }
