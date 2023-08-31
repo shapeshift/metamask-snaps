@@ -1,5 +1,5 @@
 {
-  "version": "1.0.0-alpha.15",
+  "version": "1.0.0-alpha.17",
   "description": "The ShapeShift Multichain snap evolves your wallet to support 11 chains in one snap, including Bitcoin, Dogecoin, Litecoin, Cosmos, Binance Chain, Bitcoin Cash, THORChain, Osmosis, and Secret Network.",
   "proposedName": "ShapeShift Multichain",
   "repository": {
@@ -7,7 +7,7 @@
     "url": "https://github.com/shapeshift/metamask-snaps.git"
   },
   "source": {
-    "shasum": "U3SMeV++GpULbf6J/tIctL4t291KSj9uxAoKrpemZfM=",
+    "shasum": "5C5tYFsVdAArsjdQr/CHugTd6dByBwrbAFzvfTtmHXw=",
     "location": {
       "npm": {
         "filePath": "dist/bundle.js",
