@@ -1,14 +1,10 @@
-import {
-  AvalancheBroadcastTransactionParams,
-  AvalancheBroadcastTransactionResponse,
+import type {
   AvalancheGetAddressParams,
   AvalancheGetAddressResponse,
+  AvalancheSendTransactionParams,
+  AvalancheSendTransactionResponse,
   AvalancheSignMessageParams,
   AvalancheSignMessageResponse,
-  AvalancheSignTransactionParams,
-  AvalancheSignTransactionResponse,
-  AvalancheVerifyMessageParams,
-  AvalancheVerifyMessageResponse,
 } from '@shapeshiftoss/metamask-snaps-types'
 
 import { logger } from '../../common/lib/logger'
@@ -44,41 +40,15 @@ export const avalancheSignMessage = async (
   }
 }
 
-export const avalancheVerifyMessage = async (
-  params: AvalancheVerifyMessageParams,
-): Promise<AvalancheVerifyMessageResponse> => {
+export const avalancheSendTransaction = async (
+  params: AvalancheSendTransactionParams,
+): Promise<AvalancheSendTransactionResponse> => {
   try {
     const avalancheSigner = new AvalancheSigner()
     await avalancheSigner.initialize()
-    return await avalancheSigner.verifyMessage(params)
+    return await avalancheSigner.sendTransaction(params)
   } catch (error) {
-    moduleLogger.error({ fn: 'avalancheVerifyMessage' }, error)
-    return Promise.reject(error)
-  }
-}
-
-export const avalancheSignTransaction = async (
-  params: AvalancheSignTransactionParams,
-): Promise<AvalancheSignTransactionResponse> => {
-  try {
-    const avalancheSigner = new AvalancheSigner()
-    await avalancheSigner.initialize()
-    return await avalancheSigner.signTransaction(params)
-  } catch (error) {
-    moduleLogger.error({ fn: 'avalancheSignTransaction' }, error)
-    return Promise.reject(error)
-  }
-}
-
-export const avalancheBroadcastTransaction = async (
-  params: AvalancheBroadcastTransactionParams,
-): Promise<AvalancheBroadcastTransactionResponse> => {
-  try {
-    const avalancheSigner = new AvalancheSigner()
-    await avalancheSigner.initialize({ broadcastUrl: params.baseUrl })
-    return await avalancheSigner.broadcastTransaction(params)
-  } catch (error) {
-    moduleLogger.error({ fn: 'avalancheSignTransaction' }, error)
+    moduleLogger.error({ fn: 'avalancheSendTransaction' }, error)
     return Promise.reject(error)
   }
 }

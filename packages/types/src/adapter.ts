@@ -1,9 +1,7 @@
-import {
+import type {
   AvalancheGetAddress,
-  AvalancheSignedTransaction,
   AvalancheSignMessage,
   AvalancheSignTransaction,
-  AvalancheVerifyMessage,
   BinanceGetAddress,
   BinanceSignedTransaction,
   BinanceSignTransaction,
@@ -20,10 +18,8 @@ import {
   DogecoinSignedTransaction,
   DogecoinSignTransaction,
   EthereumGetAddress,
-  EthereumSignedTransaction,
   EthereumSignMessage,
   EthereumSignTransaction,
-  EthereumVerifyMessage,
   KavaGetAddress,
   KavaSignedTransaction,
   KavaSignTransaction,
@@ -43,7 +39,7 @@ import {
   ThorchainSignedTransaction,
   ThorchainSignTransaction,
 } from './common'
-import {
+import type {
   BroadcastTransactionParams,
   GetAddressParams,
   SignMessageParams,
@@ -59,13 +55,10 @@ export type SignMessageAdapterParams<T> = SignMessageParams<T> & { snapId: strin
 export type SignTransactionAdapterParams<T> = SignTransactionParams<T> & { snapId: string }
 export type VerifyMessageAdapterParams<T> = VerifyMessageParams<T> & { snapId: string }
 
-export type AvalancheBroadcastTransactionAdapterParams =
-  BroadcastTransactionAdapterParams<AvalancheSignedTransaction>
 export type AvalancheGetAddressAdapterParams = GetAddressAdapterParams<AvalancheGetAddress>
 export type AvalancheSignMessageAdapterParams = SignMessageAdapterParams<AvalancheSignMessage>
-export type AvalancheSignTransactionAdapterParams =
+export type AvalancheSendTransactionAdapterParams =
   SignTransactionAdapterParams<AvalancheSignTransaction>
-export type AvalancheVerifyMessageAdapterParams = VerifyMessageAdapterParams<AvalancheVerifyMessage>
 export type BinanceBroadcastTransactionAdapterParams =
   BroadcastTransactionAdapterParams<BinanceSignedTransaction>
 export type BinanceGetAddressAdapterParams = GetAddressAdapterParams<BinanceGetAddress>
@@ -92,13 +85,10 @@ export type DogecoinBroadcastTransactionAdapterParams =
 export type DogecoinGetAddressAdapterParams = GetAddressAdapterParams<DogecoinGetAddress>
 export type DogecoinSignTransactionAdapterParams =
   SignTransactionAdapterParams<DogecoinSignTransaction>
-export type EthereumBroadcastTransactionAdapterParams =
-  BroadcastTransactionAdapterParams<EthereumSignedTransaction>
 export type EthereumGetAddressAdapterParams = GetAddressAdapterParams<EthereumGetAddress>
 export type EthereumSignMessageAdapterParams = SignMessageAdapterParams<EthereumSignMessage>
-export type EthereumSignTransactionAdapterParams =
+export type EthereumSendTransactionAdapterParams =
   SignTransactionAdapterParams<EthereumSignTransaction>
-export type EthereumVerifyMessageAdapterParams = VerifyMessageAdapterParams<EthereumVerifyMessage>
 export type KavaBroadcastTransactionAdapterParams =
   BroadcastTransactionAdapterParams<KavaSignedTransaction>
 export type KavaGetAddressAdapterParams = GetAddressAdapterParams<KavaGetAddress>

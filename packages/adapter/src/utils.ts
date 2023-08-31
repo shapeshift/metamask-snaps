@@ -1,7 +1,7 @@
-import { ExternalProvider } from '@ethersproject/providers'
+import type { ExternalProvider } from '@ethersproject/providers'
 import detectEthereumProvider from '@metamask/detect-provider'
-import {
-  EnableShapeShiftSnapResult,
+import type {
+  EnableShapeShiftMultichainResult,
   RPCHandlerResponse,
   ShapeShiftSnapRPCRequest,
   ShapeShiftSnapRPCResponse,
@@ -19,9 +19,9 @@ export type Provider = Omit<ExternalProvider, 'request'> & {
 
 export const getMetaMaskProvider = async (): Promise<Provider | undefined> => {
   try {
-    const provider = await (<Promise<Provider | undefined>>(
-      detectEthereumProvider({ mustBeMetaMask: true })
-    ))
+    const provider = await (detectEthereumProvider({ mustBeMetaMask: true }) as Promise<
+      Provider | undefined
+    >)
     if (provider === undefined) {
       throw new Error('Could not get MetaMask provider')
     }
@@ -75,7 +75,7 @@ export const shapeShiftSnapInstalled = async (snapId: string): Promise<boolean> 
     }
     return true
   } catch (error) {
-    moduleLogger.error({ fn: 'shapeShiftSnapInstalled' }, error)
+    moduleLogger.error({ fn: 'shapeshiftSnapInstalled' }, error)
     return false
   }
 }
@@ -108,8 +108,8 @@ export const isLocked = async (): Promise<boolean> => {
 export const enableShapeShiftSnap = async (
   snapId: string,
   version?: string,
-): Promise<EnableShapeShiftSnapResult> => {
-  const ret: EnableShapeShiftSnapResult = {
+): Promise<EnableShapeShiftMultichainResult> => {
+  const ret: EnableShapeShiftMultichainResult = {
     success: false,
     message: {
       accounts: [],

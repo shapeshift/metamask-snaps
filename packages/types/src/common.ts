@@ -4,7 +4,6 @@ export {
   ETHSignedTx as AvalancheSignedTransaction,
   ETHSignMessage as AvalancheSignMessage,
   ETHSignTx as AvalancheSignTransaction,
-  ETHVerifyMessage as AvalancheVerifyMessage,
   BinanceGetAddress,
   BinanceSignedTx as BinanceSignedTransaction,
   BinanceSignTx as BinanceSignTransaction,
@@ -25,7 +24,6 @@ export {
   ETHSignedTx as EthereumSignedTransaction,
   ETHSignMessage as EthereumSignMessage,
   ETHSignTx as EthereumSignTransaction,
-  ETHVerifyMessage as EthereumVerifyMessage,
   KavaGetAddress,
   KavaSignedTx as KavaSignedTransaction,
   KavaSignTx as KavaSignTransaction,
@@ -86,7 +84,7 @@ export interface WalletEnableResult {
   errors?: Error[] // Any errors encountered during processing.
 }
 
-export interface EnableShapeShiftSnapResult {
+export interface EnableShapeShiftMultichainResult {
   success: boolean
   message: WalletEnableResult
 }

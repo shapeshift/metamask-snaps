@@ -1,5 +1,5 @@
 {
-  "version": "1.0.0",
+  "version": "1.0.0-alpha.21",
   "description": "The ShapeShift Multichain snap evolves your wallet to support 11 chains in one snap, including Bitcoin, Dogecoin, Litecoin, Cosmos, Binance Chain, Bitcoin Cash, THORChain, Osmosis, and Secret Network.",
   "proposedName": "ShapeShift Multichain",
   "repository": {
@@ -7,7 +7,6 @@
     "url": "https://github.com/shapeshift/metamask-snaps.git"
   },
   "source": {
-    "shasum": "aS9p2HJESIwkYNAf5LCpi02cdfWe/X8mBRCOHQy2Yqg=",
     "location": {
       "npm": {
         "filePath": "dist/bundle.js",
@@ -15,63 +14,67 @@
         "packageName": "@shapeshiftoss/metamask-snaps",
         "registry": "https://registry.npmjs.org/"
       }
-    }
+    },
+    "shasum": "6BFw+qPCNlvOwsg02OhdBLlwyVCV2sjqPoUWxXY7eRc="
   },
   "initialPermissions": {
-    "snap_dialog": {},
-    "snap_getBip32Entropy": [
-      {
-        "path": ["m", "44'", "0'"],
-        "curve": "secp256k1"
-      },
-      {
-        "path": ["m", "44'", "2'"],
-        "curve": "secp256k1"
-      },
-      {
-        "path": ["m", "44'", "3'"],
-        "curve": "secp256k1"
-      },
-      {
-        "path": ["m", "44'", "60'"],
-        "curve": "secp256k1"
-      },
-      {
-        "path": ["m", "44'", "118'"],
-        "curve": "secp256k1"
-      },
-      {
-        "path": ["m", "44'", "145'"],
-        "curve": "secp256k1"
-      },
-      {
-        "path": ["m", "44'", "714'"],
-        "curve": "secp256k1"
-      },
-      {
-        "path": ["m", "44'", "931'"],
-        "curve": "secp256k1"
-      },
-      {
-        "path": ["m", "44'", "330'"],
-        "curve": "secp256k1"
-      },
-      {
-        "path": ["m", "44'", "459'"],
-        "curve": "secp256k1"
-      },
-      {
-        "path": ["m", "44'", "529'"],
-        "curve": "secp256k1"
-      }
-    ],
-    "snap_manageState": {},
     "endowment:network-access": {},
-    "endowment:long-running": {},
     "endowment:rpc": {
       "dapps": true,
       "snaps": false
-    }
+    },
+    "snap_dialog": {},
+    "snap_getBip32Entropy": [
+      {
+        "curve": "secp256k1",
+        "path": [
+          "m",
+          "44'",
+          "0'"
+        ]
+      },
+      {
+        "curve": "secp256k1",
+        "path": [
+          "m",
+          "44'",
+          "2'"
+        ]
+      },
+      {
+        "curve": "secp256k1",
+        "path": [
+          "m",
+          "44'",
+          "3'"
+        ]
+      },
+      {
+        "curve": "secp256k1",
+        "path": [
+          "m",
+          "44'",
+          "118'"
+        ]
+      },
+      {
+        "curve": "secp256k1",
+        "path": [
+          "m",
+          "44'",
+          "145'"
+        ]
+      },
+      {
+        "curve": "secp256k1",
+        "path": [
+          "m",
+          "44'",
+          "931'"
+        ]
+      }
+    ],
+    "snap_manageState": {}
   },
   "manifestVersion": "0.1"
 }

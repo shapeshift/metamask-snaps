@@ -1,14 +1,7 @@
 import {
-  AVAXBroadcastTransaction,
-  AVAXGetAddress,
-  AVAXSignMessage,
-  AVAXSignTransaction,
-  AVAXVerifyMessage,
   BCHBroadcastTransaction,
   BCHGetAddress,
   BCHSignTransaction,
-  binanceGetAddress,
-  binanceSignTransaction,
   BTCBroadcastTransaction,
   BTCGetAddress,
   BTCSignTransaction,
@@ -18,23 +11,9 @@ import {
   dogecoinBroadcastTransaction,
   dogecoinGetAddress,
   dogecoinSignTransaction,
-  ETHBroadcastTransaction,
-  ETHGetAddress,
-  ETHSignMessage,
-  ETHSignTransaction,
-  ETHVerifyMessage,
-  kavaGetAddress,
-  kavaSignTransaction,
   LTCBroadcastTransaction,
   LTCGetAddress,
   LTCSignTransaction,
-  osmosisBroadcastTransaction,
-  osmosisGetAddress,
-  osmosisSignTransaction,
-  secretGetAddress,
-  secretSignTransaction,
-  terraGetAddress,
-  terraSignTransaction,
   thorchainBroadcastTransaction,
   thorchainGetAddress,
   thorchainSignTransaction,
@@ -42,18 +21,11 @@ import {
 import { DEFAULT_SNAP_ID } from '@shapeshiftoss/metamask-snaps-types'
 
 import {
-  AvalancheTransactions,
-  BinanceTransactions,
   BitcoinCashTransactions,
   BitcoinTransactions,
   CosmosTransactions,
   DogecoinTransactions,
-  EthereumTransactions,
-  KavaTransactions,
   LitecoinTransactions,
-  OsmosisTransactions,
-  SecretTransactions,
-  TerraTransactions,
   ThorchainTransactions,
 } from '../../constants/transactions'
 import { CardProps } from '../Card/Card'
@@ -61,15 +33,20 @@ import { CardProps } from '../Card/Card'
 /**TODO: Add reference transactions for BCH, DOGE, LTC */
 
 export const AssetCardListConfig: Array<CardProps> = [
+  /*
   {
     name: 'Avalanche',
     icon: 'avax.png',
     symbol: 'AVAX',
-    enabled: false,
+    enabled: true,
     actions: {
       avax_getAddress: {
         callback: AVAXGetAddress,
-        params: { addressParams: AvalancheTransactions.address, snapId: DEFAULT_SNAP_ID },
+        params: {
+          addressParams: AvalancheTransactions.address,
+          chainId: '0xa86a',
+          snapId: DEFAULT_SNAP_ID,
+        },
         description: 'Generate a receive address',
       },
 
@@ -79,29 +56,15 @@ export const AssetCardListConfig: Array<CardProps> = [
         description: 'Sign a test message',
       },
 
-      avax_signTransaction: {
-        callback: AVAXSignTransaction,
+      avax_sendTransaction: {
+        callback: AVAXSendTransaction,
         params: { transaction: AvalancheTransactions.tx, snapId: DEFAULT_SNAP_ID },
-        description: 'Sign a test transaction',
-      },
-
-      avax_verifyMessage: {
-        callback: AVAXVerifyMessage,
-        params: { message: AvalancheTransactions.verify, snapId: DEFAULT_SNAP_ID },
-        description: 'Verify the signature from a previously-signed test message',
-      },
-
-      avax_broadcastTransaction: {
-        callback: AVAXBroadcastTransaction,
-        params: {
-          transaction: AvalancheTransactions.broadcast,
-          baseUrl: process.env.REACT_APP_UNCHAINED_AVALANCHE_HTTP_URL,
-          snapId: DEFAULT_SNAP_ID,
-        },
-        description: 'Broadcast a test transaction',
+        description: 'Sign/broadcast a test transaction',
       },
     },
   },
+  */
+  /*
   {
     name: 'Binance Chain',
     icon: 'bnb.png',
@@ -121,6 +84,7 @@ export const AssetCardListConfig: Array<CardProps> = [
       },
     },
   },
+  */
   {
     name: 'Bitcoin',
     icon: 'btc.png',
@@ -239,6 +203,7 @@ export const AssetCardListConfig: Array<CardProps> = [
       },
     },
   },
+  /*
   {
     name: 'Ethereum',
     icon: 'eth.png',
@@ -247,7 +212,11 @@ export const AssetCardListConfig: Array<CardProps> = [
     actions: {
       eth_getAddress: {
         callback: ETHGetAddress,
-        params: { addressParams: EthereumTransactions.address, snapId: DEFAULT_SNAP_ID },
+        params: {
+          addressParams: EthereumTransactions.address,
+          chainId: '0x1',
+          snapId: DEFAULT_SNAP_ID,
+        },
         description: 'Generate a receive address',
       },
 
@@ -257,29 +226,15 @@ export const AssetCardListConfig: Array<CardProps> = [
         description: 'Sign a test message',
       },
 
-      eth_signTransaction: {
-        callback: ETHSignTransaction,
+      eth_sendTransaction: {
+        callback: ETHSendTransaction,
         params: { transaction: EthereumTransactions.tx, snapId: DEFAULT_SNAP_ID },
-        description: 'Sign a test transaction',
-      },
-
-      eth_verifyMessage: {
-        callback: ETHVerifyMessage,
-        params: { message: EthereumTransactions.verify, snapId: DEFAULT_SNAP_ID },
-        description: 'Verify the signature from a previously-signed test message',
-      },
-
-      eth_broadcastTransaction: {
-        callback: ETHBroadcastTransaction,
-        params: {
-          transaction: EthereumTransactions.broadcast,
-          baseUrl: process.env.REACT_APP_UNCHAINED_ETHEREUM_HTTP_URL,
-          snapId: DEFAULT_SNAP_ID,
-        },
-        description: 'Broadcast a test transaction',
+        description: 'Sign/broadcast a test transaction',
       },
     },
   },
+  */
+  /*
   {
     name: 'Kava',
     icon: 'kava.png',
@@ -299,6 +254,7 @@ export const AssetCardListConfig: Array<CardProps> = [
       },
     },
   },
+  */
   {
     name: 'Litecoin',
     icon: 'ltc.png',
@@ -328,6 +284,7 @@ export const AssetCardListConfig: Array<CardProps> = [
       },
     },
   },
+  /*
   {
     name: 'Osmosis',
     icon: 'osmo.png',
@@ -357,6 +314,8 @@ export const AssetCardListConfig: Array<CardProps> = [
       },
     },
   },
+  */
+  /*
   {
     name: 'Secret',
     icon: 'scrt.png',
@@ -376,6 +335,8 @@ export const AssetCardListConfig: Array<CardProps> = [
       },
     },
   },
+  */
+  /*
   {
     name: 'Terra',
     icon: 'luna.png',
@@ -395,6 +356,7 @@ export const AssetCardListConfig: Array<CardProps> = [
       },
     },
   },
+  */
   {
     name: 'THORChain',
     icon: 'rune.png',
