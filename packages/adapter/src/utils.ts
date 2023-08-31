@@ -51,7 +51,7 @@ export const metaMaskFlaskSupported = async (externalProvider?: any): Promise<bo
   return true
 }
 
-export const shapeShiftMultichainInstalled = async (snapId: string): Promise<boolean> => {
+export const shapeShiftSnapInstalled = async (snapId: string): Promise<boolean> => {
   const provider = await getMetaMaskProvider()
   if (provider === undefined) {
     throw new Error('Could not get MetaMask provider')
@@ -105,7 +105,7 @@ export const isLocked = async (): Promise<boolean> => {
 /**
  * Prompt the user to allow the snap
  */
-export const enableShapeShiftMultichain = async (
+export const enableShapeShiftSnap = async (
   snapId: string,
   version?: string,
 ): Promise<EnableShapeShiftMultichainResult> => {
@@ -120,7 +120,7 @@ export const enableShapeShiftMultichain = async (
   }
   try {
     assert(metaMaskFlaskSupported(), 'Please install MetaMask Flask.')
-    const snapIsInstalled = await shapeShiftMultichainInstalled(snapId)
+    const snapIsInstalled = await shapeShiftSnapInstalled(snapId)
     if (!snapIsInstalled) {
       const res = await walletRequestSnaps(snapId, version)
       assert(res.errors?.length === 0, JSON.stringify(res.errors, null, 2))
