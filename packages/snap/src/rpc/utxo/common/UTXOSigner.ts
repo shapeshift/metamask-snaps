@@ -1,4 +1,3 @@
-import { PublicKey } from '@shapeshiftoss/hdwallet-core'
 import type {
   BroadcastTransactionParamsType,
   BroadcastTransactionResponseType,
@@ -12,7 +11,7 @@ import type {
 } from '@shapeshiftoss/metamask-snaps-types'
 import assert from 'assert'
 
-import { asyncCallWithTimeout, BaseSigner } from '../../common'
+import { BaseSigner } from '../../common'
 
 export abstract class UTXOSigner<T extends UTXOChainIds> extends BaseSigner<T> {
   async getAddress({ addressParams }: GetAddressParamsType<T>): Promise<GetAddressResponseType<T>> {

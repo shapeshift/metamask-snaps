@@ -77,7 +77,7 @@ export class TerraSigner extends CosmosSDKSigner<SupportedChainIds.TerraMainnet>
     }
   }
 
-  async broadcastTransaction(): Promise<
+  broadcastTransaction(): Promise<
     BroadcastTransactionResponseType<SupportedChainIds.TerraMainnet>
   > {
     return Promise.reject(

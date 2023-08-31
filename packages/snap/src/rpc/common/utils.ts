@@ -5,7 +5,6 @@ import { copyable, divider, heading, panel } from '@metamask/snaps-ui'
 import type { Coin } from '@shapeshiftoss/hdwallet-core'
 import {
   addressNListToBIP32,
-  bip32ToAddressNList,
   fromHexString,
   Keyring,
   stripHexPrefix,
@@ -141,7 +140,7 @@ export const userConfirm = async (params: userConfirmParam): Promise<boolean> =>
   return true
 }
 
-const getMetaMaskProvider = async (): Promise<ExternalProvider> => {
+const getMetaMaskProvider = (): Promise<ExternalProvider> => {
   try {
     // eslint-disable-next-line no-undef
     const provider = (window as any).ethereum

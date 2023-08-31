@@ -17,7 +17,7 @@ export class EthereumSigner extends EVMSigner<SupportedChainIds.EthereumMainnet>
     super(args)
   }
 
-  async initialize(
+  initialize(
     { broadcastUrl }: SignerInitializeArgs = {
       broadcastUrl: broadcastUrls.DEFAULT_UNCHAINED_ETHEREUM_HTTP_URL,
     },

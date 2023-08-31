@@ -77,9 +77,7 @@ export class BinanceSigner extends CosmosSDKSigner<SupportedChainIds.BinanceMain
     }
   }
 
-  async broadcastTransaction(): Promise<
-    BroadcastTransactionResponseType<SupportedChainIds.KavaMainnet>
-  > {
+  broadcastTransaction(): Promise<BroadcastTransactionResponseType<SupportedChainIds.KavaMainnet>> {
     return Promise.reject(
       new Error(`Broadcast disabled pending Unchained support for ${this.coin}.`),
     )

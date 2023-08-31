@@ -1,4 +1,3 @@
-import { PublicKey } from '@shapeshiftoss/hdwallet-core'
 import type {
   DogecoinBroadcastTransactionParams,
   DogecoinBroadcastTransactionResponse,

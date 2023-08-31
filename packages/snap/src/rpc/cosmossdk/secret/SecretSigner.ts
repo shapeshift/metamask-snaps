@@ -77,7 +77,7 @@ export class SecretSigner extends CosmosSDKSigner<SupportedChainIds.SecretMainne
     }
   }
 
-  async broadcastTransaction(): Promise<
+  broadcastTransaction(): Promise<
     BroadcastTransactionResponseType<SupportedChainIds.SecretMainnet>
   > {
     return Promise.reject(

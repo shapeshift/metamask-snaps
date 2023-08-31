@@ -13,8 +13,6 @@ import { serializeError } from 'eth-rpc-errors'
 
 import { BaseSigner } from '../../common'
 
-const BIP32_HARDENING_CONSTANT = 0x80000000
-
 const ERR_CHAIN_NOT_ADDED_TO_WALLET = 4902 // Internal error, which in the case of wallet_switchEthereumChain call means the chain isn't currently added to the wallet
 
 export abstract class EVMSigner<T extends EVMChainIds> extends BaseSigner<T> {

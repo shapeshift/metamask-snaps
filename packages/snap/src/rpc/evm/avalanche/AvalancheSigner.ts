@@ -17,7 +17,7 @@ export class AvalancheSigner extends EVMSigner<SupportedChainIds.AvalancheMainne
     super(args)
   }
 
-  async initialize(
+  initialize(
     { broadcastUrl }: SignerInitializeArgs = {
       broadcastUrl: broadcastUrls.DEFAULT_UNCHAINED_AVALANCHE_HTTP_URL,
     },
