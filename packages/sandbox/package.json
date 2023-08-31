@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "sandbox",
-  "version": "1.0.0-alpha.18",
+  "version": "1.0.0-alpha.19",
   "license": "MIT",
   "homepage": "https://shapeshift.github.io/metamask-snaps/",
   "scripts": {
@@ -26,7 +26,7 @@
     "@reduxjs/toolkit": "^1.8.3",
     "@shapeshiftoss/hdwallet-core": "^1.50.4",
     "@shapeshiftoss/logger": "^1.1.2",
-    "@shapeshiftoss/metamask-snaps-adapter": "^1.0.0-alpha.18",
+    "@shapeshiftoss/metamask-snaps-adapter": "^1.0.0-alpha.19",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.0.1",
     "@testing-library/user-event": "^14.1.0",
