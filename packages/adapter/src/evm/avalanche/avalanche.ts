@@ -1,14 +1,10 @@
-import {
-  AvalancheBroadcastTransactionAdapterParams,
-  AvalancheBroadcastTransactionResponse,
+import type {
   AvalancheGetAddressAdapterParams,
   AvalancheGetAddressResponse,
+  AvalancheSendTransactionAdapterParams,
+  AvalancheSendTransactionResponse,
   AvalancheSignMessageAdapterParams,
   AvalancheSignMessageResponse,
-  AvalancheSignTransactionAdapterParams,
-  AvalancheSignTransactionResponse,
-  AvalancheVerifyMessageAdapterParams,
-  AvalancheVerifyMessageResponse,
 } from '@shapeshiftoss/metamask-snaps-types'
 
 import { logger } from '../../lib/logger'
@@ -19,12 +15,12 @@ const moduleLogger = logger.child({ namespace: ['Adapter', 'Avalanche.ts'] })
 export const AVAXGetAddress = async (
   params: AvalancheGetAddressAdapterParams,
 ): Promise<AvalancheGetAddressResponse> => {
-  const { addressParams, snapId } = params
+  const { addressParams, chainId, snapId } = params
   try {
     return await sendFlaskRPCRequest(
       {
         method: 'avax_getAddress',
-        params: { addressParams },
+        params: { addressParams, chainId },
       },
       snapId,
     )
@@ -37,12 +33,12 @@ export const AVAXGetAddress = async (
 export const AVAXSignMessage = async (
   params: AvalancheSignMessageAdapterParams,
 ): Promise<AvalancheSignMessageResponse> => {
-  const { message, snapId } = params
+  const { message, chainId, snapId } = params
   try {
     return await sendFlaskRPCRequest(
       {
         method: 'avax_signMessage',
-        params: { message },
+        params: { message, chainId },
       },
       snapId,
     )
@@ -52,63 +48,23 @@ export const AVAXSignMessage = async (
   }
 }
 
-export const AVAXSignTransaction = async (
-  params: AvalancheSignTransactionAdapterParams,
-): Promise<AvalancheSignTransactionResponse> => {
+export const AVAXSendTransaction = async (
+  params: AvalancheSendTransactionAdapterParams,
+): Promise<AvalancheSendTransactionResponse> => {
   try {
-    const { transaction, snapId } = params
+    const { transaction, chainId, snapId } = params
     return await sendFlaskRPCRequest(
       {
-        method: 'avax_signTransaction',
-        params: { transaction },
+        method: 'avax_sendTransaction',
+        params: { transaction, chainId },
       },
       snapId,
     )
   } catch (error) {
     moduleLogger.error(
       error,
-      { fn: 'AVAXSignTransaction' },
-      `avax_signTransaction RPC call failed.`,
-    )
-    return Promise.reject(error)
-  }
-}
-
-export const AVAXVerifyMessage = async (
-  params: AvalancheVerifyMessageAdapterParams,
-): Promise<AvalancheVerifyMessageResponse> => {
-  const { message, snapId } = params
-  try {
-    return await sendFlaskRPCRequest(
-      {
-        method: 'avax_verifyMessage',
-        params: { message },
-      },
-      snapId,
-    )
-  } catch (error) {
-    moduleLogger.error(error, { fn: 'AVAXVerifyMessage' }, `avax_verifyMessage RPC call failed.`)
-    return Promise.reject(error)
-  }
-}
-
-export const AVAXBroadcastTransaction = async (
-  params: AvalancheBroadcastTransactionAdapterParams,
-): Promise<AvalancheBroadcastTransactionResponse> => {
-  const { transaction, baseUrl, snapId } = params
-  try {
-    return await sendFlaskRPCRequest(
-      {
-        method: 'avax_broadcastTransaction',
-        params: { transaction, baseUrl },
-      },
-      snapId,
-    )
-  } catch (error) {
-    moduleLogger.error(
-      error,
-      { fn: 'AVAXBroadcastTransaction' },
-      `avax_broadcastTransaction RPC call failed.`,
+      { fn: 'AVAXSendTransaction' },
+      `avax_sendTransaction RPC call failed.`,
     )
     return Promise.reject(error)
   }

@@ -1,5 +1,5 @@
-import { PublicKey } from '@shapeshiftoss/hdwallet-core'
-import {
+import type { PublicKey } from '@shapeshiftoss/hdwallet-core'
+import type {
   BitcoinCashBroadcastTransactionAdapterParams,
   BitcoinCashBroadcastTransactionResponse,
   BitcoinCashGetAddressAdapterParams,
@@ -35,7 +35,7 @@ export const BCHGetAddress = async (
 
 export const BCHGetPublicKeys = async (
   params: BitcoinCashGetAddressAdapterParams,
-): Promise<Array<PublicKey | null>> => {
+): Promise<(PublicKey | null)[]> => {
   const { addressParams, snapId } = params
   try {
     return await sendFlaskRPCRequest(
