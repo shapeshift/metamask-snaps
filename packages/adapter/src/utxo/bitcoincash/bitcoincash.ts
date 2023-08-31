@@ -1,4 +1,3 @@
-import { PublicKey } from '@shapeshiftoss/hdwallet-core'
 import type {
   BitcoinCashBroadcastTransactionAdapterParams,
   BitcoinCashBroadcastTransactionResponse,
@@ -29,21 +28,6 @@ export const BCHGetAddress = async (
     )
   } catch (error) {
     moduleLogger.error(error, { fn: 'BCHGetAddress' }, `bch_getAddress RPC call failed.`)
-    return Promise.reject(error)
-  }
-}
-
-export const BCHGetPublicKeys = async (
-  params: BitcoinCashGetAddressAdapterParams,
-): Promise<Array<PublicKey | null>> => {
-  const { addressParams, snapId } = params
-  try {
-    return await sendFlaskRPCRequest(
-      { method: 'bch_getPublicKeys', params: { addressParams } },
-      snapId,
-    )
-  } catch (error) {
-    moduleLogger.error(error, { fn: 'BCHGetPublicKeys' }, `bch_getPublicKeys RPC call failed.`)
     return Promise.reject(error)
   }
 }

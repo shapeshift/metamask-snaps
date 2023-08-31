@@ -3,7 +3,6 @@ import type {
   BitcoinBroadcastTransactionResponse,
   BitcoinGetAddressAdapterParams,
   BitcoinGetAddressResponse,
-  BitcoinGetPublicKeysResponse,
   BitcoinSignTransactionAdapterParams,
   BitcoinSignTransactionResponse,
 } from '@shapeshiftoss/metamask-snaps-types'
@@ -24,21 +23,6 @@ export const BTCGetAddress = async (
     )
   } catch (error) {
     moduleLogger.error(error, { fn: 'BTCGetAddress' }, `btc_getAddress RPC call failed.`)
-    return Promise.reject(error)
-  }
-}
-
-export const BTCGetPublicKeys = async (
-  params: BitcoinGetAddressAdapterParams,
-): Promise<BitcoinGetPublicKeysResponse> => {
-  const { addressParams, snapId } = params
-  try {
-    return await sendFlaskRPCRequest(
-      { method: 'btc_getPublicKeys', params: { addressParams } },
-      snapId,
-    )
-  } catch (error) {
-    moduleLogger.error(error, { fn: 'BTCGetPublicKeys' }, `btc_getPublicKeys RPC call failed.`)
     return Promise.reject(error)
   }
 }

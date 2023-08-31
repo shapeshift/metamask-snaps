@@ -28,19 +28,6 @@ export const bitcoincashGetAddress = async (
   }
 }
 
-export const bitcoincashGetPublicKeys = async (
-  params: BitcoinCashGetAddressParams,
-): Promise<PublicKey[]> => {
-  try {
-    const bitcoincashSigner = new BitcoinCashSigner()
-    await bitcoincashSigner.initialize()
-    return await bitcoincashSigner.getPublicKeys(params)
-  } catch (error) {
-    moduleLogger.error({ fn: 'bitcoincashGetPublicKeys' }, error)
-    return Promise.reject(error)
-  }
-}
-
 export const bitcoincashSignTransaction = async (
   params: BitcoinCashSignTransactionParams,
 ): Promise<BitcoinCashSignTransactionResponse> => {

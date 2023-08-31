@@ -47,25 +47,21 @@ import {
 import {
   bitcoinBroadcastTransaction,
   bitcoinGetAddress,
-  bitcoinGetPublicKeys,
   bitcoinSignTransaction,
 } from './rpc/utxo/bitcoin'
 import {
   bitcoincashBroadcastTransaction,
   bitcoincashGetAddress,
-  bitcoincashGetPublicKeys,
   bitcoincashSignTransaction,
 } from './rpc/utxo/bitcoincash'
 import {
   dogecoinBroadcastTransaction,
   dogecoinGetAddress,
-  dogecoinGetPublicKeys,
   dogecoinSignTransaction,
 } from './rpc/utxo/dogecoin'
 import {
   litecoinBroadcastTransaction,
   litecoinGetAddress,
-  litecoinGetPublicKeys,
   litecoinSignTransaction,
 } from './rpc/utxo/litecoin'
 
@@ -103,16 +99,12 @@ export const onRpcRequest: OnRpcRequestHandler = async ({ request, origin }: RPC
       return await binanceBroadcastTransaction({ origin, ...params })
     case 'bch_getAddress':
       return await bitcoincashGetAddress(params)
-    case 'bch_getPublicKeys':
-      return await bitcoincashGetPublicKeys(params)
     case 'bch_signTransaction':
       return await bitcoincashSignTransaction({ origin, ...params })
     case 'bch_broadcastTransaction':
       return await bitcoincashBroadcastTransaction({ origin, ...params })
     case 'btc_getAddress':
       return await bitcoinGetAddress(params)
-    case 'btc_getPublicKeys':
-      return await bitcoinGetPublicKeys(params)
     case 'btc_signTransaction':
       return await bitcoinSignTransaction({ origin, ...params })
     case 'btc_broadcastTransaction':
@@ -125,8 +117,6 @@ export const onRpcRequest: OnRpcRequestHandler = async ({ request, origin }: RPC
       return await cosmosBroadcastTransaction({ origin, ...params })
     case 'doge_getAddress':
       return await dogecoinGetAddress(params)
-    case 'doge_getPublicKeys':
-      return await dogecoinGetPublicKeys(params)
     case 'doge_signTransaction':
       return await dogecoinSignTransaction({ origin, ...params })
     case 'doge_broadcastTransaction':
@@ -145,8 +135,6 @@ export const onRpcRequest: OnRpcRequestHandler = async ({ request, origin }: RPC
       return await kavaBroadcastTransaction({ origin, ...params })
     case 'ltc_getAddress':
       return await litecoinGetAddress(params)
-    case 'ltc_getPublicKeys':
-      return await litecoinGetPublicKeys(params)
     case 'ltc_signTransaction':
       return await litecoinSignTransaction({ origin, ...params })
     case 'ltc_broadcastTransaction':

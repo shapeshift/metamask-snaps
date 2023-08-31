@@ -28,19 +28,6 @@ export const litecoinGetAddress = async (
   }
 }
 
-export const litecoinGetPublicKeys = async (
-  params: LitecoinGetAddressParams,
-): Promise<PublicKey[]> => {
-  try {
-    const litecoinSigner = new LitecoinSigner()
-    await litecoinSigner.initialize()
-    return await litecoinSigner.getPublicKeys(params)
-  } catch (error) {
-    moduleLogger.error({ fn: 'litecoinGetPublicKeys' }, error)
-    return Promise.reject(error)
-  }
-}
-
 export const litecoinSignTransaction = async (
   params: LitecoinSignTransactionParams,
 ): Promise<LitecoinSignTransactionResponse> => {
