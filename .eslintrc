@@ -1,5 +1,6 @@
 {
   "parser": "@typescript-eslint/parser",
+  "root": true,
   "extends": [
     "react-app",
     "react-app/jest",
@@ -15,7 +16,6 @@
     "__mocks__"
   ],
   "plugins": [
-    "jest",
     "prettier",
     "simple-import-sort"
   ],
