@@ -3,7 +3,13 @@ import type { BIP44CoinTypeNode } from '@metamask/key-tree'
 import { SLIP10Node } from '@metamask/key-tree'
 import { copyable, divider, heading, panel } from '@metamask/snaps-ui'
 import type { Coin } from '@shapeshiftoss/hdwallet-core'
-import { addressNListToBIP32, bip32ToAddressNList, fromHexString, Keyring, stripHexPrefix } from '@shapeshiftoss/hdwallet-core'
+import {
+  addressNListToBIP32,
+  bip32ToAddressNList,
+  fromHexString,
+  Keyring,
+  stripHexPrefix,
+} from '@shapeshiftoss/hdwallet-core'
 import type { NativeHDWallet } from '@shapeshiftoss/hdwallet-native'
 import { NativeAdapter } from '@shapeshiftoss/hdwallet-native'
 import { Node } from '@shapeshiftoss/hdwallet-native/dist/crypto/isolation/engines/default/bip32'
@@ -97,26 +103,34 @@ export const userConfirm = async (params: userConfirmParam): Promise<boolean> =>
   try {
     // Format addressNList for UTXO-like transactions
     const textAreaContentJSON = JSON.parse(params.textAreaContent)
-    if(textAreaContentJSON.inputs && textAreaContentJSON.inputs[0] && textAreaContentJSON.inputs[0].addressNList){
-      textAreaContentJSON.inputs[0].addressNList = addressNListToBIP32(textAreaContentJSON.inputs[0].addressNList)
+    if (
+      textAreaContentJSON.inputs &&
+      textAreaContentJSON.inputs[0] &&
+      textAreaContentJSON.inputs[0].addressNList
+    ) {
+      textAreaContentJSON.inputs[0].addressNList = addressNListToBIP32(
+        textAreaContentJSON.inputs[0].addressNList,
+      )
     }
     // Format addressNList for Cosmos-SDK-like transactions
-    if(textAreaContentJSON.addressNList){
+    if (textAreaContentJSON.addressNList) {
       textAreaContentJSON.addressNList = addressNListToBIP32(textAreaContentJSON.addressNList)
     }
     /* eslint-disable-next-line no-undef */
-    const ret = await asyncCallWithTimeout(snap.request({
-      method: 'snap_dialog',
-      params: {
-        type: 'confirmation',
-        content: panel([
-          heading(`${params.prompt}`),
-          divider(),
-          heading(`${params.description}:`),
-          copyable(JSON.stringify(textAreaContentJSON, null, 2)),
-        ]),
-      },
-    }))
+    const ret = await asyncCallWithTimeout(
+      snap.request({
+        method: 'snap_dialog',
+        params: {
+          type: 'confirmation',
+          content: panel([
+            heading(`${params.prompt}`),
+            divider(),
+            heading(`${params.description}:`),
+            copyable(JSON.stringify(textAreaContentJSON, null, 2)),
+          ]),
+        },
+      }),
+    )
     if (!ret) {
       return false
     }
@@ -194,7 +208,6 @@ export const metaMaskVersionGreaterThanOrEqualTo = async (version: string): Prom
   }
 }
 
-
 export const asyncCallWithTimeout = async (
   asyncPromise: any,
   timeout = DEFAULT_TIMEOUT_MS,
@@ -203,10 +216,9 @@ export const asyncCallWithTimeout = async (
 
   // eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
   const timeoutPromise = new Promise((resolve, _reject) => {
-    timeoutHandle = setTimeout(
-      () => {resolve(new Error('Async call timeout limit reached'))},
-      timeout,
-    )
+    timeoutHandle = setTimeout(() => {
+      resolve(new Error('Async call timeout limit reached'))
+    }, timeout)
   })
 
   const result = await Promise.race([asyncPromise, timeoutPromise])
@@ -215,7 +227,7 @@ export const asyncCallWithTimeout = async (
   }
 
   if (result instanceof Error) {
-    moduleLogger.error({fn:'asyncCallWithTimeout'}, 'Async call timeout expired')
+    moduleLogger.error({ fn: 'asyncCallWithTimeout' }, 'Async call timeout expired')
     return null
   }
 

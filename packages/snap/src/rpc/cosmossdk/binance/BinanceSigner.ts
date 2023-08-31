@@ -9,6 +9,7 @@ import type {
   SupportedChainIds,
 } from '@shapeshiftoss/metamask-snaps-types'
 import assert from 'assert'
+
 import type { SignerArgs } from '../../common/BaseSigner'
 import { logger } from '../../common/lib/logger'
 import { CosmosSDKSigner } from '../common/CosmosSDKSigner'
@@ -62,8 +63,8 @@ export class BinanceSigner extends CosmosSDKSigner<SupportedChainIds.BinanceMain
       const confirmed = await this.confirmTransaction(origin, transaction)
       assert(confirmed, 'User rejected the signing request')
       const signedTransaction = await this.signer.binanceSignTx(
-          transaction as SignerSignTransactionType<SupportedChainIds.BinanceMainnet>,
-        )
+        transaction as SignerSignTransactionType<SupportedChainIds.BinanceMainnet>,
+      )
       assert(signedTransaction !== null, 'Transaction signing failed')
       this.logEvent('signTransaction', {
         unsignedTransaction: transaction,

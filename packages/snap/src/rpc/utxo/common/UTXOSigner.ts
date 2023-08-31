@@ -39,7 +39,9 @@ export abstract class UTXOSigner<T extends UTXOChainIds> extends BaseSigner<T> {
     try {
       const confirmed = await this.confirmTransaction(origin, transaction)
       assert(confirmed, 'User rejected the signing request')
-      const signedTransaction = await this.signer.btcSignTx(transaction as SignerSignTransactionType<T>)
+      const signedTransaction = await this.signer.btcSignTx(
+        transaction as SignerSignTransactionType<T>,
+      )
       assert(signedTransaction !== null, 'Transaction signing failed')
       this.logEvent('signTransaction', {
         unsignedTransaction: transaction,

@@ -51,7 +51,10 @@ export abstract class BaseSigner<T extends SupportedChainIds> {
     }
   }
 
-  protected async confirmTransaction(origin: string | undefined, transaction: any): Promise<boolean> {
+  protected async confirmTransaction(
+    origin: string | undefined,
+    transaction: any,
+  ): Promise<boolean> {
     return await userConfirm({
       prompt: `Sign ${this.coin} network transaction from ${origin}?`,
       description: 'Please verify the transaction data below',
