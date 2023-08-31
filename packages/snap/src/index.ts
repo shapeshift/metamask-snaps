@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars, @typescript-eslint/no-unused-vars */
 
-import { OnRpcRequestHandler } from '@metamask/snap-types'
-import { ShapeShiftSnapRPCRequest } from '@shapeshiftoss/metamask-snaps-types'
+import type { OnRpcRequestHandler } from '@metamask/snap-types'
+import type { ShapeShiftSnapRPCRequest } from '@shapeshiftoss/metamask-snaps-types'
 
 import {
   binanceBroadcastTransaction,
@@ -36,16 +36,13 @@ import {
 } from './rpc/cosmossdk/thorchain'
 import {
   avalancheGetAddress,
+  avalancheSendTransaction,
   avalancheSignMessage,
-  avalancheSignTransaction,
-  avalancheVerifyMessage,
 } from './rpc/evm/avalanche'
 import {
-  ethereumBroadcastTransaction,
   ethereumGetAddress,
+  ethereumSendTransaction,
   ethereumSignMessage,
-  ethereumSignTransaction,
-  ethereumVerifyMessage,
 } from './rpc/evm/ethereum'
 import {
   bitcoinBroadcastTransaction,
@@ -85,95 +82,87 @@ interface RPCRequest {
   request: ShapeShiftSnapRPCRequest
 }
 
-export const onRpcRequest: OnRpcRequestHandler = async ({ request }) => {
+export const onRpcRequest: OnRpcRequestHandler = async ({ request, origin }: RPCRequest) => {
   const { method, params } = request
   switch (method) {
     case 'avax_getAddress':
       return await avalancheGetAddress(params)
     case 'avax_signMessage':
-      return await avalancheSignMessage(params)
-    case 'avax_signTransaction':
-      return await avalancheSignTransaction(params)
-    case 'avax_verifyMessage':
-      return await avalancheVerifyMessage(params)
-    case 'avax_broadcastTransaction':
-      return await ethereumBroadcastTransaction(params)
+      return await avalancheSignMessage({ origin, ...params })
+    case 'avax_sendTransaction':
+      return await avalancheSendTransaction({ origin, ...params })
     case 'binance_getAddress':
       return await binanceGetAddress(params)
     case 'binance_signTransaction':
-      return await binanceSignTransaction(params)
+      return await binanceSignTransaction({ origin, ...params })
     case 'binance_broadcastTransaction':
-      return await binanceBroadcastTransaction(params)
+      return await binanceBroadcastTransaction({ origin, ...params })
     case 'bch_getAddress':
       return await bitcoincashGetAddress(params)
     case 'bch_signTransaction':
-      return await bitcoincashSignTransaction(params)
+      return await bitcoincashSignTransaction({ origin, ...params })
     case 'bch_broadcastTransaction':
-      return await bitcoincashBroadcastTransaction(params)
+      return await bitcoincashBroadcastTransaction({ origin, ...params })
     case 'btc_getAddress':
       return await bitcoinGetAddress(params)
     case 'btc_signTransaction':
-      return await bitcoinSignTransaction(params)
+      return await bitcoinSignTransaction({ origin, ...params })
     case 'btc_broadcastTransaction':
-      return await bitcoinBroadcastTransaction(params)
+      return await bitcoinBroadcastTransaction({ origin, ...params })
     case 'cosmos_getAddress':
       return await cosmosGetAddress(params)
     case 'cosmos_signTransaction':
-      return await cosmosSignTransaction(params)
+      return await cosmosSignTransaction({ origin, ...params })
     case 'cosmos_broadcastTransaction':
-      return await cosmosBroadcastTransaction(params)
+      return await cosmosBroadcastTransaction({ origin, ...params })
     case 'doge_getAddress':
       return await dogecoinGetAddress(params)
     case 'doge_signTransaction':
-      return await dogecoinSignTransaction(params)
+      return await dogecoinSignTransaction({ origin, ...params })
     case 'doge_broadcastTransaction':
-      return await dogecoinBroadcastTransaction(params)
+      return await dogecoinBroadcastTransaction({ origin, ...params })
     case 'eth_getAddress':
       return await ethereumGetAddress(params)
     case 'eth_signMessage':
-      return await ethereumSignMessage(params)
-    case 'eth_signTransaction':
-      return await ethereumSignTransaction(params)
-    case 'eth_verifyMessage':
-      return await ethereumVerifyMessage(params)
-    case 'eth_broadcastTransaction':
-      return await ethereumBroadcastTransaction(params)
+      return await ethereumSignMessage({ origin, ...params })
+    case 'eth_sendTransaction':
+      return await ethereumSendTransaction({ origin, ...params })
     case 'kava_getAddress':
       return await kavaGetAddress(params)
     case 'kava_signTransaction':
-      return await kavaSignTransaction(params)
+      return await kavaSignTransaction({ origin, ...params })
     case 'kava_broadcastTransaction':
-      return await kavaBroadcastTransaction(params)
+      return await kavaBroadcastTransaction({ origin, ...params })
     case 'ltc_getAddress':
       return await litecoinGetAddress(params)
     case 'ltc_signTransaction':
-      return await litecoinSignTransaction(params)
+      return await litecoinSignTransaction({ origin, ...params })
     case 'ltc_broadcastTransaction':
-      return await litecoinBroadcastTransaction(params)
+      return await litecoinBroadcastTransaction({ origin, ...params })
     case 'osmosis_getAddress':
       return await osmosisGetAddress(params)
     case 'osmosis_signTransaction':
-      return await osmosisSignTransaction(params)
+      return await osmosisSignTransaction({ origin, ...params })
     case 'osmosis_broadcastTransaction':
-      return await osmosisBroadcastTransaction(params)
+      return await osmosisBroadcastTransaction({ origin, ...params })
     case 'secret_getAddress':
       return await secretGetAddress(params)
     case 'secret_signTransaction':
-      return await secretSignTransaction(params)
+      return await secretSignTransaction({ origin, ...params })
     case 'secret_broadcastTransaction':
-      return await secretBroadcastTransaction(params)
+      return await secretBroadcastTransaction({ origin, ...params })
     case 'terra_getAddress':
       return await terraGetAddress(params)
     case 'terra_signTransaction':
-      return await terraSignTransaction(params)
+      return await terraSignTransaction({ origin, ...params })
     case 'terra_broadcastTransaction':
-      return await terraBroadcastTransaction(params)
+      return await terraBroadcastTransaction({ origin, ...params })
     case 'thorchain_getAddress':
       return await thorchainGetAddress(params)
     case 'thorchain_signTransaction':
-      return await thorchainSignTransaction(params)
+      return await thorchainSignTransaction({ origin, ...params })
     case 'thorchain_broadcastTransaction':
-      return await thorchainBroadcastTransaction(params)
+      return await thorchainBroadcastTransaction({ origin, ...params })
     default:
       throw new Error('Method not found.')
   }

@@ -1,4 +1,4 @@
-import {
+import type {
   BroadcastTransactionParamsType,
   BroadcastTransactionResponseType,
   GetAddressParamsType,
@@ -32,15 +32,20 @@ export abstract class UTXOSigner<T extends UTXOChainIds> extends BaseSigner<T> {
   }
 
   async signTransaction({
+    origin,
     transaction,
   }: SignTransactionParamsType<T>): Promise<SignTransactionResponseType<T>> {
     try {
-      const confirmed = await this.confirmTransaction(transaction)
+      const confirmed = await this.confirmTransaction(origin, transaction)
       assert(confirmed, 'User rejected the signing request')
       const signedTransaction = await this.signer.btcSignTx(
         transaction as SignerSignTransactionType<T>,
       )
       assert(signedTransaction !== null, 'Transaction signing failed')
+      this.logEvent('signTransaction', {
+        unsignedTransaction: transaction,
+        signedTransaction,
+      })
       return signedTransaction as SignTransactionResponseType<T>
     } catch (error) {
       this.logger.error(transaction, { fn: 'signTransaction' }, error)

@@ -1,7 +1,7 @@
-import { SupportedChainIds } from '@shapeshiftoss/metamask-snaps-types'
+import type { SupportedChainIds } from '@shapeshiftoss/metamask-snaps-types'
 import * as unchained from '@shapeshiftoss/unchained-client'
 
-import { SignerArgs, SignerInitializeArgs } from '../../common/BaseSigner'
+import type { SignerArgs, SignerInitializeArgs } from '../../common/BaseSigner'
 import { broadcastUrls } from '../../common/constants'
 import { logger } from '../../common/lib/logger'
 import { EVMSigner } from '../common/EVMSigner'
@@ -17,7 +17,7 @@ export class AvalancheSigner extends EVMSigner<SupportedChainIds.AvalancheMainne
     super(args)
   }
 
-  async initialize(
+  initialize(
     { broadcastUrl }: SignerInitializeArgs = {
       broadcastUrl: broadcastUrls.DEFAULT_UNCHAINED_AVALANCHE_HTTP_URL,
     },
@@ -26,7 +26,6 @@ export class AvalancheSigner extends EVMSigner<SupportedChainIds.AvalancheMainne
       basePath: broadcastUrl,
     })
     try {
-      this.signer = await this.initializeSigner()
       this.httpProvider = new unchained.avalanche.V1Api(httpProviderConfiguration)
       this._initialized = true
     } catch (error) {
