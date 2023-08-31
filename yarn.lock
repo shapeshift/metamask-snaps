@@ -20749,6 +20749,30 @@ __metadata:
   languageName: node
   linkType: hard
 
+"patch-package@npm:^6.2.2":
+  version: 6.5.1
+  resolution: "patch-package@npm:6.5.1"
+  dependencies:
+    "@yarnpkg/lockfile": ^1.1.0
+    chalk: ^4.1.2
+    cross-spawn: ^6.0.5
+    find-yarn-workspace-root: ^2.0.0
+    fs-extra: ^9.0.0
+    is-ci: ^2.0.0
+    klaw-sync: ^6.0.0
+    minimist: ^1.2.6
+    open: ^7.4.2
+    rimraf: ^2.6.3
+    semver: ^5.6.0
+    slash: ^2.0.0
+    tmp: ^0.0.33
+    yaml: ^1.10.2
+  bin:
+    patch-package: index.js
+  checksum: 8530ffa30f11136b527c6eddf6da48fa12856ee510a47edb1f9cdf8a025636adb82968f5fae778b5e04ce8c87915ebdf5911422b54add59a5a42e372a8f30eb2
+  languageName: node
+  linkType: hard
+
 "patch-package@npm:^6.4.7":
   version: 6.4.7
   resolution: "patch-package@npm:6.4.7"
@@ -23518,6 +23542,7 @@ __metadata:
     eslint-plugin-simple-import-sort: ^7.0.0
     lerna: ^4.0.0
     mkdirp: ^1.0.4
+    patch-package: ^6.2.2
     prettier: ^2.7.1
     prettier-package-json: ^2.6.4
     prettier-plugin-packagejson: ^2.2.18

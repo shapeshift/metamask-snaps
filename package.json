@@ -68,6 +68,7 @@
     "eslint-plugin-simple-import-sort": "^7.0.0",
     "lerna": "^4.0.0",
     "mkdirp": "^1.0.4",
+    "patch-package": "^6.2.2",
     "prettier": "^2.7.1",
     "prettier-package-json": "^2.6.4",
     "prettier-plugin-packagejson": "^2.2.18",
