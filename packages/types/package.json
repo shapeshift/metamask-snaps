@@ -1,6 +1,6 @@
 {
   "name": "@shapeshiftoss/metamask-snaps-types",
-  "version": "1.0.0-alpha.11",
+  "version": "1.0.0-alpha.18",
   "description": "Types for ShapeShift multi-chain snap.",
   "license": "MIT",
   "author": "pastaghost <pastaghost@2520.io>",
@@ -42,5 +42,5 @@
   "publishConfig": {
     "access": "public"
   },
-  "gitHead": "eef9bd51f773eaefa59340b75647bd0d4592ba53"
+  "gitHead": "54beb75f060ee91836861205eaaf04226f40a326"
 }

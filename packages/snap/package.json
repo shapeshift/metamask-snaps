@@ -1,6 +1,6 @@
 {
   "name": "@shapeshiftoss/metamask-snaps",
-  "version": "1.0.0-alpha.11",
+  "version": "1.0.0-alpha.18",
   "description": "A multi-chain Snap for MetaMask by ShapeShift.",
   "license": "MIT",
   "author": "pastaghost <pastaghost@2520.io> (http://www.github.com/pastaghost)",
@@ -47,10 +47,11 @@
     "@shapeshiftoss/hdwallet-core": "^1.50.4",
     "@shapeshiftoss/hdwallet-native": "^1.50.4",
     "@shapeshiftoss/logger": "^1.1.2",
-    "@shapeshiftoss/metamask-snaps-types": "^1.0.0-alpha.11",
+    "@shapeshiftoss/metamask-snaps-types": "^1.0.0-alpha.18",
     "@shapeshiftoss/types": "^8.3.0",
     "@shapeshiftoss/unchained-client": "10.1.1",
-    "eth-rpc-errors": "^4.0.3"
+    "eth-rpc-errors": "^4.0.3",
+    "patch-package": "^6.2.2"
   },
   "peerDependencies": {
     "@babel/core": "*",
@@ -96,7 +97,6 @@
     "eslint-plugin-simple-import-sort": "^10.0.0",
     "jest": "^29.0.3",
     "mkdirp": "^1.0.4",
-    "patch-package": "^6.4.7",
     "postinstall-postinstall": "^2.1.0",
     "prettier": "^2.8.8",
     "prettier-package-json": "^2.8.0",
@@ -116,5 +116,6 @@
   "installConfig": {
     "hoistingLimits": "workspaces"
   },
-  "packageManager": "yarn@3.2.2"
+  "packageManager": "yarn@3.2.2",
+  "gitHead": "54beb75f060ee91836861205eaaf04226f40a326"
 }
