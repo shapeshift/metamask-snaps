@@ -5803,7 +5803,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@metamask/snaps-browserify-plugin@npm:^1.0.1":
+"@metamask/snaps-browserify-plugin@npm:^1.0.2":
   version: 1.0.2
   resolution: "@metamask/snaps-browserify-plugin@npm:1.0.2"
   dependencies:
@@ -5813,9 +5813,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@metamask/snaps-cli@npm:1.0.1":
-  version: 1.0.1
-  resolution: "@metamask/snaps-cli@npm:1.0.1"
+"@metamask/snaps-cli@npm:1.0.2":
+  version: 1.0.2
+  resolution: "@metamask/snaps-cli@npm:1.0.2"
   dependencies:
     "@babel/core": ^7.16.7
     "@babel/plugin-proposal-class-properties": ^7.16.7
@@ -5825,8 +5825,8 @@ __metadata:
     "@babel/plugin-transform-runtime": ^7.16.7
     "@babel/preset-env": ^7.16.7
     "@babel/preset-typescript": ^7.16.7
-    "@metamask/snaps-browserify-plugin": ^1.0.1
-    "@metamask/snaps-utils": ^1.0.1
+    "@metamask/snaps-browserify-plugin": ^1.0.2
+    "@metamask/snaps-utils": ^1.0.2
     "@metamask/utils": ^6.0.1
     babelify: ^10.0.0
     browserify: ^17.0.0
@@ -5839,7 +5839,7 @@ __metadata:
     yargs-parser: ^20.2.2
   bin:
     mm-snap: ./dist/main.js
-  checksum: 9638cb1da060e70672d268155585c45db641547c3ce3b3eefd53946bf7497b50b4ea1e6eaabcf4751fd09095d1873a3b05298045e183268f7d10b1656c046fe2
+  checksum: bc3795c811f2c93dc0d0d6442ded505a2d005312e191da6137f17afd3d8ff155e2dc7f4840748796db7a5bb47c771d41810bab73af5a030990f24982e106f235
   languageName: node
   linkType: hard
 
@@ -5886,7 +5886,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@metamask/snaps-utils@npm:^1.0.1, @metamask/snaps-utils@npm:^1.0.2":
+"@metamask/snaps-utils@npm:^1.0.2":
   version: 1.0.2
   resolution: "@metamask/snaps-utils@npm:1.0.2"
   dependencies:
@@ -7349,7 +7349,7 @@ __metadata:
     "@metamask/eslint-config-nodejs": ^12.1.0
     "@metamask/eslint-config-typescript": ^12.1.0
     "@metamask/key-tree": ^9.0.0
-    "@metamask/snaps-cli": 1.0.1
+    "@metamask/snaps-cli": 1.0.2
     "@metamask/snaps-types": ^1.0.1
     "@metamask/snaps-ui": ^1.0.1
     "@metamask/types": ^1.1.0
