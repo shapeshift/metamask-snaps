@@ -1,4 +1,4 @@
-import { PublicKey } from '@shapeshiftoss/hdwallet-core'
+import type { PublicKey } from '@shapeshiftoss/hdwallet-core'
 import type {
   DogecoinBroadcastTransactionAdapterParams,
   DogecoinBroadcastTransactionResponse,
@@ -33,7 +33,7 @@ export const dogecoinGetAddress = async (
 
 export const dogecoinGetPublicKeys = async (
   params: DogecoinGetAddressAdapterParams,
-): Promise<Array<PublicKey | null>> => {
+): Promise<(PublicKey | null)[]> => {
   const { addressParams, snapId } = params
   try {
     return await sendFlaskRPCRequest(

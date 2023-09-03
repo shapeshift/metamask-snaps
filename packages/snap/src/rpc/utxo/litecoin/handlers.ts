@@ -1,4 +1,4 @@
-import { PublicKey } from '@shapeshiftoss/hdwallet-core'
+import type { PublicKey } from '@shapeshiftoss/hdwallet-core'
 import type {
   LitecoinBroadcastTransactionParams,
   LitecoinBroadcastTransactionResponse,

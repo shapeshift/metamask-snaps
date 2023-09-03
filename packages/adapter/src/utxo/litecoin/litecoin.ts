@@ -1,4 +1,4 @@
-import { PublicKey } from '@shapeshiftoss/hdwallet-core'
+import type { PublicKey } from '@shapeshiftoss/hdwallet-core'
 import type {
   LitecoinBroadcastTransactionAdapterParams,
   LitecoinBroadcastTransactionResponse,
@@ -33,7 +33,7 @@ export const LTCGetAddress = async (
 
 export const LTCGetPublicKeys = async (
   params: LitecoinGetAddressAdapterParams,
-): Promise<Array<PublicKey | null>> => {
+): Promise<(PublicKey | null)[]> => {
   const { addressParams, snapId } = params
   try {
     return await sendFlaskRPCRequest(
