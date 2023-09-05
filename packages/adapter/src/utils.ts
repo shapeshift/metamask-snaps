@@ -7,6 +7,7 @@ import type {
   ShapeShiftSnapRPCResponse,
 } from '@shapeshiftoss/metamask-snaps-types'
 import assert from 'assert'
+import PQueue from 'p-queue'
 
 import { logger } from './lib/logger'
 import { walletRequestSnaps } from './metamask/metamask'
@@ -133,6 +134,9 @@ export const enableShapeShiftSnap = async (
   return ret
 }
 
+// Flask only supports a max. of 5 queued requests, so this ensures we're under that
+const flaskRpcRequestsQueue = new PQueue({ concurrency: 4 })
+
 export const sendFlaskRPCRequest = async <T extends ShapeShiftSnapRPCResponse>(
   request: ShapeShiftSnapRPCRequest,
   snapId: string,
@@ -145,13 +149,15 @@ export const sendFlaskRPCRequest = async <T extends ShapeShiftSnapRPCResponse>(
     if (provider.request === undefined) {
       throw new Error('MetaMask provider does not define a .request() method')
     }
-    const ret = await provider.request({
-      method: 'wallet_invokeSnap',
-      params: {
-        snapId,
-        request,
-      },
-    })
+    const ret = await flaskRpcRequestsQueue.add(() =>
+      provider.request?.({
+        method: 'wallet_invokeSnap',
+        params: {
+          snapId,
+          request,
+        },
+      }),
+    )
     return ret as T
   } catch (error) {
     moduleLogger.error(error, { fn: 'sendFlaskRPCRequest' }, `${request.method} RPC call failed.`)
