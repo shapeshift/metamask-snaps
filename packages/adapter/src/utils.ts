@@ -135,7 +135,8 @@ export const enableShapeShiftSnap = async (
 }
 
 // Flask only supports a max. of 5 queued requests, so this ensures we're under that
-const flaskRpcRequestsQueue = new PQueue({ concurrency: 4 })
+// by limiting to 1 concurrent snap JSON-RPC request and 1 RPS
+const flaskRpcRequestsQueue = new PQueue({ concurrency: 1, interval: 1000, intervalCap: 1 })
 
 export const sendFlaskRPCRequest = async <T extends ShapeShiftSnapRPCResponse>(
   request: ShapeShiftSnapRPCRequest,
