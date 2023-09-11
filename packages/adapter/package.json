@@ -1,6 +1,6 @@
 {
   "name": "@shapeshiftoss/metamask-snaps-adapter",
-  "version": "1.0.0-alpha.30",
+  "version": "1.0.0-alpha.30-1",
   "description": "",
   "author": "pastaghost <pastaghost@2520.io> (http://www.github.com/pastaghost)",
   "homepage": "https://github.com/shapeshift/metamask-snaps/tree/main/packages/adapter",
@@ -28,7 +28,7 @@
     "@metamask/snaps-ui": "1.0.1",
     "@shapeshiftoss/hdwallet-core": "^1.50.4",
     "@shapeshiftoss/logger": "^1.1.3",
-    "@shapeshiftoss/metamask-snaps": "^1.0.0-alpha.30",
+    "@shapeshiftoss/metamask-snaps": "^1.0.0-alpha.30-1",
     "@shapeshiftoss/metamask-snaps-types": "^1.0.0-alpha.30",
     "p-queue": "^7.4.1"
   },
