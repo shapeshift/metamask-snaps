@@ -1,6 +1,6 @@
 {
   "name": "@shapeshiftoss/metamask-snaps",
-  "version": "1.0.0-alpha.28",
+  "version": "1.0.0-alpha.29",
   "description": "A multi-chain Snap for MetaMask by ShapeShift.",
   "license": "MIT",
   "author": "pastaghost <pastaghost@2520.io> (http://www.github.com/pastaghost)",
@@ -47,7 +47,7 @@
     "@shapeshiftoss/hdwallet-core": "^1.50.4",
     "@shapeshiftoss/hdwallet-native": "^1.50.4",
     "@shapeshiftoss/logger": "^1.1.2",
-    "@shapeshiftoss/metamask-snaps-types": "^1.0.0-alpha.28",
+    "@shapeshiftoss/metamask-snaps-types": "^1.0.0-alpha.29",
     "@shapeshiftoss/types": "^8.3.0",
     "@shapeshiftoss/unchained-client": "10.1.1",
     "eth-rpc-errors": "^4.0.3",
@@ -117,5 +117,5 @@
     "hoistingLimits": "workspaces"
   },
   "packageManager": "yarn@3.2.2",
-  "gitHead": "54beb75f060ee91836861205eaaf04226f40a326"
+  "gitHead": "53a1ff8ba938947307bdb3783207e34bb6fd8744"
 }
