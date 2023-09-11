@@ -40,18 +40,6 @@ export const getMetaMaskProvider = async (): Promise<Provider | undefined> => {
   return undefined
 }
 
-export const metaMaskFlaskSupported = async (externalProvider?: any): Promise<boolean> => {
-  try {
-    const provider = externalProvider || (await getMetaMaskProvider())
-
-    const isFlask = (await provider.request({ method: 'web3_clientVersion' }))?.includes('flask')
-    assert(isFlask, 'Please install MetaMask Flask.')
-  } catch (error) {
-    moduleLogger.error({ fn: 'metaMaskFlaskSupported' }, error)
-  }
-  return true
-}
-
 export const shapeShiftSnapInstalled = async (snapId: string): Promise<boolean> => {
   try {
     const provider = await getMetaMaskProvider()
@@ -120,7 +108,6 @@ export const enableShapeShiftSnap = async (
     },
   }
   try {
-    assert(metaMaskFlaskSupported(), 'Please install MetaMask Flask.')
     const snapIsInstalled = await shapeShiftSnapInstalled(snapId)
     if (!snapIsInstalled) {
       const res = await walletRequestSnaps(snapId, version)
