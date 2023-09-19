@@ -1,9 +1,9 @@
-import type { PublicKey } from '@shapeshiftoss/hdwallet-core'
 import type {
   DogecoinBroadcastTransactionAdapterParams,
   DogecoinBroadcastTransactionResponse,
   DogecoinGetAddressAdapterParams,
   DogecoinGetAddressResponse,
+  DogecoinGetPublicKeysResponse,
   DogecoinSignTransactionAdapterParams,
   DogecoinSignTransactionResponse,
 } from '@shapeshiftoss/metamask-snaps-types'
@@ -33,7 +33,7 @@ export const dogecoinGetAddress = async (
 
 export const dogecoinGetPublicKeys = async (
   params: DogecoinGetAddressAdapterParams,
-): Promise<(PublicKey | null)[]> => {
+): Promise<DogecoinGetPublicKeysResponse> => {
   const { addressParams, snapId } = params
   try {
     return await sendFlaskRPCRequest(
