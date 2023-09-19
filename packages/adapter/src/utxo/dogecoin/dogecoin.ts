@@ -3,6 +3,7 @@ import type {
   DogecoinBroadcastTransactionResponse,
   DogecoinGetAddressAdapterParams,
   DogecoinGetAddressResponse,
+  DogecoinGetPublicKeysResponse,
   DogecoinSignTransactionAdapterParams,
   DogecoinSignTransactionResponse,
 } from '@shapeshiftoss/metamask-snaps-types'
@@ -26,6 +27,25 @@ export const dogecoinGetAddress = async (
     )
   } catch (error) {
     moduleLogger.error(error, { fn: 'DogeGetAddress' }, `doge_getAddress RPC call failed.`)
+    return Promise.reject(error)
+  }
+}
+
+export const dogecoinGetPublicKeys = async (
+  params: DogecoinGetAddressAdapterParams,
+): Promise<DogecoinGetPublicKeysResponse> => {
+  const { addressParams, snapId } = params
+  try {
+    return await sendFlaskRPCRequest(
+      { method: 'doge_getPublicKeys', params: { addressParams } },
+      snapId,
+    )
+  } catch (error) {
+    moduleLogger.error(
+      error,
+      { fn: 'dogecoinGetPublicKeys' },
+      `doge_getPublicKeys RPC call failed.`,
+    )
     return Promise.reject(error)
   }
 }

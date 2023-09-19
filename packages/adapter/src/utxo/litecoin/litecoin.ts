@@ -3,6 +3,7 @@ import type {
   LitecoinBroadcastTransactionResponse,
   LitecoinGetAddressAdapterParams,
   LitecoinGetAddressResponse,
+  LitecoinGetPublicKeysResponse,
   LitecoinSignTransactionAdapterParams,
   LitecoinSignTransactionResponse,
 } from '@shapeshiftoss/metamask-snaps-types'
@@ -26,6 +27,21 @@ export const LTCGetAddress = async (
     )
   } catch (error) {
     moduleLogger.error(error, { fn: 'LTCGetAddress' }, `ltc_getAddress RPC call failed.`)
+    return Promise.reject(error)
+  }
+}
+
+export const LTCGetPublicKeys = async (
+  params: LitecoinGetAddressAdapterParams,
+): Promise<LitecoinGetPublicKeysResponse> => {
+  const { addressParams, snapId } = params
+  try {
+    return await sendFlaskRPCRequest(
+      { method: 'ltc_getPublicKeys', params: { addressParams } },
+      snapId,
+    )
+  } catch (error) {
+    moduleLogger.error(error, { fn: 'LTCGetPublicKeys' }, `ltc_getPublicKeys RPC call failed.`)
     return Promise.reject(error)
   }
 }

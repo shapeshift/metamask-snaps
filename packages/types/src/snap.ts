@@ -44,6 +44,7 @@ import type {
   OsmosisGetAddress,
   OsmosisSignedTransaction,
   OsmosisSignTransaction,
+  PublicKeys,
   SecretAddress,
   SecretGetAddress,
   SecretSignedTransaction,
@@ -157,8 +158,18 @@ export interface BitcoinCashGetAddressRequest {
   params: BitcoinCashGetAddressParams
 }
 
+export interface BitcoinCashGetPublicKeysRequest {
+  method: 'bch_getPublicKeys'
+  params: BitcoinCashGetAddressParams
+}
+
 export interface BitcoinGetAddressRequest {
   method: 'btc_getAddress'
+  params: BitcoinGetAddressParams
+}
+
+export interface BitcoinGetPublicKeysRequest {
+  method: 'btc_getPublicKeys'
   params: BitcoinGetAddressParams
 }
 
@@ -169,6 +180,11 @@ export interface CosmosGetAddressRequest {
 
 export interface DogecoinGetAddressRequest {
   method: 'doge_getAddress'
+  params: DogecoinGetAddressParams
+}
+
+export interface DogecoinGetPublicKeysRequest {
+  method: 'doge_getPublicKeys'
   params: DogecoinGetAddressParams
 }
 
@@ -184,6 +200,11 @@ export interface KavaGetAddressRequest {
 
 export interface LitecoinGetAddressRequest {
   method: 'ltc_getAddress'
+  params: LitecoinGetAddressParams
+}
+
+export interface LitecoinGetPublicKeysRequest {
+  method: 'ltc_getPublicKeys'
   params: LitecoinGetAddressParams
 }
 
@@ -212,6 +233,10 @@ export type AvalancheGetAddressResponse = MaybeRpcResponse<AvalancheAddress>
 export type BinanceGetAddressResponse = MaybeRpcResponse<BinanceAddress>
 export type BitcoinCashGetAddressResponse = MaybeRpcResponse<BitcoinCashAddress>
 export type BitcoinGetAddressResponse = MaybeRpcResponse<BitcoinAddress>
+export type BitcoinGetPublicKeysResponse = MaybeRpcResponse<PublicKeys>
+export type BitcoinCashGetPublicKeysResponse = MaybeRpcResponse<PublicKeys>
+export type DogecoinGetPublicKeysResponse = MaybeRpcResponse<PublicKeys>
+export type LitecoinGetPublicKeysResponse = MaybeRpcResponse<PublicKeys>
 export type CosmosGetAddressResponse = MaybeRpcResponse<CosmosAddress>
 export type DogecoinGetAddressResponse = MaybeRpcResponse<DogecoinAddress>
 export type EthereumGetAddressResponse = MaybeRpcResponse<EthereumAddress>
@@ -726,14 +751,17 @@ export type ShapeShiftSnapRPCRequest =
   | BitcoinBroadcastTransactionRequest
   | BitcoinCashBroadcastTransactionRequest
   | BitcoinCashGetAddressRequest
+  | BitcoinCashGetPublicKeysRequest
   | BitcoinCashSignTransactionRequest
   | BitcoinGetAddressRequest
+  | BitcoinGetPublicKeysRequest
   | BitcoinSignTransactionRequest
   | CosmosBroadcastTransactionRequest
   | CosmosGetAddressRequest
   | CosmosSignTransactionRequest
   | DogecoinBroadcastTransactionRequest
   | DogecoinGetAddressRequest
+  | DogecoinGetPublicKeysRequest
   | DogecoinSignTransactionRequest
   | EthereumGetAddressRequest
   | EthereumSignMessageRequest
@@ -743,6 +771,7 @@ export type ShapeShiftSnapRPCRequest =
   | KavaSignTransactionRequest
   | LitecoinBroadcastTransactionRequest
   | LitecoinGetAddressRequest
+  | LitecoinGetPublicKeysRequest
   | LitecoinSignTransactionRequest
   | OsmosisBroadcastTransactionRequest
   | OsmosisGetAddressRequest
@@ -769,6 +798,7 @@ export type ShapeShiftSnapRPCResponse =
   | BitcoinCashGetAddressResponse
   | BitcoinCashSignTransactionResponse
   | BitcoinGetAddressResponse
+  | BitcoinGetPublicKeysResponse
   | BitcoinSignTransactionResponse
   | CosmosBroadcastTransactionResponse
   | CosmosGetAddressResponse

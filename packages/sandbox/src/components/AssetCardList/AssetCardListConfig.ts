@@ -1,6 +1,6 @@
 import {
-  BCHBroadcastTransaction,
   BCHGetAddress,
+  BCHBroadcastTransaction,
   BCHSignTransaction,
   BTCBroadcastTransaction,
   BTCGetAddress,
@@ -11,9 +11,9 @@ import {
   dogecoinBroadcastTransaction,
   dogecoinGetAddress,
   dogecoinSignTransaction,
-  LTCBroadcastTransaction,
   LTCGetAddress,
   LTCSignTransaction,
+  LTCBroadcastTransaction,
   thorchainBroadcastTransaction,
   thorchainGetAddress,
   thorchainSignTransaction,
