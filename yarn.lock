@@ -5866,7 +5866,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@metamask/snaps-ui@npm:1.0.2, @metamask/snaps-ui@npm:^1.0.1, @metamask/snaps-ui@npm:^1.0.2":
+"@metamask/snaps-ui@npm:2.0.0, @metamask/snaps-ui@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "@metamask/snaps-ui@npm:2.0.0"
+  dependencies:
+    "@metamask/utils": ^8.1.0
+    superstruct: ^1.0.3
+  checksum: 0a8886402aea3aeebc18dd8058f169b7c751f93aac22286a693dbb6f787b10e44f7da9efa40981dde427f2301ce3da11af93e37398157eb75fdce85c53f48dd8
+  languageName: node
+  linkType: hard
+
+"@metamask/snaps-ui@npm:^1.0.2":
   version: 1.0.2
   resolution: "@metamask/snaps-ui@npm:1.0.2"
   dependencies:
@@ -5936,6 +5946,20 @@ __metadata:
     semver: ^7.5.4
     superstruct: ^1.0.3
   checksum: 165ed378f4ac5ca42c241d32154e15b609f9e772a9dc069b870613c005dc0e7e4fa92204c30e98ec2317f1e38c77747057671a26fd0a5ba36a288e3c9ef03790
+  languageName: node
+  linkType: hard
+
+"@metamask/utils@npm:^8.1.0":
+  version: 8.1.0
+  resolution: "@metamask/utils@npm:8.1.0"
+  dependencies:
+    "@ethereumjs/tx": ^4.1.2
+    "@noble/hashes": ^1.3.1
+    "@types/debug": ^4.1.7
+    debug: ^4.3.4
+    semver: ^7.5.4
+    superstruct: ^1.0.3
+  checksum: 4cbee36d0c227f3e528930e83f75a0c6b71b55b332c3e162f0e87f3dd86ae017d0b20405d76ea054ab99e4d924d3d9b8b896ed12a12aae57b090350e5a625999
   languageName: node
   linkType: hard
 
@@ -7269,7 +7293,7 @@ __metadata:
   dependencies:
     "@ethersproject/providers": ^5.7.2
     "@metamask/detect-provider": ^2.0.0
-    "@metamask/snaps-ui": 1.0.2
+    "@metamask/snaps-ui": 2.0.0
     "@shapeshiftoss/hdwallet-core": ^1.50.4
     "@shapeshiftoss/logger": ^1.1.3
     "@shapeshiftoss/metamask-snaps": ^1.0.1
@@ -7342,7 +7366,7 @@ __metadata:
     "@metamask/key-tree": ^9.0.0
     "@metamask/snaps-cli": 1.0.2
     "@metamask/snaps-types": ^1.0.1
-    "@metamask/snaps-ui": ^1.0.1
+    "@metamask/snaps-ui": ^2.0.0
     "@metamask/types": ^1.1.0
     "@shapeshiftoss/caip": ^8.15.0
     "@shapeshiftoss/hdwallet-core": ^1.50.4
