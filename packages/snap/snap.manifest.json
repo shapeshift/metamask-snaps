@@ -15,7 +15,7 @@
         "registry": "https://registry.npmjs.org/"
       }
     },
-    "shasum": "TGIuQx3ItIAjD1Zp1hl+53YY1ULXSoRQGQx9ppn1pFM="
+    "shasum": "gNroTAxZl9TXIrFdD/OiCsLzH1/Qqnox6BprEFTyEZQ="
   },
   "initialPermissions": {
     "endowment:network-access": {},
