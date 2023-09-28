@@ -7,7 +7,7 @@ import type {
   ShapeShiftSnapRPCResponse,
 } from '@shapeshiftoss/metamask-snaps-types'
 import assert from 'assert'
-import PQueue from 'p-queue/dist'
+import PQueue from 'p-queue'
 
 import { logger } from './lib/logger'
 import { walletRequestSnaps } from './metamask/metamask'
