@@ -7199,9 +7199,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@shapeshiftoss/hdwallet-core@npm:1.55.0, @shapeshiftoss/hdwallet-core@npm:^1.55.0":
-  version: 1.55.0
-  resolution: "@shapeshiftoss/hdwallet-core@npm:1.55.0"
+"@shapeshiftoss/hdwallet-core@npm:1.55.1, @shapeshiftoss/hdwallet-core@npm:^1.55.1":
+  version: 1.55.1
+  resolution: "@shapeshiftoss/hdwallet-core@npm:1.55.1"
   dependencies:
     "@shapeshiftoss/proto-tx-builder": ^0.8.0
     eip-712: ^1.0.0
@@ -7209,7 +7209,7 @@ __metadata:
     lodash: ^4.17.21
     rxjs: ^6.4.0
     type-assertions: ^1.1.0
-  checksum: 57f71e6af2ed3319875d7a69fb0498a62c4872bc4976484b78c5c8a4c0d4dd0add1304cc5aef25b394eb428ad365bf7d122db4cb6307e5f94cd412227f3b3d23
+  checksum: 8b100097dfc6a5661f1ee7e2bceb91e196813f9aee174cdc7313507017d0ecc4d80476b415d1e6791313b946a3fc8e8329eb939b91cdb57070b7d9e3e8847568
   languageName: node
   linkType: hard
 
@@ -7225,13 +7225,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@shapeshiftoss/hdwallet-native@npm:^1.55.0":
-  version: 1.55.0
-  resolution: "@shapeshiftoss/hdwallet-native@npm:1.55.0"
+"@shapeshiftoss/hdwallet-native@npm:^1.55.1":
+  version: 1.55.1
+  resolution: "@shapeshiftoss/hdwallet-native@npm:1.55.1"
   dependencies:
     "@shapeshiftoss/bitcoinjs-lib": 5.2.0-shapeshift.2
     "@shapeshiftoss/fiosdk": 1.2.1-shapeshift.6
-    "@shapeshiftoss/hdwallet-core": 1.55.0
+    "@shapeshiftoss/hdwallet-core": 1.55.1
     "@shapeshiftoss/proto-tx-builder": ^0.8.0
     "@zxing/text-encoding": ^0.9.0
     bchaddrjs: ^0.4.9
@@ -7245,6 +7245,7 @@ __metadata:
     ethers: 5.7.2
     eventemitter2: ^5.0.1
     funtypes: ^3.0.1
+    hash-wasm: ^4.11.0
     lodash: ^4.17.21
     node-fetch: ^2.6.1
     p-lazy: ^3.1.0
@@ -7252,7 +7253,7 @@ __metadata:
     tendermint-tx-builder: ^1.0.9
     tiny-secp256k1: ^1.1.6
     web-encoding: ^1.1.0
-  checksum: 020fe95429231af1e222ad543425a7714e422081116f300dcd698487b3df495c96ac4a3d3d9e86322aef2922c53ae4fcfa3b6eef9680fefb8158896d7b317809
+  checksum: 278c54daee3082bb66fcb8ab6af5f51ea0a2b2c3b5a4a530f8a74ac70a1503ae6aefa6aa114aec808855a77e4e10618b39d176e9f8367c90f44f03ec5953e4de
   languageName: node
   linkType: hard
 
@@ -7270,7 +7271,7 @@ __metadata:
     "@ethersproject/providers": ^5.7.2
     "@metamask/detect-provider": ^2.0.0
     "@metamask/snaps-ui": 1.0.2
-    "@shapeshiftoss/hdwallet-core": ^1.55.0
+    "@shapeshiftoss/hdwallet-core": ^1.55.1
     "@shapeshiftoss/logger": ^1.1.3
     "@shapeshiftoss/metamask-snaps": ^1.0.9
     "@shapeshiftoss/metamask-snaps-types": ^1.0.9
@@ -7306,8 +7307,8 @@ __metadata:
   resolution: "@shapeshiftoss/metamask-snaps-types@workspace:packages/types"
   dependencies:
     "@metamask/types": ^1.1.0
-    "@shapeshiftoss/hdwallet-core": ^1.55.0
-    "@shapeshiftoss/hdwallet-native": ^1.55.0
+    "@shapeshiftoss/hdwallet-core": ^1.55.1
+    "@shapeshiftoss/hdwallet-native": ^1.55.1
     "@shapeshiftoss/unchained-client": ^10.1.1
     eslint: ^8.47.0
     eslint-config-airbnb: ^19.0.4
@@ -7345,8 +7346,8 @@ __metadata:
     "@metamask/snaps-ui": ^1.0.1
     "@metamask/types": ^1.1.0
     "@shapeshiftoss/caip": ^8.15.0
-    "@shapeshiftoss/hdwallet-core": ^1.55.0
-    "@shapeshiftoss/hdwallet-native": ^1.55.0
+    "@shapeshiftoss/hdwallet-core": ^1.55.1
+    "@shapeshiftoss/hdwallet-native": ^1.55.1
     "@shapeshiftoss/logger": ^1.1.2
     "@shapeshiftoss/metamask-snaps-types": ^1.0.9
     "@shapeshiftoss/types": ^8.3.0
@@ -10766,9 +10767,9 @@ __metadata:
   linkType: hard
 
 "caniuse-lite@npm:^1.0.0, caniuse-lite@npm:^1.0.30001396, caniuse-lite@npm:^1.0.30001400, caniuse-lite@npm:^1.0.30001407":
-  version: 1.0.30001495
-  resolution: "caniuse-lite@npm:1.0.30001495"
-  checksum: c0a139a2e679ca60ae1ce2aaf0e9f5850cc1016b3735200cc1a1347bd7737f0a2a5993bc3f88f43a13ec687befffdae212a849f782702a6fe488de123e92351e
+  version: 1.0.30001659
+  resolution: "caniuse-lite@npm:1.0.30001659"
+  checksum: 99304d1ca91ddd25065d200ecc545668187359d54eea5d9eef6b4d99f28ce1164c0a6c7f785c531a336aeed171055f50be5bc68ae0b1e564474c1d35ce737947
   languageName: node
   linkType: hard
 
@@ -15619,6 +15620,13 @@ __metadata:
     readable-stream: ^3.6.0
     safe-buffer: ^5.2.0
   checksum: 26b7e97ac3de13cb23fc3145e7e3450b0530274a9562144fc2bf5c1e2983afd0e09ed7cc3b20974ba66039fad316db463da80eb452e7373e780cbee9a0d2f2dc
+  languageName: node
+  linkType: hard
+
+"hash-wasm@npm:^4.11.0":
+  version: 4.11.0
+  resolution: "hash-wasm@npm:4.11.0"
+  checksum: c0c12f36f6fb689fd97f6f24756ec1aa08d132b456bc4f0526fa7dbefdb07a25aa1d58bfb29fac69ff16f842717b38af36b6875dc98e9b01def43cde8c1f3154
   languageName: node
   linkType: hard
 
@@ -24125,7 +24133,7 @@ __metadata:
     "@fontsource/inter": ^5.0.2
     "@fontsource/work-sans": ^5.0.2
     "@reduxjs/toolkit": ^1.8.3
-    "@shapeshiftoss/hdwallet-core": ^1.55.0
+    "@shapeshiftoss/hdwallet-core": ^1.55.1
     "@shapeshiftoss/logger": ^1.1.2
     "@shapeshiftoss/metamask-snaps-adapter": ^1.0.9
     "@testing-library/jest-dom": ^5.16.4
