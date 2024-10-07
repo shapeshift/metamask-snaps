@@ -1,5 +1,4 @@
 import type { ExternalProvider } from '@ethersproject/providers'
-import detectEthereumProvider from '@metamask/detect-provider'
 import type {
   EnableShapeShiftMultichainResult,
   RPCHandlerResponse,
@@ -7,6 +6,7 @@ import type {
   ShapeShiftSnapRPCResponse,
 } from '@shapeshiftoss/metamask-snaps-types'
 import assert from 'assert'
+import { createStore } from 'mipd'
 import PQueue from 'p-queue'
 
 import { logger } from './lib/logger'
@@ -18,26 +18,16 @@ export type Provider = Omit<ExternalProvider, 'request'> & {
   request?: (request: { method: string; params?: any }) => Promise<any>
 }
 
-export const getMetaMaskProvider = async (): Promise<Provider | undefined> => {
-  try {
-    const provider = await (detectEthereumProvider({ mustBeMetaMask: true }) as Promise<
-      Provider | undefined
-    >)
-    if (provider === undefined) {
-      throw new Error('Could not get MetaMask provider')
-    }
-    if (provider.request === undefined) {
-      throw new Error('MetaMask provider does not define a .request() method')
-    }
-    return provider
-  } catch (error) {
-    moduleLogger.error(
-      error,
-      { fn: 'getMetaMaskProvider' },
-      'Please install MetaMask browser extension.',
-    )
-  }
-  return undefined
+export const mipdStore = createStore()
+
+const METAMASK_RDNS = 'io.metamask'
+
+// Detects MM explicitly using its rdns - no weird cases e.g Brave https://github.com/MetaMask/detect-provider/pull/87
+// and ensures the correct EIP-1193 provider is used even with many, many wallets installed
+export const getMetaMaskProvider = (): Promise<Provider | undefined> => {
+  const maybeEip6963Provider = mipdStore.findProvider({ rdns: METAMASK_RDNS })
+
+  return maybeEip6963Provider?.provider
 }
 
 export const shapeShiftSnapInstalled = async (snapId: string): Promise<boolean> => {
