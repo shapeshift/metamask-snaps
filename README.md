@@ -4,7 +4,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 ![](https://img.shields.io/badge/yarn-%3E%3D3.2.2-orange.svg?style=flat-square&label=Yarn&logo=yarn)
 ![](https://img.shields.io/badge/Node.js-%3E%3D16.16-orange.svg?style=flat-square&label=Node.js&logo=Node.js)
-![Discord](https://img.shields.io/discord/554694662431178782?color=blue&label=Discord&logo=discord)
+[![ShapeShift](https://img.shields.io/discord/539606376339734558.svg?label=discord&logo=discord&logoColor=white)](https://discord.gg/shapeshift)
 
 A Snap plugin for MetaMask providing multi-chain signing support.
 Currently supported networks are:
